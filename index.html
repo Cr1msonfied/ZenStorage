@@ -7,44 +7,70 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #20232a;
+            color: #61dafb;
+            margin: 0;
+            padding: 20px;
         }
         h1 {
             text-align: center;
+            font-size: 2.5em;
+            color: #61dafb;
         }
         #searchBar {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 16px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
         }
         .category {
-            margin: 20px 0;
+            margin: 10px 0;
+            cursor: pointer;
+            border-bottom: 2px solid #61dafb;
+            padding-bottom: 5px;
         }
         .category h2 {
-            background-color: #333;
-            color: #fff;
+            font-size: 1.8em;
+            margin: 0;
             padding: 10px;
-            border-radius: 5px;
+            color: #61dafb;
+            transition: color 0.3s ease;
+        }
+        .category h2:hover {
+            color: #ffffff;
         }
         .file-list {
             list-style-type: none;
             padding: 0;
+            display: none;
         }
         .file-list li {
-            background-color: #fff;
+            background-color: #282c34;
             margin: 5px 0;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #61dafb;
             border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .file-list li a {
+            text-decoration: none;
+            color: #61dafb;
+            transition: color 0.3s ease;
+        }
+        .file-list li a:hover {
+            color: #ffffff;
+        }
+        .category.open .file-list {
+            display: block;
         }
     </style>
 </head>
 <body>
 
     <h1>ZenStorage Repository</h1>
-    <input type="text" id="searchBar" onkeyup="filterFiles()" placeholder="Search for scripts..">
+    <input type="text" id="searchBar" onkeyup="filterFiles()" placeholder="Search for scripts...">
 
     <div id="content"></div>
 
@@ -54,6 +80,7 @@
             const data = await response.json();
             const categories = {};
 
+            // Group scripts by category
             data.scripts.forEach(script => {
                 if (!categories[script.category]) {
                     categories[script.category] = [];
@@ -62,26 +89,39 @@
             });
 
             const contentDiv = document.getElementById('content');
+
+            // Create category sections
             for (const category in categories) {
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'category';
-                categoryDiv.innerHTML = `<h2>${category}</h2>`;
-                
+
+                // Create clickable category header
+                const categoryHeader = document.createElement('h2');
+                categoryHeader.textContent = category;
+                categoryHeader.addEventListener('click', function() {
+                    categoryDiv.classList.toggle('open');
+                });
+
+                // Create file list under each category
                 const fileList = document.createElement('ul');
                 fileList.className = 'file-list';
 
                 categories[category].forEach(script => {
                     const listItem = document.createElement('li');
-                    listItem.dataset.file = script.filename;
-                    listItem.textContent = script.name;
+                    const fileLink = document.createElement('a');
+                    fileLink.href = script.filename;
+                    fileLink.textContent = script.name;
+                    listItem.appendChild(fileLink);
                     fileList.appendChild(listItem);
                 });
 
+                categoryDiv.appendChild(categoryHeader);
                 categoryDiv.appendChild(fileList);
                 contentDiv.appendChild(categoryDiv);
             }
         }
 
+        // Filter function for the search bar
         function filterFiles() {
             const input = document.getElementById('searchBar');
             const filter = input.value.toLowerCase();
@@ -98,5 +138,6 @@
 
         window.onload = loadScripts;
     </script>
+
 </body>
 </html>
