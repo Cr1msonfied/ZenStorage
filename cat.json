@@ -199,6 +199,11 @@
       "name": "Custom Zenshot Rebirth Island update - Zenmaster",
       "filename": "CUSTOM_ZENSHOT_REBIRTH_UPDATE.gpc",
       "category": "Call of Duty"
+    },
+    {
+      "name": "Zenshot 9.4 - Zenmaster",
+      "filename": "ZENSHOT_9.4.gpc",
+      "category": "Call of Duty"
     }
   ]
 }
