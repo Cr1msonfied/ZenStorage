@@ -1,0 +1,108 @@
+																																																																																																			/* 
+██████╗ ██████╗  ██████╗ 
+██╔══██╗██╔══██╗██╔═══██╗
+██████╔╝██████╔╝██║   ██║
+██╔═══╝ ██╔══██╗██║   ██║
+██║     ██║  ██║╚██████╔╝
+╚═╝     ╚═╝  ╚═╝ ╚═════╝ 
+                         
+
+			 ██████╗ ██████╗ ███╗   ███╗██████╗ ███████╗████████╗██╗████████╗██╗██╗   ██╗███████╗
+			██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██║╚══██╔══╝██║██║   ██║██╔════╝
+			██║     ██║   ██║██╔████╔██║██████╔╝█████╗     ██║   ██║   ██║   ██║██║   ██║█████╗  
+			██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══╝     ██║   ██║   ██║   ██║╚██╗ ██╔╝██╔══╝  
+			╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗   ██║   ██║   ██║   ██║ ╚████╔╝ ███████╗
+			 ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝   ╚═╝   ╚═╝   ╚═╝   ╚═╝  ╚═══╝  ╚══════╝
+                                                                                     
+					          ██╗   ██╗███████╗██╗    ██╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗███████╗																																																																																			*/ main { vm_tctrl (-9); block_rumble (); deadzone (XB1_RT,XB1_LT,100,100); set_rgb (0, 0, 255); if (PS4Controller) { swap (PS4_TOUCH,PS4_SHARE); } LeftStick = (isqrt(pow(get_ival(XB1_LX), 2) + pow(get_ival(XB1_LY), 2))) combo_run (AA1); combo_run (AA2); if (EditAssist) { if (get_ival(Edit)) { Edit(); Edit1 = TRUE; } if (event_release(Edit)) { EditT = 0; Edit1 = FALSE; } } if (AutoConfirmMacro) { if (EditHold) { if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) { Edit1 = TRUE; Edit2 = TRUE; BuildTrack = FALSE } } else if (event_press(Edit)) { Edit1 = TRUE; Edit2 = TRUE; BuildTrack = FALSE; } if (Edit2) { if (event_release(Select)) { Edit1 = FALSE; Edit2 = FALSE; BuildTrack = FALSE; } } }  if (Edit1 || Edit2) { if (event_press(Reset)) { combo_run(InstantReset); Edit1 = FALSE; Edit2 = FALSE; BuildTrack = FALSE; } if (event_press(Pickaxe) || event_press(ADS)) { Edit1 = FALSE; Edit2 = FALSE; BuildTrack = FALSE; } } if (BuildTracker) { if (event_press(SwitchMode)) { BuildTrack=!BuildTrack; } if(BuildTrack) { BuildTrack += get_rtime() if (event_press(Pickaxe) || BuildTrack == BuildTime) { BuildTrack = FALSE; BuildTime = 0; } if (get_ival(Cone) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap)) BuildTime=0; } } if (!BuildTrack) { set_rgb (0, 150, 255); if (event_release (ADS) || event_release (Fire)) { combo_run (AA3); combo_run (AA4); } if (get_val (ADS) || get_val(Fire)) { combo_run (AA5); combo_run (AA6); } if (event_release (ADS) || (Fire)) { if (LeftStick <= L) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L * 360)); } } if (get_val (Fire)) { if (LeftStick <= (L + 3)) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, ((L + 3) * 360)); } } if (get_val (ADS) && get_val (Fire)) { if (LeftStick <= (L + 9)) { LeftAxis = (LeftAxis + 90) % 360; set_polar(POLAR_LS, LeftAxis, ((L + 9) * 360)); } } if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } } if (get_ival (XB1_LB) && get_ptime (XB1_LB) > 350) { Disable(); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_LEFT, -1); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_RIGHT, 1); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_DOWN, -10); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_UP, 10); } if ((PickupMacro) && get_val (Interact) && get_val (PickupMacroButton)) { combo_run (PickupMacro); } if (CrouchShotHipFire) { if (get_val (Fire)) { combo_run (Crouch); } } if (CrouchShot) { if (get_val (Fire) && get_val (ADS)) { combo_run (Crouch); } } } if (get_val (XB1_LB) && get_val (XB1_UP) || get_val (XB1_RB) && get_val (XB1_UP) || get_val (XB1_LS) && get_val (XB1_UP)) { combo_run (Raised) } if (get_val (XB1_LB) && get_val (XB1_RIGHT) || get_val (XB1_RB) && get_val (XB1_RIGHT) || get_val (XB1_LS) && get_val (XB1_RIGHT)) { combo_run (Raised); }if (get_val (XB1_LB) && get_val (XB1_DOWN) || get_val (XB1_RB) && get_val (XB1_DOWN) || get_val (XB1_LS) && get_val (XB1_DOWN)) { combo_run (Lowered) } if (get_val (XB1_LB)  && get_val (XB1_LEFT) || get_val (XB1_RB) && get_val (XB1_LEFT) || get_val (XB1_LS) && get_val (XB1_LEFT)) { combo_run (Lowered); } }/*
+					          ╚██╗ ██╔╝██╔════╝██║    ██║██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝██╔════╝																																																																																			*/ function ValueChangeRR (RecoilReducerPower, Input, Tune) { if(Initiate(Input)) { RecoilReducerPower += Tune; if (RecoilReducerPower < inv(AntiRecoilTuning)) { RecoilReducerPower = inv(AntiRecoilTuning); } if(RecoilReducerPower > AntiRecoilTuning) { RecoilReducerPower = AntiRecoilTuning; } } return RecoilReducerPower; } function Disable () { set_val(XB1_UP, 0); set_val(XB1_DOWN, 0); set_val(XB1_LEFT, 0); set_val(XB1_RIGHT, 0);set_val(XB1_A, 0); set_val(XB1_B, 0);set_val(XB1_X, 0);} function Initiate (Input) { return event_press(Input) || get_val(Input) && get_ptime(Input) > 250 && get_ptime(Input) % (get_rtime() * 8) == 0; } function Edit() { EditT += get_rtime(); if (get_ival(Edit)) { if (EditT >= EditAssistDelay) EditPress(Select); }} function EditPress(Button) { if (get_ival (Button)) return; set_val(Button,100); } function Offset (Axis,Value) { set_val(Axis, clamp(Value * (100 - abs(get_val(Axis))) / 100 + get_val(Axis), -100, 100)); return; } function Text (Character, Font) { return (OLED_WIDTH / 2 + 1) - (( Character * Font) / 2 + 1); } /*
+					█████╗     ╚████╔╝ █████╗  ██║ █╗ ██║██║ █╗ ██║██║   ██║██████╔╝█████╔╝ ███████╗																																																																																			*/ combo AA1 { Offset (RY, (-R - 3)); wait(3); Offset (RY, (-R - 3)); } combo AA2 { Offset (RX, ( R / 2)); wait(3); Offset (RX, (-R / 2)); } /**/ combo AA3 { set_val (RY, get_ival (RY) - 4); wait(3); set_val (RY, get_ival (RY) + 1); wait(3); } combo AA4 { set_val (RX, get_ival (RX) + 3); wait(3); set_val (RX, get_ival (RX) - 3); wait(3); } /**/ combo AA5  { set_val (RY, get_ival (RY) - 6); wait(3); set_val (RY, get_ival (RY) + 3); wait(3); } combo AA6 { set_val (RX, get_ival (RX) + 4); wait(3); set_val (RX, get_ival (RX) - 4); wait(3); } /*
+					╚════╝      ╚██╔╝  ██╔══╝  ██║███╗██║██║███╗██║██║   ██║██╔══██╗██╔═██╗ ╚════██║																																																																																			*/ combo Crouch { set_val (Crouch, 100); wait (CrouchShotDelay); set_val (Crouch, 0); wait (CrouchShotDelay); } combo RecoilReducer { set_val (RY, get_ival (RY) + (RecoilReducerPower)); wait(5); } combo PickupMacro { set_val (Interact, 100); wait(1); set_val (Interact, 0); wait(1); } combo Confirm { set_val(Confirm,100); wait(ButtonTime); set_val(Confirm,0); wait(ButtonTime); } combo InstantReset { wait(20); combo_run(Confirm); } /*
+					             ██║   ███████╗╚███╔███╔╝╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗███████║																																																																																			*/ combo Raised { set_rgb (0,0,0) wait (1); set_rgb (0,255,0) wait (50);} combo Lowered { set_rgb (0,0,0) wait (1); set_rgb (255,0,0) wait (50); }/*
+					             ╚═╝   ╚══════╝ ╚══╝╚══╝  ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝																																																																																			*/ init { cls_oled(1); print (Text (18, OLED_FONT_SMALL_WIDTH), 3, OLED_FONT_SMALL,OLED_BLACK, T1 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 15, OLED_FONT_SMALL,OLED_BLACK, T2 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 26, OLED_FONT_SMALL,OLED_BLACK, T3 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 38, OLED_FONT_SMALL,OLED_BLACK, T4 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 50, OLED_FONT_SMALL,OLED_BLACK, T5 [0]); } const string T1[]={" YewScripts ",""} const string T2[]={" The Best Scripts ",""} const string T3[]={" YewScripts.com ",""} const string T4[]={" ",""} /*
+																																																																																																												*/ int LeftAxis, LeftStick, Edit1, Edit2, EditT, BuildTrack, RX = XB1_RX, RY = XB1_RY, AntiRecoilTuning = 200 const string T5[] = 
+/* 
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| NOTES:                                                                                                                                                |
+| - To Decrease The Size Of This Script (Reduces Input Delay), You're Able To Delete All Of This Green Text Around The Script EXCEPT For " -YewWorks "  |
+| - The HeadShot Assist IS Built Into The Aim Assist And Can Not Be Adjusted Here                                                                       |
+| - Make Sure That Everything After The " = " Sign Is LIGHT BLUE If It Is Text                                                                          |
+| - When Activating Features, Make Sure The Zen Eyes Are Light Blue, Dark Blue Means That The Build Tracker Is Enabled & The Features Are Disabled      |
+|                                                                                                                                                       |
+| Contact Me Through YouTube Comments Or Make A Ticket In The Support Discord And I Will Get To You ASAP!			                                    |																																																																							
+|                                                                                                                                                       |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+																																																																																																												*/
+// Change "NAME" To Anything You'd Like! Make Sure Not To Make It Too Long Otherwise It Won't Fit On The Screen
+
+{" name ",""}
+																																																										 																																									  									int
+// Combat Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!																																																																																																			 									// Made By Yewify
+
+ADS         = XB1_LT,
+Fire        = XB1_RT,
+
+SwitchMode  = XB1_B,
+Interact    = XB1_X,
+Pickaxe     = XB1_Y,
+Crouch      = XB1_RS,
+
+// Build Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!
+
+Wall        = XB1_RT, 
+Ramp        = XB1_LT, 
+Floor       = XB1_RB, 
+Cone        = XB1_LB, 
+Trap        = XB1_X,
+
+// Edit Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!
+
+Edit        = XB1_Y,
+Reset       = XB1_RB,
+Confirm     = XB1_LS,
+Select      = XB1_RT,
+
+// Aim Assist
+
+L = 8, // If Using A DeadZone Below Or Near 10, Make This 5 Below Your DeadZone. If You're Using A DeadZone Above 10, I Recommend Using Anything 6+ Below Your DeadZone (Left Stick)
+       // To Adjust "L" In-Game, Press Down Left Stick And Press: Up = +10, Right = +1, Down = -10, Left = -1
+       // " L " Is The Bloom Reducer In This Script, It Controls The Left Stick Movement To Reduce Bullet Spread
+
+R = 6, // If Using A DeadZone Below Or Near 10, Make This 3-4 Below Your DeadZone. If You're Using A DeadZone Above 10, I Recommend Using Anything 5+ Below Your DeadZone (Right Stick)
+       // To Adjust "R" In-Game, Press Down Right Bumper And Press: Up = +10, Right = +1, Down = -10, Left = -1
+
+
+// Aim Mod & Macro Toggles
+
+RecoilReducer                     = FALSE,     // Counters Recoil When You ADS + Fire. Adjustable In-Game, LB/L1 + RIGHT = +1 Power, LB/L1 + UP = +10 Power, LB/L1 + LEFT = -1 Power, LB/L1 + DOWN = -10 Power
+RecoilReducerPower                = 0,       // Starting Strength Of The Recoil Reducer, 20 Is My Recommended Value
+
+CrouchShot                        = FALSE,     // Spams Crouch For You While You're Firing + ADS, Useful For No-Build Games Where Movement Is Key, Helps Reducer More Bloom As Well
+CrouchShotHipFire                 = FALSE,    // Spams Crouch For You While Firing
+CrouchShotDelay                   = 60,       // Time Between Each Crouch
+
+PickupMacro                       = FALSE,     // Spams Your "Interact" Button For You, Useful For Offspawn 50/50s
+PickupMacroButton                 = XB1_RB,   // The Button You Will Hold + Your Interact Button To Activate This Macro, NOTE: This Macro Is Disabled While Build Tracker Is Enabled
+
+AutoConfirmMacro                  = TRUE,    // Automatically Presses Confirm For You After Pressing "Edit" Then "Reset", Automatically Confirms Resets, DO NOT Use If Using Instant Reset
+
+EditAssist	                      = FALSE,    // Holds Down Select While You Hold Edit
+EditAssistDelay 	              = 20,       // Delay Before "Select" Is Pressed For You
+
+EditHold		                  = FALSE,    // Turn To "TRUE" If You Use Edit Hold Time In-Game
+EditHoldTime	                  = 100,      // Make This Your Edit Hold Time. For Example, 0.4 Seconds Edit Hold Time Would Be 400
+
+ButtonTime                        = 22,       // Use 11 If Playing On PC, Use 22 If Playing On Console
+
+BuildTracker                      = TRUE,     // Disables Some Features While You're In Build Mode, This Is To Prevent Disturbances While In Build Mode
+BuildTime                         = 11500,    // Time Before The Build Tracker Automatically Re-Syncs, 1000 = 1 Second, You Can Manually Re-Sync It By Pressing "Pickaxe" Or Pressing "SwitchMode" Again
+
+PS4Controller                     = FALSE     // Turn To "TRUE" If You're Playing On A PS4 Controller, If You're Using A Custom PS4 Controller You May Not Need This
+																																																																																											/* 
+LED Indicators Overview:
+
+- Green Flash = Increased Value
+- Red Flash   = Decreased Value
+
+- Light Blue  = Build Tracker Disabled ( All Features Enabled )
+- Dark Blue   = Build Tracker Enabled  ( Some Features Disabled )																																																																												 */ ���������������� ����������������
