@@ -1,0 +1,69 @@
+																																																																																																			/* 
+███████╗ ██████╗ ██████╗ ████████╗███╗   ██╗██╗████████╗███████╗
+██╔════╝██╔═══██╗██╔══██╗╚══██╔══╝████╗  ██║██║╚══██╔══╝██╔════╝
+█████╗  ██║   ██║██████╔╝   ██║   ██╔██╗ ██║██║   ██║   █████╗  
+██╔══╝  ██║   ██║██╔══██╗   ██║   ██║╚██╗██║██║   ██║   ██╔══╝  
+██║     ╚██████╔╝██║  ██║   ██║   ██║ ╚████║██║   ██║   ███████╗
+╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝╚═╝   ╚═╝   ╚══════╝
+
+				██████╗  █████╗ ███████╗██╗ ██████╗
+				██╔══██╗██╔══██╗██╔════╝██║██╔════╝
+				██████╔╝███████║███████╗██║██║     
+				██╔══██╗██╔══██║╚════██║██║██║     
+				██████╔╝██║  ██║███████║██║╚██████╗
+				╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝
+                                   
+					          ██╗   ██╗███████╗██╗    ██╗███████╗ ██████╗██████╗ ██╗██████╗ ████████╗███████╗																																																																																			*/ main { vm_tctrl (-9); block_rumble (); deadzone (XB1_RT, XB1_LT, 100, 100); set_rgb (0, 0, 255); if (PS4Controller) { swap (PS4_TOUCH,PS4_SHARE); } if (BuildTracker) { if (event_press(SwitchMode)) { BuildTrack=!BuildTrack; } if(BuildTrack) { BuildTrack += get_rtime() if (event_press(Pickaxe) || BuildTrack == BuildTime) { BuildTrack = FALSE; BuildTime = 0; } if (get_ival(Cone) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap)) BuildTime=0; } } if (!BuildTrack) { set_rgb (0, 150, 255); combo_run (Strafe); combo_run(AA1); combo_run(AA2); X = get_val(RX);Y = get_val(RY);M = isqrt(pow(X, 2) + pow(Y, 2)); MM = (M < 100);if(!(T++ % Delay)){A += Speed;}A = A % 360; SA = Data[A % 360]; CA = Data[(A + 270) % 360];CA = (CA * Range) / 100;SA = (SA * Range) / 100;if((get_val(ADS)) || get_val(Fire)) { if(M <= Range){SA -= Y;CA -= X;}else {SA = (SA * (200 - ((abs(Y) + M) / 10) * 10) / 200) * MM;CA = (CA * (200 - ((abs(X) + M) / 10) * 10) / 200) * MM;} set_val(RX, clamp(X + CA, -100, 100));set_val(RY, clamp(Y + SA, -100, 100)); } if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } }  }  }/*
+					          ╚██╗ ██╔╝██╔════╝██║    ██║██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝██╔════╝																																																																																			*/ function Text (Character, Font) { return (OLED_WIDTH / 2 + 1) - (( Character * Font) / 2 + 1); } /*
+					█████╗     ╚████╔╝ █████╗  ██║ █╗ ██║███████╗██║     ██████╔╝██║██████╔╝   ██║   ███████╗																																																																																			*/ combo AA1 { set_val (RY, get_ival (RY) - 2); wait(3); set_val (RY, get_ival (RY) + 1); wait(3); } combo AA2 { set_val (RX, get_ival (RX) + 2); wait(3); set_val (RX, get_ival (RX) - 2); wait(3); } combo Strafe { set_val (LX, get_ival (LX) + 3); wait(3); set_val (LX, get_ival (LX) - 3); wait(3); }/*
+					╚════╝      ╚██╔╝  ██╔══╝  ██║███╗██║╚════██║██║     ██╔══██╗██║██╔═══╝    ██║   ╚════██║																																																																																			*/ combo RecoilReducer { set_val (RY, get_ival (RY) + (RecoilReducerPower)); wait(5); } /*
+					             ██║   ███████╗╚███╔███╔╝███████║╚██████╗██║  ██║██║██║        ██║   ███████║																																																																																			*/ const int16 Data [] = { 100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100}; /*
+					             ╚═╝   ╚══════╝ ╚══╝╚══╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝   ╚══════╝																																																																																			*/ init { cls_oled(1); print (Text (18, OLED_FONT_SMALL_WIDTH), 3, OLED_FONT_SMALL,OLED_BLACK, T1 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 15, OLED_FONT_SMALL,OLED_BLACK, T2 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 26, OLED_FONT_SMALL,OLED_BLACK, T3 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 38, OLED_FONT_SMALL,OLED_BLACK, T4 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 50, OLED_FONT_SMALL,OLED_BLACK, T5 [0]); } const string T1[]={" ",""} const string T2[]={" ",""} const string T3[]={" ",""} const string T4[]={" ",""} /*
+																																																																																																												*/ int BuildTrack, CA, SA, X, Y, M, MM, T, A, Delay = 10, RX = XB1_RX, RY = XB1_RY, LX = XB1_LX const string T5[] = 
+																																																																																																												/* 
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| NOTES:                                                                                                                                                |
+| - To Decrease The Size Of This Script (Reduces Input Delay), You're Able To Delete All Of This Green Text Around The Script EXCEPT For " -YewWorks "  |
+| - The HeadShot Assist IS Built Into The Aim Assist And Can Not Be Adjusted Here                                                                       |
+| - Make Sure That Everything After The " = " Sign Is LIGHT BLUE If It Is Text                                                                          |
+| - When Activating Features, Make Sure The Zen Eyes Are Light Blue, Dark Blue Means That The Build Tracker Is Enabled & The Features Are Disabled      |
+|                                                                                                                                                       |
+| Contact Me Through YouTube Comments Or Make A Ticket In The Support Discord And I Will Get To You ASAP!			                                    |																																																																							
+|                                                                                                                                                       |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+																																																																																																												*/
+// Change "NAME" To Anything You'd Like! Make Sure Not To Make It Too Long Otherwise It Won't Fit On The Screen
+
+{" NAME ",""}
+																																																										 																																									  									int
+// Combat Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!
+																																																																																																			 									// Made By Yewify
+ADS         = XB1_LT,
+Fire        = XB1_RT,
+
+SwitchMode  = XB1_B,
+Pickaxe     = XB1_Y,
+
+// Build Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!
+
+Wall        = XB1_RT, 
+Ramp        = XB1_LT, 
+Floor       = XB1_RB, 
+Cone        = XB1_LB, 
+Trap        = XB1_X,
+
+Range  = 3,     // Range Which The AA Works In, I Recommend Making This 3-6 Below Your Right Stick DeadZone
+Speed  = 60,    // Speed Of The AA, Slower = Choppier
+
+RecoilReducer                     = TRUE,     // Counters Recoil When You ADS + Fire
+RecoilReducerPower                = 20,       // Starting Strength Of The Recoil Reducer, 20 Is My Recommended Value
+
+BuildTracker                      = TRUE,     // Disables Some Features While You're In Build Mode, This Is To Prevent Disturbances While In Build Mode
+BuildTime                         = 11500,    // Time Before The Build Tracker Automatically Re-Syncs, 1000 = 1 Second, You Can Manually Re-Sync It By Pressing "Pickaxe" Or Pressing "SwitchMode" Again
+
+PS4Controller                     = TRUE     // Turn To "TRUE" If You're Playing On A PS4 Controller, If You're Using A Custom PS4 Controller You May Not Need This
+																																																																																											/* 
+LED Indicators Overview:
+
+- Light Blue  = Build Tracker Disabled ( All Features Enabled )
+- Dark Blue   = Build Tracker Enabled  ( Some Features Disabled )																																																																												 */ ����������������
