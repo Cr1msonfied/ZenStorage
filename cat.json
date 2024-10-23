@@ -49,6 +49,11 @@
       "name": "Zeitgeist 115",
       "filename": "zeitgeist_115.gpc",
       "category": "Call of Duty"
+    },
+    {
+      "name": "Evilbot (Playstation)",
+      "filename": "EvilBot_playstation.gpc",
+      "category": "Call of Duty"
     }
   ]
 }
