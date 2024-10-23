@@ -1,0 +1,99 @@
+																																																																							/*
+															██████╗ ███████╗ ██████╗ ██╗███╗   ██╗███╗   ██╗███████╗██████╗ 																																								*/ init { cls_oled(1); print (Text (18, OLED_FONT_SMALL_WIDTH), 3 , OLED_FONT_SMALL,OLED_BLACK, T1 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 15, OLED_FONT_SMALL,OLED_BLACK, T2 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 26, OLED_FONT_SMALL,OLED_BLACK, T3 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 38, OLED_FONT_SMALL,OLED_BLACK, T4 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 50, OLED_FONT_SMALL,OLED_BLACK, T5 [0]); } /*
+															██╔══██╗██╔════╝██╔════╝ ██║████╗  ██║████╗  ██║██╔════╝██╔══██╗																																								*/ main { vm_tctrl (-9); block_rumble (); deadzone (XB1_RT,XB1_LT,100,100); LeftStick  = (isqrt(pow(get_ival(PS4_LX), 2) + pow(get_ival(PS4_LY), 2))) if (LeftStick <= L) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L * 360)); } if (BuildTracker) { if (event_press(SwitchMode)) { BuildTrack=!BuildTrack; } if(BuildTrack) { BuildTrack += get_rtime() if (event_press(Pickaxe) || BuildTrack == BuildTime) { BuildTrack = FALSE; BuildTime = 0; } if (get_ival(Cone) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap)) BuildTime=0; } } if (!BuildTrack) { combo_run (AA1); combo_run (AA2); if ((RY) > -50) { combo_run (AA3); combo_run (AA4); } if (get_val (RY) < -50){ combo_run (AA5); combo_run (AA6); } if ((AimAssist) || event_release (ADS) || event_release (Fire)) { combo_run (On); combo_run (AA7); combo_run (AA8); } if (get_val (ADS) || get_val(Fire)) { combo_run (Off); combo_run (AA9); combo_run (AA10); }  if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } } if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } }  } if (LED) { set_rgb (255,255,90) } else { set_rgb (255,9,255) } } /*
+															██████╔╝█████╗  ██║  ███╗██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝																																								*/ combo AA1 { Offset (RY, -R/4); wait(1); Offset (RY, (-R/2)); } combo AA2 { Offset (RX, R); wait(1); Offset (RX, -R); } combo AA3 { set_val (RY, get_ival (RY) - 2); wait(1); set_val (RY, get_ival (RY) + 1); wait(1); } combo AA4 { set_val (RX, get_ival (RX) - 1); wait(1); set_val (RX, get_ival (RX) + 1); wait(1); } combo AA5 { set_val (RY, get_ival (RY) - 3); wait(1); set_val (RY, get_ival (RY) + 2); wait(1); } combo AA6 { set_val (RX, get_ival (RX) - 2); wait(1); set_val (RX, get_ival (RX) + 2); wait(1); } combo AA7 { set_val (RY, get_ival (RY) - 5); wait(1); set_val (RY, get_ival (RY) + 4); wait(1); } combo AA8 { set_val (RX, get_ival (RX) + 3); wait(2); set_val (RX, get_ival (RX) - 3); wait(2); } combo AA9 { set_val (RY, get_ival (RY) - 7); wait(1); set_val (RY, get_ival (RY) + 5); wait(1); } combo AA10 { set_val (RX, get_ival (RX) + 5); wait(2); set_val (RX, get_ival (RX) - 5); wait(2); } /*
+															██╔══██╗██╔══╝  ██║   ██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗																																								*/ combo RecoilReducer { set_val (RY, get_ival (RY) + (RecoilReducerPower)); wait(5); } /*
+															██████╔╝███████╗╚██████╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║																																								*/ /*
+															╚═════╝ ╚══════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝																																								*/ function Offset (Axis,Value) { set_val(Axis, clamp(Value * (100 - abs(get_val(Axis))) / 100 + get_val(Axis), -100, 100)); return; } /*
+                                                                                                     																																														*/ /*
+                                                                                                     																																														
+                                                                                                     																																														
+                                                                                                     																																														
+										██╗   ██╗███████╗██╗    ██╗███████╗ ██████╗██████╗ ██╗██████╗ ████████╗███████╗    ██████╗ ██████╗ ███╗   ███╗																																		*/ /*
+										╚██╗ ██╔╝██╔════╝██║    ██║██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝██╔════╝   ██╔════╝██╔═══██╗████╗ ████║																																		*/ /*
+										 ╚████╔╝ █████╗  ██║ █╗ ██║███████╗██║     ██████╔╝██║██████╔╝   ██║   ███████╗   ██║     ██║   ██║██╔████╔██║																																		*/ int RX = XB1_RX, RY = XB1_RY, LED, LeftAxis, LeftStick, BuildTrack, AimAssist, AimAssist2 /*
+										  ╚██╔╝  ██╔══╝  ██║███╗██║╚════██║██║     ██╔══██╗██║██╔═══╝    ██║   ╚════██║   ██║     ██║   ██║██║╚██╔╝██║																																		*/ function Text (Character, Font) { return (OLED_WIDTH / 2 + 1) - (( Character * Font) / 2 + 1); } /*
+										   ██║   ███████╗╚███╔███╔╝███████║╚██████╗██║  ██║██║██║        ██║   ███████║██╗╚██████╗╚██████╔╝██║ ╚═╝ ██║																																		*/ combo On { AimAssist = TRUE; AimAssist2 = FALSE; LED = TRUE; } combo Off { AimAssist = FALSE; AimAssist2 = TRUE; LED = FALSE; } /*
+										   ╚═╝   ╚══════╝ ╚══╝╚══╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝   ╚══════╝╚═╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝																																		*/ const string T1[]={" YewScripts.com",""}const string T2[]={" Best Fortnite,",""} const string T3[]={" COD, & Apex",""} const string T4[]={" Scripts! ON SALE!",""} const string T5[]={
+																																																																							/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+|  ██╗███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗    |
+|  ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝    |
+|  ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗    |
+|  ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║    |
+|  ██║██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║    |
+|  ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝    |
+|  This is V1, Check yewscripts.com/products/grand-master To Check What The Current Version is!      |
+|----------------------------------------------------------------------------------------------------|
+																																																																							
+Change "NAME" To Anything You'd Like! Make Sure Not To Make It Too Long Otherwise It Won't Fit On The Screen																																												*/
+
+" NAME "																																																																					,""} /*
+
+Combat Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!																																				*/ int
+
+												ADS  		= XB1_LT,
+												Fire 		= XB1_RT,
+												SwitchMode  = XB1_B,
+												Pickaxe     = XB1_Y,
+																																																																							/*
+Build Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!																																				*/
+
+												Wall        = XB1_RT, 
+												Ramp        = XB1_LT, 
+												Floor       = XB1_RB, 
+												Cone        = XB1_LB, 
+												Trap        = XB1_X																																																				/*
+                                    
+|------------------------------------------|
+|                                          |
+|  ███╗   ███╗ ██████╗ ██████╗ ███████╗    |
+|  ████╗ ████║██╔═══██╗██╔══██╗██╔════╝    |
+|  ██╔████╔██║██║   ██║██║  ██║███████╗    |
+|  ██║╚██╔╝██║██║   ██║██║  ██║╚════██║    |
+|  ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████║    |
+|  ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝    |
+|                                          |
+|------------------------------------------| 																																																												
+
+
+Make "L1" Your LEFT STICK Dead-Zone. Make R Any Value You're Comfortable With. A Value Near Your Right Stick Dead-Zone Is Recommended. For Best PC Tracking, Keep The Current L Values.				   YewScripts.Com
+																																																																							*/ int
+												YewScriptsAutoTracking              = TRUE,
+												L 				  					= 13,																												
+												R  				  					= 13,																																																	/*
+
+The Recoil Reducer Will Reduce Your Weapon's Recoil. I Suggest 18-22 For PC, 14-18 For Console. Press LEFT STICK + UP While In-Game To Raise The Recoil Reducer's Power by 10, Press					
+LEFT STICK + RIGHT While In-Game To Increase it by 1, Press LEFT STICK + DOWN While In-Game To Decrease it by 10, Press LEFT STICK + LEFT While In-Game To Decrease it by 1.							YewScripts.Com		
+																																																																							*/
+												RecoilReducer      					= TRUE,
+												RecoilReducerPower 					= 14,																																																	/*
+																																																																							
+Build Tracker Will Deactivate ALL Mods While In Build Mode EXCEPT For Edit Mods. The Build Time Is How Long It Takes For The Build Tracker To Disable After Your Controller Is Not Touched.				YewScripts.Com
+																																																																							*/
+												BuildTracker                      = FALSE,
+												BuildTime                         = 11500,																																																	/*
+												
+If Using A PS4 Controller, Turn It To TRUE. If Using A PS5/Xbox Controller, Keep It At FALSE.																											YewScripts.Com
+																																																																							*/
+												PS4Controller                     = FALSE																																																	/*
+												
+LED Indicators Overview:
+
+- Green Flash = Increased Value
+- Red Flash   = Decreased Value																																																																*/ ����������������
