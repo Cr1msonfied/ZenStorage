@@ -1,0 +1,240 @@
+																																																																							/*
+																██████╗ ██████╗  ██████╗ ██████╗ ██╗ ██████╗██╗   ██╗ 																																										*/ init { cls_oled(1); print (Text (18, OLED_FONT_SMALL_WIDTH), 3 , OLED_FONT_SMALL,OLED_BLACK, T1 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 15, OLED_FONT_SMALL,OLED_BLACK, T2 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 26, OLED_FONT_SMALL,OLED_BLACK, T3 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 38, OLED_FONT_SMALL,OLED_BLACK, T4 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 50, OLED_FONT_SMALL,OLED_BLACK, T5 [0]); } /*
+																██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██║██╔════╝╚██╗ ██╔╝																																										*/ main { vm_tctrl (-9); block_rumble (); deadzone (XB1_RT,XB1_LT,100,100); LeftStick  = (isqrt(pow(get_ival(PS4_LX), 2) + pow(get_ival(PS4_LY), 2))) if (EditAssist) { if (get_ival(Edit)) { Edit(); Edit1 = TRUE; } if (event_release(Edit)) { EditT = 0; Edit1 = FALSE; } } if (InstantReset) { if (event_press(InstantResetButton)) { combo_run(InstantResetButton); } } if (AutoConfirmMacro) { if (EditHold) { if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) { Edit1 = TRUE; Edit2 = TRUE; BuildTrack = FALSE; } } else if (event_press(Edit)) { Edit1 = TRUE; Edit2 = TRUE; BuildTrack = FALSE; } if (Edit2) { if (event_release(Select)) { Edit1 = FALSE; Edit2 = FALSE; BuildTrack = FALSE; } } } if (Edit1 || Edit2) { if (event_press(Reset)) { combo_run(InstantReset); Edit1 = FALSE; Edit2 = FALSE; BuildTrack = FALSE; } if (event_press(Pickaxe) || event_press(ADS)) { Edit1 = FALSE; Edit2 = FALSE; BuildTrack = FALSE; } } if (BuildTracker) { if (event_press(SwitchMode)) { BuildTrack=!BuildTrack; } if(BuildTrack) { BuildTrack += get_rtime() if (event_press(Pickaxe) || BuildTrack == BuildTime) { BuildTrack = FALSE; BuildTime = 0; } if (get_ival(Cone) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap)) BuildTime=0; } } if (!BuildTrack) { if (Linear) { if (YewScriptsAutoTracking) {  if (get_val (Fire)) { if (LeftStick <= L2) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L2 * 360)); } } if (get_val (ADS) && get_val (Fire)) { if (LeftStick <= L3) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L3 * 360)); } } if (event_release (ADS) || (Fire)) { if (LeftStick <= L1) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L1 * 360)); } } } combo_run (AA1); combo_run (AA2); if (PolarAimStabilizer) { AX = get_val(RX); AY = get_val(RY); AM = isqrt(pow(AX, 2) + pow(AY, 2) ); MM = (AM < 100); if(!(T++ % PolarAimStabilizerTime) ) { A += PolarAimStabilizerReach; } A = A % 360; SA = DataArray[A % 360]; CA = DataArray[(A + 270) % 360]; CA = (CA * PolarAimStabilizerRadii) / 100; SA = (SA * PolarAimStabilizerRadii) / 100; if (AM <= PolarAimStabilizerRadii) { SA -= AY; CA -= AX; } else { SA = (SA * (200 - ((abs(AY) + AM) / 10) * 10) / 200) * MM; CA = (CA * (200 - ((abs(AX) + AM) / 10) * 10) / 200) * MM; } set_val(RX, clamp(AX + CA, -100, 100)); set_val(RY, clamp(AY + SA, -100, 100)); } if ((RY) > -50) { combo_run (AA3); combo_run (AA4); } if (get_val (RY) < -50){ combo_run (AA5); combo_run (AA6); } if ((AimAssist) || event_release (ADS) || event_release (Fire)) { combo_run (On); combo_run (AA7); combo_run (AA8); } if (get_val (ADS) || get_val(Fire)) { combo_run (Off); combo_run (AA9); combo_run (AA10); } } if (Exponential) { if (YewScriptsAutoTracking) {  if (get_val (Fire)) { if (LeftStick <= L2) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L2 * 360)); } } if (get_val (ADS) && get_val (Fire)) { if (LeftStick <= L3) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L3 * 360)); } } if (event_release (ADS) || (Fire)) { if (LeftStick <= L1) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L1 * 360)); } } } combo_run (AA11); combo_run (AA12); if (PolarAimStabilizer) { AX = get_val(RX); AY = get_val(RY); AM = isqrt(pow(AX, 2) + pow(AY, 2) ); MM = (AM < 100); if(!(T++ % PolarAimStabilizerTime) ) { A += PolarAimStabilizerReach; } A = A % 360; SA = DataArray[A % 360]; CA = DataArray[(A + 270) % 360]; CA = (CA * PolarAimStabilizerRadii) / 100; SA = (SA * PolarAimStabilizerRadii) / 100; if (AM <= PolarAimStabilizerRadii) { SA -= AY; CA -= AX; } else { SA = (SA * (200 - ((abs(AY) + AM) / 10) * 10) / 200) * MM; CA = (CA * (200 - ((abs(AX) + AM) / 10) * 10) / 200) * MM; } set_val(RX, clamp(AX + CA, -100, 100)); set_val(RY, clamp(AY + SA, -100, 100)); } if ((RY) > -50) { combo_run (AA13); combo_run (AA14); } if (get_val (RY) < -50){ combo_run (AA15); combo_run (AA16); } if ((AimAssist) || event_release (ADS) || event_release (Fire)) { combo_run (On); combo_run (AA17); combo_run (AA18); } if (get_val (ADS) || get_val(Fire)) { combo_run (Off); combo_run (AA19); combo_run (AA20); } } if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } } if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } } if (get_ival (XB1_LB) && get_ptime (XB1_LB) > 350) { Disable(); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_LEFT, -1); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_RIGHT, 1); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_DOWN, -10); RecoilReducerPower = ValueChangeRR(RecoilReducerPower, XB1_UP, 10); } if (RapidFire) { if (get_val (RapidFireOnButton) && get_val (XB1_RT)) { combo_run (RapidFireOn); } if (get_val (RapidFireOffButton) && get_val (XB1_RT)) { combo_run (RapidFireOff); } } if ((RapidFireToggle) && get_val (Fire)) { combo_run (RapidFire); } else { combo_stop(RapidFire); } if (LongRangeAccuracyAssist) { if (get_val (LongRangeAccuracyAssistOnButton) && get_val (XB1_LT)) { combo_run (LongRangeAccuracyAssistOn) } if (get_val (LongRangeAccuracyAssistOffButton) && get_val (XB1_LT)) { combo_run (LongRangeAccuracyAssistOff) } } if (LongRangeAccuracyAssistToggle) { combo_run (LongRangeAccuracyAssist) } if ((PickupMacro) && get_val (Interact) && get_val (PickupMacroButton)) { combo_run (PickupMacro); } if (CrouchShotHipFire) { if (get_val (Fire)) { combo_run (CrouchShot); } } if (CrouchShot) { if (get_val (Fire) && get_val (ADS)) { combo_run (CrouchShot); } } } if (LED) { set_rgb (255,255,90) } else { set_rgb (255,9,255) } if (get_val (XB1_LS) && get_val (XB1_UP)) { combo_run (Raised) } if (get_val (XB1_LS) && get_val (XB1_RIGHT)) { combo_run (Raised); } if (get_val (XB1_LS) && get_val (XB1_DOWN)) { combo_run (Lowered) } if (get_val (XB1_LS) && get_val (XB1_LEFT)) { combo_run (Lowered); } } /*
+																██████╔╝██████╔╝██║   ██║██║  ██║██║██║  ███╗╚████╔╝ 																																										*/ combo AA1 { Offset (RY, -R/4); wait(1); Offset (RY, (-R/2)); } combo AA2 { Offset (RX, R); wait(1); Offset (RX, -R); } combo AA3 { set_val (RY, get_ival (RY) - 2); wait(1); set_val (RY, get_ival (RY) + 1); wait(1); } combo AA4 { set_val (RX, get_ival (RX) - 1); wait(1); set_val (RX, get_ival (RX) + 1); wait(1); } combo AA5 { set_val (RY, get_ival (RY) - 3); wait(1); set_val (RY, get_ival (RY) + 2); wait(1); } combo AA6 { set_val (RX, get_ival (RX) - 2); wait(1); set_val (RX, get_ival (RX) + 2); wait(1); } combo AA7 { set_val (RY, get_ival (RY) - 5); wait(1); set_val (RY, get_ival (RY) + 4); wait(1); } combo AA8 { set_val (RX, get_ival (RX) + 3); wait(2); set_val (RX, get_ival (RX) - 3); wait(2); } combo AA9 { set_val (RY, get_ival (RY) - 7); wait(1); set_val (RY, get_ival (RY) + 5); wait(1); } combo AA10 { set_val (RX, get_ival (RX) + 5); wait(2); set_val (RX, get_ival (RX) - 5); wait(2); } combo AA11 { Offset (RY, -R/3); wait(1); Offset (RY, (-R/2)); } combo AA12 { Offset (RX, R); wait(1); Offset (RX, -R); } combo AA13 { set_val (RY, get_ival (RY) - 3); wait(1); set_val (RY, get_ival (RY) + 2); wait(1); } combo AA14 { set_val (RX, get_ival (RX) - 3); wait(1); set_val (RX, get_ival (RX) + 3); wait(1); } combo AA15 { set_val (RY, get_ival (RY) - 4); wait(1); set_val (RY, get_ival (RY) + 3); wait(1); } combo AA16 { set_val (RX, get_ival (RX) - 3); wait(1); set_val (RX, get_ival (RX) + 3); wait(1); } combo AA17 { set_val (RY, get_ival (RY) - 6); wait(1); set_val (RY, get_ival (RY) + 5); wait(1); } combo AA18 { set_val (RX, get_ival (RX) + 3); wait(2); set_val (RX, get_ival (RX) - 3); wait(2); } combo AA19 { set_val (RY, get_ival (RY) - 7); wait(1); set_val (RY, get_ival (RY) + 6); wait(1); } combo AA20 { set_val (RX, get_ival (RX) + 7); wait(2); set_val (RX, get_ival (RX) - 7); wait(2); } combo CrouchShot { set_val (Crouch, 100); wait (CrouchShotDelay); set_val (Crouch, 0); wait (CrouchShotDelay); } /*
+																██╔═══╝ ██╔══██╗██║   ██║██║  ██║██║██║   ██║ ╚██╔╝  																																										*/ combo RecoilReducer { set_val (RY, get_ival (RY) + (RecoilReducerPower)); wait(5); } combo RapidFireOn { RapidFireToggle = TRUE; } combo RapidFireOff { RapidFireToggle = FALSE; } combo RapidFire { set_val(Fire, 100); wait(RapidFireDelay); set_val(Fire, 0); wait(RapidFireDelay); set_val(Fire, 0); } combo LongRangeAccuracyAssistOn { LongRangeAccuracyAssistToggle = TRUE; } combo LongRangeAccuracyAssistOff { LongRangeAccuracyAssistToggle = FALSE; } combo LongRangeAccuracyAssist { set_val (RX, get_ival (RX) + 1); wait(4); set_val (RY, get_ival (RY) - 1); wait(4); set_val (RX, get_ival (RX) - 1); wait(4); set_val (RY, get_ival (RY) + 1); wait(4); } /*
+																██║     ██║  ██║╚██████╔╝██████╔╝██║╚██████╔╝  ██║  																																										*/ combo PickupMacro { set_val (Interact, 100); wait(1); set_val (Interact, 0); wait(1); } combo Confirm { set_val(Confirm,100); wait(ButtonTime); set_val(Confirm,0); wait(ButtonTime); } combo InstantResetButton { set_val(Edit,100); wait(ButtonTime); set_val(Reset,100); wait(ButtonTime); combo_run(Confirm); } combo InstantReset { wait(20); combo_run(Confirm); } /*
+																╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝   ╚═╝  																																										*/ function Offset (Axis,Value) { set_val(Axis, clamp(Value * (100 - abs(get_val(Axis))) / 100 + get_val(Axis), -100, 100)); return; } /*
+                                                                                                     																																														*/ function ValueChangeRR (RecoilReducerPower, Input, Tune) { if(Initiate(Input)) { RecoilReducerPower += Tune; if (RecoilReducerPower < inv(AntiRecoilTuning)) { RecoilReducerPower = inv(AntiRecoilTuning); } if(RecoilReducerPower > AntiRecoilTuning) { RecoilReducerPower = AntiRecoilTuning; } } return RecoilReducerPower; } /*
+                                                                                                     																																														
+                                                                                                     																																														
+                                                                                                     																																														
+										██╗   ██╗███████╗██╗    ██╗███████╗ ██████╗██████╗ ██╗██████╗ ████████╗███████╗    ██████╗ ██████╗ ███╗   ███╗																																		*/ function Disable () { set_val(XB1_UP, 0); set_val(XB1_DOWN, 0); set_val(XB1_LEFT, 0); set_val(XB1_RIGHT, 0);set_val(XB1_A, 0); set_val(XB1_B, 0);set_val(XB1_X, 0);} function Initiate (Input) { return event_press(Input) || get_val(Input) && get_ptime(Input) > 250 && get_ptime(Input) % (get_rtime() * 8) == 0; } /*
+										╚██╗ ██╔╝██╔════╝██║    ██║██╔════╝██╔════╝██╔══██╗██║██╔══██╗╚══██╔══╝██╔════╝   ██╔════╝██╔═══██╗████╗ ████║																																		*/ function Edit() { EditT += get_rtime(); if (get_ival(Edit)) { if (EditT >= EditAssistDelay) EditPress(Select); }} function EditPress(Button) { if (get_ival (Button)) return; set_val(Button,100); } /*
+										 ╚████╔╝ █████╗  ██║ █╗ ██║███████╗██║     ██████╔╝██║██████╔╝   ██║   ███████╗   ██║     ██║   ██║██╔████╔██║																																		*/ int RX = XB1_RX, RY = XB1_RY, LED, LeftAxis, LeftStick, Edit1, Edit2, EditT, BuildTrack, LongRangeAccuracyAssistToggle, RapidFireToggle, AntiRecoilTuning = 200, AimAssist, AimAssist2, PolarAimStabilizerReach = 30, PolarAimStabilizerTime = 1, A, CA, SA, AX, AY, AM, MM, T /*
+										  ╚██╔╝  ██╔══╝  ██║███╗██║╚════██║██║     ██╔══██╗██║██╔═══╝    ██║   ╚════██║   ██║     ██║   ██║██║╚██╔╝██║																																		*/ function Text (Character, Font) { return (OLED_WIDTH / 2 + 1) - (( Character * Font) / 2 + 1); } /*
+										   ██║   ███████╗╚███╔███╔╝███████║╚██████╗██║  ██║██║██║        ██║   ███████║██╗╚██████╗╚██████╔╝██║ ╚═╝ ██║																																		*/ combo On { AimAssist = TRUE; AimAssist2 = FALSE; LED = TRUE; } combo Off { AimAssist = FALSE; AimAssist2 = TRUE; LED = FALSE; } combo Raised { set_rgb (0,0,0) wait (1); set_rgb (0,255,0) wait (50);} combo Lowered { set_rgb (0,0,0) wait (1); set_rgb (255,0,0) wait (50); } /*
+										   ╚═╝   ╚══════╝ ╚══╝╚══╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝   ╚══════╝╚═╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝																																		*/ const string T1[]={" YewScripts.com",""}const string T2[]={" Best Fortnite,",""} const string T3[]={" COD, & Apex",""} const string T4[]={" Scripts! ON SALE!",""} const string T5[]={
+																																																																							/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|----------------------------------------------------------------------------------------------------|
+|                                                                                                    |
+|  ██╗███╗   ██╗███████╗████████╗██████╗ ██╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗    |
+|  ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝    |
+|  ██║██╔██╗ ██║███████╗   ██║   ██████╔╝██║   ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗    |
+|  ██║██║╚██╗██║╚════██║   ██║   ██╔══██╗██║   ██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║    |
+|  ██║██║ ╚████║███████║   ██║   ██║  ██║╚██████╔╝╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║    |
+|  ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝    |
+|----------------------------------------------------------------------------------------------------|
+																																																																							
+Change "NAME" To Anything You'd Like! Make Sure Not To Make It Too Long Otherwise It Won't Fit On The Screen																																												*/
+
+" NAME "																																																																						,""} /*
+
+Combat Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!																																				*/ int
+
+												ADS  		= PS4_L2,
+												Fire 		= PS4_R2,
+												SwitchMode  = PS4_TRIANGLE,
+												Interact    = PS4_SQUARE,
+												Pickaxe     = PS4_RIGHT,
+												Crouch      = PS4_CROSS,
+																																																																							/*
+Build Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!																																				*/
+
+												Wall        = PS4_R2, 
+												Ramp        = PS4_L2, 
+												Floor       = PS4_R1, 
+												Cone        = PS4_L1, 
+												Trap        = PS4_SQUARE	,
+																																																																							/*
+Edit Mode Binds | MATCH TO IN-GAME BINDS | IT DOES NOT MATTER IF YOU USE THE PS4 OR XB1 LAYOUT, AS LONG AS THE BUTTONS MATCH UP IT WILL WORK!																																				*/
+
+												Edit        = PS4_L3,
+												Reset       = PS4_R1,
+												Confirm     = PS4_R2,
+												Select      = PS4_R2																																																						/*
+                                    
+|------------------------------------------|
+|                                          |
+|  ███╗   ███╗ ██████╗ ██████╗ ███████╗    |
+|  ████╗ ████║██╔═══██╗██╔══██╗██╔════╝    |
+|  ██╔████╔██║██║   ██║██║  ██║███████╗    |
+|  ██║╚██╔╝██║██║   ██║██║  ██║╚════██║    |
+|  ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████║    |
+|  ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝    |
+|                                          |
+|------------------------------------------| 																																																												
+
+
+Make "L1" Your LEFT STICK Dead-Zone. Make "L2" Your LEFT STICK Dead-Zone + 3. Make "L3" Your LEFT STICK Dead-Zone + 8. Make R Any Value You're Comfortable With. A Value Near Your Right Stick			
+Dead-Zone Is Recommended. For Best PC Tracking, Keep The Current L Values.																																YewScripts.Com
+																																																																							*/ int
+												YewScriptsAutoTracking              = TRUE,
+												L1 				  					= 9,																												
+												L2 				 					= 9,
+												L3				  					= 9,
+												R  				  					= 7,																																																	/*
+												
+If on LINEAR, Turn "Linear" To TRUE. If on EXPONENTIAL, Turn "Exponential" To TRUE. Turn The One That You Are NOT, To FALSE.																			YewScripts.Com																		*/
+
+												Linear 								= TRUE,
+												Exponential 						= FALSE,																																																							/*
+																																																		
+The Polar Aim Stabilizer. This Feature Will Increase Your Crosshair's Firing Radius, Allowing You To Hit Some Shots Without Having Your Crosshair On The Enemy. You May Have Seen This Feature in		
+My Videos A Few Times, And Here It Is. This Works Primarily Well With Shotguns.																															YewScripts.Com
+																																																																							*/
+												PolarAimStabilizer					= TRUE,
+												PolarAimStabilizerRadii				= 7,	 																																																/*
+
+The Recoil Reducer Will Reduce Your Weapon's Recoil. I Suggest 18-22 For PC, 14-18 For Console. Press LEFT STICK + UP While In-Game To Raise The Recoil Reducer's Power by 10, Press					
+LEFT STICK + RIGHT While In-Game To Increase it by 1, Press LEFT STICK + DOWN While In-Game To Decrease it by 10, Press LEFT STICK + LEFT While In-Game To Decrease it by 1.							YewScripts.Com		
+																																																																							*/
+												RecoilReducer      					= TRUE,
+												RecoilReducerPower 					= 18,																																																	/*
+																																																		
+Long Range Accuracy Assist Will Increase Your Accuracy At Longer Distance, As it Minimizes Your Bullet Spread For Distance Firing. This is Made For The No-Build Gamemode, Although it					
+Can Be Used in Any. Press The "LongRangeAccuracyAssistOnButton" While Holding Down LEFT TRIGGER While In-Game To Activate This Mod. Press "LongRangeAccuracyAssistOffButton" While 						
+Holding LEFT TRIGGER In-Game To Deactivate This Mod.																																					YewScripts.Com
+																																																																							*/
+												LongRangeAccuracyAssist           = TRUE,						
+												LongRangeAccuracyAssistOnButton   = XB1_RB,
+												LongRangeAccuracyAssistOffButton  = XB1_LB,																																																	/*
+																																																		
+Rapid Fire is Used For Non-Automatic Weapons. Press The "RapidFireOnButton" While Holding Down LEFT TRIGGER While In-Game To Activate This Mod. Press "RapidFireOffButton" While Holding 				
+LEFT TRIGGER In-Game To Deactivate This Mod. This Mod Will Allow You To Rapidly Fire A Non-Automatic Weapon At A Very Fast Rate Whilst Just Holding Down RIGHT TRIGGER. The Rapid Fire					
+Delay is The Speed Your Weapon Will Shoot At.																																							YewScripts.Com
+																																																																									*/
+												RapidFire                         = FALSE,
+												RapidFireDelay                    = 80,
+												RapidFireOnButton                 = XB1_RB,
+												RapidFireOffButton                = XB1_LB,																																																	/*
+												
+Crouch Shot Will Make Your Character Crouch As You ADS + FIRE. Turning On "CrouchShotHipFire" Will Make Your Character Crouch As You Just FIRE. The Crouch Shot Delay Will Determine How
+Fast Your Character Crouches.																																											YewScripts.Com
+																																																																							*/
+												CrouchShot                        = TRUE,
+												CrouchShotHipFire                 = FALSE,
+												CrouchShotDelay                   = 60,																																																		/*
+												
+The Scroll Wheel Pickup Macro Allows Your To Easily Win All 50/50s & Pickup All Guns Nearby. Press The "PickupMacroButton" While Holding Down Your Interact Button To Use This Macro.					YewScripts.com
+																																																																							*/
+												PickupMacro                       = FALSE,
+												PickupMacroButton                 = XB1_RB,																																																	/*
+												
+Instant Reset Allows You To Press 1 Bind To Fully Reset A Building Piece. Pressing The "InstantResetButton" Will Press EDIT, RESET, & Then CONFIRM For You. You Can NOT Have This AND The 
+Auto Confirm Macro TRUE At The Same Time.																																								YewScripts.Com
+																																																																							*/
+												InstantReset                      = FALSE,
+												InstantResetButton                = XB1_LEFT,																																																/*
+												
+The Auto Confirm Macro Will Press Confirm For You After You Press EDIT + RESET.
+																																																																							*/
+												AutoConfirmMacro                  = FALSE,																																																	/*
+												
+Edit Assist Will Allow You To Hold Down Your Edit Button While In An Edit To Select The Tiles. This Removes The Need To Use RIGHT TRIGGER As Your Select Tool. The Edit Assist Delay is
+The Delay Before it Presses SELECT For You.																																								YewScripts.Com
+																																																																							*/
+												EditAssist	                      = FALSE,
+												EditAssistDelay 	              = 20,																																																		/*
+												
+Turn "EditHold" To TRUE If You Use An Edit Hold Time In-Game. If It Is At The Lowest, Keep This FALSE. If TRUE, Make "EditHoldTime" Your Hold Time. For Example, 0.4 Seconds Edit Hold 
+Time Would Be 400.																																														YewScripts.Com
+																																																																							*/
+												EditHold		                  = FALSE,
+												EditHoldTime	                  = 100,																																																	/*
+												
+If You're On PC, Keep Button Time At 11, If You're Console, Raise It To 22.																																YewScripts.Com				
+																																																																							*/
+												ButtonTime                        = 22,																																																		/*
+																																																																							
+Build Tracker Will Deactivate ALL Mods While In Build Mode EXCEPT For Edit Mods. The Build Time Is How Long It Takes For The Build Tracker To Disable After Your Controller Is Not Touched.				YewScripts.Com
+																																																																							*/
+												BuildTracker                      = TRUE,
+												BuildTime                         = 11500,																																																	/*
+												
+If Using A PS4 Controller, Turn It To TRUE. If Using A PS5/Xbox Controller, Keep It At FALSE.																											YewScripts.Com
+																																																																							*/
+												PS4Controller                     = TRUE																																																	/*
+												
+LED Indicators Overview:
+
+- Green Flash = Increased Value
+- Red Flash   = Decreased Value																																																																*/ const int8 DataArray [] = { 
+
+100,	100,	100,	100,	100,	100,	100,	100,	99,		99,		99,		
+99,		98,		98,		97,		97,		
+97,		96,		95,		95,		94,		
+94,		93,		92,		92,		91,		
+90,		89,		89,		88,		87,		86,
+85,		84,		83,		82,		81,		
+80,		79,		78,		77,		75,		
+74,		73,		72,		71,		70,		69,		
+67,		66,		65,		63,		62,		
+61,		59,		58,		56,		55,		
+53,		52,		50,		49,		47,		46,
+44,		43,		41,		40,		38,		
+36,		35,		33,		31,		30,		
+28,		26,		25,		23,		21,		20,		
+18,		16,		14,		13,		11,		
+9,		7,		6,		4,		2,		0,		-1,		-3,		-5,		-7,		-8,
+-10,	-12,	-13,	-15,	-17,	
+-19,	-20,	-22,	-24,	-25,	-27,	-29,	-30,	-32,	
+-34,	-35,	
+-37,	-39,	-40,	-42,	-43,	
+-45,	-46,	-48,	-50,	-51,	-53,	-54,	-55,	
+-57,	-58,	-60,
+-61,	-62,	-64,	-65,	-66,	
+-68,	-69,	-70,	-71,	-73,	-74,	-75,	-76,	-77,	-78,	-79,	
+-80,	-81,	-82,	-83,	-84,	
+-85,	-86,	-87,	-88,	-89,	-89,	-90,	
+-91,	-92,	-92,	-93,
+-93,	-94,	-95,	-95,	-96,	
+-96,	-97,	-97,	-97,	-98,	-98,	-99,	-99,	-99,	-99,	-100,	
+-100,	-100,	-100,	-100,	-100,	
+-100,	-100,	-100,	-100,	-100,	-100,	-100,	-100,	
+-99,	-99,	-99,
+-98,	-98,	-98,	-97,	-97,	
+-96,	-96,	-95,	-94,	-94,	-93,	
+-93,	-92,	-91,	-90,	-90,	
+-89,	-88,	-87,	-86,	-85,	
+-84,	-83,	-82,	-81,	-80,	-79,	-78,	
+-77,	-76,	
+-75,	-74,
+-72,	-71,	-70,	-69,	-67,	
+-66,	-65,	-63,	-62,	-61,	-59,	-58,	-56,	-55,	-53,	-52,	
+-50,	-49,	-47,	-46,	-44,	
+-43,	-41,	-40,	-38,	-36,	-35,	-33,	-31,	
+-30,	-28,	-26,
+-25,	-23,	-21,	-20,	-18,	
+-16,	-14,	-13,	-11,	-9,		-7,		-6,		-4,		-2,		0,		2,		
+4,		6,		7,		9,		11,		
+13,		14,		16,		18,		20,		21,		23,		25,		26,		
+28,		30,		
+31,		33,		35,		36,		38,		
+40,		41,		43,		44,		46,		47,		
+49,		51,		52,		54,		55,		
+56,		58,		59,		61,		62,		
+63,		65,		66,		67,		69,		70,		70,		
+72,		73,		74,		75,		
+77,		78,		79,		80,		81,		
+82,		83,		84,		85,		86,		87,		88,		89,		
+89,		90,		91,		
+92,		92,		93,		94,		94,		
+95,		95,		96,		97,		97,		
+97,		98,		98,		99,		99,		
+99,		99,		100,	100,	100,	
+100,	100,	100,	100};                 
