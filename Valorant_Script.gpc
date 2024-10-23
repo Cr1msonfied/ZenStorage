@@ -1,0 +1,1816 @@
+// GPC Online Library
+// valorant script aimbot 1.0.0.gpc
+// Author: Sweetea
+// Link: https://forums.cronusmax.com/gpclib/13516
+
+/*
+
+_________                                       __________                 _________               .__          __          
+\_   ___ \_______   ____    ____   __ __  ______\____    / ____    ____   /   _____/  ____ _______ |__|______ _/  |_  ______
+/    \  \/\_  __ \ /  _ \  /    \ |  |  \/  ___/  /     /_/ __ \  /    \  \_____  \ _/ ___\\_  __ \|  |\____ \\   __\/  ___/
+\     \____|  | \/(  <_> )|   |  \|  |  /\___ \  /     /_\  ___/ |   |  \ /        \\  \___ |  | \/|  ||  |_> >|  |  \___ \ 
+ \______  /|__|    \____/ |___|  /|____//____  >/_______ \\___  >|___|  //_______  / \___  >|__|   |__||   __/ |__| /____  >
+        \/                     \/            \/         \/    \/      \/         \/      \/            |__|              \/ 
+                                                                                                                            
+                                                                                                                            
+                                                                                                                            
+                                                                                                                            
+                                                                                                                            
+                                                                                                                            
+____   ____        .__                                   __                 _____   .__         ___.             __         
+\   \ /   /_____   |  |    ____ _______ _____     ____ _/  |_              /  _  \  |__|  _____ \_ |__    ____ _/  |_       
+ \   Y   / \__  \  |  |   /  _ \\_  __ \\__  \   /    \\   __\   ______   /  /_\  \ |  | /     \ | __ \  /  _ \\   __\      
+  \     /   / __ \_|  |__(  <_> )|  | \/ / __ \_|   |  \|  |    /_____/  /    |    \|  ||  Y Y  \| \_\ \(  <_> )|  |        
+   \___/   (____  /|____/ \____/ |__|   (____  /|___|  /|__|             \____|__  /|__||__|_|  /|___  / \____/ |__|        
+                \/                           \/      \/                          \/           \/     \/                     
+
+*/
+
+
+/*
+ Instructions
+*/
+
+/*
+  Opening and Navigating the Mod Menu
+  ===================================
+  1. Open Mod Menu:
+     - PS5: Press L2 + Triangle
+     - XBOX: Press LT + Y
+
+  2. Exit Mod Menu or Mods:
+     - PS5: Press Circle
+     - XBOX: Press B
+
+  3. Switch Between Mods:
+     - Use DPAD left and DPAD right
+
+  4. Enable or Disable a Mod:
+     - Use DPAD up and DPAD down
+*/
+
+/*
+  Adjusting Specific Mod Settings
+  ===============================
+  1. Modify Anti Recoil / Aim Assist / Rapid Fire Settings:
+     - PS5: Press L1 and R1
+     - XBOX: Press LB and RB
+
+  2. Enter a Mod to Change Values:
+     - PS5: Press Cross
+     - XBOX: Press A
+
+  3. Change the Values of a Mod:
+     - PS5:
+       * L2 + DPAD right = +1
+       * L2 + DPAD up = +10
+       * L2 + DPAD left = -1
+       * L2 + DPAD down = -10
+     - XBOX:
+       * LT + DPAD right = +1
+       * LT + DPAD up = +10
+       * LT + DPAD left = -1
+       * LT + DPAD down = -10
+*/
+
+/*
+  Aimbot Settings
+  ===============
+  1. Aimbot Values:
+     - Head or Body Target:
+       * Higher size increases Aim Assist but can cause shaking.
+       * Recommended Setting: Head
+     - Size: Higher size means stronger Aim Assist.
+       * Recommended to use 99
+     - Speed: Recommended to use 25
+
+  2. POINT Settings:
+     - Size: Higher radius means stronger Aim Assist.
+       * Recommended Values: 30 or 70
+     - Speed: Recommended to use 99
+
+  3. Distance Support:
+     - If enabled, POINT will be turned off. Only one can be active.
+     - Higher values reduce Aim Assist strength but improve long-range performance.
+       * Recommended Values: 30-40
+     - Adjust Aim Assist size accordingly for Head or Body when using Distance Support.
+*/
+
+int modMenu,editMenu; 
+int modNameIdx,valNameIdx;
+int screenSaver,blankScreen;
+int displayTitle = TRUE;
+int updateDisplay;
+const string Toggle  []  = {"DISABLED","ENABLED"}; 
+const string misc[]      = {"Valorant","| AIMBOT |","CronusZenScripts","Drive Mode","Activated","Deactivated","AIMBOT!",""}; 
+int CronusZenScriptscriptz234566;
+int CronusZenScriptscriptz66738948775;
+int ValorantAimbotMONAIMBOT   ;
+int CronusZenScriptsULTRAAIMABUSE   ;
+int CronusZenScripts342      ;
+int NANNYBASHER       ;
+int CronusZenScriptssZ    ;
+int CronusZenScripts666   ;
+int CronusZenScripts595    ;
+int CronusZenScripts212        ;
+int CronusZenScripts232  ;
+int stickLayouts   ;
+int REALGKILLA    ;
+int NSCRIPTZ45    ;
+int NSCRIPTZ        ;
+int ValorantAimbotMONKILLZ       ;
+int ValorantAimbotMONBRUV     ;
+int ValorantAimbotMONTING    ;
+int ValorantAimbotMONTRIGGER   ;
+int VALValorantAimbotMON   ;
+int VAL ;
+int VALValorantAimbotMONP  ;
+int VALP;
+int daREALG ;
+int REALG23      ;
+int ValorantAimbotMONAIM ;
+int ValorantAimbotMON46         ;
+int CronusZenScriptsValorantAimbotMON         ;
+int GWAGON     ;
+int MERC4LYF         ;
+int HAHAlulz          ;
+int ValorantAimbotMONKILLA          ;
+int ValorantAimbotMONKILLARadius    ;
+int daValorantAimbotMON     ;
+int CronusZenScripts89    ;
+int ROF         ;
+int YAMUMSAHOE   ;
+define MaxAmountOfMODs = 4;
+int ValorantAimbotMONstick23;
+int ValorantAimbotMONstick22;
+int ValorantAimbotMONKILLZU;
+int CronusZenScripts342Type;  
+int CronusZenScriptssZFireType;
+int CronusZenScriptsValorantAimbotMON456;
+int smartRumble;
+int CronusZenScripts6;
+int CronusZenScripts4;
+int CronusZenScripts5;
+int CronusZenScripts9;
+int UWOTMATE; 
+int CronusZenScripts7; 
+int angle,loopTime,cosAngle,sinAngle,radiusUsed;
+int CronusZenScripts3;
+int HoldTime,RestTime;
+int LedOn,LedOff;
+int ValorantAimbot;
+int ValorantAimbotMONstrength
+int ValorantAimbotMONstick = 1;
+const int16 valRangeIdx[][] = {
+{        0     ,       1     ,       1     ,  0,  0,  0 }, 
+{        2     ,       5     ,       1     ,  0,  0,  0 }, 
+{        6     ,      13     ,       1     ,  0,  0,  0 }, 
+{       14     ,      15     ,       1     ,  0,  0,  0 }, 
+{       16     ,      16     ,       1     ,  0,  0,  0 }, 
+{       17     ,      17     ,       1     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 },   
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }, 
+{        0     ,       0     ,       0     ,  0,  0,  0 }  
+} 
+const uint8 toggleMax[] = {
+2, 
+2, 
+1, 
+1, 
+1, 
+2, 
+1, 
+1,  
+1, 
+3, 
+21,
+3, 
+1, 
+1, 
+1, 
+1, 
+1, 
+1, 
+1  
+}
+const int16 valuesMinMax[][] = {
+{  -99,   99,    1,   10,  0,  0  }, 
+{  -99,   99,    1,   10,  0,  0  }, 
+{  -99,   99,    1,   10,  0,  0  }, 
+{  -99,   99,    1,   10,  0,  0  }, 
+{    0, 5000,   10,  100,  0,  0  }, 
+{    0,   20,    1,   10,  0,  0  }, 
+{    0,    1,    1,   10,  0,  0  }, 
+{    0,   99,    1,   10,  0,  0  }, 
+{    0,   99,    1,   10,  0,  0  }, 
+{    0,    1,    1,   10,  0,  0  }, 
+{    0,   99,    1,   10,  0,  0  }, 
+{    0,   99,    1,   10,  0,  0  }, 
+{    0,    1,    1,   10,  0,  0  }, 
+{    0,   99,    1,   10,  0,  0  }, 
+{    0,   99,    1,   10,  0,  0  }, 
+{    0,   99,   10,   10,  0,  0  }, 
+{    1,   25,    1,   10,  0,  0  }, 
+{    1,   25,    1,   10,  0,  0  }  
+}      
+const string modNames[] = { "  ANTI-RECOIL ","  ANTI-RECOIL PRO","AIMBOT","AIMABUSE","RAPID FIRE","Disabled Mod","Disabled Mod","Disabled Mod","Disabled Mod","Disabled Mod","LAYOUT"," AIMABUSE ","VIBRATION OFF","DISABLE ALL","HOTKEY","HOTKEY1","HOTKEY2","HOTKEY3","HOTKEY4", "" };
+const string valNames[] = { "VERTICAL","HORIZONTAL","VERTICAL","HORIZONTAL","WAIT MS","CENTER MS","OBJECT TARGET","SIZE","SPEED","POINT","POINT SIZE","POINT SPEED ","DISTANCE SUPPORT","DISTANCE SP","STRENGHT","MS","ROUNDSFRD","ROUNDSFRD", "" };
+const string CronusZenScriptscriptz234566_Opt [] = { "OFF","ON","VIBRATION", "" };
+const string CronusZenScriptscriptz66738948775_Opt [] = { "OFF","ON","VIBRATION", "" };
+const string NANNYBASHER_Opt [] = { "Off","SEMI AUTOMATIC","AUTOMATIC", "" };
+const string CronusZenScripts212_Opt [] = { "0","-2","-4","-6", "" };
+const string CronusZenScripts232_Opt [] = { "Default","Tactical","Lefty","N0M4D/Charlie","N0M4D/Charlie Tac","N0M4D/Charlie Left","Bumper Jumper","Bumper Jumper Tac","1-Hand Gunslinger","Stick & Move","Brawler","Beast","Bumper Ping","Bumper Ping Tac","Default Flipped","Tactical Flipped","B.Jumper Flipped","B.JumprTac Flipped","Stick&Move Flipped","Beasty Swapped","B.Ping Flipped","B.Ping.Tac.Flipped", "" };
+const string stickLayouts_Opt [] = { "Default","Southpaw","Legacy","Legacy Southpaw", "" };
+const string ValorantAimbotMONAIM_Opt [] = { "HEAD","BODY", "" };
+const string GWAGON_Opt [] = { "OFF","ON", "" };
+const string ValorantAimbotMONKILLA_Opt [] = { "OFF","ON", "" };
+const string pressButtons[]          = { "Select","Triangle","Cross","Circle","Square","Dpad Down","Dpad UP","Dpad Left","Dpad Right","Share/View","Options/Menu","Touch/Sync","[]","PS4","PS5","Xbox1","XbOX TR","XBbOX TR L","Xbx TR R","[]"};
+const string handGunFireType[]= {"On SHOOT","On ADS","ADS & THROW"};
+const string snakeShotOpt []  = {"On SHOOT","On ADS","ADS & CIRCLE","SHOOT & CIRCLE","ADS & THROW"};
+const string instaDropOpt[]   = {"On SHOOT","On ADS","ADS & CIRCLE","SHOOT & CIRCLE","ADS & THROW"}; 
+const string arActivation[]   = {"On ADS","On SHOOT","ADS&Doubletap"}; 
+const string aimAssistType[]  = {"ADS & SHOOT","On ADS","On SHOOT","ADS&Doubletap"}; 
+init { 
+Load();
+run = 1;
+} 
+main { 
+Buttons(CronusZenScripts232);
+ControllerRSLS(stickLayouts);
+ActivateAllButtons(); 
+if(run){ 
+combo_run(ValorantAimbotMONcha1);
+} 
+if(get_console() == PIO_PS4){
+if(get_controller() != PIO_PS4){
+if(get_ival(PS4_SHARE)){
+if(get_ival(PS4_R3)){
+set_val(PS4_SHARE,100);
+set_val(PS4_TOUCH,0);
+set_val(PS4_R3,0);
+}
+else{
+set_val(PS4_TOUCH, 100);
+set_val(PS4_SHARE, 0);
+}
+}
+}
+}
+else if(NSCRIPTZ45){
+swap(PS4_TOUCH, PS4_SHARE);
+}
+if(get_ival(Ads)){ 
+if(event_press(PS4_TRIANGLE)){ 
+modMenu = TRUE;
+updateDisplay = TRUE;
+displayTitle = FALSE;
+if(combo_running(v187)) {
+combo_stop(v187);
+ValorantAimbotaim = FALSE; 
+} 
+if(!modMenu){ 
+displayTitle = TRUE;
+} 
+}
+set_val(PS4_OPTIONS,0);
+}
+if(!displayTitle){ 
+if(modMenu || editMenu){ 
+combo_run(ValorantAimbotMONcha1);
+} 
+if(modMenu){
+vm_tctrl(0);    
+modNameIdx = menuNavigation(modNameIdx,0,MaxAmountOfMODs);
+CronusZenScriptscriptz234566        = toggleSwitch  (CronusZenScriptscriptz234566         ,0  ); 
+CronusZenScriptscriptz66738948775        = toggleSwitch  (CronusZenScriptscriptz66738948775         ,1  ); 
+ValorantAimbotMONAIMBOT           = toggleSwitch  (ValorantAimbotMONAIMBOT            ,2  ); 
+stickLayouts           = toggleSwitch  (stickLayouts            ,3 ); 
+CronusZenScripts342              = toggleSwitch  (CronusZenScripts342               ,4  ); 
+NANNYBASHER               = toggleSwitch  (NANNYBASHER                ,5  ); 
+CronusZenScriptssZ            = toggleSwitch  (CronusZenScriptssZ             ,6  ); 
+CronusZenScripts666           = toggleSwitch  (CronusZenScripts666            ,7  ); 
+CronusZenScripts595            = toggleSwitch  (CronusZenScripts595             ,8  );
+CronusZenScripts212                = toggleSwitch  (CronusZenScripts212                 ,9  ); 
+CronusZenScripts232          = toggleSwitch  (CronusZenScripts232           ,10 );
+CronusZenScriptsULTRAAIMABUSE           = toggleSwitch  (CronusZenScriptsULTRAAIMABUSE            ,11 );
+REALGKILLA            = toggleSwitch  (REALGKILLA             ,12 );
+NSCRIPTZ45            = toggleSwitch  (NSCRIPTZ45             ,13 );
+ValorantAimbotMONstick23     = fireTypeSwitch(0,ValorantAimbotMONstick23    ,2  );
+ValorantAimbotMONstick23     = fireTypeSwitch(1,ValorantAimbotMONstick23    ,2  );
+ValorantAimbotMONstick22         = fireTypeSwitch(2,ValorantAimbotMONstick22        ,3  );
+ValorantAimbotMONKILLZU     = fireTypeSwitch(3,ValorantAimbotMONKILLZU    ,3  );
+CronusZenScripts342Type          = fireTypeSwitch(4,CronusZenScripts342Type         ,2  );
+CronusZenScriptssZFireType    = fireTypeSwitch(6,CronusZenScriptssZFireType   ,4  );
+CronusZenScriptsValorantAimbotMON456 = fireTypeSwitch(7,CronusZenScriptsValorantAimbotMON456,4  );
+ButtonActivation(0,14)
+ButtonActivation(1,15)	
+ButtonActivation(2,16)
+ButtonActivation(3,17)
+ButtonActivation(4,18)
+} 
+if(editMenu){ 
+vm_tctrl(0);  
+valNameIdx = menuNavigation(valNameIdx,valRangeIdx[modNameIdx][0],valRangeIdx[modNameIdx][1]);   
+VALValorantAimbotMON      = editValues(VALValorantAimbotMON    ,0 );
+VALValorantAimbotMONP     = editValues(VALValorantAimbotMONP   ,2 );
+VALP   = editValues(VALP ,3 );
+daREALG    = editValues(daREALG  ,4 );
+REALG23         = editValues(REALG23       ,5 );
+ValorantAimbotMONAIM    = editSwitch(ValorantAimbotMONAIM  ,6 );  
+ValorantAimbotMON46            = editValues(ValorantAimbotMON46          ,7 );
+CronusZenScriptsValorantAimbotMON            = editValues(CronusZenScriptsValorantAimbotMON          ,8 );
+GWAGON        = editSwitch(GWAGON      ,9 );  
+MERC4LYF            = editValues(MERC4LYF          ,10);
+HAHAlulz             = editValues(HAHAlulz           ,11);
+ValorantAimbotMONKILLA             = editSwitch(ValorantAimbotMONKILLA           ,12);  
+ValorantAimbotMONKILLARadius       = editValues(ValorantAimbotMONKILLARadius     ,13);
+daValorantAimbotMON        = editValues(daValorantAimbotMON      ,14);
+ROF            = editValues(ROF          ,16);
+YAMUMSAHOE      = editValues(YAMUMSAHOE    ,17);
+}
+if(updateDisplay){ 
+cls_oled(OLED_BLACK);   
+rect_oled(0, 0, OLED_WIDTH, OLED_HEIGHT, OLED_BLACK, OLED_WHITE);
+line_oled(0,28,127 , 28, 1, 0); 
+if(editMenu){ 
+print(centerPosition(getREALGKILLA96(valNames[valNameIdx]) ,OLED_FONT_SMALL_WIDTH), 10  ,OLED_FONT_SMALL  , OLED_WHITE , valNames[valNameIdx]); 
+}
+else { 
+print(centerPosition(getREALGKILLA96(modNames[modNameIdx]) ,OLED_FONT_SMALL_WIDTH), 15  ,OLED_FONT_SMALL , OLED_WHITE , modNames[modNameIdx]);
+}
+updateDisplay = FALSE;  
+}
+} 
+if(!modMenu && !editMenu){
+if(displayTitle){ 
+cls_oled(1);
+displayTitle = FALSE;
+screenSaver  = TRUE;
+rect_oled(0, 0, OLED_WIDTH, OLED_HEIGHT, OLED_BLACK, OLED_WHITE);
+print(centerPosition(getREALGKILLA96(misc[0]) ,OLED_FONT_LARGE_WIDTH), 0  ,OLED_FONT_LARGE , OLED_BLACK , misc[0]);
+print(centerPosition(getREALGKILLA96(misc[1]) ,OLED_FONT_MEDIUM_WIDTH),25  ,OLED_FONT_MEDIUM , OLED_BLACK , misc[1]);
+print(centerPosition(getREALGKILLA96(misc[2]) ,OLED_FONT_SMALL_WIDTH),50  ,OLED_FONT_SMALL , OLED_BLACK , misc[2]);
+print(centerPosition(getREALGKILLA96(misc[3]) ,OLED_FONT_MEDIUM_WIDTH),63  ,OLED_FONT_MEDIUM , OLED_BLACK , misc[3]);    
+}
+if(screenSaver){  
+blankScreen += get_rtime();
+if(blankScreen >= 10000)
+{
+cls_oled(OLED_BLACK);
+blankScreen = 0;
+screenSaver = FALSE;
+run = 1;
+} 
+}
+if(get_ival(Fire)){
+if(event_press(PS4_RIGHT) && get_brtime(PS4_RIGHT) <= 200 && !modMenu && !editMenu){
+ValorantAimbot = TRUE; 
+combo_run(ValorantAimbot);
+}
+set_val(PS4_RIGHT,0);
+} 
+if(ValorantAimbot){
+combo_run(zenValorantAimbotMON);
+LedOn  = 150;
+LedOff = 300;
+run    = 0;
+if(event_press(PS4_SQUARE)){
+ValorantAimbot = FALSE;
+combo_run(ValorantAimbotOff); 
+combo_run(ValorantAimbotMONassault569);
+}
+} 
+if(REALGKILLA) {
+block_rumble();
+}
+if(get_ival(Ads) > 1)
+set_val(Ads, 100);
+if(get_ival(Fire) > 1)
+set_val(Fire, 100);
+if(!ValorantAimbot){ 
+if(CronusZenScripts212){
+if(CronusZenScripts212 == 0) vm_tctrl( 0);	
+if(CronusZenScripts212 == 1) vm_tctrl(-2);
+if(CronusZenScripts212 == 2) vm_tctrl(-4);
+if(CronusZenScripts212 == 3) vm_tctrl(-6);
+}
+CronusZenScripts342 					= presetv187(ActivateHoldButton[0],ActivatePressButton[0],CronusZenScripts342   ,4,1,NSCRIPTZ     );
+NANNYBASHER                    = presetv187(ActivateHoldButton[1],ActivatePressButton[1],NANNYBASHER    ,5,2,ValorantAimbotMONKILLZ    );
+CronusZenScriptssZ			        = presetv187(ActivateHoldButton[2],ActivatePressButton[2],CronusZenScriptssZ ,6,1,ValorantAimbotMONBRUV  );
+CronusZenScripts666    			= presetv187(ActivateHoldButton[3],ActivatePressButton[3],CronusZenScripts666,7,1,ValorantAimbotMONTING  );
+CronusZenScripts595                 = presetv187(ActivateHoldButton[4],ActivatePressButton[4],CronusZenScripts595 ,8,1,ValorantAimbotMONTRIGGER); 
+if(CronusZenScripts342){
+HoldTime = 500 / ROF; 	
+RestTime = HoldTime -get_rtime();
+if(RestTime < 0) RestTime = 0;
+if(CronusZenScripts342ActivationType())
+combo_run(CronusZenScripts342);
+else
+combo_stop(CronusZenScripts342);	 
+combo_run(zenValorantAimbotMON);
+LedOn  = 200;
+LedOff = 150; 
+}
+if(CronusZenScripts666){ 
+if(snakeShotActivationType(CronusZenScriptsValorantAimbotMON456)){ 
+combo_run(CronusZenScripts666);
+}
+if(combo_running(CronusZenScripts666) && !get_val(Fire)){
+combo_stop(CronusZenScripts666);
+}
+}
+if(CronusZenScriptscriptz234566 >= 1){ 
+CronusZenScripts4 = get_rumble(rumbleToUse());
+if(antirecoilActivation(ValorantAimbotMONstick23)){
+if(CronusZenScriptscriptz234566 == 1){ 
+combo_run(CronusZenScriptscha1);
+} 
+if(CronusZenScriptscriptz234566 == 2){ 
+if(CronusZenScripts4 > 10 && CronusZenScripts4 < 90){ 
+CronusZenScripts6 = VALValorantAimbotMON + CronusZenScripts4 / 2; 
+} 
+if(CronusZenScripts4 < 10){ 
+if(ValorantAimbotMONAIMBOT){ 
+offsetAR(aimRY,VALValorantAimbotMON   + (sinAngle / 327));
+offsetAR(aimRX,VAL + (cosAngle / 327));
+}
+else { 
+offsetAR(aimRY,VALValorantAimbotMON);
+offsetAR(aimRX,VAL);
+}
+}
+else { 
+if(ValorantAimbotMONAIMBOT){ 
+offsetAR(aimRY,CronusZenScripts6 + (sinAngle / 327));
+offsetAR(aimRX,VAL + (cosAngle / 327));
+}
+else { 
+offsetAR(aimRY,CronusZenScripts6);
+offsetAR(aimRX,VAL);
+}
+}	
+} 
+}
+if(!get_val(Fire)){ 
+CronusZenScripts6 = 0;
+CronusZenScripts4 = 0;
+} 
+} 
+if(CronusZenScriptscriptz66738948775 == 1){
+if(antirecoilActivation(ValorantAimbotMONstick23)){
+CronusZenScripts9 += get_rtime(); 
+if(CronusZenScripts9 < daREALG){ 
+CronusZenScripts5 = ((VALValorantAimbotMONP * 2 * 32767/100)); 
+}
+if(CronusZenScripts9 > daREALG){ 
+CronusZenScripts5 = (VALValorantAimbotMONP * 32767/100) ;
+}
+if(isqrt(pow(get_ival(POLAR_RX),2) + pow(get_ival(POLAR_RY),2)) >(REALG23 * 32767/100)) { 
+offset(POLAR_RY,CronusZenScripts5 - (REALG23 * 32767 / 100));
+offset(POLAR_RX,VALP * 32767 / 100);
+}
+if(isqrt(pow(get_ival(POLAR_RX),2) + pow(get_ival(POLAR_RY),2))<(REALG23 * 32767/100)) {    
+offset(POLAR_RY,CronusZenScripts5 - get_val(POLAR_RY))
+offset(POLAR_RX,VALP  * 32767 / 100);	
+}		
+}
+if(!get_val(Fire)){ 
+CronusZenScripts9 = 0;
+} 
+} 
+if(CronusZenScriptscriptz66738948775 == 2){
+smartRumble = get_rumble(rumbleToUse());
+if(antirecoilActivation(ValorantAimbotMONstick23)){
+CronusZenScripts9 += get_rtime(); 
+if(smartRumble > 10 && smartRumble < 90){
+if(CronusZenScripts9 < daREALG){
+if(get_controller() == PIO_XB1){
+ValorantAimbotMONstrength = ((VALValorantAimbotMONP * ValorantAimbotMONstick) * 2) + smartRumble / 2; 
+} 
+else { 
+ValorantAimbotMONstrength = ((VALValorantAimbotMONP * ValorantAimbotMONstick) * 2) + smartRumble / 4; 
+}
+}
+if(CronusZenScripts9 > daREALG){ 
+if(get_controller() == PIO_XB1){
+ValorantAimbotMONstrength = (VALValorantAimbotMONP * ValorantAimbotMONstick) + smartRumble / 2; 
+}
+else { 
+ValorantAimbotMONstrength = (VALValorantAimbotMONP * ValorantAimbotMONstick) + smartRumble / 3;
+} 
+} 
+}	
+if(isqrt(pow(get_ival(POLAR_RX),2) + pow(get_ival(POLAR_RY),2)) >(REALG23 * 32767/100)) { 
+if(smartRumble < 10){ 
+offset(POLAR_RY,((VALValorantAimbotMONP - (REALG23 * ValorantAimbotMONstick))  * 32767 / 100));
+offset(POLAR_RX,VAL * 32767 / 100);
+}
+else { 
+offset(POLAR_RY,((ValorantAimbotMONstrength - (REALG23 * ValorantAimbotMONstick)) * 32767 / 100));
+offset(POLAR_RX,VAL * 32767 / 100);
+}
+}
+if(isqrt(pow(get_ival(POLAR_RX),2) + pow(get_ival(POLAR_RY),2))<(REALG23 * 32767/100)) { 
+if(smartRumble < 10){ 
+offset(POLAR_RY,(VALValorantAimbotMONP * 32767/100) - get_val(POLAR_RY))
+offset(POLAR_RX,VAL * 32767 / 100);
+}
+else { 
+offset(POLAR_RY,ValorantAimbotMONstrength  * 32767 / 100);
+offset(POLAR_RX,VAL * 32767 / 100);
+}
+}
+}
+if(!get_val(Fire)){ 
+smartRumble = 0;
+ValorantAimbotMONstrength = 0;
+} 
+} 	
+if(ValorantAimbotMONAIMBOT){ 
+UWOTMATE = getPolar(POLAR_RS,POLAR_RADIUS);
+angle    = (angle % 360);
+if(!(loopTime++ % 1)){
+if(GWAGON) 
+angle += (CronusZenScriptsValorantAimbotMON + HAHAlulz);
+else 
+angle +=  CronusZenScriptsValorantAimbotMON;
+}	
+if(get_ival(Ads) || get_ival(Fire)){ 
+if(!ValorantAimbotMONKILLA){
+if(GWAGON && get_ival(Fire)){ 
+radiusUsed  = ((ValorantAimbotMON46 + MERC4LYF) * 32767/100); 	 
+}
+else { 
+radiusUsed  = (ValorantAimbotMON46 * 32767/100);
+}
+} 
+if(ValorantAimbotMONKILLA){ 
+if(!(loopTime++ % 1)){ 
+if(UWOTMATE > 0 && UWOTMATE < (30 * 32767/100)){
+if(!GWAGON){ 
+radiusUsed = ((ValorantAimbotMON46  * 32767/100) + inv(ValorantAimbotMONKILLARadius * 32767/100));
+}
+}else { 
+radiusUsed  = (ValorantAimbotMON46 * 32767/100); 
+} 
+}
+}
+if(ValorantAimbotMONAIM == 0)
+setPolar(POLAR_RS,angle,radiusUsed);	
+else
+setLinear(POLAR_RS,angle,radiusUsed);
+CronusZenScripts7 = 32767;  
+} 
+} 
+if(CronusZenScriptsULTRAAIMABUSE){ 
+CronusZenScripts3 = (daValorantAimbotMON * 32767/100);
+if(aimAssistActivation(ValorantAimbotMONKILLZU)){
+combo_run(ValorantAimbotMONaimV2);
+}
+} 
+if(CronusZenScriptssZ){ 
+if(CronusZenScriptssZFireType == 0)  {
+if(get_val(Fire) && get_ptime(Fire) <= 200 && !get_val(Ads)){ 
+combo_run(ValorantAimbotaimWZ);
+}
+}
+if(CronusZenScriptssZFireType == 1)  {
+if(get_ival(Ads) && get_val(Fire) && get_ptime(Fire) <= 200){ 
+combo_run(ValorantAimbotaimWZ);
+}
+}
+if(CronusZenScriptssZFireType == 2)  {
+if(get_val(Ads) && get_val(Fire) && get_val(Crouch)){
+combo_run(ValorantAimbotaimWZ);
+}
+if(combo_running(ValorantAimbotaimWZ) && (event_release(Ads) || !get_val(Fire) || event_press(Jump) || !get_val(Crouch))){
+combo_stop(ValorantAimbotaimWZ);
+} 
+}
+if(CronusZenScriptssZFireType == 3){
+if(get_val(Fire) && event_release(Crouch) && get_ptime(Crouch) < 200){
+combo_run(ValorantAimbotaimWZ);
+}
+}
+if(CronusZenScriptssZFireType == 4) { 
+if(get_ival(Ads)){
+if(get_val(Lethal)){ 
+swap(Lethal,Fire);
+}
+if(get_ptime(Lethal) <= 200){ 
+combo_run(ValorantAimbotaimWZ);
+}
+set_val(Lethal,0);
+}
+} 
+if(combo_running(ValorantAimbotaimWZ) && (event_release(Ads) || !get_val(Fire) || event_press(Jump))){
+combo_stop(ValorantAimbotaimWZ);
+} 
+} 
+if(CronusZenScripts595){ 
+if(get_ival(Ads) && get_val(Fire) || get_val(Fire)){
+combo_run(zenValorantAimbotMON323);
+}
+}
+if(NANNYBASHER == 1){ 
+HoldTime = 500 / YAMUMSAHOE;     
+RestTime = HoldTime -get_rtime();
+if(RestTime < 0) RestTime = 0;
+if(get_val(Fire)){
+combo_run(AkimboCronusZenScripts3421)
+} 
+else { 
+if(get_val(Ads)){ 
+combo_run(AkimboCronusZenScripts3422);
+}
+}  
+combo_run(zenValorantAimbotMON);
+LedOn  = 200;
+LedOff = 150;    
+} 
+if(NANNYBASHER == 2){ 
+if(get_ival(Ads) || get_ival(Fire)){ 
+set_val(Ads,100);
+set_val(Fire,100);
+}
+combo_run(zenValorantAimbotMON);
+LedOn  = 200;
+LedOff = 150;    
+} 
+}   
+}    
+} 
+combo ValorantAimbotMONaimV2 {
+offset(POLAR_LX,CronusZenScripts3);
+offset(POLAR_LY,inv(CronusZenScripts3));
+wait(CronusZenScripts89);
+offset(POLAR_LX,inv(CronusZenScripts3));
+offset(POLAR_LY,CronusZenScripts3);
+wait(CronusZenScripts89);
+offset(POLAR_LY,CronusZenScripts3);
+offset(POLAR_LX,CronusZenScripts3);
+wait(CronusZenScripts89);
+offset(POLAR_LX,inv(CronusZenScripts3));
+offset(POLAR_LY,inv(CronusZenScripts3));
+wait(CronusZenScripts89);
+}
+function offset(Stick, Value) {
+if (Stick >= POLAR_RX) {
+set_val(Stick, clamp(Value * (32767 - abs(get_val(Stick))) / 32767 + get_val(Stick), -32767, 32767));
+return;
+}
+set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));
+}
+function offsetAR(Stick,Value) {
+set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));
+return;
+}
+function getPolar(Stick, AngleOrRadius) {
+if (AngleOrRadius) return 360 - get_polar(Stick, POLAR_ANGLE);
+return isqrt((get_val(Stick + 42) * get_val(Stick + 42)) + (get_val(Stick + 43) * get_val(Stick + 43)));   
+}
+function linearCosAngle(int angle) { return linearCoordinates(angle, 0); }
+function linearSinAngle(int angle) { return linearCoordinates(angle, 1); }
+int angleOut, yOut, xOut;
+function linearCoordinates(int angle, int axis) {
+if (angle < 0) 
+angle    = (angle % 360) + 360; 
+angle    = (angle % 360);
+angleOut = ((angle % 90)) * (CronusZenScripts7) / (90);
+xOut     =  angleOut;
+yOut     = -CronusZenScripts7 + angleOut;
+if (angle < 90) {
+xOut = CronusZenScripts7 - angleOut;
+yOut = angleOut;
+} 
+else if (angle < 180) {
+xOut = -angleOut;
+yOut = CronusZenScripts7 - angleOut;
+} 
+else if (angle < 270) {
+xOut = -CronusZenScripts7 + angleOut;
+yOut = -angleOut;
+} 
+if (axis) return yOut;
+return xOut;
+}
+function setLinear(int stick,int angle,int radius) {
+cosAngle = (linearCosAngle(angle) * radius/32767); 
+sinAngle = (linearSinAngle(angle) * radius/32767);
+set_val(42 + stick,clamp(cosAngle + get_val(POLAR_RX),-32767,32767));
+set_val(43 + stick,clamp(sinAngle + get_val(POLAR_RY),-32767,32767));
+return;
+}
+function setPolar(int stick,int angle,int radius) {
+cosAngle = (polarCosAngle(angle) * radius/32767); 
+sinAngle = (polarSinAngle(angle) * radius/32767);
+set_val(42 + stick,clamp(cosAngle + get_val(POLAR_RX),-32767,32767));
+set_val(43 + stick,clamp(sinAngle + get_val(POLAR_RY),-32767,32767));
+return;
+}
+function polarSinAngle(int angle) {
+return (polarCosAngle(angle - 90));
+}
+function polarCosAngle(int angle) {
+if (angle < 0) 
+angle    = (angle % 360) + 360;
+angle    = (angle % 360);
+xOut     = CronusZenScripts7;
+yOut     = CronusZenScripts7;
+angleOut = (angle) % 45;
+if (angle < 45) {
+yOut = (CronusZenScripts7 * angleOut) / 45;
+} 
+else if (angle < 90) {
+xOut = (CronusZenScripts7 * (45 - angleOut)) / 45;
+} 
+else if (angle < 135) {
+xOut = (-CronusZenScripts7 * angleOut) / 45;
+} 
+else if (angle < 180) {
+yOut = (CronusZenScripts7 * (45 - angleOut)) / 45;
+xOut = -CronusZenScripts7;
+} 
+else if (angle < 225) {
+yOut = (CronusZenScripts7 * angleOut) / 45;
+xOut = -CronusZenScripts7;
+} 
+else if (angle < 270) {
+xOut = (-CronusZenScripts7 * (45 - angleOut)) / 45;
+yOut = -CronusZenScripts7;
+} 
+else if (angle < 315) {
+xOut = (CronusZenScripts7 * angleOut) / 45;
+yOut = -CronusZenScripts7;
+} 
+else {
+yOut = (CronusZenScripts7 * (45 - angleOut)) / 45;
+}
+angleOut = abs(yOut);
+if (abs(xOut) > angleOut) angleOut = abs(xOut);
+return (xOut * angleOut / isqrt((pow(xOut, 2) + pow(yOut, 2))));
+}
+int ValorantAimbotMONKILLZA,CronusZenScriptsting;
+combo CronusZenScriptscha1{
+ValorantAimbotMONKILLZA = get_val(aimRY) + VALValorantAimbotMON;  
+if(abs(get_val(aimRY)) < abs(VALValorantAimbotMON) +  5){
+if(ValorantAimbotMONAIMBOT){
+set_val(aimRY, (ValorantAimbotMONKILLZA + (sinAngle / 327)));
+}
+else { 
+set_val(aimRY, (ValorantAimbotMONKILLZA));	
+} 
+} 
+CronusZenScriptsting = get_val(aimRX) + VAL;
+if(abs(get_val(aimRX)) < abs(VAL) + 5) { 
+if(ValorantAimbotMONAIMBOT){ 
+set_val(aimRX, CronusZenScriptsting + (cosAngle / 327));
+}
+else { 
+set_val(aimRX, CronusZenScriptsting); 	
+} 
+} 
+}
+combo ValorantAimbotaimWZ {
+set_val(Crouch,100);
+wait(100);
+set_val(moveLY,100);
+wait(30);
+set_val(Crouch,100);
+offsetAR(aimRY,-20);
+wait(700);
+set_val(Crouch,0);
+set_val(moveLY,0);
+wait(20);
+} 
+function CronusZenScripts342ActivationType(){ 
+if(CronusZenScripts342Type == 0){ 
+if(get_val(Fire)){ 
+return TRUE;
+}
+}
+if(CronusZenScripts342Type == 1){ 
+if(get_ival(Ads) && get_val(Fire)){ 
+return TRUE;
+}
+} 
+if(CronusZenScripts342Type == 2){ 
+if(get_ival(Ads)){
+if(get_val(Lethal)){ 
+swap(Lethal,Fire);
+return TRUE;
+}
+set_val(Lethal,0);
+}
+} 
+return 0;
+}
+function snakeShotActivationType(fVar){ 
+if(fVar  == 0){   
+if(get_val(Fire) && get_ptime(Fire) <= 200 && !get_val(Ads)){ 
+return TRUE;
+}
+}
+if(fVar  == 1){   		 
+if(get_ival(Ads) && get_val(Fire) && get_ptime(Fire) <= 200){ 
+return TRUE;
+}
+}
+if(fVar  == 2){	
+if(get_val(Ads) && get_val(Fire) && event_press(Crouch) && get_ptime(Crouch) <= 200){
+return TRUE;
+}
+}	
+if(fVar == 3){   
+if(get_ival(Fire) && event_press(Crouch) && get_ptime(Crouch) <1720){
+return TRUE;
+}
+}
+if(fVar  == 4){ 
+if(get_ival(Ads)){
+if(get_val(Lethal)){ 
+swap(Lethal,Fire);
+return TRUE;
+}
+set_val(Lethal,0);
+}
+} 		
+return 0;
+}
+function rumbleToUse() {
+if(get_rumble(RUMBLE_A) == get_rumble(RUMBLE_B)) 
+{
+return RUMBLE_A;
+}
+if(get_rumble(RUMBLE_A) == 100) 
+{
+return RUMBLE_B;
+}
+if(get_rumble(RUMBLE_B) == 100) 
+{
+return RUMBLE_A;
+}
+if(get_rumble(RUMBLE_A) > get_rumble(RUMBLE_B)) 
+{
+return RUMBLE_A;
+}
+if(get_rumble(RUMBLE_A) < get_rumble(RUMBLE_B)) 
+{
+return RUMBLE_B;
+}
+return 0;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+function antirecoilActivation(fVar){ 
+if(fVar == 0){ 
+if(get_ival(Ads) && get_val(Fire)){ 
+return TRUE;
+}
+}
+if(fVar == 1){ 
+if(get_val(Fire) && !get_ival(Ads)){
+return TRUE;
+}
+} 
+if(fVar == 2){ 
+if(get_ival(Ads) && get_val(Fire) || get_val(Fire)){ 
+return TRUE;
+} 
+}
+return 0;
+} 
+function aimAssistActivation(fVar){ 
+if(fVar == 0){ 
+if(get_ival(Ads) || get_ival(Fire)){ 
+return TRUE;
+}
+} 
+if(fVar == 1){ 
+if(get_ival(Ads) && get_ival(Fire)){ 
+return TRUE;
+} 
+} 
+if(fVar == 2){ 
+if(get_ival(Fire) && !get_ival(Ads)){
+return TRUE;
+} 
+} 
+if(fVar == 3){ 
+if(get_ival(Ads) && get_ival(Fire) || get_ival(Fire)){ 
+return TRUE;
+}
+} 
+return 0;
+} 
+function fireTypeSwitch(fIdx,fVar,fMax){ 
+if(modNameIdx == fIdx){ 
+if(event_press(PS4_R1)){
+fVar ++;
+updateDisplay = TRUE;
+if(!fVar)
+combo_run(ValorantAimbotMONassault);
+else
+combo_run(TOMOpower); 
+}
+if(event_press(PS4_L1)){ 
+fVar --;
+updateDisplay = TRUE;
+if(!fVar)
+combo_run(ValorantAimbotMONassault);
+else
+combo_run(TOMOpower); 
+}
+fVar    = rotateVar(fVar,0,fMax);  
+if(modNameIdx ==  6){ 
+print(centerPosition(getREALGKILLA96(instaDropOpt[CronusZenScriptssZFireType]) ,OLED_FONT_SMALL_WIDTH),34  ,OLED_FONT_SMALL , OLED_WHITE ,instaDropOpt[CronusZenScriptssZFireType]);
+}
+else if(modNameIdx == 0 || modNameIdx == 1){ 
+print(centerPosition(getREALGKILLA96(arActivation[ValorantAimbotMONstick23]),OLED_FONT_SMALL_WIDTH),34,OLED_FONT_SMALL,OLED_WHITE,arActivation[ValorantAimbotMONstick23])	
+}
+else if(modNameIdx == 2){ 
+print(centerPosition(getREALGKILLA96(aimAssistType[ValorantAimbotMONstick22]),OLED_FONT_SMALL_WIDTH),34,OLED_FONT_SMALL,OLED_WHITE,aimAssistType[ValorantAimbotMONstick22])	
+}
+else if(modNameIdx == 3){ 
+print(centerPosition(getREALGKILLA96(aimAssistType[ValorantAimbotMONKILLZU]),OLED_FONT_SMALL_WIDTH),34,OLED_FONT_SMALL,OLED_WHITE,aimAssistType[ValorantAimbotMONKILLZU])	
+}
+else if(modNameIdx == 4){ 
+print(centerPosition(getREALGKILLA96(handGunFireType[CronusZenScripts342Type]) ,OLED_FONT_SMALL_WIDTH),34 ,OLED_FONT_SMALL , OLED_WHITE ,handGunFireType[CronusZenScripts342Type]);
+}
+else if(modNameIdx == 7){ 
+print(centerPosition(getREALGKILLA96(snakeShotOpt[CronusZenScriptsValorantAimbotMON456]) ,OLED_FONT_SMALL_WIDTH),34  ,OLED_FONT_SMALL , OLED_WHITE ,snakeShotOpt[CronusZenScriptsValorantAimbotMON456]);
+}
+}
+return fVar;
+} 
+function menuNavigation(indexVar,fMin,fMax){ 
+if(!get_ival(Ads)){ 
+if(event_press(PS4_RIGHT)){ 
+indexVar  += 1;
+updateDisplay = TRUE;
+}
+if(event_press(PS4_LEFT)){ 
+indexVar  -= 1;
+updateDisplay = TRUE;
+}
+}
+if(valRangeIdx[modNameIdx][2] == 1){
+if(event_press(PS4_CROSS)){    
+valNameIdx    = valRangeIdx[modNameIdx][0];
+modMenu       = FALSE;
+editMenu      = TRUE;
+updateDisplay = TRUE;     
+}
+} 
+if(event_press(PS4_CIRCLE)){ 
+if(modMenu){ 
+modMenu       = FALSE;
+editMenu      = FALSE;
+displayTitle  = TRUE;
+Save();
+combo_run(ValorantAimbotS);
+}
+else if(editMenu){ 
+updateDisplay = TRUE;
+modMenu       = TRUE;
+editMenu      = FALSE;
+}
+} 
+BlockButtonPress ()
+indexVar = rotateVar(indexVar,fMin,fMax);
+return indexVar;
+}
+int run;
+int PWNED = 6; 
+int ValorantAimbotMONG;
+int CronusZenScripts3124;
+int GKILLAaim;
+combo ValorantAimbotMONcha1 {
+CronusZenScripts3124 += get_rtime();
+if(!(CronusZenScripts3124++ % PWNED)){  
+if(!ValorantAimbotMONG){ 
+GKILLAaim     -= 4;  
+if(GKILLAaim < 0)  
+ValorantAimbotMONG = TRUE;
+}
+else { 
+GKILLAaim     += 4;
+if(GKILLAaim > 359) 
+ValorantAimbotMONG = FALSE;
+}
+CronusZenScripts3124 = 0;  
+} 
+set_hsb(GKILLAaim,100,100);
+}
+function rotateVar(Value,Min,Max){  
+if(Value > Max) 
+return Min;         
+if(Value < Min)
+return Max;     
+return Value;    
+}
+combo v187{ 
+wait(1500) 
+displayTitle  = TRUE; 
+} 
+combo ValorantAimbotS { 
+cls_oled(OLED_BLACK);
+print(centerPosition(getREALGKILLA96(misc[7]),OLED_FONT_MEDIUM_WIDTH),25,OLED_FONT_MEDIUM,OLED_WHITE,misc[7])
+wait(500);
+displayTitle = TRUE;
+} 
+combo AkimboCronusZenScripts3421 {
+offsetAR(moveLY,0);
+wait(40);
+set_val(Fire,100);
+set_val(Ads,0);
+wait(HoldTime);
+offsetAR(moveLY,0);
+wait(40);
+set_val(Ads,100);
+set_val(Fire,0);
+wait(RestTime);
+}
+combo AkimboCronusZenScripts3422 {
+offsetAR(moveLY,0);
+wait(40);
+set_val(Ads,100);
+set_val(Fire,0);
+wait(HoldTime);
+offsetAR(moveLY,0);
+wait(40);
+set_val(Fire,100);
+set_val(Ads,0);
+wait(RestTime);
+}
+combo zenValorantAimbotMON{
+set_ledx(0,0);
+wait(LedOn);
+set_ledx(1,2);
+wait(LedOff);
+}
+combo zenValorantAimbotMON323 {
+set_val(Lethal,100);
+wait(100);
+set_val(Lethal,100);
+set_val(Swap,100);
+wait(40);
+set_val(Swap,0);
+wait(20);
+}
+combo CronusZenScripts666{
+set_val(Crouch,100);
+wait(100);
+set_val(moveLY,100);
+wait(30);
+set_val(Crouch,100);
+wait(750);
+set_val(Crouch,0);
+set_val(moveLY,0);
+wait(100);
+set_val(Jump, 100);
+wait(30);
+set_val(Jump, 0);
+wait(60);
+set_val(Jump, 100);
+wait(30);
+set_val(Jump, 0);
+wait(60);
+set_val(Jump, 100);
+wait(30);
+set_val(Jump, 0);
+wait(600);
+set_val(Jump, 100);
+wait(30);
+set_val(Jump, 0);
+wait(60);
+}
+combo CronusZenScripts342 { 
+wait(HoldTime);
+set_val(Fire, 0);
+wait(RestTime);
+}
+combo TOMOpower {
+set_ledx(2, 2);
+set_rumble(RUMBLE_B, 50);
+wait(150);
+reset_rumble();
+wait(100);
+set_rumble(RUMBLE_B, 50);
+wait(150);
+reset_rumble();
+reset_leds();
+run = 1;
+}
+combo ValorantAimbotMONassault {                        
+set_ledx(1, 1);
+set_rumble(RUMBLE_A, 50);
+wait(300);
+reset_rumble();
+wait(400);
+reset_leds();
+wait(20);
+}
+combo ValorantAimbotMONassault569 {                        
+reset_leds();
+set_rumble(RUMBLE_A, 50);
+wait(300);
+reset_rumble();
+wait(400);
+reset_leds();
+wait(20);
+run = TRUE;
+}
+combo ValorantAimbot { 
+cls_oled(OLED_BLACK);
+print(centerPosition(getREALGKILLA96(misc[4]),OLED_FONT_MEDIUM_WIDTH),10,OLED_FONT_MEDIUM,OLED_WHITE,misc[4])
+print(centerPosition(getREALGKILLA96(misc[5]),OLED_FONT_MEDIUM_WIDTH),35,OLED_FONT_MEDIUM,OLED_WHITE,misc[5])
+wait(1500);
+displayTitle = TRUE;
+} 
+combo ValorantAimbotOff { 
+cls_oled(OLED_BLACK)
+print(centerPosition(getREALGKILLA96(misc[4]),OLED_FONT_MEDIUM_WIDTH),10,OLED_FONT_MEDIUM,OLED_WHITE,misc[4])
+print(centerPosition(getREALGKILLA96(misc[6]),OLED_FONT_MEDIUM_WIDTH),35,OLED_FONT_MEDIUM,OLED_WHITE,misc[6])
+wait(1500);
+displayTitle = TRUE;
+run = TRUE;
+} 
+int ValorantAimbotaim;
+function presetv187(fHold,fPress,fVar,fIdx,fMax,fState) {  
+if(get_ival(fHold)){
+if(event_release(fPress) && get_ptime(fPress) < 300){ 
+modNameIdx = fIdx;
+if(fVar){
+fVar = rotateVar(fVar++,0,fMax);
+}
+else {
+if(!fState){ 
+fVar = rotateVar(fVar++,0,fMax);
+fState = fVar;
+} 
+else 
+fVar = fState;
+} 	
+ValorantAimbotaim = TRUE;
+}
+if(get_val(fPress) && get_ptime(fPress) == 300){ 
+if(fVar){
+fVar = 0;
+}
+else { 
+if(!fState){ 
+fVar = rotateVar(fVar++,0,0);
+fState = fVar;
+}
+else 
+fVar = fState;
+} 	
+ValorantAimbotaim = TRUE;		
+} 
+set_val(fPress, 0) 
+} 
+if(ValorantAimbotaim){
+combo_run(v187);
+screenSaver = FALSE;
+cls_oled(OLED_BLACK);
+rect_oled(0, 0, OLED_WIDTH, OLED_HEIGHT, OLED_BLACK, OLED_WHITE);
+ValorantAimbotaim = FALSE;
+print(centerPosition(getREALGKILLA96(modNames[modNameIdx]) ,OLED_FONT_SMALL_WIDTH), 8  ,OLED_FONT_SMALL , OLED_WHITE , modNames[modNameIdx]);
+if(modNameIdx == 5){ 
+if(fVar == 0) 
+print(centerPosition(getREALGKILLA96(NANNYBASHER_Opt[0]),OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_WHITE,NANNYBASHER_Opt[0])	
+else if(fVar == 1)
+print(centerPosition(getREALGKILLA96(NANNYBASHER_Opt[1]),OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_WHITE,NANNYBASHER_Opt[1])
+else if(fVar == 2)
+print(centerPosition(getREALGKILLA96(NANNYBASHER_Opt[2]),OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_WHITE,NANNYBASHER_Opt[2])
+} 
+else { 
+if(fVar == 1)
+print(centerPosition(getREALGKILLA96(Toggle[1]),OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_WHITE,Toggle[1])	
+else
+print(centerPosition(getREALGKILLA96(Toggle[0]),OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_WHITE,Toggle[0])	
+} 	
+}   
+return fVar;
+} 
+int REALGKILLA96;
+function getREALGKILLA96(offset) { 
+REALGKILLA96 = 0;
+do { 
+offset++;
+REALGKILLA96++;
+} while (duint8(offset));
+return REALGKILLA96;
+} 
+function centerPosition(f_chars,f_font) {
+return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2);
+}
+int BAL;
+int GUCCI,PRADA;
+function NumberToString(f_val,f_digits) {
+BAL = 1;  
+PRADA = 10000;
+if(f_val < 0) {                    
+putc_oled(BAL,45);    
+BAL += 1;
+f_val = abs(f_val);
+}
+for(GUCCI = 5; GUCCI >= 1; GUCCI--) {
+if(f_digits >= GUCCI) {
+putc_oled(BAL,(f_val / PRADA) + 48);
+f_val %= PRADA;
+BAL ++; 
+if(GUCCI == 4) {
+putc_oled(BAL,44);
+BAL ++;
+}
+}
+PRADA /= 10;
+} 
+puts_oled(centerPosition(BAL - 1,OLED_FONT_MEDIUM_WIDTH),38,OLED_FONT_MEDIUM,BAL - 1,OLED_WHITE);
+} 
+int D3MONcanAIM;
+function FindDigits(num) {
+D3MONcanAIM = 0;
+do {
+num /= 10;
+D3MONcanAIM++;
+} while (num);
+return D3MONcanAIM;
+}
+int i;
+const uint8 BlockButtons [] = {  
+PS4_L2,PS4_OPTIONS,PS4_LEFT, PS4_RIGHT,PS4_UP,PS4_DOWN,PS4_CROSS,PS4_CIRCLE,PS4_SQUARE,PS4_TRIANGLE,PS4_L1,PS4_R1,PS4_R2}; 
+function BlockButtonPress (){  
+for(i = 0; i < 13; i++){
+if(get_ival(BlockButtons[i]) || event_press(BlockButtons[i])){
+set_val(BlockButtons[i],0);
+set_val(Tactical,0);
+set_val(Ping,0);
+set_val(Melee,0);
+set_val(Reload,0);
+set_val(Swap,0);
+set_val(Lethal,0);
+set_val(Sprint,0);
+set_val(moveLX,0);
+}    
+}
+}
+function toggleSwitch(fVar,fIdx){ 
+if(modNameIdx == fIdx){ 
+if(event_press(PS4_UP)){ 
+fVar = rotateVar(fVar + 1,0,toggleMax[modNameIdx]);  
+updateDisplay = TRUE;
+if(!fVar)
+combo_run(ValorantAimbotMONassault);
+else
+combo_run(TOMOpower); 
+}
+if(event_press(PS4_DOWN)){ 
+fVar = rotateVar(fVar - 1,0,toggleMax[modNameIdx]); 
+updateDisplay = TRUE;
+if(!fVar)
+combo_run(ValorantAimbotMONassault);
+else
+combo_run(TOMOpower); 
+}
+if(modNameIdx == 0){ 
+if(fVar == 1){ 
+CronusZenScriptscriptz66738948775 = 0;
+}
+} 
+if(modNameIdx == 1){ 
+if(fVar == 1){ 
+CronusZenScriptscriptz234566 = 0;
+}
+} 
+if(modNameIdx == 4){ 
+NSCRIPTZ = fVar;
+if(fVar == 1){ 
+NANNYBASHER = 0;
+}
+} 
+if(modNameIdx == 5){ 
+ValorantAimbotMONKILLZ = fVar;
+if(fVar == 1){ 
+CronusZenScripts342 = 0;
+}
+} 
+if(modNameIdx == 6){ 
+ValorantAimbotMONBRUV = fVar;
+if(fVar == 1){ 
+CronusZenScripts666 = 0;
+}
+} 
+if(modNameIdx == 7){ 
+ValorantAimbotMONTING = fVar;
+if(fVar == 1){ 
+CronusZenScriptssZ = 0;
+}
+} 
+if(modNameIdx == 8){ 
+ValorantAimbotMONTRIGGER = fVar;
+} 
+if(modNameIdx == 0 ){ 
+print(centerPosition(getREALGKILLA96(CronusZenScriptscriptz234566_Opt[CronusZenScriptscriptz234566]) ,OLED_FONT_SMALL_WIDTH),49  ,OLED_FONT_SMALL , OLED_WHITE ,CronusZenScriptscriptz234566_Opt[CronusZenScriptscriptz234566]); 
+}   
+else if(modNameIdx == 1 ){ 
+print(centerPosition(getREALGKILLA96(CronusZenScriptscriptz66738948775_Opt[CronusZenScriptscriptz66738948775]) ,OLED_FONT_SMALL_WIDTH),49  ,OLED_FONT_SMALL , OLED_WHITE ,CronusZenScriptscriptz66738948775_Opt[CronusZenScriptscriptz66738948775]);
+}   
+else if(modNameIdx == 5 ){ 
+print(centerPosition(getREALGKILLA96(NANNYBASHER_Opt[NANNYBASHER]) ,OLED_FONT_SMALL_WIDTH),40  ,OLED_FONT_SMALL , OLED_WHITE ,NANNYBASHER_Opt[NANNYBASHER]);
+} 
+else if(modNameIdx == 8){ 
+if(fVar == 1)
+print(centerPosition(getREALGKILLA96(Toggle[1]),OLED_FONT_SMALL_WIDTH),40,OLED_FONT_SMALL,OLED_WHITE,Toggle[1])
+else
+print(centerPosition(getREALGKILLA96(Toggle[0]),OLED_FONT_SMALL_WIDTH),40,OLED_FONT_SMALL,OLED_WHITE,Toggle[0])
+} 
+else if(modNameIdx == 9 ){ 
+print(centerPosition(getREALGKILLA96(CronusZenScripts212_Opt[CronusZenScripts212]) ,OLED_FONT_SMALL_WIDTH),40  ,OLED_FONT_SMALL , OLED_WHITE ,CronusZenScripts212_Opt[CronusZenScripts212]);
+}   
+else if(modNameIdx == 10){ 
+print(centerPosition(getREALGKILLA96(CronusZenScripts232_Opt[CronusZenScripts232]) ,OLED_FONT_SMALL_WIDTH),40  ,OLED_FONT_SMALL , OLED_WHITE ,CronusZenScripts232_Opt[CronusZenScripts232]);
+}   
+else if(modNameIdx == 11){ 
+print(centerPosition(getREALGKILLA96(stickLayouts_Opt[stickLayouts]) ,OLED_FONT_SMALL_WIDTH),40 ,OLED_FONT_SMALL , OLED_WHITE ,stickLayouts_Opt[stickLayouts]);
+} 
+else if(modNameIdx == 12){ 
+if(fVar == 1)
+print(centerPosition(getREALGKILLA96(Toggle[1]),OLED_FONT_SMALL_WIDTH),40,OLED_FONT_SMALL,OLED_WHITE,Toggle[1])
+else
+print(centerPosition(getREALGKILLA96(Toggle[0]),OLED_FONT_SMALL_WIDTH),40,OLED_FONT_SMALL,OLED_WHITE,Toggle[0])
+} 
+else if(modNameIdx == 13){ 
+if(fVar == 1)
+print(centerPosition(getREALGKILLA96(Toggle[1]),OLED_FONT_SMALL_WIDTH),40,OLED_FONT_SMALL,OLED_WHITE,Toggle[1])
+else
+print(centerPosition(getREALGKILLA96(Toggle[0]),OLED_FONT_SMALL_WIDTH),40,OLED_FONT_SMALL,OLED_WHITE,Toggle[0])
+} 
+else { 
+if(fVar == 1)
+print(centerPosition(getREALGKILLA96(Toggle[1]),OLED_FONT_SMALL_WIDTH),49,OLED_FONT_SMALL,OLED_WHITE,Toggle[1])
+else
+print(centerPosition(getREALGKILLA96(Toggle[0]),OLED_FONT_SMALL_WIDTH),49,OLED_FONT_SMALL,OLED_WHITE,Toggle[0])
+} 
+}
+return fVar; 
+} 
+function editSwitch(fVar,fIdx){ 
+if(valNameIdx == fIdx){ 
+if(event_press(PS4_UP)){ 
+fVar += valuesMinMax[valNameIdx][2]  
+updateDisplay = TRUE;
+if(!fVar)
+combo_run(ValorantAimbotMONassault);
+else
+combo_run(TOMOpower); 
+}
+if(event_press(PS4_DOWN)){ 
+fVar -= valuesMinMax[valNameIdx][2]  
+updateDisplay = TRUE; 
+if(!fVar)
+combo_run(ValorantAimbotMONassault);
+else
+combo_run(TOMOpower); 
+}
+fVar = rotateVar(fVar,valuesMinMax[valNameIdx][0],valuesMinMax[valNameIdx][1]);
+if(valNameIdx == 9){ 
+if(fVar == 1){ 
+ValorantAimbotMONKILLA = 0;
+}
+} 
+if(valNameIdx == 12){ 
+if(fVar == 1){ 
+GWAGON = 0;
+}
+} 
+if(valNameIdx == 6){ 
+print(centerPosition(getREALGKILLA96(ValorantAimbotMONAIM_Opt[ValorantAimbotMONAIM]),OLED_FONT_MEDIUM_WIDTH),32,OLED_FONT_MEDIUM,OLED_WHITE,ValorantAimbotMONAIM_Opt[ValorantAimbotMONAIM])  
+}       
+else if(valNameIdx == 9){ 
+print(centerPosition(getREALGKILLA96(GWAGON_Opt[GWAGON]),OLED_FONT_MEDIUM_WIDTH),32,OLED_FONT_MEDIUM,OLED_WHITE,GWAGON_Opt[GWAGON]) 
+}       
+else if(valNameIdx == 12){ 
+print(centerPosition(getREALGKILLA96(ValorantAimbotMONKILLA_Opt[ValorantAimbotMONKILLA]),OLED_FONT_SMALL_WIDTH),42,OLED_FONT_SMALL,OLED_WHITE,ValorantAimbotMONKILLA_Opt[ValorantAimbotMONKILLA]) 
+}       
+else { 
+if(fVar == 1)
+print(centerPosition(getREALGKILLA96(Toggle[1]),OLED_FONT_SMALL_WIDTH),42,OLED_FONT_SMALL,OLED_WHITE,Toggle[1])    
+else
+print(centerPosition(getREALGKILLA96(Toggle[0]),OLED_FONT_SMALL_WIDTH),42,OLED_FONT_SMALL,OLED_WHITE,Toggle[0])    
+}
+} 
+return fVar;
+}
+function editValues(fVar,fIdx){ 
+if(valNameIdx == fIdx){ 
+if(get_ival(Ads)){  
+if(event_press(PS4_RIGHT)){ 
+fVar += valuesMinMax[valNameIdx][2]  
+updateDisplay = TRUE;
+}
+if(event_press(PS4_LEFT)){ 
+fVar -= valuesMinMax[valNameIdx][2]  
+updateDisplay = TRUE;
+}
+if(event_press(PS4_UP)){ 
+fVar += valuesMinMax[valNameIdx][3]  
+updateDisplay = TRUE;
+}
+if(event_press(PS4_DOWN)){ 
+fVar -= valuesMinMax[valNameIdx][3]  
+updateDisplay = TRUE;
+}
+fVar = rotateVar(fVar,valuesMinMax[valNameIdx][0],valuesMinMax[valNameIdx][1]);
+}
+NumberToString(fVar,FindDigits(fVar));   
+} 
+return fVar;
+}
+const string HoldButtons[]     = { "Select","L2/LT","R2/RT","L1/LB","R1/RB","L3/LS","R3/RS","Dpad Down","Dpad Up","Dpad Left","Dpad Right","Triangle/Y","Cross/A","Circle/B","Square/X"};
+const int8   HoldBtns []       = { -1,  PS4_L2  ,PS4_R2  , PS4_L1, PS4_R1  , PS4_L3 , PS4_R3 ,PS4_DOWN,PS4_UP,PS4_LEFT,PS4_RIGHT,PS4_TRIANGLE,PS4_CROSS, PS4_CIRCLE,PS4_SQUARE}; 
+const int8   PressBtns[]       = { -1,  PS4_TRIANGLE,PS4_CROSS,PS4_CIRCLE,PS4_SQUARE,PS4_DOWN,PS4_UP,PS4_LEFT,PS4_RIGHT,PS4_SHARE,PS4_OPTIONS,PS4_TOUCH,PS4_ACCX,PS4_ACCY,PS4_PS,XB1_XBOX};
+int D3MON34976;
+define ActivateButtonCount = 6;
+int ActivateHoldButton[ActivateButtonCount];
+int ActivatePressButton[ActivateButtonCount];
+int ActivateHoldBtnIdx[ActivateButtonCount];
+int ActivatePressBtnIdx[ActivateButtonCount];
+function ButtonActivation(i,fIdx){
+if(modNameIdx == fIdx){ 
+if(event_press(PS4_UP)){ 
+D3MON34976 = rotateVar(D3MON34976 ++,0,1);
+updateDisplay = TRUE;
+}
+if(event_press(PS4_DOWN)){ 
+D3MON34976 = rotateVar(D3MON34976 --,0,1);
+updateDisplay = TRUE;
+} 
+if(get_ival(Ads)){
+if(D3MON34976 == 0){
+if(event_press(PS4_RIGHT)){ 
+ActivateHoldBtnIdx[i] = rotateVar(ActivateHoldBtnIdx[i] + 1,0,14);
+updateDisplay = TRUE;
+}
+if(event_press(PS4_LEFT)){ 
+ActivateHoldBtnIdx[i] = rotateVar(ActivateHoldBtnIdx[i] - 1,0,14);
+updateDisplay = TRUE;
+} 
+}
+if(D3MON34976 == 1){ 
+if(event_press(PS4_RIGHT)){ 
+ActivatePressBtnIdx[i] = rotateVar(ActivatePressBtnIdx[i] + 1,0,19);
+updateDisplay = TRUE;
+}
+if(event_press(PS4_LEFT)){ 
+ActivatePressBtnIdx[i] = rotateVar(ActivatePressBtnIdx[i] - 1,0,19);
+updateDisplay = TRUE;
+} 
+} 
+}
+if(D3MON34976 == 0){
+rect_oled(115,34, 6, 8, OLED_WHITE, OLED_WHITE); 
+rect_oled(6,34, 6, 8, OLED_WHITE, OLED_WHITE);   
+}
+if(D3MON34976 == 1){
+rect_oled(115,49, 6, 8, OLED_WHITE, OLED_WHITE); 
+rect_oled(6,49, 6, 8, OLED_WHITE, OLED_WHITE);   
+}  
+print(centerPosition(getREALGKILLA96(HoldButtons[ActivateHoldBtnIdx[i]]),OLED_FONT_SMALL_WIDTH),34,OLED_FONT_SMALL,OLED_WHITE,HoldButtons[ActivateHoldBtnIdx[i]])
+print(centerPosition(getREALGKILLA96(pressButtons[ActivatePressBtnIdx[i]]),OLED_FONT_SMALL_WIDTH),49,OLED_FONT_SMALL,OLED_WHITE,pressButtons[ActivatePressBtnIdx[i]])
+}  
+}
+function ActivateAllButtons(){
+for (i = 0; i < ActivateButtonCount; i++) 
+{ 
+ActivateHoldButton[i]          = HoldBtns[clamp(ActivateHoldBtnIdx[i], 0, sizeof(HoldBtns))];
+ActivatePressButton[i]         = PressBtns[clamp(ActivatePressBtnIdx[i],0, sizeof(PressBtns))];
+}
+return;   
+} 
+int Ads,Fire,Tactical,Lethal,Crouch,Jump,Reload,Melee,Swap,Sprint,Ping;    
+const uint8 Layouts[][] = {            
+{ XB1_RT, XB1_LT, XB1_RB, XB1_LB, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_LT, XB1_RB, XB1_LB, XB1_A,  XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_LT, XB1_RT, XB1_LB, XB1_RB, XB1_A,  XB1_B,  XB1_LS, XB1_RS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_RB, XB1_LT, XB1_LB, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_RB, XB1_LT, XB1_LB, XB1_A,  XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_LT, XB1_LB, XB1_RT, XB1_RB, XB1_A,  XB1_B,  XB1_LS, XB1_RS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_LT, XB1_RB, XB1_A,  XB1_LB, XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP },  
+{ XB1_RT, XB1_LT, XB1_RB, XB1_A,  XB1_LB, XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_LB, XB1_LT, XB1_RT, XB1_RB, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_LT, XB1_RB, XB1_LB, XB1_RS, XB1_B,  XB1_A,  XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_LT, XB1_RB, XB1_LB, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_LT, XB1_RS, XB1_A,  XB1_LB, XB1_B,  XB1_RB, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RT, XB1_LT, XB1_RB, XB1_RB, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_LB }, 
+{ XB1_RT, XB1_LT, XB1_RB, XB1_RB, XB1_A,  XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_LB }, 
+{ XB1_RB, XB1_LB, XB1_RT, XB1_LT, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RB, XB1_LB, XB1_RT, XB1_LT, XB1_A,  XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RB, XB1_LB, XB1_RT, XB1_A,  XB1_LT, XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_UP },  
+{ XB1_RB, XB1_LB, XB1_RT, XB1_A,  XB1_LT, XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_UP },  
+{ XB1_RB, XB1_LB, XB1_RT, XB1_LT, XB1_RS, XB1_B,  XB1_A,  XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RB, XB1_LB, XB1_RS, XB1_A,  XB1_LB, XB1_B,  XB1_RB, XB1_LS ,XB1_X, XB1_Y, XB1_UP }, 
+{ XB1_RB, XB1_LB, XB1_RT, XB1_RT, XB1_A,  XB1_B,  XB1_RS, XB1_LS ,XB1_X, XB1_Y, XB1_LT }, 
+{ XB1_RB, XB1_LB, XB1_RT, XB1_RT, XB1_A,  XB1_RS, XB1_B,  XB1_LS ,XB1_X, XB1_Y, XB1_LT }}; 		
+function Buttons(Type) {
+Fire     = Layouts[Type][0];
+Ads      = Layouts[Type][1];
+Lethal   = Layouts[Type][2];
+Tactical = Layouts[Type][3];
+Jump     = Layouts[Type][4];
+Crouch   = Layouts[Type][5];
+Melee    = Layouts[Type][6];
+Sprint   = Layouts[Type][7];
+Reload   = Layouts[Type][8];
+Swap     = Layouts[Type][9];
+Ping     = Layouts[Type][10];
+} 
+int aimRY,aimRX,moveLY,moveLX;
+const uint8  StickLayouts[][] = { 
+{ PS4_RY,PS4_RX,PS4_LY,PS4_LX}, 
+{ PS4_LY,PS4_LX,PS4_RY,PS4_RX},
+{ PS4_RY,PS4_LX,PS4_LY,PS4_RX}, 
+{ PS4_LY,PS4_RX,PS4_LY,PS4_LX} 
+};
+function ControllerRSLS(sticks){ 
+aimRY      = StickLayouts[sticks][0];
+aimRX      = StickLayouts[sticks][1];
+moveLY     = StickLayouts[sticks][2];
+moveLX     = StickLayouts[sticks][3];
+}
+function Load() {
+reset_spvar();   
+if (read_spvar(0, 1, 0)) { 
+CronusZenScriptscriptz234566 = read_spvar(       0,       2,       0);  
+CronusZenScriptscriptz66738948775 = read_spvar(       0,       2,       0); 
+ValorantAimbotMONAIMBOT    = read_spvar(       0,       1,       0); 
+CronusZenScriptsULTRAAIMABUSE    = read_spvar(       0,       1,       0); 
+CronusZenScripts342       = read_spvar(       0,       1,       0); 
+NANNYBASHER        = read_spvar(       0,       2,       0); 
+CronusZenScriptssZ     = read_spvar(       0,       1,       0); 
+CronusZenScripts666    = read_spvar(       0,       1,       0); 
+CronusZenScripts595     = read_spvar(       0,       1,       0); 
+CronusZenScripts212         = read_spvar(       0,       3,       0); 
+CronusZenScripts232   = read_spvar(       0,      21,       0); 
+stickLayouts    = read_spvar(       0,       3,       0); 
+NSCRIPTZ         = read_spvar(       0,       1,       0); 
+ValorantAimbotMONKILLZ        = read_spvar(       0,       1,       0); 
+ValorantAimbotMONBRUV      = read_spvar(       0,       1,       0); 
+ValorantAimbotMONTING     = read_spvar(       0,       1,       0); 
+ValorantAimbotMONTRIGGER    = read_spvar(       0,       1,       0); 
+VALValorantAimbotMON = read_spvar(     -99,      99,       0); 
+VAL = read_spvar(     -99,      99,       0); 
+VALValorantAimbotMONP = read_spvar(     -99,      99,       0); 
+VALP = read_spvar(     -99,      99,       0); 
+daREALG = read_spvar(       0,    5000,       0); 
+REALG23   = read_spvar(       0,      20,       4); 
+ValorantAimbotMONAIM = read_spvar(       0,       1,       0); 
+ValorantAimbotMON46      = read_spvar(       0,      99,       0); 
+CronusZenScriptsValorantAimbotMON      = read_spvar(       0,      99,       0); 
+GWAGON  = read_spvar(       0,       1,       0); 
+MERC4LYF      = read_spvar(       0,      99,       0); 
+HAHAlulz       = read_spvar(       0,      99,       0); 
+ValorantAimbotMONKILLA       = read_spvar(       0,       1,       0); 
+ValorantAimbotMONKILLARadius = read_spvar(       0,      99,       0); 
+daValorantAimbotMON  = read_spvar(       0,      99,       0); 
+CronusZenScripts89 = read_spvar(       0,      99,       0); 
+ROF      = read_spvar(       0,      25,       1); 
+YAMUMSAHOE = read_spvar(      0,      25,       1); 
+ActivateHoldBtnIdx[0]   = read_spvar(0,14,0);
+ActivateHoldBtnIdx[1]   = read_spvar(0,14,0);
+ActivateHoldBtnIdx[2]   = read_spvar(0,14,0);
+ActivateHoldBtnIdx[3]   = read_spvar(0,14,0);
+ActivateHoldBtnIdx[4]   = read_spvar(0,14,0);
+ActivateHoldBtnIdx[5]   = read_spvar(0,14,0);
+ActivatePressBtnIdx[0]  = read_spvar(0,19,0);
+ActivatePressBtnIdx[1]  = read_spvar(0,19,0);
+ActivatePressBtnIdx[2]  = read_spvar(0,19,0);
+ActivatePressBtnIdx[3]  = read_spvar(0,19,0);
+ActivatePressBtnIdx[4]  = read_spvar(0,19,0);
+ActivatePressBtnIdx[5]  = read_spvar(0,19,0);
+ValorantAimbotMONstick23      = read_spvar(0, 2,0);
+ValorantAimbotMONstick22	        = read_spvar(0, 3,0);
+ValorantAimbotMONKILLZU      = read_spvar(0, 3,0);
+CronusZenScripts342Type	        = read_spvar(0, 2,0);
+CronusZenScriptsValorantAimbotMON456  = read_spvar(0, 4,0);
+CronusZenScriptssZFireType     = read_spvar(0, 4,0);
+REALGKILLA             = read_spvar(0, 1,0);
+NSCRIPTZ45             = read_spvar(0, 1,0);
+}
+else {
+CronusZenScriptscriptz234566 =        0;  
+CronusZenScriptscriptz66738948775 =        0;  
+ValorantAimbotMONAIMBOT    =        0;  
+CronusZenScriptsULTRAAIMABUSE    =        0;  
+CronusZenScripts342       =        0;  
+NANNYBASHER        =        0;  
+CronusZenScriptssZ     =        0;  
+CronusZenScripts666    =        0;  
+CronusZenScripts595     =        0;  
+CronusZenScripts212         =        0;  
+CronusZenScripts232   =        0; 
+stickLayouts    =        0; 
+NSCRIPTZ         =        0; 
+ValorantAimbotMONKILLZ        =        0; 
+ValorantAimbotMONBRUV      =        0; 
+ValorantAimbotMONTING     =        0; 
+ValorantAimbotMONTRIGGER    =        0; 
+VALValorantAimbotMON =       0; 
+VAL =     0; 
+VALValorantAimbotMONP =      0; 
+VALP =    0; 
+daREALG =   400; 
+REALG23   =        4; 
+ValorantAimbotMONAIM =     0; 
+ValorantAimbotMON46      =       12; 
+CronusZenScriptsValorantAimbotMON      =       12; 
+GWAGON  =        0; 
+MERC4LYF      =        5; 
+HAHAlulz       =        5; 
+ValorantAimbotMONKILLA       =        0; 
+ValorantAimbotMONKILLARadius =        5; 
+daValorantAimbotMON  =       25; 
+CronusZenScripts89 =       20; 
+ROF      =        1; 
+YAMUMSAHOE =       1; 
+ActivateHoldBtnIdx[0]   = 0;
+ActivateHoldBtnIdx[1]   = 0;
+ActivateHoldBtnIdx[2]   = 0;
+ActivateHoldBtnIdx[3]   = 0;
+ActivateHoldBtnIdx[4]   = 0;
+ActivateHoldBtnIdx[5]   = 0;
+ActivatePressBtnIdx[0]  = 0;
+ActivatePressBtnIdx[1]  = 0;
+ActivatePressBtnIdx[2]  = 0;
+ActivatePressBtnIdx[3]  = 0;
+ActivatePressBtnIdx[4]  = 0;
+ActivatePressBtnIdx[5]  = 0;
+ValorantAimbotMONstick23      = 0;
+ValorantAimbotMONstick22          = 0;
+ValorantAimbotMONKILLZU      = 0;
+CronusZenScripts342Type           = 0;
+CronusZenScriptsValorantAimbotMON456  = 0;
+CronusZenScriptssZFireType     = 2;
+REALGKILLA             = 0;
+NSCRIPTZ45             = 0;
+}
+}  
+function Save(){  
+reset_spvar();   
+save_spvar(1,0, 1);   
+save_spvar(CronusZenScriptscriptz234566     ,       0,       2);  
+save_spvar(CronusZenScriptscriptz66738948775     ,       0,       2); 
+save_spvar(ValorantAimbotMONAIMBOT        ,       0,       1); 
+save_spvar(CronusZenScriptsULTRAAIMABUSE        ,       0,       1);
+save_spvar(CronusZenScripts342           ,       0,       1); 
+save_spvar(NANNYBASHER            ,       0,       2); 
+save_spvar(CronusZenScriptssZ         ,       0,       1); 
+save_spvar(CronusZenScripts666        ,       0,       1);
+save_spvar(CronusZenScripts595         ,       0,       1);
+save_spvar(CronusZenScripts212             ,       0,       3);
+save_spvar(CronusZenScripts232       ,       0,      21); 
+save_spvar(stickLayouts        ,       0,       3); 
+save_spvar(NSCRIPTZ             ,       0,       1); 
+save_spvar(ValorantAimbotMONKILLZ            ,       0,       1); 
+save_spvar(ValorantAimbotMONBRUV          ,       0,       1); 
+save_spvar(ValorantAimbotMONTING         ,       0,       1); 
+save_spvar(ValorantAimbotMONTRIGGER        ,       0,       1); 
+save_spvar(VALValorantAimbotMON    ,     -99,      99); 
+save_spvar(VAL  ,     -99,      99); 
+save_spvar(VALValorantAimbotMONP   ,     -99,      99); 
+save_spvar(VALP ,     -99,      99); 
+save_spvar(daREALG  ,       0,    5000); 
+save_spvar(REALG23       ,       0,      20);
+save_spvar(ValorantAimbotMONAIM  ,       0,       1); 
+save_spvar(ValorantAimbotMON46          ,       0,      99); 
+save_spvar(CronusZenScriptsValorantAimbotMON          ,       0,      99); 
+save_spvar(GWAGON      ,       0,       1);
+save_spvar(MERC4LYF          ,       0,      99);
+save_spvar(HAHAlulz           ,       0,      99);
+save_spvar(ValorantAimbotMONKILLA           ,       0,       1); 
+save_spvar(ValorantAimbotMONKILLARadius     ,       0,      99); 
+save_spvar(daValorantAimbotMON      ,       0,      99); 
+save_spvar(CronusZenScripts89     ,       0,      99); 
+save_spvar(ROF          ,       0,      25); 
+save_spvar(YAMUMSAHOE    ,       0,      25); 
+save_spvar(ActivateHoldBtnIdx[0]  ,0,14);
+save_spvar(ActivateHoldBtnIdx[1]  ,0,14);
+save_spvar(ActivateHoldBtnIdx[2]  ,0,14);
+save_spvar(ActivateHoldBtnIdx[3]  ,0,14);
+save_spvar(ActivateHoldBtnIdx[4]  ,0,14);
+save_spvar(ActivateHoldBtnIdx[5]  ,0,14);
+save_spvar(ActivatePressBtnIdx[0] ,0,19);
+save_spvar(ActivatePressBtnIdx[1] ,0,19);
+save_spvar(ActivatePressBtnIdx[2] ,0,19);
+save_spvar(ActivatePressBtnIdx[3] ,0,19);
+save_spvar(ActivatePressBtnIdx[4] ,0,19);
+save_spvar(ActivatePressBtnIdx[5] ,0,19);
+save_spvar(ValorantAimbotMONstick23     ,0, 2);
+save_spvar(ValorantAimbotMONstick22         ,0, 3);
+save_spvar(ValorantAimbotMONKILLZU     ,0, 3);
+save_spvar(CronusZenScripts342Type          ,0, 2);
+save_spvar(CronusZenScriptsValorantAimbotMON456 ,0, 4);
+save_spvar(CronusZenScriptssZFireType    ,0, 4);
+save_spvar(REALGKILLA            ,0, 1);
+save_spvar(NSCRIPTZ45            ,0, 1);
+}
+function reset_spvar() {
+ValorantAimbot2 = SPVAR_1; 
+ValorantAimbot1 = 0; 
+ValorantAimbot3 = 0;
+}
+int ValorantAimbot1, 		
+ValorantAimbot2,		
+ValorantAimbot3,    
+ValorantAimbot4,                
+ValorantAimbot5;                
+function get_bit_count(val) {
+ValorantAimbot4 = 0; 
+while (val) { 
+ValorantAimbot4++; 
+val = abs(val >> 1); 
+}
+return ValorantAimbot4;
+}
+function get_bit_count2(val1, val2) {    
+ValorantAimbot4 = max(get_bit_count(val1), get_bit_count(val2)); 
+if (is_signed2(val1, val2)) { 
+ValorantAimbot4++; 
+}
+return ValorantAimbot4;
+}
+function is_signed2(val1, val2) { return val1 < 0 || val2 < 0; }
+function make_sign(bits) { return 1 << clamp(bits - 1, 0, 31); }
+function make_full_mask(bits) {    
+if (bits == 32) { 
+return -1;
+}
+return 0x7FFFFFFF >> (31 - bits); 
+}
+function make_sign_mask(bits) { return make_full_mask(bits - 1); }
+function pack_i(val, bits) {
+if (val < 0) { 
+return (abs(val) & make_sign_mask(bits)) | make_sign(bits); 
+}
+return val & make_sign_mask(bits); 
+}
+function unpack_i(val, bits) {
+if (val & make_sign(bits)) { 
+return 0 - (val & make_sign_mask(bits)); 
+}
+return val & make_sign_mask(bits); 
+}
+function read_spvar_slot(slot) { return get_pvar(slot, 0x80000000, 0x7FFFFFFF, 0); }
+function save_spvar(val, min, max) {
+ValorantAimbot5 = get_bit_count2(min, max); 
+val = clamp(val, min, max); 
+if (is_signed2(min, max)) { 
+val = pack_i(val, ValorantAimbot5); 
+}
+val = val & make_full_mask(ValorantAimbot5); 
+if (ValorantAimbot5 >= 32 - ValorantAimbot1) { 
+ValorantAimbot3 = ValorantAimbot3 | (val << ValorantAimbot1); 
+set_pvar(ValorantAimbot2, ValorantAimbot3); 
+ValorantAimbot2++; 
+ValorantAimbot5 -= (32 - ValorantAimbot1); 
+val = val >> (32 - ValorantAimbot1); 
+ValorantAimbot1 = 0; 
+ValorantAimbot3 = 0; 
+}
+ValorantAimbot3 = ValorantAimbot3 | (val << ValorantAimbot1); 
+ValorantAimbot1 += ValorantAimbot5; 
+if (!ValorantAimbot1) {
+ValorantAimbot3 = 0; 
+}
+set_pvar(ValorantAimbot2, ValorantAimbot3); 
+}
+function read_spvar(min, max, def) {
+ValorantAimbot5 = get_bit_count2(min, max); 
+ValorantAimbot3 = (read_spvar_slot(ValorantAimbot2) >> ValorantAimbot1) & make_full_mask(ValorantAimbot5);
+if (ValorantAimbot5 >= 32 - ValorantAimbot1) { 
+ValorantAimbot3 = (ValorantAimbot3 & make_full_mask(32 - ValorantAimbot1)) | ((read_spvar_slot(ValorantAimbot2 + 1) & make_full_mask(ValorantAimbot5 - (32 - ValorantAimbot1))) << (32 - ValorantAimbot1));
+}    
+ValorantAimbot1 += ValorantAimbot5; 
+ValorantAimbot3 = ValorantAimbot3 & make_full_mask(ValorantAimbot5); 
+if (ValorantAimbot1 >= 32) {
+ValorantAimbot2++;
+ValorantAimbot1 -= 32; 
+}
+if (is_signed2(min, max)) { 
+ValorantAimbot3 = unpack_i(ValorantAimbot3, ValorantAimbot5); 
+}
+if (ValorantAimbot3 < min || ValorantAimbot3 > max) { 
+return def; 
+}
+return ValorantAimbot3;
+}                   ˙πàπå∫ãΩãΩèÃ˙Œ˛ 
