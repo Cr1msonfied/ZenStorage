@@ -1,0 +1,393 @@
+																																																																				/*
+                                                                                     
+ _______  __                __          
+|       \|  \              |  \         
+| ▓▓▓▓▓▓▓\\▓▓_______   ____| ▓▓ _______ 
+| ▓▓__/ ▓▓  \       \ /      ▓▓/       \
+| ▓▓    ▓▓ ▓▓ ▓▓▓▓▓▓▓\  ▓▓▓▓▓▓▓  ▓▓▓▓▓▓▓
+| ▓▓▓▓▓▓▓\ ▓▓ ▓▓  | ▓▓ ▓▓  | ▓▓\▓▓    \ 
+| ▓▓__/ ▓▓ ▓▓ ▓▓  | ▓▓ ▓▓__| ▓▓_\▓▓▓▓▓▓\
+| ▓▓    ▓▓ ▓▓ ▓▓  | ▓▓\▓▓    ▓▓       ▓▓
+ \▓▓▓▓▓▓▓ \▓▓\▓▓   \▓▓ \▓▓▓▓▓▓▓\▓▓▓▓▓▓▓ 
+ 
+𝗠𝗔𝗧𝗖𝗛 𝗬𝗢𝗨𝗥 𝗜𝗡-𝗚𝗔𝗠𝗘 𝗕𝗜𝗡𝗗𝗦 | 𝗖𝗢𝗠𝗕𝗔𝗧 𝗠𝗢𝗗𝗘
+                                        																																																																																			*/ int
+ADS         = PS4_L2,
+Fire     	= PS4_R2,
+Interact 	= PS4_SQUARE,
+Crouch      = PS4_L3,
+Pickaxe    	= PS4_R3,																																																																																								/*
+
+𝗠𝗔𝗧𝗖𝗛 𝗬𝗢𝗨𝗥 𝗜𝗡-𝗚𝗔𝗠𝗘 𝗕𝗜𝗡𝗗𝗦 | 𝗕𝗨𝗜𝗟𝗗 𝗠𝗢𝗗𝗘																																																																																				*/
+ 
+SwitchMode  = PS4_CIRCLE,
+Wall     	= PS4_R2,
+Floor   	= PS4_R1, 
+Ramp     	= PS4_L2, 
+Cone   		= PS4_L1,
+Trap     	= XB1_LEFT,																																																																																								/*
+
+𝗠𝗔𝗧𝗖𝗛 𝗬𝗢𝗨𝗥 𝗜𝗡-𝗚𝗔𝗠𝗘 𝗕𝗜𝗡𝗗𝗦 | 𝗘𝗗𝗜𝗧 𝗠𝗢𝗗𝗘																																																																																					*/
+
+Edit 		= PS4_L3,
+Confirm 	= PS4_CIRCLE,
+Select  	= PS4_R2,
+Reset 		= PS4_R3,     																																																																																							/*
+
+𝗕𝗜𝗡𝗗𝗦 𝗖𝗛𝗘𝗔𝗧 𝗦𝗛𝗘𝗘𝗧
+
+𝗔 𝗼𝗿 𝗖𝗥𝗢𝗦𝗦 -> 𝗫𝗕𝟭_𝗔 𝗼𝗿 𝗣𝗦𝟰_𝗖𝗥𝗢𝗦𝗦 𝗼𝗿 𝗣𝗦𝟱_𝗖𝗥𝗢𝗦𝗦
+-------------------------------------------
+𝗕 𝗼𝗿 𝗖𝗜𝗥𝗖𝗟𝗘 -> 𝗫𝗕𝟭_𝗕 𝗼𝗿 𝗣𝗦𝟰_𝗖𝗜𝗥𝗖𝗟𝗘 𝗼𝗿 𝗣𝗦𝟱_𝗖𝗜𝗥𝗖𝗟𝗘
+-------------------------------------------
+𝗫 𝗼𝗿 𝗦𝗤𝗨𝗔𝗥𝗘 -> 𝗫𝗕𝟭_𝗫 𝗼𝗿 𝗣𝗦𝟰_𝗦𝗤𝗨𝗔𝗥𝗘 𝗼𝗿 𝗣𝗦𝟱_𝗦𝗤𝗨𝗔𝗥𝗘
+-------------------------------------------
+𝗬 𝗼𝗿 𝗧𝗥𝗜𝗔𝗡𝗚𝗟𝗘 -> 𝗫𝗕𝟭_𝗬 𝗼𝗿 𝗣𝗦𝟰_𝗧𝗥𝗜𝗔𝗡𝗚𝗟𝗘 𝗼𝗿 𝗣𝗦𝟱_𝗧𝗥𝗜𝗔𝗡𝗚𝗟𝗘
+-------------------------------------------
+𝗥𝗕 𝗼𝗿 𝗥𝟭 -> 𝗫𝗕𝟭_𝗥𝗕 𝗼𝗿 𝗣𝗦𝟰_𝗥𝟭 𝗼𝗿 𝗣𝗦𝟱_𝗥𝟭
+-------------------------------------------
+𝗟𝗕 𝗼𝗿 𝗟𝟭 -> 𝗫𝗕𝟭_𝗟𝗕 𝗼𝗿 𝗣𝗦𝟰_𝗟𝟭 𝗼𝗿 𝗣𝗦𝟱_𝗟𝟭
+-------------------------------------------
+𝗥𝗧 𝗼𝗿 𝗥𝟮 -> 𝗫𝗕𝟭_𝗥𝗧 𝗼𝗿 𝗣𝗦𝟰_𝗥𝟮 𝗼𝗿 𝗣𝗦𝟱_𝗥𝟮
+-------------------------------------------
+𝗟𝗧 𝗼𝗿 𝗟𝟮 -> 𝗫𝗕𝟭_𝗟𝗧 𝗼𝗿 𝗣𝗦𝟰_𝗟𝟮 𝗼𝗿 𝗣𝗦𝟱_𝗥𝟮
+-------------------------------------------
+𝗟𝗦 𝗼𝗿 𝗟𝟯 -> 𝗫𝗕𝟭_𝗟𝗦 𝗼𝗿 𝗣𝗦𝟰_𝗟𝟯 𝗼𝗿 𝗣𝗦𝟱_𝗟𝟯
+-------------------------------------------
+𝗥𝗦 𝗼𝗿 𝗥𝟯 -> 𝗫𝗕𝟭_𝗥𝗦 𝗼𝗿 𝗣𝗦𝟰_𝗥𝟯 𝗼𝗿 𝗣𝗦𝟱_𝗥𝟯
+-------------------------------------------
+𝗗𝗣𝗔𝗗 -> 𝗫𝗕𝟭_𝗨𝗣 𝗫𝗕𝟭_𝗥𝗜𝗚𝗛𝗧 𝗫𝗕𝟭_𝗗𝗢𝗪𝗡 𝗫𝗕𝟭_𝗟𝗘𝗙𝗧 ~ 𝗜𝗧 𝗗𝗢𝗘𝗦𝗡'𝗧 
+𝗠𝗔𝗧𝗧𝗘𝗥 𝗪𝗛𝗔𝗧 𝗬𝗢𝗨 𝗣𝗟𝗔𝗬 𝗢𝗡 𝗧𝗛𝗘𝗦𝗘 𝗪𝗜𝗟𝗟 𝗪𝗢𝗥𝗞.
+-------------------------------------------
+𝗧𝗼𝘂𝗰𝗵𝗣𝗮𝗱 -> 𝗣𝗦𝟰_𝗧𝗢𝗨𝗖𝗛 𝗼𝗿 𝗣𝗦𝟱_𝗧𝗢𝗨𝗖𝗛																																																																																					*/ /*
+-------------------------------------------
+
+ ______  __                    ______                    __            __     
+/      \|  \                  /      \                  |  \          |  \    
+|  ▓▓▓▓▓▓\\▓▓______ ____      |  ▓▓▓▓▓▓\ _______  _______ \▓▓ _______ _| ▓▓_   
+| ▓▓__| ▓▓  \      \    \     | ▓▓__| ▓▓/       \/       \  \/       \   ▓▓ \  
+| ▓▓    ▓▓ ▓▓ ▓▓▓▓▓▓\▓▓▓▓\    | ▓▓    ▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓▓▓▓ ▓▓  ▓▓▓▓▓▓▓\▓▓▓▓▓▓  
+| ▓▓▓▓▓▓▓▓ ▓▓ ▓▓ | ▓▓ | ▓▓    | ▓▓▓▓▓▓▓▓\▓▓    \ \▓▓    \| ▓▓\▓▓    \  | ▓▓ __ 
+| ▓▓  | ▓▓ ▓▓ ▓▓ | ▓▓ | ▓▓    | ▓▓  | ▓▓_\▓▓▓▓▓▓\_\▓▓▓▓▓▓\ ▓▓_\▓▓▓▓▓▓\ | ▓▓|  \
+| ▓▓  | ▓▓ ▓▓ ▓▓ | ▓▓ | ▓▓    | ▓▓  | ▓▓       ▓▓       ▓▓ ▓▓       ▓▓  \▓▓  ▓▓
+ \▓▓   \▓▓\▓▓\▓▓  \▓▓  \▓▓     \▓▓   \▓▓\▓▓▓▓▓▓▓ \▓▓▓▓▓▓▓ \▓▓\▓▓▓▓▓▓▓    \▓▓▓▓ 
+                                                                               
+                                                                                                                                                              																																																						*/ 
+// 𝗧𝗼 𝗘𝗱𝗶𝘁 𝗧𝗵𝗶𝘀 𝗩𝗮𝗹𝘂𝗲 𝗜𝗻-𝗚𝗮𝗺𝗲: 𝗟𝗲𝗳𝘁 𝗦𝘁𝗶𝗰𝗸 + 𝗨𝗽 𝗗-𝗣𝗮𝗱	= +𝟭𝟬 -> 𝗟𝗲𝗳𝘁 𝗦𝘁𝗶𝗰𝗸 + 𝗥𝗶𝗴𝗵𝘁-𝗗-𝗣𝗮𝗱	 = +𝟭
+// 𝗧𝗼 𝗘𝗱𝗶𝘁 𝗧𝗵𝗶𝘀 𝗩𝗮𝗹𝘂𝗲 𝗜𝗻-𝗚𝗮𝗺𝗲: 𝗟𝗲𝗳𝘁 𝗦𝘁𝗶𝗰𝗸 + 𝗗𝗼𝘄𝗻-𝗗-𝗣𝗮𝗱 	= -𝟭𝟬 -> 𝗟𝗲𝗳𝘁 𝗦𝘁𝗶𝗰𝗸 + 𝗟𝗲𝗳𝘁-𝗗-𝗣𝗮𝗱 	 = -𝟭
+L = 6, // 𝗠𝗮𝗸𝗲 𝗧𝗵𝗶𝘀 𝗩𝗮𝗹𝘂𝗲 𝟭 𝗔𝗯𝗼𝘃𝗲 𝗬𝗼𝘂𝗿 𝗟𝗲𝗳𝘁 𝗦𝘁𝗶𝗰𝗸 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲. 𝗘𝘅 - 𝟱 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲 - L = 𝟲
+
+// 𝗧𝗼 𝗘𝗱𝗶𝘁 𝗧𝗵𝗶𝘀 𝗩𝗮𝗹𝘂𝗲 𝗜𝗻-𝗚𝗮𝗺𝗲: 𝗥𝗶𝗴𝗵𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗨𝗽-𝗗-𝗣𝗮𝗱 	= +𝟭𝟬 -> 𝗥𝗶𝗴𝗵𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗥𝗶𝗴𝗵𝘁-𝗗-𝗣𝗮𝗱 	= +𝟭
+// 𝗧𝗼 𝗘𝗱𝗶𝘁 𝗧𝗵𝗶𝘀 𝗩𝗮𝗹𝘂𝗲 𝗜𝗻-𝗚𝗮𝗺𝗲: 𝗥𝗶𝗴𝗵𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗗𝗼𝘄𝗻 𝗗-𝗣𝗮𝗱 	= -𝟭𝟬 -> 𝗥𝗶𝗴𝗵𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗟𝗲𝗳𝘁-𝗗-𝗣𝗮𝗱 	= -𝟭 
+A = 6, // 𝗠𝗮𝗸𝗲 𝗧𝗵𝗶𝘀 𝗩𝗮𝗹𝘂𝗲 𝟭 𝗕𝗲𝗹𝗼𝘄 𝗬𝗼𝘂𝗿 𝗥𝗶𝗴𝗵𝘁 𝗦𝘁𝗶𝗰𝗸 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲. 𝗘𝘅 - 𝟱 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲 = A = 𝟲. 
+//𝗙𝗼𝗿 𝗛𝗶𝗴𝗵𝗲𝗿 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲𝘀 𝗔𝗯𝗼𝘃𝗲 𝟴, 𝗨𝘀𝗲 𝟮 𝗕𝗲𝗹𝗼𝘄 𝗬𝗼𝘂𝗿 𝗥𝗶𝗴𝗵𝘁 𝗦𝘁𝗶𝗰𝗸 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲. 𝗔𝘁 𝟭𝟬, 𝗜 𝗥𝗲𝗰𝗼𝗺𝗺𝗲𝗻𝗱 A 𝘁𝗼 𝗯𝗲 𝟳 𝗼𝗿 𝟴. 𝗔𝘁 𝟮𝟬% 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲, 𝗨𝘀𝗲 A = 𝟭𝟮.
+
+// 𝗧𝗵𝗲 𝘀𝗺𝗼𝗼𝘁𝗵𝗲𝘀𝘁 𝗲𝘅𝗽𝗶𝗲𝗿𝗲𝗻𝗰𝗲 𝗵𝗮𝘀 𝗮𝗹𝗿𝗲𝗮𝗱𝘆 𝗯𝗲𝗲𝗻 𝗰𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗲𝗱 𝗮𝗻𝗱 𝗶𝘀 𝘀𝗲𝘁 𝗱𝗲𝗳𝗮𝘂𝗹𝘁 𝗼𝗻 𝘁𝗵𝗶𝘀 𝘀𝗰𝗿𝗶𝗽𝘁, 𝗯𝘆 𝗺𝘆𝘀𝗲𝗹𝗳, 𝘆𝗲𝘄𝗼𝗽. 𝗧𝗵𝗶𝘀 𝗶𝘀 𝘄𝗵𝗮𝘁 𝗜 𝗽𝗲𝗿𝘀𝗼𝗻𝗮𝗹𝗹𝘆 𝘂𝘀𝗲.
+// 𝗬𝗼𝘂 𝗮𝗿𝗲 𝗮𝗯𝗹𝗲 𝘁𝗼 𝗿𝗲𝗾𝘂𝗲𝘀𝘁 𝗺𝘆 𝘀𝗲𝘁𝘁𝗶𝗻𝗴𝘀 𝗶𝗳 𝘆𝗼𝘂 𝘄𝗶𝘀𝗵 𝗮𝘀 𝘄𝗲𝗹𝗹. DeadZones are 5% each. Linear (Advanced Settings).
+
+RecoilNegator      		= TRUE, // 𝗖𝗼𝘂𝗻𝘁𝗲𝗿𝘀 𝗥𝗲𝗰𝗼𝗶𝗹 -> 𝗡𝗼𝘁 𝗩𝗲𝗿𝘆 𝗡𝗲𝗰𝗲𝘀𝘀𝗮𝗿𝘆 𝗼𝗻 𝗖𝗼𝗻𝘀𝗼𝗹𝗲
+RecoilNegatorPower  	= 27,	 // 𝗛𝗶𝗴𝗵𝗲𝗿 𝗩𝗮𝗹𝘂𝗲 = 𝗠𝗼𝗿𝗲 𝗣𝗼𝘄𝗲𝗿𝗳𝘂𝗹 𝗥𝗲𝗰𝗼𝗶𝗹 𝗡𝗲𝗴𝗮𝘁𝗶𝗼𝗻 -> 𝟭2 𝗶𝘀 𝗮 𝗚𝗼𝗼𝗱 𝗦𝘄𝗲𝗲𝘁 𝗦𝗽𝗼𝘁
+
+CrouchShot          	= FALSE, // 𝗖𝗿𝗼𝘂𝗰𝗵𝗲𝘀 𝗪𝗵𝗶𝗹𝗲 𝗔𝗗𝗦 + 𝗙𝗶𝗿𝗶𝗻𝗴
+CrouchShotHipFire   	= FALSE, // 𝗖𝗿𝗼𝘂𝗰𝗵𝗲𝘀 𝗪𝗵𝗶𝗹𝗲 𝗢𝗻𝗹𝘆 𝗙𝗶𝗿𝗶𝗻𝗴
+CrouchShotDelay     	= 60,    // 𝗧𝗶𝗺𝗲 𝗕𝗲𝘁𝘄𝗲𝗲𝗻 𝗘𝗮𝗰𝗵 𝗖𝗿𝗼𝘂𝗰𝗵 -> 𝟭𝟬𝟬𝟬 = 𝟭 𝗦𝗲𝗰𝗼𝗻𝗱 
+
+Exponential				= FALSE, // 𝗠𝗮𝗸𝗲 𝗧𝗥𝗨𝗘 𝗶𝗳 𝘆𝗼𝘂 𝗣𝗹𝗮𝘆 𝗼𝗻 𝗘𝘅𝗽𝗼𝗻𝗲𝗻𝘁𝗶𝗮𝗹
+
+YewsAim1 				= TRUE, // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 1
+YewsAim2 				= TRUE, // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 2
+YewsAim3 				= FALSE, // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 3
+YewsAim4        		= TRUE, // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 4
+YewsAim5				= TRUE, // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 5 -> HEAD-LOCK: MAKES YOUR CROSSHAIR MOVE UP
+YewsAim6				= TRUE, // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 6
+YewsAim6Strength   		= 7,     // 𝗔𝗶𝗺 𝗘𝗻𝗵𝗮𝗻𝗰𝗲𝗿 𝗧𝗼𝗴𝗴𝗹𝗲 6 𝗦𝘁𝗿𝗲𝗻𝗴𝘁𝗵 -> 𝗠𝗮𝗸𝗲 𝗧𝗵𝗶𝘀 𝟮 𝗔𝗯𝗼𝘃𝗲 𝗬𝗼𝘂𝗿 𝗥𝗶𝗴𝗵𝘁-𝗦𝘁𝗶𝗰𝗸 𝗗𝗲𝗮𝗱𝗭𝗼𝗻𝗲
+YewsAim7				= TRUE,
+
+BloomNegator 			= TRUE, // 𝗖𝗼𝘂𝗻𝘁𝗲𝗿𝘀 𝗕𝗹𝗼𝗼𝗺  -> 𝗢𝗻𝗲 𝗼𝗳 𝗺𝘆 𝗙𝗮𝘃𝗼𝗿𝗶𝘁𝗲𝘀
+
+AutoTrack 				= TRUE, // 𝗟𝗘𝗚𝗦 𝗪𝗜𝗟𝗟 𝗠𝗢𝗩𝗘 -> 𝗛𝗶𝗴𝗵𝗹𝘆 𝗜𝗻𝗰𝗿𝗲𝗮𝘀𝗲𝘀 𝗧𝗿𝗮𝗰𝗸𝗶𝗻𝗴
+AutoTrackStrength		= 100,    // 𝗔𝘂𝘁𝗼 𝗧𝗿𝗮𝗰𝗸𝗶𝗻𝗴 𝗦𝘁𝗿𝗲𝗻𝗴𝘁𝗵 -> 𝗠𝗮𝘅 𝗶𝘀 𝟭𝟬𝟬
+// 𝗟𝗲𝗳𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗨𝗣 𝗼𝗻 𝗗-𝗣𝗮𝗱 = 𝗦𝘁𝗿𝗲𝗻𝗴𝘁𝗵 		= 100
+// 𝗟𝗲𝗳𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗥𝗜𝗚𝗛𝗧 𝗼𝗻 𝗗-𝗣𝗮𝗱 = 𝗦𝘁𝗿𝗲𝗻𝗴𝘁𝗵 	= 75
+// 𝗟𝗲𝗳𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗗𝗢𝗪𝗡 𝗼𝗻 𝗗-𝗣𝗮𝗱 = 𝗦𝘁𝗿𝗲𝗻𝗴𝘁𝗵 	= 35
+// 𝗟𝗲𝗳𝘁 𝗕𝘂𝗺𝗽𝗲𝗿 + 𝗟𝗘𝗙𝗧 𝗼𝗻 𝗗-𝗣𝗮𝗱 = 𝗦𝘁𝗿𝗲𝗻𝗴𝘁𝗵 		= 1
+																																																																																													/*
+ __       __                                              
+|  \     /  \                                             
+| ▓▓\   /  ▓▓ ______   _______  ______   ______   _______ 
+| ▓▓▓\ /  ▓▓▓|      \ /       \/      \ /      \ /       \
+| ▓▓▓▓\  ▓▓▓▓ \▓▓▓▓▓▓\  ▓▓▓▓▓▓▓  ▓▓▓▓▓▓\  ▓▓▓▓▓▓\  ▓▓▓▓▓▓▓
+| ▓▓\▓▓ ▓▓ ▓▓/      ▓▓ ▓▓     | ▓▓   \▓▓ ▓▓  | ▓▓\▓▓    \ 
+| ▓▓ \▓▓▓| ▓▓  ▓▓▓▓▓▓▓ ▓▓_____| ▓▓     | ▓▓__/ ▓▓_\▓▓▓▓▓▓\
+| ▓▓  \▓ | ▓▓\▓▓    ▓▓\▓▓     \ ▓▓      \▓▓    ▓▓       ▓▓
+ \▓▓      \▓▓ \▓▓▓▓▓▓▓ \▓▓▓▓▓▓▓\▓▓       \▓▓▓▓▓▓ \▓▓▓▓▓▓▓ 
+                                                          																																																																															*/
+
+PickupMacro        = TRUE,    // 𝗦𝗽𝗮𝗺 𝗣𝗶𝗰𝗸-𝗨𝗽 𝗪𝗲𝗮𝗽𝗼𝗻𝘀 -> 𝗚𝗿𝗲𝗮𝘁 𝗳𝗼𝗿 𝟱𝟬/𝟱𝟬𝘀 𝗼𝗿 𝗦𝘁𝗲𝗮𝗹𝗶𝗻𝗴 𝗬𝗼𝘂𝗿 𝗙𝗿𝗶𝗲𝗻𝗱'𝘀 𝗟𝗼𝗼𝘁
+PickupMacroButton  = PS4_SQUARE,   // 𝗧𝗵𝗲 𝗕𝘂𝘁𝘁𝗼𝗻 𝗬𝗼𝘂'𝗹𝗹 𝗛𝗼𝗹𝗱 𝗪𝗶𝘁𝗵 𝗜𝗻𝘁𝗲𝗿𝗮𝗰𝘁 𝘁𝗼 𝗔𝗰𝘁𝗶𝘃𝗮𝘁𝗲 𝘁𝗵𝗲 𝗠𝗮𝗰𝗿𝗼
+
+InstantReset       = FALSE,    // 𝗣𝗿𝗲𝘀𝘀𝗶𝗻𝗴 "𝗜𝗻𝘀𝘁𝗮𝗻𝘁𝗥𝗲𝘀𝗲𝘁𝗕𝘂𝘁𝘁𝗼𝗻" 𝗪𝗶𝗹𝗹 𝗔𝗰𝘁𝗶𝘃𝗮𝘁𝗲 𝘁𝗵𝗲 𝗠𝗮𝗰𝗿𝗼, 𝗔𝗹𝗹𝗼𝘄𝗶𝗻𝗴 𝗬𝗼𝘂 𝘁𝗼 𝗜𝗻𝘀𝘁𝗮𝗻𝘁𝗹𝘆 𝗥𝗲𝘀𝗲𝘁 𝗮 𝗕𝘂𝗶𝗹𝗱𝗶𝗻𝗴 𝗣𝗶𝗲𝗰𝗲 𝗪𝗶𝘁𝗵𝗼𝘂𝘁 𝗣𝗿𝗲𝘀𝘀𝗶𝗻𝗴 𝗘𝗱𝗶𝘁
+InstantResetButton = XB1_LEFT, // 𝗔𝗰𝘁𝗶𝘃𝗮𝘁𝗶𝗼𝗻 𝗕𝘂𝘁𝘁𝗼𝗻
+
+AutoConfirmMacro   = FALSE,    // 𝗔𝘂𝘁𝗼𝗺𝗮𝘁𝗶𝗰𝗮𝗹𝗹𝘆 𝗖𝗼𝗻𝗳𝗶𝗿𝗺𝘀 𝗘𝗱𝗶𝘁𝘀
+
+EditAssist	       = FALSE,    // 𝗛𝗼𝗹𝗱 𝗘𝗱𝗶𝘁 & 𝗶𝘁 𝗪𝗶𝗹𝗹 𝗦𝗲𝗹𝗲𝗰𝘁 𝗙𝗼𝗿 𝗬𝗼𝘂 - 𝗡𝗼 𝗡𝗲𝗲𝗱 𝘁𝗼 𝗣𝗿𝗲𝘀𝘀 𝗼𝗿 𝗛𝗼𝗹𝗱 𝗦𝗲𝗹𝗲𝗰𝘁
+EditAssistDelay    = 20,       // 𝗠𝗮𝗰𝗿𝗼 𝗧𝗶𝗺𝗲 -> 𝗞𝗲𝗲𝗽 𝗮𝘁 𝟮𝟬
+
+EditHold		   = FALSE,    // 𝗧𝗥𝗨𝗘 𝗶𝗳 𝗬𝗼𝘂 𝗨𝘀𝗲 𝗘𝗱𝗶𝘁 𝗛𝗼𝗹𝗱 𝗧𝗶𝗺𝗲 𝗜𝗻-𝗚𝗮𝗺𝗲
+EditHoldTime	   = 100,      // 𝗠𝗮𝘁𝗰𝗵 𝗧𝗶𝗺𝗲 -> 𝟭𝟬𝟬𝟬 = 𝟭 𝗦𝗲𝗰𝗼𝗻𝗱
+
+ButtonTime         = 11,       // 𝗠𝗮𝗰𝗿𝗼 𝗧𝗶𝗺𝗲 -> 𝗞𝗲𝗲𝗽 𝗮𝘁 𝟭𝟭
+
+PreFireMacro	   = FALSE,    // 𝗛𝗼𝗹𝗱 𝗗𝗼𝘄𝗻 "𝗣𝗿𝗲𝗙𝗶𝗿𝗲", 𝗧𝗵𝗲𝗻 𝗛𝗼𝗹𝗱 𝗙𝗶𝗿𝗲, 𝗥𝗲𝗹𝗲𝗮𝘀𝗲 "𝗣𝗿𝗲𝗙𝗶𝗿𝗲" 𝗪𝗵𝗲𝗻 𝗥𝗲𝗮𝗱𝘆 𝘁𝗼 𝗙𝗶𝗿𝗲
+PreFire 		   = XB1_UP,    // 𝗔𝗰𝘁𝗶𝘃𝗮𝘁𝗶𝗼𝗻 𝗥𝗲𝗹𝗲𝗮𝘀𝗲 𝗕𝘂𝘁𝘁𝗼𝗻
+
+WallReplaceMacro   = FALSE ,    // 𝗢𝗻𝗰𝗲 𝗮 𝗪𝗮𝗹𝗹 𝗶𝘀 𝟭 𝗣𝗶𝗰𝗸-𝗔𝘅𝗲 𝗔𝘄𝗮𝘆 𝗳𝗿𝗼𝗺 𝗕𝗿𝗲𝗮𝗸𝗶𝗻𝗴, 𝗛𝗼𝗹𝗱 𝗗𝗼𝘄𝗻 "𝗪𝗮𝗹𝗹𝗥𝗲𝗽𝗹𝗮𝗰𝗲" 𝗪𝗵𝗶𝗹𝗲 𝗧𝗮𝗽𝗽𝗶𝗻𝗴 𝗙𝗶𝗿𝗲 -> 𝗜𝘁'𝗹𝗹 𝗥𝗲𝗽𝗹𝗮𝗰𝗲 𝘁𝗵𝗲 𝗪𝗮𝗹𝗹 𝗳𝗼𝗿 𝗬𝗼𝘂
+WallReplace        = XB1_DOWN,    // 𝗔𝗰𝘁𝗶𝘃𝗮𝘁𝗶𝗼𝗻 𝗕𝘂𝘁𝘁𝗼𝗻 (𝗣𝗿𝗲𝘀𝘀 𝗙𝗶𝗿𝗲 𝗪𝗵𝗶𝗹𝗲 𝗛𝗼𝗹𝗱𝗶𝗻𝗴)
+								 																																																																																					/*
+  ______    __     __                         
+ /      \  |  \   |  \                        
+|  ▓▓▓▓▓▓\_| ▓▓_  | ▓▓____   ______   ______  
+| ▓▓  | ▓▓   ▓▓ \ | ▓▓    \ /      \ /      \ 
+| ▓▓  | ▓▓\▓▓▓▓▓▓ | ▓▓▓▓▓▓▓\  ▓▓▓▓▓▓\  ▓▓▓▓▓▓\
+| ▓▓  | ▓▓ | ▓▓ __| ▓▓  | ▓▓ ▓▓    ▓▓ ▓▓   \▓▓
+| ▓▓__/ ▓▓ | ▓▓|  \ ▓▓  | ▓▓ ▓▓▓▓▓▓▓▓ ▓▓      
+ \▓▓    ▓▓  \▓▓  ▓▓ ▓▓  | ▓▓\▓▓     \ ▓▓      
+  \▓▓▓▓▓▓    \▓▓▓▓ \▓▓   \▓▓ \▓▓▓▓▓▓▓\▓▓      
+                                              																																																																																		*/
+
+QuickValues	  = FALSE,
+
+NoVibration   = TRUE,  // 𝗕𝗹𝗼𝗰𝗸𝘀 𝗖𝗼𝗻𝘁𝗿𝗼𝗹𝗹𝗲𝗿 𝗩𝗶𝗯𝗿𝗮𝘁𝗶𝗼𝗻𝘀
+
+KillSwitch    = FALSE,  // 𝗟𝗲𝗳𝘁 𝗧𝗿𝗶𝗴𝗴𝗲𝗿 + 𝗢𝗽𝘁𝗶𝗼𝗻𝘀 𝘁𝗼 𝗘𝗻𝗮𝗯𝗹𝗲/𝗗𝗶𝘀𝗮𝗯𝗹𝗲
+
+BuildTracker  = TRUE,  // 𝗧𝘂𝗿𝗻𝘀 𝗠𝗮𝗰𝗿𝗼𝘀 𝗼𝗳𝗳 𝗪𝗵𝗶𝗹𝗲 𝗕𝘂𝗶𝗹𝗱𝗶𝗻𝗴
+BuildTime     = 11500, // 𝗧𝗶𝗺𝗲 𝗕𝗲𝗳𝗼𝗿𝗲 𝗕𝘂𝗶𝗹𝗱 𝗧𝗿𝗮𝗰𝗸𝗲𝗿 𝗗𝗲𝗮𝗰𝘁𝗶𝘃𝗮𝘁𝗲𝘀 𝗪𝗵𝗲𝗻 𝗔𝗙𝗞
+
+PS4Controller = FALSE  // 𝗔𝗹𝗹𝗼𝘄𝘀 𝗬𝗼𝘂 𝘁𝗼 𝗣𝗿𝗼𝗽𝗲𝗿𝗹𝘆 𝗨𝘀𝗲 𝗧𝗼𝘂𝗰𝗵𝗣𝗮𝗱
+
+combo ChampionAA1 { set_val (I0I0, get_ival (I0I0) -A); wait(3); set_val (I0I0, get_ival (I0I0) + 3); wait(3); } 
+combo ChampionAA2 { set_val (I000, get_ival (I000) - 2); wait(3); set_val (I000, get_ival (I000) + 2); wait(3); }
+combo ChampionAA3 { set_val (I0I0, get_ival (I0I0) - 4); wait(3); set_val (I0I0, get_ival (I0I0) + 4); wait(3); }
+combo ChampionAA4 { set_val (I000, get_ival (I000) - 3); wait(3); set_val (I000, get_ival (I000) + 3); wait(3); }
+combo ChampionAA5 { set_val (I0I0, get_ival (I0I0) - 4); wait(3); set_val (I0I0, get_ival (I0I0) + 4); wait(3); }
+combo ChampionAA6 { set_val (I000, get_ival (I000) + 3); wait(3); set_val (I000, get_ival (I000) - 3); wait(3); }
+combo ChampionAA7 { set_val (I0I0, get_ival (I0I0) - 5); wait(3); set_val (I0I0, get_ival (I0I0) + 5); wait(3); } 
+combo ChampionAA8 { set_val (I000, get_ival (I000) + 4); wait(3); set_val (I000, get_ival (I000) - 4); wait(3); } 
+combo ChampionAA9 {if ( !( Byte29++ % 4 ) ) Function7 ( POLAR_RS, Byte28 = ( Byte28 * Byte30 ) % 360, Byte32 * 359 ) Byte29 = 0 }
+combo ChampionAA10 {set_val (I0I0, get_ival (I0I0) - 3);wait(1);set_val (I0I0, get_ival (I0I0) + 3);wait(1);}
+combo ChampionAA11 {set_val (I000, get_ival (I000) - 2);wait(1);set_val (I000, get_ival (I000) + 2);wait(1);}
+combo ChampionAA12 {set_val (I0I0, get_ival (I0I0) - 4);wait(1);set_val (I0I0, get_ival (I0I0) + 4);wait(1);}
+combo ChampionAA13 {set_val (I000, get_ival (I000) - 3);wait(1);set_val (I000, get_ival (I000) + 3);wait(1);}
+combo ChampionAA14 {set_val (I0I0, get_ival (I0I0) - 6);wait(1);set_val (I0I0, get_ival (I0I0) + 6);wait(1);}
+combo ChampionAA15 {set_val (I000, get_ival (I000) + 5);wait(2);set_val (I000, get_ival (I000) - 5);wait(2);}
+combo ChampionAA16 {set_val (I0I0, get_ival (I0I0) - 8);wait(1);set_val (I0I0, get_ival (I0I0) + 8);wait(1);}
+combo ChampionAA17 {set_val (I000, get_ival (I000) + 6);wait(2);set_val (I000, get_ival (I000) - 6);wait(2);}
+combo ChampionAA18 { set_val(I0I0,Function3(I0I0, 6));wait(10);set_val(I000,Function2(I000, 5));wait(10);set_val(I0I0,Function3(I0I0, 6 * -1));wait(10);set_val(I000,Function2(I000, 5 * -1));wait(10);}
+combo ChampionAA19 { set_val(I0I0,Function3(I0I0, 4));wait(8);set_val(I000,Function2(I000, 4));wait(8);set_val(I0I0,Function3(I0I0, 4 * -1));wait(8);set_val(I000,Function2(I000, 4 * -1));wait(8);}
+combo ChampionAA20 { set_val(I0I0,Function3(I0I0, 4));wait(16);set_val(I000,Function2(I000, 3));wait(16);set_val(I0I0,Function3(I0I0, 4 * -1));wait(16);set_val(I000,Function2(I000, 3 * -1));wait(16);}
+combo ChampionAA21 { set_val(I0I0,Function3(I0I0, 5));wait(12);set_val(I000,Function2(I000, 3));wait(12);set_val(I0I0,Function3(I0I0, 5 * -1));wait(12);set_val(I000,Function2(I000, 3 * -1));wait(12);}
+combo ChampionAA22 { set_val(I0I0, (A + 1));wait(1)set_val(I000, (A + 1));wait(1)set_val(I0I0, (-A + 1));wait(1)set_val(I000, (-A + 1));wait(1)set_val(I0I0, (A + 1));wait(1)set_val(I000, (A + 1));wait(1)set_val(I0I0, (-A + 1));wait(1)set_val(I000, (-A + 1));wait(1);}	
+combo ChampionAA23 { set_val(I0I0,  get_ival (I0I0)  + A);wait(2);set_val(I000, get_ival (I000)+ A);set_val(I0II, get_ival (I0II)+ A);wait(2);set_val(I0I0, get_ival(I0I0)+ A*-1);wait(2);set_val(I000, get_ival (I000)  + A*-1);set_val(I0II, get_ival (I0II) + A*-1);wait(2);}
+combo ChampionAA24 { Function5(I000,A + 2);Function5(I0I0,A + 2);wait(6);Function5(I000,A + 2 * -1);Function5(I0I0,A + 2 * -1);wait(6);}
+combo ChampionAA25 { if(!(Byte13++ % 4))Function6(POLAR_RS, Byte22 = (Byte22 + 32767) % 360, 32767 * 359);Byte13 = 0;}
+combo ChampionAA26 { set_val(I000, Function4(I000,A + 1));wait (3);set_val(I000,Function4(I000,A - 1));wait (3);} 
+combo ChampionAA27 {if ( !( Byte29++ % 4 ) ) Function7 ( POLAR_RS, Byte28 = ( Byte28 * Byte30 ) % 360, Byte32 * 359 ) Byte29 = 0 } 
+combo ChampionAA28 {set_val (I0I0, get_ival (I0I0) - 8);wait(1);set_val (I0I0, get_ival (I0I0) + 8);wait(1); } 
+combo ChampionAA29 {set_val (I000, get_ival (I000) + 6);wait(2);set_val (I000, get_ival (I000) - 6);wait(2); } 
+combo ChampionAA30 {set_val(I000, (A + 1)); wait(1)set_val(I0I0, (A + 1)); set_val(I000, -A - 1); wait(1)set_val(I0I0, -A - 1); } 
+combo ChampionAA31 {set_val(I000,A)set_val(I0I0,A + 1)wait(1)set_val(I000,-A - 1)set_val(I0I0,-A - 1)wait(1) } 
+combo ChampionAA32 {set_val(I000,A + 1)wait(1)set_val(I0I0,A + 1)wait(1) set_val(II00,A + 5) set_val(I0II,A + 9) } 
+combo ChampionAA33 {set_val(I000,A + 1)wait(1)set_val(I0I0,A + 1)wait(1) set_val(II00,A - 11)wait(1)  set_val(I0II,A - 7) }
+combo ChampionAA34 {Function1 (XB1_RY, -A + 2);}
+combo ChampionAA35 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2) wait(1)set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2)}
+combo ChampionAA36 {set_val(PS4_RX,A + 1)wait(1)set_val(PS4_RY,A + 1) wait(1)set_val(PS4_RX,-A + 1)wait(1)set_val(PS4_RY,-A + 1)}
+combo ChampionAA37 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2) wait(1)set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2)}
+combo ChampionAA38 {set_val(PS4_RX,A + 1)wait(1)set_val(PS4_RY,A + 1) wait(1)set_val(PS4_RX,-A + 1)wait(1)set_val(PS4_RY,-A + 1)}
+combo ChampionAA39 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2) wait(1)set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2)}
+combo ChampionAA40 {set_val(PS4_RX,A + 1)wait(1)set_val(PS4_RY,A + 1)}
+combo ChampionAA41 {set_val(PS4_RX,A + 1)wait(1)set_val(PS4_RY,A + 1)wait(1)set_val(PS4_RX,-A + 1)wait(1)set_val(PS4_RY,-A + 1)wait(1)set_val(PS4_RY,-A + 1)wait(1)}
+combo ChampionAA42 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2)wait(1)set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2)wait(1)}
+combo ChampionAA43 {set_val(PS4_RX,A + 1)wait(1)set_val(PS4_RY,A + 1)wait(1)set_val(PS4_RX,-A + 1)wait(1)set_val(PS4_RY,-A + 1)wait(1)}
+combo ChampionAA44 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2)wait(1)set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2)wait(1)}
+combo ChampionAA45 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2) set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2) }
+combo ChampionAA46 {set_val(PS4_RX,A + 2) set_val(PS4_RY,A + 2) set_val(PS4_RX,-A + 2)wait(1)set_val(PS4_RY,-A + 2) }
+combo ChampionAA47 {set_val(PS4_RX,A + 2)wait(1)set_val(PS4_RY,A + 2) set_val(PS4_RX,-A + 2) set_val(PS4_RY,-A + 2) }
+combo ChampionAA48 {set_val(PS4_RY, (A + 1)); wait(10)set_val(PS4_RX, (A + 1)); wait(10)set_val(PS4_RY, A + 1 * -1); wait(10)set_val(PS4_RX, A + 1 * -1); wait(10)}
+combo ChampionAA49 {set_val(PS4_RX,A)set_val(PS4_RY,A)wait(1)set_val(PS4_RX,-A)set_val(PS4_RY,-A)wait(1)}
+combo ChampionAA50 {set_val(PS4_RX,A)wait(1)set_val(PS4_RY,A)wait(1) set_val(PS4_LY,A) set_val(PS4_LX,A)}
+combo ChampionAA51 {set_val(PS4_RX,A)wait(1)set_val(PS4_RY,A)wait(1) set_val(PS4_LY,A)wait(1)  set_val(PS4_LX,A)}
+combo ChampionAA52 { Byte47 (XB1_RY, -5); } 
+combo ChampionAA53 { if ( !( Byte40++ % 4 ) ) Byte48 ( POLAR_RS, Byte39 = ( Byte39 * Byte41 ) % 360, Byte32 * 359 ) Byte40 = 0 } 
+combo ChampionAA54 { set_val (XB1_RY, get_ival (XB1_RY) - 6);wait(1);set_val (XB1_RY, get_ival (XB1_RY) + 5);wait(1); } 
+combo ChampionAA55 { set_val (XB1_RX, get_ival (XB1_RX) + 5);wait(2);set_val (XB1_RX, get_ival (XB1_RX) - 6);wait(2); } 
+combo ChampionAA56 { set_val(XB1_RX, (A + 1)); wait(1)set_val(XB1_RY, (A + 1)); set_val(XB1_RX, -A - 1); wait(1)set_val(XB1_RY, -A - 1); } 
+combo ChampionAA57 { set_val(XB1_RX,A)set_val(XB1_RY,A + 1)wait(1)set_val(XB1_RX,-A - 1)set_val(XB1_RY,-A - 1)wait(1) } 
+combo ChampionAA58 { set_val(XB1_RX,A + 1)wait(1)set_val(XB1_RY,A + 1)wait(1) set_val(XB1_LY,A + 1) set_val(XB1_LX,A + 1) } 
+combo ChampionAA59 { set_val(XB1_RX,A + 1)wait(1)set_val(XB1_RY,A + 1)wait(1) set_val(XB1_LY,A - 1)wait(1)  set_val(XB1_LX,A - 1) }
+combo ChampionAAEnhancer60{Function1(PS4_LX,Byte80)wait(3)Function1(PS4_LX,0)wait(3)Function1(PS4_LX,-Byte80)wait(3)Function1(PS4_LX,0)wait(3)}
+combo ChampionAAEnhancer61{Function1(PS4_LY,0)wait(3)Function1(PS4_LY,Byte81)wait(3)Function1(PS4_LY,0)wait(3)Function1(PS4_LY,-Byte81)wait(3)}
+
+combo PreFire {set_val(XB1_RT, 0)} 
+combo Wall {set_val(Wall, 100) wait(100) set_val(Wall, 0) wait(100) set_val (SwitchMode, 100) wait(11) set_val (SwitchMode, 0) set_val(Wall, 100) wait(11) set_val(Wall, 0) wait(11)} 
+
+function ValueChangeRR (RecoilNegatorPower, Input, Tune) { if(Initiate(Input)) { RecoilNegatorPower += Tune; if (RecoilNegatorPower < inv(Byte12)) { RecoilNegatorPower = inv(Byte12); } if(RecoilNegatorPower > Byte12) { RecoilNegatorPower = Byte12; } } return RecoilNegatorPower; } 
+function ValueChangeBR (L, Input, Tune) { if(Initiate(Input)) { L += Tune; if(L < inv(Byte11)) { L = inv(Byte11); } if(L > Byte11) { L = Byte11; } } return L; } 
+function ValueChangeAA (A, Input, Tune) { if(Initiate(Input)) { A += Tune; if(A < inv(Byte10)) { A = inv(Byte10); } if(A > Byte10) { A = Byte10; } } return A; }
+function Disable () { set_val(XB1_UP, 0); set_val(XB1_DOWN, 0); set_val(XB1_LEFT, 0); set_val(XB1_RIGHT, 0);set_val(XB1_A, 0); set_val(XB1_B, 0);set_val(XB1_X, 0);} 
+function Initiate (Input) { return event_press(Input) || get_val(Input) && get_ptime(Input) > 250 && get_ptime(Input) % (get_rtime() * 8) == 0; } 
+
+function Edit() { Byte8 += get_rtime(); if (get_ival(Edit)) { if (Byte8 >= EditAssistDelay) EditPress(Select); }} 
+function EditPress(Button) { if (get_ival (Button)) return; set_val(Button,100); } 
+
+combo Crouch { set_val (Crouch, 100); wait (CrouchShotDelay); set_val (Crouch, 0); wait (CrouchShotDelay); } 
+combo RecoilNegator { set_val (I0I0, get_ival (I0I0) + (RecoilNegatorPower)); wait(5); } 
+combo PickupMacro { set_val (Interact, 100); wait(1); set_val (Interact, 0); wait(1); }
+combo Confirm { set_val(Confirm,100); wait(ButtonTime); set_val(Confirm,0); wait(ButtonTime); } 
+combo InstantResetButton { set_val(Edit,100); wait(ButtonTime); set_val(Reset,100); wait(ButtonTime); combo_run(Confirm); }
+combo InstantReset { wait(20); combo_run(Confirm); }
+
+combo Open { set_val (XB1_LX, get_ival (XB1_LX) + 0); }
+combo Open2 { set_val (XB1_LY, get_ival (XB1_LY) + 0); }
+
+combo Raised { set_rgb (0,0,0) wait (100); set_rgb (0,255,0) wait (1000); set_rgb (255,0,0); } 
+combo Lowered { set_rgb (0,0,0) wait (100); set_rgb (255,0,30) wait (1000); set_rgb (255,0,0); } 
+
+init { if(Toggle1){cls_oled(OLED_BLACK);print(15,25,OLED_FONT_SMALL,OLED_WHITE,Site[0]);print(10,40,OLED_FONT_MEDIUM,OLED_WHITE,Brand[0])print(23,10,OLED_FONT_SMALL,OLED_WHITE,Enabled[0]);set_rgb(250, 0, 0);}else{if(!Toggle1){cls_oled(OLED_BLACK);print(15,25,OLED_FONT_SMALL,OLED_WHITE,Site[0]);print(10,40,OLED_FONT_MEDIUM,OLED_WHITE,Brand[0])print(23,10,OLED_FONT_SMALL,OLED_WHITE,Disabled[0]);set_rgb(0, 0, 250);}}}
+
+const string Site = "YewScripts.com";
+const string Brand = "YewScripts";
+const string Enabled = "Champion: On";
+const string Disabled = "Champion: Off";
+
+combo EnableVibration{set_rumble(RUMBLE_A, 50);wait(100);set_rumble(RUMBLE_A, 0)}
+combo DisableVibration{set_rumble(RUMBLE_B, 50);wait(100);set_rumble(RUMBLE_B, 0) }
+
+main {
+deadzone (XB1_RT,XB1_LT,100,100);
+
+if (NoVibration) { block_rumble (); }
+
+if (PS4Controller) { swap (PS4_TOUCH,PS4_SHARE); } 
+			
+if(Toggle1) {if(Toggle2) { if(get_val(XB1_LT) && event_press(XB1_VIEW)) { Toggle2 = FALSE; Script = FALSE; Function18(FALSE) } } else { if(get_val(XB1_LT) && event_press(XB1_VIEW)) { Toggle2 = TRUE; Script = TRUE; Function18(TRUE) } } }
+
+if (KillSwitch) { if (get_val (XB1_LT) && get_val(XB1_LS)) { Script = FALSE } if (get_val (XB1_LT) && get_val(XB1_LS)) { Script = TRUE } } 
+
+if (Script) { set_rgb (255,0,0) } else {set_rgb(0,0,255) } if (Script) { 
+
+if (get_val (Interact)) { combo_run (Open); combo_run (Open2); } else { combo_stop (Open); combo_stop (Open2); }
+
+if (YewsAim1) { if(get_val (XB1_RT)) {set_val(I000, (get_ival(I000) + random(3/2, -3/2)));set_val(I0I0, (get_ival(I0I0) + random(2, -3)));combo_run (ChampionAA10);combo_run (ChampionAA11);}combo_run(ChampionAA12);if (abs(get_val(9)) > 19 || abs(get_val(10)) > 19)combo_stop(ChampionAA12);if (Byte1) { if (event_release(Byte1))Byte1 = FALSE;else {set_val (Byte1,FALSE);combo_run(ChampionAA13)if(abs(get_val(I000)) > 15 || abs(get_val(I000)) > 15 || abs(get_val(II00)) < 15 || abs(get_val(I0II)) < 15)combo_stop(ChampionAA13)combo_run(ChampionAA14)if(abs(get_val(I000)) > 16 || abs(get_val(I0I0)) > 16 || abs(get_val(I0II)) > 16 || abs(get_val(II00)) > 16)combo_stop(ChampionAA14)combo_run(ChampionAA15)if(abs(get_val(I000)) > 17 || abs(get_val(I0I0)) > 17 || abs(get_val(I0II)) > 16 || abs(get_val(II00)) > 16)combo_stop(ChampionAA15)}}}
+
+if (BloomNegator) { Byte3  = (isqrt(pow(get_ival(PS4_RX), 2) + pow(get_ival(PS4_RY), 2)))Byte5 = (isqrt(pow(get_ival(I0II), 2) + pow(get_ival(II00), 2)))if (get_val (Fire)) { if (Byte3 <= (A + 3)) { Byte2 = (Byte2 + 30) % 360; set_polar(POLAR_RS, Byte4, ((A + 5/2) * 360)); }if (Byte5 <= (L + 3)) { Byte4 = (Byte4 + 21) % 360; set_polar(POLAR_LS, Byte4, ((L + 60) * 360)); } set_val(I0II, (get_ival(I0II) + random(50, -50)));set_val(II00, (get_ival(II00) + random(35, -35))); }}
+
+if (YewsAim3) { if (get_val (I0I0) > 25) { combo_run (ChampionAA10); combo_run (ChampionAA11); } else { combo_stop (ChampionAA11); combo_stop (ChampionAA10); }if (get_val (I0I0) < 25) { combo_run (ChampionAA12); combo_run (ChampionAA13); } else { combo_stop (ChampionAA12); combo_stop (ChampionAA13); }if (event_release (ADS) || event_release (Fire)) { combo_run (ChampionAA14); combo_run (ChampionAA15); } else { combo_stop (ChampionAA14); combo_stop (ChampionAA15); } if (get_val (ADS) || get_val(Fire)) { combo_run (ChampionAA16); combo_run (ChampionAA17); } else { combo_stop (ChampionAA16); combo_stop (ChampionAA17); } }
+
+if (YewsAim2) { combo_run(ChampionAA34)combo_run(ChampionAA1)combo_run(ChampionAA2)combo_run(ChampionAA3)combo_run(ChampionAA4)combo_run(ChampionAA5)combo_run(ChampionAA6)combo_run(ChampionAA7)combo_run(ChampionAA8)combo_run(ChampionAA9) }
+
+if (YewsAim6) { 
+Byte18 = get_val(I000);
+Byte19 = get_val(I0I0);
+
+Byte20 = isqrt(pow(Byte18, 2) + pow(Byte19, 2));
+Byte21 = (Byte20 < 100);if(!(Byte14++ % 1)){Byte15 += Byte37;}Byte15 = Byte15 % 360;
+Byte17 = Array6[Byte15 % 360]
+Byte16 = Array6[(Byte15 + 270) % 360];
+Byte16 = (Byte16 * YewsAim6Strength) / 100;
+Byte17 = (Byte17 * YewsAim6Strength) / 100;
+if((get_val(ADS)) || get_val(Fire)) { if(Byte20 <= YewsAim6Strength){Byte17 -= Byte19;Byte16 -= Byte18;} else { 
+Byte17 = (Byte17 * (200 - ((abs(Byte19) + Byte20) / 10) * 10) / 200) * Byte21;
+Byte16 = (Byte16 * (200 - ((abs(Byte18) + Byte20) / 10) * 10) / 200) * Byte21; } 
+set_val(I000, clamp(Byte18 + Byte16, -100, 100));
+set_val(I0I0, clamp(Byte19 + Byte17, -100, 100));
+} 
+
+}
+
+if (YewsAim4) { combo_run(ChampionAA18);combo_run(ChampionAA19);combo_run(ChampionAA20);combo_run(ChampionAA21);Byte13 += get_rtime();combo_run(ChampionAA22);if (get_val(I000)<-A + 1||get_val(I000)>A + 1||get_val(I0I0)<-A + 1||get_val(I0I0)>A + 1||get_val(I000)<-A + 1||get_val(I000)>A + 1||get_val(I0I0)<-A + 1||get_val(I0I0)>A + 1){combo_stop(ChampionAA22);}combo_run(ChampionAA23);combo_run(ChampionAA26);combo_run(ChampionAA26);combo_run(ChampionAA25);Byte27  = isqrt(abs(event_press(I000)) * abs(event_press(I000)) + abs(event_press(I0I0)) * abs(event_press(I0I0)));if (event_press(I000) || event_press(I0I0) && event_press(I0I0) && Byte27 <= 8 || event_press(I0I0) && Byte27 > 8) {combo_run(ChampionAA24);}} 
+
+if (YewsAim5) { if(get_val (XB1_RT)) {combo_run(ChampionAA27);combo_run (ChampionAA28); combo_run (ChampionAA29);}combo_run(ChampionAA30);if (abs(get_val(9)) > 19 || abs(get_val(10)) > 19)combo_stop(ChampionAA30);if (Byte1) {if (event_release(Byte1))Byte1 = FALSE;else {set_val (Byte1,FALSE);combo_run(ChampionAA31)if(abs(get_val(I000)) >= 15 || abs(get_val(I000)) >= 15 || abs(get_val(II00)) <= 15 || abs(get_val(I0II)) <= 15)combo_stop(ChampionAA31)combo_run(ChampionAA32)if(abs(get_val(I000)) > 16 || abs(get_val(I0I0)) > 16 || abs(get_val(I0II)) > 16 || abs(get_val(II00)) > 16)combo_stop(ChampionAA32)combo_run(ChampionAA33)if(abs(get_val(I000)) > 17 || abs(get_val(I0I0)) > 17 || abs(get_val(I0II)) > 16 || abs(get_val(II00)) > 16)combo_stop(ChampionAA33)}}} 
+
+if (YewsAim7) { Function19();combo_run(ChampionAAEnhancer60);combo_run(ChampionAAEnhancer61); }
+
+if (AutoTrack){ if(AutoTrack){ combo_run(PlayerAutoTracking) } if (AutoTrack) { if (AutoTrack && abs(get_ival(XB1_LX)) <= 35 && abs(get_ival(XB1_LY)) <= 35) { combo_run(PlayerAutoTracking); } else { combo_stop(PlayerAutoTracking); } } } if (get_val(Interact)) { combo_stop (PlayerAutoTracking) }
+
+if (AutoTrack) { if (get_val (XB1_LB) && get_val (XB1_DOWN))  { AutoTrackStrength = 1   combo_run(Lowered)} if (get_val (XB1_LB) && get_val (XB1_LEFT))  { AutoTrackStrength = 35  combo_run(Lowered)}  if (get_val (XB1_LB) && get_val (XB1_UP))    { AutoTrackStrength = 100 combo_run(Raised)} if (get_val (XB1_LB) && get_val (XB1_RIGHT)) { AutoTrackStrength = 75  combo_run(Raised)} } 
+
+if (WallReplaceMacro) { if (get_val (WallReplace) && get_val (Wall)) { combo_run (Wall) }} 
+
+if (EditAssist) { if (get_ival(Edit)) { Edit(); Byte6 = TRUE; } if (event_release(Edit)) { Byte8 = 0; Byte6 = FALSE; } } 
+
+if (InstantReset) { if (event_press(InstantResetButton)) { combo_run(InstantResetButton); } } 
+
+if (AutoConfirmMacro) { if (EditHold) { if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) { Byte6 = TRUE; Byte7 = TRUE; Byte9 = FALSE; } } else if (event_press(Edit)) { Byte6 = TRUE; Byte7 = TRUE; Byte9 = FALSE; } if (Byte7) { if (event_release(Select)) { Byte6 = FALSE; Byte7 = FALSE; Byte9 = FALSE; } } }  
+
+if (Byte6 || Byte7) { if (event_press(Reset)) { combo_run(InstantReset); Byte6 = FALSE; Byte7 = FALSE; Byte9 = FALSE; }
+
+if (event_press(Pickaxe) || event_press(ADS)) { Byte6 = FALSE; Byte7 = FALSE; Byte9 = FALSE; } } 
+
+if (BuildTracker) { if (event_press(SwitchMode)) { Byte9=!Byte9; } if(Byte9) { Byte9 += get_rtime() if (event_press(Pickaxe) || Byte9 == BuildTime) { Byte9 = FALSE; BuildTime = 0; } if (get_ival(Cone) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap)) BuildTime=0; } } if (!Byte9) { 
+
+if (PreFireMacro) {if (get_val (PreFire) && get_val (Fire)) { combo_run (PreFire) } } 
+
+if (RecoilNegator) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilNegator); } } 
+
+if ((PickupMacro) && get_val (Interact) && get_val (PickupMacroButton)) { combo_run (PickupMacro); } 
+
+if (CrouchShotHipFire) { if (get_val (Fire)) { combo_run (Crouch); } } if (CrouchShot) { if (get_val (Fire) && get_val (ADS)) { combo_run (Crouch); } }} 
+
+if (QuickValues) { if (get_ival (XB1_LS) && get_ptime (XB1_LS) > 350) { Disable();L = ValueChangeBR(L, XB1_LEFT, -1); L = ValueChangeBR(L, XB1_RIGHT, 1); L = ValueChangeBR(L, XB1_DOWN, -10); L = ValueChangeBR(L, XB1_UP, 10); }if (get_ival (XB1_RB) && get_ptime (XB1_RB) > 350) { Disable(); A = ValueChangeAA(A, XB1_LEFT, -1); A = ValueChangeAA(A, XB1_RIGHT, 1); A = ValueChangeAA(A, XB1_DOWN, -10); A = ValueChangeAA(A, XB1_UP, 10); }if (get_ival (XB1_LB) && get_ptime (XB1_LB) > 350) { Disable(); RecoilNegatorPower = ValueChangeRR(RecoilNegatorPower, XB1_LEFT, -1); RecoilNegatorPower = ValueChangeRR(RecoilNegatorPower, XB1_RIGHT, 1); RecoilNegatorPower = ValueChangeRR(RecoilNegatorPower, XB1_DOWN, -10); RecoilNegatorPower = ValueChangeRR(RecoilNegatorPower, XB1_UP, 10); }if (get_val (XB1_LB) && get_val (XB1_UP) || get_val (XB1_RB) && get_val (XB1_UP) || get_val (XB1_LS) && get_val (XB1_UP)) { combo_run (Raised) }if (get_val (XB1_LB) && get_val (XB1_RIGHT) || get_val (XB1_RB) && get_val (XB1_RIGHT) || get_val (XB1_LS) && get_val (XB1_RIGHT)) { combo_run (Raised); }if (get_val (XB1_LB) && get_val (XB1_DOWN) || get_val (XB1_RB) && get_val (XB1_DOWN) || get_val (XB1_LS) && get_val (XB1_DOWN)) { combo_run (Lowered) } if (get_val (XB1_LB)  && get_val (XB1_LEFT) || get_val (XB1_RB) && get_val (XB1_LEFT) || get_val (XB1_LS) && get_val (XB1_LEFT)) { combo_run (Lowered); } } } }
+
+function Function1(Byte73,Byte74) { set_val(Byte73, clamp(Byte74 * (100 - abs(get_val(Byte73))) / 100 + get_val(Byte73), -100, 100)); return; } 
+function Function2(Byte75,Byte76) { if(abs(get_val(Byte75)) < (5 + 1)) return Byte76;return get_val(Byte75);}
+function Function3(Byte75,Byte76) { if(abs(get_val(Byte75)) < (6 + 1)) return Byte76;return get_val(Byte75);}
+function Function4(Byte77,Byte78) {if(abs(get_val(Byte77)) < (A - 1)) return Byte78;return get_val(Byte77);}
+function Function5(Byte79,Byte80) {set_val(Byte79, clamp(Byte80 * (100 - abs(get_val(Byte79))) / 100 + get_val(Byte79), -100, 100));return}
+function Function6(Byte73,Byte81, Byte82){Byte23 = 9 + Byte73;Byte24 = 10 + Byte73;if(Byte81 < 0) Byte81 = 360 + (Byte81 % 360);Byte81 = (Byte81 + 90) % 360;Byte82 = clamp(Byte82, 0, 100);Byte26 = Array6[Byte81];Byte25 = Array6[(Byte81 + 90) % 360];Function5(Byte23, inv(Byte82 * Byte25 / 100));Function5(Byte24, inv(Byte82 * Byte26 / 100))return;} 
+function Function7(Byte83, Byte84, Byte85) {Byte31 = 9  + Byte83;Byte34 = 10 + Byte83;	if ( Byte84 < 0 ) Byte84 = 360 + ( Byte84 % 360 )Byte84  = ( Byte84 + 90) % 360 Byte85 = clamp ( Byte85, 0, 100 )Byte36 = Array6 [ Byte84 ]Byte35 = Array6 [ ( Byte84 + 90 ) % 360 ]Function1(Byte31, inv ( Byte85 * Byte35 / 100 ) )Function1(Byte34, inv ( Byte85 * Byte36 / 100 ) ) }
+function Function8() { Byte66 += get_rtime(); Byte65 = (Byte65 + Byte63); if (!Byte67) Function9(Byte65,(Byte66 * Byte62 / 10 * 2 * 327)); if (Byte67 == 1) Function9(Byte65,(Byte66 * Byte62 / 10 * 2 * 327));	if (Byte67 == 2) Function9(Byte65,inv(Byte66 * Byte62 / 10 * 2 * 327));	if (Byte67 == 3) { Function9(Byte65,inv(Byte66 * Byte62 / 10 * 2 * 327)); if (Byte66 > 50) { Byte66 = FALSE; Byte67 = FALSE; } } else if (Byte66 > 50) { Byte66 = FALSE; Byte67 ++; } }
+function Function9(Byte64,Byte68) { Byte68 = Byte68 >> TRUE; set_val(POLAR_RX,get_ival(POLAR_RX) + inv(clamp(((Byte68 * Function10(Byte64 + Byte60) >> (Byte69 + Byte59)) / (Byte54) << TRUE),Byte52 + get_ival(POLAR_RX),Byte51 + get_ival(POLAR_RX)))); if (Byte46) { set_val(POLAR_RY,get_ival(POLAR_RY) + inv(Byte72 * Byte49) + inv(clamp(((Byte68 * Function11(Byte64 + Byte61) >> (Byte70 + Byte59)) / (Byte54) << TRUE),Byte52 + get_ival(POLAR_RY),Byte51 + get_ival(POLAR_RY) + inv(Byte72 * Byte49)))); } else { set_val(POLAR_RY,get_ival(POLAR_RY) + (Byte72 * Byte49) + inv(clamp(((Byte68 * Function11(Byte64 + Byte61) >> (Byte70 + Byte59)) / (Byte54) << TRUE),Byte52 + get_ival(POLAR_RY) + (Byte72 * Byte49),Byte51 + get_ival(POLAR_RY)))); } }
+function Function10(Byte64) { if (!Byte71 || Byte71 == 4) { return Function13(Array3[((Function12(Byte64 - TRUE) + Byte48) % Byte47)],Array3[((Function12(Byte64 + TRUE) + Byte48) % Byte47)],inv(Byte52)); } else if (Byte71 == Array4[33] || Byte71 == 5) { return Function13(Array5[((Function12(Byte64 - TRUE) + Byte48) % Byte47)],Array5[((Function12(Byte64 + TRUE) + Byte48) % Byte47)],inv(Byte52)); } return FALSE;}
+function Function11(Byte64) { if (!Byte71 || Byte71 == Array4[37]) { return Function13(Array3[(Function12(Byte64 - TRUE))],Array3[(Function12(Byte64 + TRUE))],inv(Byte52)); } else if (Byte71 == Array4[33] || Byte71 == Array4[36]) { return Function13(Array5[(Function12(Byte64 - TRUE))],Array5[(Function12(Byte64 + TRUE))],inv(Byte52)); } return FALSE;}
+function Function12(Byte64) { if (Byte64 < FALSE) { Byte64 = Byte47 + (Byte64 % Byte47); } Byte64 = (Byte64 + Byte48) % Byte47; return Byte64;}
+function Function13(Byte86,Byte87,Byte88) { return Function14(Function15(Function16(Byte86),Function16(Byte87),Byte88)); }
+function Function14(Byte88) { if (Byte88 >= FALSE) { return (Byte88 + Byte53 >> TRUE) / Byte53; } return (Byte88 - Byte53 >> TRUE) / Byte53; }
+function Function15(Byte86,Byte87,Byte88) { return Function17((Byte53 - Byte88),Byte86) + Function17(Byte88,Byte87); }
+function Function16(Byte88) { return Byte88 * Byte53; }
+function Function17(Byte89,Byte90) { return ((Byte89 >> Byte50) * (Byte90 >> Byte50)); }
+function Function18(state){ if(state){ cls_oled(OLED_BLACK); print(15,25,OLED_FONT_SMALL,OLED_WHITE,Site[0]); print(10,40,OLED_FONT_MEDIUM,OLED_WHITE,Brand[0]) print(23,10,OLED_FONT_SMALL,OLED_WHITE,Enabled[0]); combo_run(EnableVibration); set_rgb(250, 0, 0); } if (!state) { cls_oled(OLED_BLACK);print(15,25,OLED_FONT_SMALL,OLED_WHITE,Site[0]);print(10,40,OLED_FONT_MEDIUM,OLED_WHITE,Brand[0])print(23,10,OLED_FONT_SMALL,OLED_WHITE,Disabled[0]);combo_run(DisableVibration)set_rgb(0, 0, 250); } }
+function Byte47 ( Byte91,  Byte92) { set_val ( Byte91, clamp ( Byte92 * ( 100 - abs ( get_val ( Byte91 ) ) ) / 100 + get_val ( Byte91), -100, 100 ) ); return;	} 
+function Byte48(Byte93, Byte94, Byte95){ Byte42 = 1  + Byte93; Byte43 = 10 + Byte93; if ( Byte94 < 0 ) Byte94 = 360 + ( Byte94 % 360 ) Byte94  = ( Byte94 + 90) % 360 Byte95 = clamp ( Byte95, 0, 100 ) Byte45 = Array2 [ Byte94 ] Byte44 = Array2 [ ( Byte94 + 90 ) % 360 ] Byte47(Byte42, inv ( Byte95 * Byte44 / 100 ) ) Byte47(Byte43, inv ( Byte95 * Byte45 / 100 ) ) } 
+function Function19(){Byte75 = -1 Byte74 = -1 if ( PS4_RX > 0 ) {Byte75 = 1 }if ( PS4_RY > 0 ) { Byte74 = 1 } Byte79 = (PS4_RX + -A) * Byte75 Byte78 = (PS4_RY + -A) * Byte74 Byte76 = -1 Byte77 = -1 if ( PS4_LX > 0 ) {Byte76 = 1}if ( PS4_LY > 0 ) {Byte77 = 1}Byte80 =  (PS4_LX + -A) * Byte76 Byte81 =  (PS4_LY + -A) * Byte77}
+
+combo PlayerAutoTracking {set_val(I0II,-AutoTrackStrength + get_ival(PS4_LX))wait(1);set_val(I0II,AutoTrackStrength - get_ival(PS4_LX));wait(1)}
+
+int Kill = TRUE, Script = TRUE, Toggle1 = TRUE, Toggle2 = TRUE, Toggle3 = XB1_LEFT, Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7, Byte8, Byte9, I0II = PS4_LX, II00 = PS4_LY, Byte10 = 200, Byte11 = 200, Byte12 = 200, Byte13, Byte14, Byte15, Byte16, Byte17, Byte18, Byte19, Byte20, Byte21, Byte22, Byte23 ,Byte24, Byte25, Byte26, Byte27, I000 = XB1_RX, I0I0 = XB1_RY, Byte28, Byte29, Byte30 = 32767, Byte31, Byte32 = 32767, Byte34, Byte35, Byte36, Byte37 = 21, Byte38, Byte39, Byte40  ,Byte41 = 32767, Byte42, Byte43, Byte44, Byte45, Byte46  = FALSE, Byte47 = 360, Byte48 = 90, Byte49 = 327, Byte50 = 8, Byte51 = 32767, Byte52 = -32768, Byte53 = 65536, Byte54 = 23170, Byte55 = TRUE, Byte56  = 41, Byte57 = 15, Byte58 = TRUE, Byte59, Byte60, Byte61, Byte62, Byte63, Byte64, Byte65, Byte66, Byte67, Byte68, Byte69, Byte70, Byte71, Byte72, Byte73, Byte74, Byte75, Byte76, Byte77, Byte78, Byte79, Byte80, Byte81; 
+
+main { if (Script) { if(Exponential) { 
+combo_run(ChampionAA35)if(abs(get_val(PS4_RX)) > 18 || abs(get_val(PS4_RY)) > 18)combo_stop(ChampionAA35)combo_run(ChampionAA36)
+if(abs(get_val(PS4_RX)) > 19 || abs(get_val(PS4_RY)) > 19)combo_stop(ChampionAA36)combo_run(ChampionAA37)
+if(abs(get_val(PS4_RX)) > 20 || abs(get_val(PS4_RY)) > 20)combo_stop(ChampionAA37)combo_run(ChampionAA38)
+if(abs(get_val(PS4_RX)) > 21 || abs(get_val(PS4_RY)) > 21)combo_stop(ChampionAA38)combo_run(ChampionAA39)
+if(abs(get_val(PS4_RX)) > 23 || abs(get_val(PS4_RY)) > 23)combo_stop(ChampionAA39)combo_run(ChampionAA40)
+if(abs(get_val(PS4_RX)) > 22 || abs(get_val(PS4_RY)) > 22 || abs(get_val(SWI_LY)) > 15 || abs(get_val(SWI_LX)) > 15)combo_stop(ChampionAA40)combo_run(ChampionAA41)
+if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > A || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -A)combo_stop(ChampionAA41)if (get_val (ADS))combo_run(ChampionAA42)
+if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > A + 1 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -A + 1)combo_stop(ChampionAA42)if (get_val(ADS))combo_run(ChampionAA43)
+if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > A + 2 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -A + 2)combo_stop(ChampionAA43)if (get_val(ADS))combo_run(ChampionAA44)
+if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > A + 3 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -A + 3)combo_stop(ChampionAA44)combo_run(ChampionAA45)
+if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15)combo_stop(ChampionAA45)combo_run(ChampionAA46)
+if(abs(get_val(PS4_RX)) > 16 || abs(get_val(PS4_RY)) > 16)combo_stop(ChampionAA46)combo_run(ChampionAA47)
+if(abs(get_val(PS4_RX)) > 17 || abs(get_val(PS4_RY)) > 17)combo_stop(ChampionAA47)combo_run(ChampionAA48);
+if(abs(get_val(PS4_RX)) > 19 || abs(get_val(PS4_RY)) > 19) combo_stop(ChampionAA48); combo_run(ChampionAA49)
+if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_LY)) <= 15 || abs(get_val(PS4_LX)) <= 15)combo_stop(ChampionAA49)combo_run(ChampionAA50)
+if(abs(get_val(PS4_RX)) > 16 || abs(get_val(PS4_RY)) > 16 || abs(get_val(PS4_LX)) > 16 || abs(get_val(PS4_LY)) > 16)combo_stop(ChampionAA50)combo_run(ChampionAA51)
+if(abs(get_val(PS4_RX)) > 17 || abs(get_val(PS4_RY)) > 17 || abs(get_val(PS4_LX)) > 16 || abs(get_val(PS4_LY)) > 16)combo_stop(ChampionAA51) }}} 
+
+const int16  Array1 [] = { 100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,9,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100 };
+const int16  Array2 [] = { 100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,1,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-1,-7,-6,-4,-2,0,2,4,6,7,1,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100 };
+const int16  Array3 [] = { 23170,  23167,  23156,  23139,  23114,  23082,  23044,  22998,  22945,  22885,  22818,  22745,  22664,  22577,  22482,  22381,  22273,  22158,  22036,  21908,  21773,  21632,  21483,  21329,  21167,  21000,  20825,  20645,  20458,  20265,  20066,  19861,  19650,  19432,  19209,  18980,  18745,  18505,  18259,  18007,  17750,  17487,  17219,  16946,  16667,  16384,  16096,  15802,  15504,  15201,  14894,  14582,  14265,  13944,  13619,  13290,  12957,  12620,  12278,  11934,  11585,  11233,  10878,  10519,  10157,  9792,  9424,  9053,  8680,  8304,  7925,  7544,  7160,  6774,  6387,  5997,  5605,  5212,  4817,  4421,  4024,  3625,  3225,  2824,  2422,  2019,  1616,  1213,  809,  404,  00,  -404,  -809,  -1213,  -1616,  -2019,  -2422,  -2824,  -3225,  -3625,  -4024,  -4421,  -4817,  -5212,  -5605,  -5997,  -6387,  -6774,  -7160,  -7544,  -7925,  -8304,  -8680,  -9053,  -9424,  -9792,  -10157,  -10519,  -10878,  -11233,  -11585,  -11934,  -12278,  -12620,  -12957,  -13290,  -13619,  -13944,  -14265,  -14582,  -14894,  -15201,  -15504,  -15802,  -16096,  -16384,  -16667,  -16946,  -17219,  -17487,  -17750,  -18007,  -18259,  -18505,  -18745,  -18980,  -19209,  -19432,  -19650,  -19861,  -20066,  -20265,  -20458,  -20645,  -20825,  -21000,  -21167,  -21329,  -21483,  -21632,  -21773,  -21908,  -22036,  -22158,  -22273,  -22381,  -22482,  -22577,  -22664,  -22745,  -22818,  -22885,  -22945,  -22998,  -23044,  -23082,  -23114,  -23139,  -23156,  -23167,  -23170,  -23167,  -23156,  -23139,  -23114,  -23082,  -23044,  -22998,  -22945,  -22885,  -22818,  -22745,  -22664,  -22577,  -22482,  -22381,  -22273,  -22158,  -22036,  -21908,  -21773,  -21632,  -21483,  -21329,  -21167,  -21000,  -20825,  -20645,  -20458,  -20265,  -20066,  -19861,  -19650,  -19432,  -19209,  -18980,  -18745,  -18505,  -18259,  -18007,  -17750,  -17487,  -17219,  -16946,  -16667,  -16384,  -16096,  -15802,  -15504,  -15201,  -14894,  -14582,  -14265,  -13944,  -13619,  -13290,  -12957,  -12620,  -12278,  -11934,  -11585,  -11233,  -10878,  -10519,  -10157,  -9792,  -9424,  -9053,  -8680,  -8304,  -7925,  -7544,  -7160,  -6774,  -6387,  -5997,  -5605,  -5212,  -4817,  -4421,  -4024,  -3625,  -3225,  -2824,  -2422,  -2019,  -1616,  -1213,  -809,  -404,  00,  404,  809,  1213,  1616,  2019,  2422,  2824,  3225,  3625,  4024,  4421,  4817,  5212,  5605,  5997,  6387,  6774,  7160,  7544,  7925,  8304,  8680,  9053,  9424,  9792,  10157,  10519,  10878,  11233,  11585,  11934,  12278,  12620,  12957,  13290,  13619,  13944,  14265,  14582,  14894,  15201,  15504,  15802,  16096,  16384,  16667,  16946,  17219,  17487,  17750,  18007,  18259,  18505,  18745,  18980,  19209,  19432,  19650,  19861,  20066,  20265,  20458,  20645,  20825,  21000,  21167,  21329,  21483,  21632,  21773,  21908,  22036,  22158,  22273,  22381,  22482,  22577,  22664,  22745,  22818,  22885,  22945,  22998,  23044,  23082,  23114,  23139,  23156,  23167,  23170 };
+const uint16 Array4 [] = { 10, 20, 55, 80, 30, 65, 265, 90, 285, 290, 105, 15, 155, 85, 20, 35, 40, 70, 350, 160, 190, 280, 45, 30, 5, 35, 80, 165, 360, 165, 175, 85, 335, 1, 2, 3, 4, 5, 6, 7, 8, 1, 10, 11, 12, 13, 14, 15 };
+const int16  Array5 [] = { -23170, -22913, -22655, -22398, -22140, -21883, -21625, -21368, -21110, -20853, -20596, -20338, -20081, -19823, -19566, -19308, -19051, -18793, -18536, -18279, -18021, -17764, -17506, -17249, -16991, -16734, -16476, -16219, -15962, -15704, -15447, -15189, -14932, -14674, -14417, -14159, -13902, -13645, -13387, -13130, -12872, -12615, -12357, -12100, -11842, -11585, -11328, -11070, -10813, -10555, -10298, -10040, -9783, -9525, -9268, -9011, -8753, -8496, -8238, -7981, -7723, -7466, -7208, -6951, -6694, -6436, -6179, -5921, -5664, -5406, -5149, -4891, -4634, -4377, -4119, -3862, -3604, -3347, -3089, -2832, -2574, -2317, -2060, -1802, -1545, -1287, -1030, -772, -515, 257, 257, 515, 772, 1030, 1287, 1545, 1802, 2060, 2317, 2574, 2832, 3089, 3347, 3604, 3862, 4119, 4377, 4634, 4891, 5149, 5406, 5664, 5921, 6179, 6436, 6694, 6951, 7208, 7466, 7723, 7981, 8238, 8496, 8753, 9011, 9268, 9525, 9783, 10040, 10298, 10555, 10813, 11070, 11328, 11585, 11842, 12100, 12357, 12615, 12872, 13130, 13387, 13645, 13902, 14159, 14417, 14674, 14932, 15189, 15447, 15704, 15962, 16219, 16476, 16734, 16991, 17249, 17506, 17764, 18021, 18279, 18536, 18793, 19051, 19308, 19566, 19823, 20081, 20338, 20596, 20853, 21110, 21368, 21625, 21883, 22140, 22398, 22655, 22913, 23170, 23170, 22913, 22655, 22398, 22140, 21883, 21625, 21368, 21110, 20853, 20596, 20338, 20081, 19823, 19566, 19308, 19051, 18793, 18536, 18279, 18021, 17764, 17506, 17249, 16991, 16734, 16476, 16219, 15962, 15704, 15447, 15189, 14932, 14674, 14417, 14159, 13902, 13645, 13387, 13130, 12872, 12615, 12357, 12100, 11842, 11585, 11328, 11070, 10813, 10555, 10298, 10040, 9783, 9525, 9268, 9011, 8753, 8496, 8238, 7981, 7723, 7466, 7208, 6951, 6694, 6436, 6179, 5921, 5664, 5406, 5149, 4891, 4634, 4377, 4119, 3862, 3604, 3347, 3089, 2832, 2574, 2317, 2060, 1802, 1545, 1287, 1030, 772, 515, 257, -257, -515, -772, -1030, -1287, -1545, -1802, -2060, -2317, -2574, -2832, -3089, -3347, -3604, -3862, -4119, -4377, -4634, -4891, -5149, -5406, -5664, -5921, -6179, -6436, -6694, -6951, -7208, -7466, -7723, -7981, -8238, -8496, -8753, -9011, -9268, -9525, -9783, -10040, -10298, -10555, -10813, -11070, -11328, -11585, -11842, -12100, -12357, -12615, -12872, -13130, -13387, -13645, -13902, -14159, -14417, -14674, -14932, -15189, -15447, -15704, -15962, -16219, -16476, -16734, -16991, -17249, -17506, -17764, -18021, -18279, -18536, -18793, -19051, -19308, -19566, -19823, -20081, -20338, -20596, -20853, -21110, -21368, -21625, -21883, -22140, -22398, -22655, -22913, -23170};
+const int16  Array6 [] = { 100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100 }; ���������������� ����������������
