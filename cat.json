@@ -149,6 +149,11 @@
       "name": "YewifySecret - Yewscripts",
       "filename": "YewifySecret.gpc",
       "category": "Fortnite"
+    },
+    {
+      "name": "YewWorks Master3 Exponential - Yewscripts",
+      "filename": "YewWorks_master_exponential.gpc",
+      "category": "Fortnite"
     }
   ]
 }
