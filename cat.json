@@ -54,6 +54,11 @@
       "name": "Evilbot (Playstation)",
       "filename": "EvilBot_playstation.gpc",
       "category": "Call of Duty"
+    },
+    {
+      "name": "Grave hunter \"Hunter Edition\"",
+      "filename": "GRAVE_HUNTER_HUNTER_EDITION.gpc",
+      "category": "Call of Duty"
     }
   ]
 }
