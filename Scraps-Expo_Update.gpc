@@ -1,0 +1,112 @@
+//Adjustable-Values & Mods |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+int   	Main_AAbooster    	= True;
+int   	Track_AA          	= True;
+int   	AimBoost          	= True;
+int   	InstaEditReset    	= True;
+int     Assist_Fire_Exploit = True;
+int 	Fire_Assist_Strength= 135;	/*FIRE ASSIST STRENGTH*/
+int   	PickUpMacro			= False;/* Set To True If Wanted To Win Every 50/50 - To "Macro Pickup" Hold your Pickup Button you can change below under The Section Triggers and Buttons*/
+int   	EditHold     	  	= False;/* [True / False] SET On WHEN USING EDIT HOLD TIME TO EDIT ( MATCH TO IN GAME SETUP ) [False = INSTANT PRESS]*/
+int     headshot            = True; /*Head Shot Assist Toggle*/
+int   	Drop_Shot		    = False;/* [TRUE / FALSE] Turn To True if You Want to Crouch When You Shoot.*/
+int   	Assist_Strength1 	=  7;	/* Change to liked values. - I Recomend To Change to +DeadZone.*/
+int   	Assist_Strength2 	= -9;	/* Change to liked values. - I Recomend To Change to -DeadZone.*/
+int  	Anti_Recoil       	= 22;	/* Change Anywhere from 16-27*/
+int   	EditHoldTime      	=  -9;	/* Recomended to Leave Alone*/
+int 	HeadStep            = 4;	// [1 - 20] = Step Increment Increasing Until Its Reached HeadMax   
+int 	HeadMax             = 20;	// [1 - 70] = Max Head Assist Value
+
+//Triggers & Buttons |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+define Ads 	   		= XB1_LT;//if for XB1 you put XB1_LT
+define Fire	   		= XB1_RT;//if for XB1 you put XB1_RT
+define Pickaxe 		= XB1_Y;//you put Pickaxe Button
+define Edit    		= XB1_B; //you put Edit Button
+define Select  		= XB1_RT;//Change to Select Button
+define Reset   		= XB1_RS;//Change to Reset Button
+define Confirm 		= XB1_RS;//Change to Confirm Button
+define pickup  		= XB1_X; //Change to PickUp Button
+define Crouch  		= XB1_RS;//Change to Crouch Button
+define FastReset  	= XB1_RS;//Change to Reset Button
+
+
+
+
+
+
+
+
+
+int Edit1,Edit2,Delay =1,AA1 = 9,AA4 = 9,AA5 = 9,Head,RadiusExploit,AngleExploit,ExploAngle,Recoil_Control,Wait_Linear= 7,Strength_Linear= 5,ExploitAngleBoost= 8,ExploitRadiusBoost= 8,ExploSin,ExploCos;int inc=1,dec,color[3];
+main {if (InstaEditReset)vm_tctrl(-4);if (EditHold) {if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) {Edit1 = True;Edit2 = True;}}
+else if (event_press(Edit)) {Edit1 = True;Edit2 = True;}if (Edit2) {if (event_release(Select)) {  Edit1 = False;Edit2 = False;}}
+if (Edit1 || Edit2) 
+if (event_press(Reset)) {  combo_run(InstantReset)Edit1 = False;Edit2 = False;}
+if(Main_AAbooster)
+combo_run(AA1)if(abs(get_val(XB1_RX)) > 18 || abs(get_val(XB1_RY)) > 18)combo_stop(AA1)
+if(Track_AA)
+combo_run(Major_AA4)if(abs(get_val(RX)) > 17 || abs(get_val(RY)) > 14)combo_stop(Major_AA4)
+combo_run(Major_AA5)if(abs(get_val(RX)) > 18 || abs(get_val(RY)) > 15)combo_stop(Major_AA5)
+combo_run(Major_AA6)if(abs(get_val(RX)) > 19 || abs(get_val(RY)) > 16)combo_stop(Major_AA6)
+Anti_Recoil()
+combo_run(Hair_Trigger)
+if(abs(get_val(XB1_LT)) > 100 || abs(get_val(XB1_RT)) > 100)combo_stop(Hair_Trigger)
+{combo_run(BloomReducer);}
+if(abs(get_val(LX)) > 40||abs(get_val(LY)) > 40){ combo_stop(BloomReducer); 
+if (AimBoost && get_ival(Fire)) {RadiusExploit = Strength_Linear + ExploitRadiusBoost;AngleExploit = ExploitAngleBoost;} else {RadiusExploit = Strength_Linear;AngleExploit = 0;}ExploAngle += Wait_Linear + AngleExploit;ExploAngle = ExploAngle % 360;
+ExploSin = ExploitPolar[ExploAngle % 360];
+ExploCos = ExploitPolar[(ExploAngle + 270) % 360];
+ExploCos = (ExploCos * RadiusExploit) / 100; ExploSin = (ExploSin * RadiusExploit) / 100;
+if (PickUpMacro && get_val(pickup)) combo_run(PickupSpam);}
+if (headshot) {
+if (get_ival(Ads) && get_ival(Fire) || headshot && get_ival(Fire)) {
+if (abs(get_ival(XB1_RY)) < HeadMax) {Head += HeadStep;combo_run(HeadAssist);}}
+if (!get_ival(Fire)) Head = 0;
+if (Head >= HeadMax) combo_stop(HeadAssist)}
+if (Drop_Shot && get_ival(Ads)&& get_ival(Fire)) {combo_run(DropShot);}   else {combo_stop(DropShot);}
+combo_run(RGB)
+if (Assist_Fire_Exploit) {
+if (get_ival(Ads) && get_val(Fire)) {
+if (abs(get_ival(PS4_LX)) <= 40 && abs(get_ival(PS4_LY)) <= 35) {combo_run(Assist_Fire_Exploit);} else {combo_stop(Assist_Fire_Exploit);}
+}
+}
+}
+
+
+
+combo InstantReset {wait(20)combo_run(Confirm);}
+combo Confirm {set_val(Confirm,100);wait(50);set_val(Confirm,0);wait(100);}
+combo Major_AA4 {set_val(XB1_RX,AA4)wait(Delay)set_val(XB1_RY,AA4)set_val(XB1_RX,-AA4)wait(Delay)set_val(XB1_RY,-AA4)}
+combo Major_AA5 {set_val(XB1_RX,AA5)wait(Delay)set_val(XB1_RY,AA5) wait(Delay)set_val(XB1_RX,-AA5)wait(Delay)set_val(XB1_RY,-AA5)}
+combo Major_AA6 {set_val(XB1_RX,Assist_Strength1)wait(Delay)set_val(XB1_RY,Assist_Strength1)set_val(XB1_RX,-Assist_Strength2)wait(Delay)set_val(XB1_RY,-Assist_Strength2)wait(Delay)}
+combo AA1 {set_val(XB1_RX,AA1)wait(Delay)set_val(XB1_RY,AA1) set_val(XB1_RX,-AA1)wait(Delay)set_val(XB1_RY,-AA1)}
+combo Anti_Recoil{Recoil_Control=get_ival(XB1_RY)+Anti_Recoil;if(Recoil_Control >  100 + 100 - 100 )Anti_Recoil = 100 - 100 + 100;set_val(XB1_RY,Anti_Recoil)}
+function Anti_Recoil(){if(get_val(Ads) && get_val(Fire))combo_run(Anti_Recoil)if(abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) > Anti_Recoil - 100 + 100)combo_stop(Anti_Recoil)return;}
+combo Hair_Trigger{if(get_ival(Ads) > 1)set_val(Ads, 100);if(get_ival(Fire) > 1)set_val(Fire, 100);}
+combo BloomReducer{set_val(LX,-3); wait(50); set_val(LY,-3); wait(30);set_val(LX,+2);wait(50);set_val(LY,+1); wait(30);}
+combo PickupSpam {set_val(pickup, 100);wait(5);set_val(pickup, 0); }
+combo HeadAssist {set_val(RY,inv(Head) + get_val(RY));}
+combo DropShot {set_val(Crouch,100);wait(50);set_val(Crouch,0);wait(30);wait(DropShotWait);}int DropShotWait = 90;
+combo Assist_Fire_Exploit {set_val(XB1_LX,-100);wait(Fire_Assist_Strength);set_val(XB1_LX,100);wait(Fire_Assist_Strength);}
+
+function center_x(f_chars,f_font) {return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2);}
+combo RGB { wait(1);set_rgb(color, color[1], color[2]);color[dec] -= 1; color[inc] += 1;if(!color[dec]) { inc = (inc + 1) % 3; dec = (dec + 1) % 3; }}
+const string TextLineName []  = {"Scrap-QQ",""};const string TextLine1 []  = {"Aim_Improver",""};const string TextLine2 [] = {"Great,""};const string TextLine3 [] = {"Script",""};const string TextLine4 [] = {"Fortnite",""};
+init { color = 255;cls_oled(1);print(center_x(18, OLED_FONT_SMALL_WIDTH),5,OLED_FONT_SMALL,OLED_BLACK,TextLineName[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),15,OLED_FONT_SMALL,OLED_BLACK,TextLine1[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),25,OLED_FONT_SMALL,OLED_BLACK,TextLine2[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_BLACK,TextLine3[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),45,OLED_FONT_SMALL,OLED_BLACK,TextLine4[0]);}
+const int8 ExploitPolar[]={100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,
+80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9
+,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,
+-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,
+-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,
+-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,
+-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,
+-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,
+75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100};data(
+1,0,0,0,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,0,1,1,1,0,0,1,0,0,0,0,0,0 );
+define True=TRUE,False=FALSE,On=TRUE,Off=FALSE;define RX = XB1_RX;define RY = XB1_RY; define LX = XB1_LX;define LY = XB1_LY;define PY = POLAR_RY;define PX = POLAR_RX;define PS = POLAR_RS;
+
+
+
+
+
+
+ ˙πã≥Å≥Ä∞áøåæà∞Å¿
