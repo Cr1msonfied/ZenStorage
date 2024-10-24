@@ -1,0 +1,308 @@
+//Deadzone
+define Deadzone    = 11;// Change to 
+define DZ = 11;		// Change to
+//Controller layout
+
+define Ads 	   = XB1_LT;//if for PS4 you put PS4_L2
+define Fire	   = XB1_RT;//if for PS4 you put PS4_R2
+define Edit    = XB1_B; //you put Edit Button
+define Build   = XB1_B; // Your Build Button
+define Select  = XB1_RT;//Change to Select Button
+define Reset   = XB1_RS;//Change to Reset Button
+define Confirm = XB1_RS;//Change to Confirm Button
+define pickup  = XB1_X; //Change to PickUp Button
+define Pickaxe  = PS4_TRIANGLE;
+define Crouch  = XB1_RS;//Change to Crouch Button
+define EditHoldTime = 10;// Time If Using Hold to Edit In game [Setting To Be Matched To In Game Time]
+//Aim Assist(Toggles and values)
+int InstaEditReset = True;	int EditHold = False;
+int BloomReducer   = True;	int AimAssist = True;
+int YewifySpecialPolar = True;	int Block_Rumble =True;
+int Crescens_Polar = True;	int Track_AA = True;
+int ToggleStickyAim = True;	int AdaptiAAHip = True;
+int AdaptiveAbuse = False;	int Prime_AimBotToogle=True;
+int	EditTracker	= True;		int Prime_enemy_tracker2  = True;//enemy tracking v2
+//Anti-Recoil
+int   Anti_Recoil    = 28; // Really No Need To Change But I Recomend Anywhere From 18 - 25
+//Values
+define DEADZONE = 32767 / DZ;
+int FirePower           = 15;// Real Polar or DAM Polar Before Or After DeadZone or Fire
+int FireSpeed           = 20;// Real Polar or DAM Polar Before Or After DeadZone On Fire
+int BasePower           = 12;// Real Polar (Zen) Under DeadZone on ADS
+int BaseSpeed           = 12;// Real Polar (Zen) Under DeadZone on ADS
+int ZonePower           = 20;// DAM Polar After DeadZone
+int ZoneSpeed           = 10;// DAM Polar After DeadZone On ADS
+int AimBot22_AARY       = 12;
+int AimBot22_AARX       = 12;
+int AimBot22_AAWait     = 20;
+int mn = 130; 
+int mx = 130;
+int L1 = +3;
+int L2 = -3;
+int L3 = +3;
+int YSPRange = 12;
+int YSPSpeed = 10;
+int Const_Radius = 20;//NO CHANGE 
+int Const_Speed  = 240;//NO CHANGE
+define POLAR_MAX = 32767;
+define POLAR_MIN = -32767;
+
+int PXS = 3150 * DEADZONE / POLAR_MAX;
+int PXSE = 200 * DEADZONE / POLAR_MAX;
+int PVSI = 200 * DEADZONE / POLAR_MAX;
+int PVS = 0;
+int PYS = -200 * DEADZONE / POLAR_MAX;
+int PYSE = 200 * DEADZONE / POLAR_MAX;
+int PrimeAApower        = 12;
+int enemy_tracker2_power= 12;
+int enemy_tracker2_wait = 10;
+int AimStrengthLinearRS = 12;
+int Assist_Strength1  =  12;	//Change to liked values. - I Recomend To Change to +DeadZone.
+int Assist_Strength2  = -12;	//Change to liked values. - I Recomend To Change to -DeadZone.
+int AdaptiveWait        = 15;// WAIT ABUSES
+int AA4 = 11,AA5 = 12:
+int Val3 = 12;int Val4 = 11;
+int StickAssistLinearV1_RS = 12;
+int	 AimAssistOpSize = 5;
+int	 AimAssistSize =13;
+int	 AimAssistOpTime =8;
+int	 AimAssistTime = 5;
+int	 HIPBoost = 5;
+int   Delay = 1;// No Need To Change
+int LEGACYZAA_DZ = +12,DELAY = +1;int DZ_LEGACYZ_MOVEMENT = 12;
+int valueX               = 12; // make your deadzome
+int delayA = 0;
+init{
+PS4SwapFix();
+}
+main{
+Anti_Recoil();
+stick_input = (isqrt(pow(get_ival(PS4_RX), 2) + pow(get_ival(PS4_RY), 2)));
+if(Crescens_Polar){
+Radius	= Const_Radius;  
+Speed	= Const_Speed;
+if(stick_input <= Radius){
+rnd = random(mn, mx);
+RS_Gradient = (RS_Gradient + Speed) % 360;
+set_polar(POLAR_RS, RS_Gradient, (Radius * rnd));}
+}
+  if(AimAssist){
+   if(get_val(Ads)){
+      combo_run(AssX); 
+      }if((get_val(RX)) > valueX || (get_val(RX)) < valueX*(-1)){
+          combo_stop(AssX);
+          }
+      \}
+if (get_ival(Ads) || (Prime_AimBotToogle && get_ival(Fire))) {combo_run(AimBot22);} else {combo_stop(AimBot22); }
+if (InstaEditReset)vm_tctrl(-0);if (EditHold) {if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) {Edit1 = True;Edit2 = True;}
+}
+else if (event_press(Edit)) {Edit1 = True;Edit2 = True;}if (Edit2) {if (event_release(Select)) {  Edit1 = False;Edit2 = False;}
+}
+if (Edit1 || Edit2) 
+if (event_press(Reset)) {  combo_run(InstantReset)Edit1 = False;Edit2 = False;}
+if(BloomReducer) 
+if (get_val(LX) && (get_val(LY)))
+{combo_run(BloomReducer);}
+LeftStick  = (isqrt(pow(get_ival(PS4_LX), 2) + pow(get_ival(PS4_LY), 2)))
+    if ((RY) > 200) { 
+combo_run (Orbit_SlowAAV3); 
+combo_run (Orbit_SlowAAV4); 
+}
+if (get_val (RY) < 200){ 
+combo_run (Orbit_SlowAAV5); 
+combo_run (Orbit_SlowAAV6); 
+}
+if ((AimAssist) || event_release (Ads) || event_release (Fire)) {  
+combo_run (Orbit_SlowAAV7); 
+combo_run (Orbit_SlowAAV8); 
+}
+if (get_val (Fire)) {
+if (LeftStick <= L2) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L2 * 360)); }
+}
+if (get_val (Ads) && get_val (Fire)) {
+if (LeftStick <= L3) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L3 * 360)); }
+}
+if (event_release (Ads) || (Fire)) {
+if (LeftStick <= L1) { LeftAxis = (LeftAxis + 30) % 360; set_polar(POLAR_LS, LeftAxis, (L1 * 360)); }
+}
+if(abs(get_val(LX)) > 12||abs(get_val(LY)) > 12){ combo_stop(BloomReducer); }
+combo_run(Hair_Trigger)
+if(abs(get_val(XB1_RT)) > 100 || abs(get_val(XB1_LT)) > 100)combo_stop(Hair_Trigger)
+ZeroDelay();
+combo_run(RGB);
+if(YewifySpecialPolar) {if(get_ival(PS4_L2) || (get_ival(PS4_R2))) {if (stick_input <= YSPRange) {rnd = random(mn, mx);RS_Gradient = (RS_Gradient + YSPSpeed) % 360;set_polar(POLAR_RS, RS_Gradient, (YSPRange * rnd));}}}
+if (Block_Rumble) block_rumble();
+if(isqrt(abs(get_val(RY)) * abs(get_ival(RY))) >= Deadzone  + 5) 
+{
+if(get_ival(Ads) > 90)
+{combo_run(AimAssistTwo);} 
+}
+if (AdaptiveAbuse) {
+if ((get_ival(Ads) >= 90) || (get_ival(Fire) && AdaptiAAHip)) {AdaptAbuse =  AdaptiveHold * 5 - isqrt((abs(get_ival(PS4_RX))) * (abs(get_ival(PS4_RX))) + (abs(get_ival(PS4_RY))) * (abs(get_ival(PS4_RY))) * 5);combo_run(AdaptiveAbuse);}else {combo_stop(AdaptiveAbuse);}}
+if(Track_AA)
+combo_run(AA2) if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Deadzone + 2 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -Deadzone + 2)combo_stop(AA2)
+combo_run(AA3)if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Deadzone + 3*1 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -Deadzone - 3*1)combo_stop(AA3)
+combo_run(Major_AA4)if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15)combo_stop(Major_AA4)
+combo_run(Major_AA5)if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15)combo_stop(Major_AA5)
+combo_run(Major_AA6)if(abs(get_val(PS4_RX)) > 13 || abs(get_val(PS4_RY)) > 13)combo_stop(Major_AA6)
+if(ToggleStickyAim){
+if( get_ival(Ads) && get_ival(Fire) || get_ival(Ads))
+combo_run(StickyAim);
+else if (get_ival(Fire ))
+combo_run(HipBoost);}
+if(StickAssistLinearV1_RS)
+{if(isqrt(abs(get_ival(RX)) * abs(get_ival(RX))) >= Deadzone  + 5) {
+if(get_ival(Ads) > 90)
+{combo_run(AimAssistOne);}}
+}
+if (Prime_AimBotToogle){combo_run(AimBot12)combo_run(AimBot13)}
+if (Prime_AimBotToogle) {
+if ((get_ival(Ads) || get_ival(Fire)) && abs(get_ival(RX)) <= Deadzone && abs(get_ival(RY)) <= Deadzone) {Speed += Angle;
+if (Speed >= 360) Speed = 0;
+if (get_ival(Fire)) {Radius = FirePower;Angle  = FireSpeed;}else {Radius = BasePower;Angle  = BaseSpeed;}set_polar(POLAR_RS,Speed,(abs(get_ival(POLAR_RX)) + abs(get_ival(POLAR_RY))) / 3 + Radius * 327);}
+if ((get_ival(Ads) || get_ival(Fire)) && (abs(get_ival(RX)) > Deadzone || abs(get_ival(RY)) > Deadzone)) {actual_X = get_ival(RX);actual_Y = get_ival(RY);actual_Magnitude = isqrt(pow(actual_X,2) + pow(actual_Y,2));max_Magnitude = (actual_Magnitude < 100);
+if (get_ival(Fire)) {Radius = FirePower;Angle  = FireSpeed;}else {Radius = ZonePower;Angle  = ZoneSpeed;}angle += Angle;angle = angle % 360;sin_angle = ExploitPolar[angle % 360];cos_angle = ExploitPolar[(angle + 270) % 360];cos_angle = (cos_angle * Radius) / 100;sin_angle = (sin_angle * Radius) / 100;
+if (actual_Magnitude <= 20) { sin_angle -= actual_Y; cos_angle -= actual_X; }else { sin_angle = (sin_angle * (200 - ((abs(actual_Y) + actual_Magnitude) / 10) * 10) / 200) * max_Magnitude; cos_angle = (cos_angle * (200 - ((abs(actual_X) + actual_Magnitude) / 10) * 10) / 200) * max_Magnitude; } Set_Val(RX,cos_angle);Set_Val(RY,sin_angle); }}stick_input = (isqrt(pow(get_ival(PS4_RX), 2) + pow(get_ival(PS4_RY), 2)));
+if (EditTracker) {
+        
+        if (event_press(Edit)) {
+            EditCount = On;
+            // Edit Mods like Edit Assist Here
+        }
+    
+        if (EditCount) {
+            EditTrack += get_rtime();
+            
+            if (event_press(Select) || EditTrack == On) {
+                EditCount = Off;
+                EditTrack = Off;
+            }
+            
+            if (event_press(Reset)) {
+            combo_run(ResetCombo); // Insta Reset Here
+            }
+            
+            if (get_ival(Confirm) || get_ival(Build) || get_ival(Pickaxe)) { // Binds that take you out of Edit mode in fortnite
+                EditCount = Off;
+                EditTrack = Off;
+            }
+        }
+    }
+    if (get_ival(Ads) || (Prime_enemy_tracker2 && get_ival(Fire))) {combo_run(AimBot16);} else {combo_stop(AimBot16); }stick_input = (isqrt(pow(get_ival(PS4_RX), 2) + pow(get_ival(PS4_RY), 2)));
+     if (get_val(PS4_L2) > 80) {
+        if (abs(RX) < Deadzone && abs(RY) < Deadzone) {
+            PPFX = PolarFlow(PPFX, PXS, PXSE, PVSI, PFD, 1);
+            PPFX = map_to_polar_range(PPFX);
+            set_polar(POLAR_RS, (get_polar(POLAR_RS, 0) + PPFX) % 360, (POLAR_MAX * PPFD) + get_polar(POLAR_RS, 1));
+
+            PPFY = PolarFlow(PPFY, PYS, PYSE, PVS, PPFD, 2);
+            PPFY = map_to_polar_range(PPFY);
+            set_polar(POLAR_RS, (get_polar(POLAR_RS, 0) + PPFY) % 360, (POLAR_MAX * PPFD) + get_polar(POLAR_RS, 1));
+        }
+}
+combo_run(DZAA)if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15)combo_stop(DZAA)
+combo_run(DZAA2)if(abs(get_val(PS4_RX)) > 16 || abs(get_val(PS4_RY)) > 16)combo_stop(DZAA2)
+combo_run(DZAA3)if(abs(get_val(PS4_RX)) > 17 || abs(get_val(PS4_RY)) > 17)combo_stop(DZAA3)
+    }
+
+combo Orbit_SlowAAV3 {set_val (RY, get_ival (RY) - 3);wait(1);set_val (RY, get_ival (RY) + 3);wait(1);}
+combo Orbit_SlowAAV4 {set_val (RX, get_ival (RX) - 4);wait(1);set_val (RX, get_ival (RX) + 4);wait(1);}
+combo Orbit_SlowAAV5 {set_val (RY, get_ival (RY) - 4);wait(1);set_val (RY, get_ival (RY) + 4);wait(1);}
+combo Orbit_SlowAAV6 {set_val (RX, get_ival (RX) - 6);wait(1);set_val (RX, get_ival (RX) + 6);wait(1);}
+combo Orbit_SlowAAV7 {set_val (RY, get_ival (RY) - 6);wait(1);set_val (RY, get_ival (RY) + 6);wait(1);}
+combo Orbit_SlowAAV8 {set_val (RX, get_ival (RX) + 7);wait(1);set_val (RX, get_ival (RX) - 7);wait(1);}
+combo DZAA {set_val(PS4_RX,LEGACYZAA_DZ)wait(DELAY)set_val(PS4_RY,LEGACYZAA_DZ) set_val(PS4_RX,-LEGACYZAA_DZ)wait(DELAY)set_val(PS4_RY,-LEGACYZAA_DZ) Dz()}
+combo DZAA3 {set_val(PS4_RX,LEGACYZAA_DZ)wait(DELAY)set_val(PS4_RY,LEGACYZAA_DZ) set_val(PS4_RX,-LEGACYZAA_DZ) set_val(PS4_RY,-LEGACYZAA_DZ) Dz()}
+function Dz (){if(PS4_RX + PS4_RY - PS4_LY + PS4_LX > 0)DZ_LEGACYZ_MOVEMENT = -8if(PS4_RX + PS4_RY - PS4_LY + PS4_LX > -0)DZ_LEGACYZ_MOVEMENT = +8 return;}
+function AxisRelease(AxisXY,AxisVal) {if (abs(get_ival(AxisXY)) <= PrimeAApower) return AxisVal;return get_ival(AxisXY); }
+combo AimBot12 {set_val(RY,get_ival(RY) + inv(2));set_val(RX,get_ival(RX) + 2);set_val(RY,get_ival(RY) + 2);set_val(RX,get_ival(RX) + inv(2));}
+combo AimBot13 {set_val(LY,get_ival(LY) + inv(2));set_val(LX,get_ival(LX) + 2);set_val(LY,get_ival(LY) + 2);set_val(LX,get_ival(LX) + inv(2));}
+combo AimBot16 {set_val(aimY,AxisRelease(aimY,enemy_tracker2_power));wait(enemy_tracker2_wait);set_val(aimX,AxisRelease(aimX,enemy_tracker2_power));set_val(STRAFE,AxisRelease(STRAFE,enemy_tracker2_power));wait(enemy_tracker2_wait);set_val(aimY,AxisRelease(aimY,inv(enemy_tracker2_power)));wait(enemy_tracker2_wait);set_val(aimX,AxisRelease(aimX,inv(enemy_tracker2_power)));set_val(STRAFE,AxisRelease(STRAFE,inv(enemy_tracker2_power)));wait(enemy_tracker2_wait);}
+combo AimBot22 {set_Val(aimY,inv(AimBot22_AARY));wait(AimBot22_AAWait);set_Val(aimX,AimBot22_AARX);wait(AimBot22_AAWait);set_Val(aimY,AimBot22_AARY);wait(AimBot22_AAWait);set_Val(aimX,inv(AimBot22_AARX));wait(AimBot22_AAWait);}
+combo Confirm {set_val(Confirm,100);wait(50);set_val(Confirm,0);wait(100);}
+combo InstantReset {wait(20)combo_run(Confirm);}
+combo BloomReducer{ set_val(XB1_LX,-2); wait(50); set_val(XB1_LY,-2); wait(30);set_val(XB1_LX,+1); wait(50);set_val(XB1_LY,+2); wait(30);}
+combo Hair_Trigger{if(get_ival(Ads) > 1)set_val(Ads, 100);if(get_ival(Fire) > 1)set_val(Fire, 100);}
+combo RGB { wait(1);set_rgb(color, color[1], color[2]);color[dec] -= 1; color[inc] += 1;if(!color[dec]) { inc = (inc + 1) % 3; dec = (dec + 1) % 3; }}
+combo AimAssistTwo {offset(XB1_RY,Deadzone  + AimStrengthLinearRS);wait(10);offset(XB1_RY,(Deadzone  + AimStrengthLinearRS) * -1);wait(10);}
+function offset(int axis, int offset_val) {set_val(axis, clamp(offset_val * (100 - abs(get_val(axis))) / 100 + get_val(axis), -100, 100));return}
+function center_x(f_chars,f_font) {return (OLED_WIDTH / 2) - ((f_chars * f_font) / 5);}
+combo Major_AA4 {set_val(PS4_RX,AA4)wait(Delay)set_val(PS4_RY,AA4)set_val(PS4_RX,-AA4)wait(Delay)set_val(PS4_RY,-AA4)}
+combo Major_AA5 {set_val(PS4_RX,AA5)wait(Delay)set_val(PS4_RY,AA5) wait(Delay)set_val(PS4_RX,-AA5)wait(Delay)set_val(PS4_RY,-AA5)}
+combo AA2 {set_val(PS4_RX,Val3)wait(Delay)set_val(PS4_RY,Val3)wait(Delay)set_val(PS4_RX,-Val3)wait(Delay)set_val(PS4_RY,-Val3)wait(Delay)}
+combo AA3 {set_val(PS4_RX,Val4)wait(Delay)set_val(PS4_RY,Val4)wait(Delay)set_val(PS4_RX,-Val4)wait(Delay)set_val(PS4_RY,-Val4)wait(Delay)}
+combo DZAA2 {set_val(PS4_RX,LEGACYZAA_DZ) set_val(PS4_RY,LEGACYZAA_DZ) set_val(PS4_RX,-LEGACYZAA_DZ)wait(DELAY)set_val(PS4_RY,-LEGACYZAA_DZ) Dz()}
+combo HipBoost {SOFTAIM(PS4_RX,AimAssistOpSize + HIPBoost)wait(AimAssistOpTime)SOFTAIM(PS4_RX,-AimAssistOpSize - HIPBoost)wait(AimAssistOpTime)SOFTAIM(PS4_RY,AimAssistOpSize + HIPBoost + 1)wait(AimAssistOpTime)SOFTAIM(PS4_RY,-AimAssistOpSize - HIPBoost - 1)wait(AimAssistOpTime)SOFTAIM(PS4_RY,AimAssistOpSize + HIPBoost + 1)wait(AimAssistOpTime)SOFTAIM(PS4_RX,-AimAssistOpSize - HIPBoost)wait(AimAssistOpTime)SOFTAIM(PS4_RX,AimAssistOpSize + HIPBoost)wait(AimAssistOpTime)SOFTAIM(PS4_RY,-AimAssistOpSize - HIPBoost - 1)wait(AimAssistOpTime)}
+combo StickyAim {offset_sticky_aa(PS4_LX,AimAssistSize * 10);wait(AimAssistTime  * 10);offset_sticky_aa(PS4_LX,inv(AimAssistSize * 10));wait(AimAssistTime  * 10);}
+combo AimAssistOne {offset(XB1_RX,Deadzone  + AimStrengthLinearRS);wait(10);offset(XB1_RX,(Deadzone  + AimStrengthLinearRS) * -1);wait(10);}  
+function offset_sticky_aa(Stick,Value) {set_val(Stick, clamp(Value * (100 - abs(get_ival(Stick))) / 100 + get_ival(Stick), -100, 100));return;}
+combo AdaptiveAbuse {set_val(Ads,100);wait(AdaptAbuse);set_val(Ads,0);wait(AdaptiveWait);}
+combo Major_AA6 {set_val(PS4_RX,Assist_Strength1)wait(Delay)set_val(PS4_RY,Assist_Strength1)set_val(PS4_RX,-Assist_Strength2)wait(Delay) set_val(PS4_RY,-Assist_Strength2)wait(Delay)}
+function Set_Val(Input,Output) {set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,100));return; }
+function PS4SwapFix() {if(get_console() == PIO_PS4){if(get_controller() != PIO_PS4) {if(get_ival(PS4_SHARE)){if(get_ival(PS4_R3)){set_val(PS4_SHARE, 100);set_val(PS4_TOUCH, 0);set_val(PS4_R3, 0);}else{set_val(PS4_TOUCH, 100);set_val(PS4_SHARE, 0);}}}}else if(get_console() == PIO_XB360){if(get_controller() == PIO_PS4){swap(PS4_TOUCH, PS4_SHARE);}}}
+combo ResetCombo {set_val(Reset, 100);wait(10);set_val(Reset, 0);wait(10);set_val(Confirm, 100);wait(10);set_val(Confirm, 0);}
+combo AssX { set_val(RX, valueX);wait(delayA);wait(4);set_val(RX, valueX*(-1));wait(delayA);} 
+function PolarFlow(int PFB, int PSV, int PFV, int PV, int PF, int PID) {if (PF) {PFB += PV;if (PFB <= PFV) {return PFB;}if (PFB > PFV) {return PFB - PV;}}else {PFB -= PV;if (PFB >= PSV) {return PFB;}if (PFB < PSV) {PVID[PID] = 1;return PFB + PV;}}return 0;}
+function map_to_polar_range(int input_value) {mapped_value = ((input_value - POLAR_MIN) * 359) / (POLAR_MAX - POLAR_MIN);mapped_value = (mapped_value + 360) % 360; return mapped_value;}
+function set_Val(Input,Output) {set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,100));return; }
+function Anti_Recoil(){if(get_val(Ads) && get_val(Fire))combo_run(Anti_Recoil)if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Anti_Recoil - 100 + 100)combo_stop(Anti_Recoil)return;}
+combo Anti_Recoil{Recoil_Control=get_ival(PS4_RY)+Anti_Recoil;if(Recoil_Control >  100 + 100 - 100 )Anti_Recoil = 100 - 100 + 100;set_val(PS4_RY,Anti_Recoil)}
+function SOFTAIM( axis,  offset_val) {set_val(axis, clamp(offset_val * (100 - abs(get_val(axis))) / 100 + get_val(axis), -100, 100));return;} 
+
+
+
+function ZeroDelay() {
+if(get_ival(PS4_UP)){set_val(PS4_UP, 100)}//DPAD
+if(get_ival(PS4_DOWN)){set_val(PS4_DOWN, 100)}//DPAD
+if(get_ival(PS4_LEFT)){set_val(PS4_LEFT, 100)}//DPAD
+if(get_ival(PS4_RIGHT)){set_val(PS4_RIGHT, 100)}//DPAD
+if(get_ival(PS4_SQUARE)){set_val(PS4_SQUARE, 100)}//BUTTONS
+if(get_ival(PS4_TRIANGLE)){set_val(PS4_TRIANGLE, 100)}//BUTTONS
+if(get_ival(PS4_CIRCLE)){set_val(PS4_CIRCLE, 100)}//BUTTONS
+if(get_ival(PS4_CROSS)){set_val(PS4_CROSS, 100)}//BUTTONS
+if(get_ival(PS4_L1)){set_val(PS4_L1, 100)}//BUMPERS
+if(get_ival(PS4_R1)){set_val(PS4_R1, 100)}//BUMPERS
+if(get_ival(PS4_L3)){set_val(PS4_L3, 100)}//STICK CLICK
+if(get_ival(PS4_R3)){set_val(PS4_R3, 100)}//STICK CLICK
+if(!get_ival(PS4_L2)){
+if(get_ival(PS4_SHARE)){set_val(PS4_SHARE, 100)}//MISCELLANEOUS
+if(get_ival(PS4_TOUCH)){set_val(PS4_TOUCH, 100)}//MISCELLANEOUS
+if(get_ival(PS4_OPTIONS)){set_val(PS4_OPTIONS, 100)}}//MISCELLANEOUS
+if(!get_ival(PS4_TOUCH)){
+if(get_ival(PS4_PS)){set_val(PS4_PS, 100)}}else {//MISCELLANEOUS
+if(event_release(PS4_UP)){set_val(PS4_UP, 0)}//DPAD
+if(event_release(PS4_DOWN)){set_val(PS4_DOWN, 0)}//DPAD
+if(event_release(PS4_LEFT)){set_val(PS4_LEFT, 0)}//DPAD
+if(event_release(PS4_RIGHT)){set_val(PS4_RIGHT, 0)}//DPAD
+if(event_release(PS4_SQUARE)){set_val(PS4_SQUARE, 0)}//BUTTONS
+if(event_release(PS4_TRIANGLE)){set_val(PS4_TRIANGLE, 0)}//BUTTONS
+if(event_release(PS4_CIRCLE)){set_val(PS4_CIRCLE, 0)}//BUTTONS
+if(event_release(PS4_CROSS)){set_val(PS4_CROSS, 0)}//BUTTONS
+if(event_release(PS4_L1)){set_val(PS4_L1, 0)}//BUMPERS
+if(event_release(PS4_R1)){set_val(PS4_R1, 0)}//BUMPERS
+if(event_release(PS4_L2)){set_val(PS4_L2, 0)}//TRIGGERS     
+if(event_release(PS4_R2)){set_val(PS4_R2, 0)}//TRIGGERS     
+if(event_release(PS4_L3)){set_val(PS4_L3, 0)}//STICK CLICK
+if(event_release(PS4_R3)){set_val(PS4_R3, 0)}//STICK CLICK
+if(event_release(PS4_SHARE)){set_val(PS4_SHARE, 0)}//MISCELLANEOUS
+if(event_release(PS4_TOUCH)){set_val(PS4_TOUCH, 0)}//MISCELLANEOUS
+if(event_release(PS4_OPTIONS)){set_val(PS4_OPTIONS, 0)}//MISCELLANEOUS
+if(event_release(PS4_PS)){set_val(PS4_PS, 0)}}}//MISCELLANEOUS
+
+
+const string TextLineName []  = {"Scraps",""};const string TextLine1 []  = {"Mastery_V2",""};const string TextLine2 [] = {"Arena",""};const string TextLine3 [] = {"Edition",""};const string TextLine4 [] = {"2024",""}
+
+init { color = 255;cls_oled(1);print(center_x(18, OLED_FONT_SMALL_WIDTH),5,OLED_FONT_SMALL,OLED_BLACK,TextLineName[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),15,OLED_FONT_SMALL,OLED_BLACK,TextLine1[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),25,OLED_FONT_SMALL,OLED_BLACK,TextLine2[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_BLACK,TextLine3[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),45,OLED_FONT_SMALL,OLED_BLACK,TextLine4[0]);}
+
+define True=TRUE,False=FALSE,On=TRUE,Off=FALSE;int RY = XB1_RY,RX = XB1_RX,LX = XB1_LX,LY = XB1_LY;int Edit1,Edit2;int LeftStick;int LeftAxis;int stick_input;int Radius; int Speed;int rnd;int RS_Gradient;int Recoil_Control;int inc=1,dec,color[3];int AdaptiveHold= 70;int AdaptAbuse;int Angle;int actual_X;int actual_Y;int actual_Magnitude;int max_Magnitude;int angle;int sin_angle;int cos_angle;int EditCount,EditTrack;
+define aimX	  = XB1_RX;define aimY	  = XB1_RY;define STRAFE = PS4_LX;
+const int8 ExploitPolar[]={100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,
+80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9
+,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,
+-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,
+-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,
+-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,
+-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,
+-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,
+75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100};data(
+1,0,0,0,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,0,1,1,1,0,0,1,0,0,0,0,0,0 );int PPFX = 0;int PPFY = 0;int PFD = 1;int PPFD = 1;int mapped_value;int PVID[1]; ˙πã≥Å≥Ä∞áøåæà∞Å¿
