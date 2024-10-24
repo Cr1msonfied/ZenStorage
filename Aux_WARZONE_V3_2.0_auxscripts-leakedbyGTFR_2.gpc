@@ -1,0 +1,172 @@
+/*
+                         █████╗ ██╗   ██╗██╗  ██╗                                    
+                        ██╔══██╗██║   ██║╚██╗██╔╝██╗                                 
+                        ███████║██║   ██║ ╚███╔╝ ╚═╝                                 
+                        ██╔══██║██║   ██║ ██╔██╗ ██╗                                 
+                        ██║  ██║╚██████╔╝██╔╝ ██╗╚═╝                                 
+                        ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝                                    
+                                                                                     
+██╗    ██╗ █████╗ ██████╗ ███████╗ ██████╗ ███╗   ██╗███████╗    ██████╗     ██████╗ 
+██║    ██║██╔══██╗██╔══██╗╚══███╔╝██╔═══██╗████╗  ██║██╔════╝    ╚════██╗   ██╔═████╗
+██║ █╗ ██║███████║██████╔╝  ███╔╝ ██║   ██║██╔██╗ ██║█████╗       █████╔╝   ██║██╔██║
+██║███╗██║██╔══██║██╔══██╗ ███╔╝  ██║   ██║██║╚██╗██║██╔══╝      ██╔═══╝    ████╔╝██║
+╚███╔███╔╝██║  ██║██║  ██║███████╗╚██████╔╝██║ ╚████║███████╗    ███████╗██╗╚██████╔╝
+ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚══════╝╚═╝ ╚═════╝ 
+
+======================================================================================                                                
+~ Welcome to 𝗔𝘂𝘅: 𝗪𝗔𝗥𝗭𝗢𝗡𝗘 𝟮.𝟬
+~ You are currently using Version 3
+
+~ Check out the 𝗢𝗙𝗙𝗜𝗖𝗜𝗔𝗟 𝗔𝗨𝗫 𝗦𝗖𝗥𝗜𝗣𝗧𝗦 website:
+
+    ->  𝐡𝐭𝐭𝐩𝐬://𝐰𝐰𝐰.𝐚𝐮𝐱𝐬𝐜𝐫𝐢𝐩𝐭𝐬.𝐜𝐨𝐦  <-
+
+~ CHECK OUT SCRIPT SHOWCWCASES: https://www.youtube.com/@auxscripts
+======================================================================================
+𝗨𝗣𝗗𝗔𝗧𝗘 𝗟𝗢𝗚:
+
+[V2]:
+
+~ Fixed the issue where some players guns were moving to the right!
+
+~ Added an EASY button config editor so if you guys require a custom layout, this can
+  easily be edited within the script - take a look!
+  
+~ Make sure you guys change your deadzone to the new required settings!
+
+======================================================================================
+        - CONFIGURATIONS -
+======================================================================================
+*/
+//Deadzone Setup
+
+//Set your Right Stick min deadzone to 0.10
+    
+//Magnet Aimbot
+
+    int AIMBOTpro_WZ2 = 10;
+    int AIMBOTpro_WZ2max = 14;       
+    int AIMBOTpro_WZ2maxDynamic = 17;
+    int ARS;
+    int AIMBOTpro_WZ2Neg = -10;    
+    int AIMBOTpro_WZ2min = 	-14;    
+    int AIMBOTpro_WZ2minDynamic = -17;
+    
+    int Delay = 14;              
+    int Release = 15;            
+ 
+    //Anti Recoil X
+    int Vertical_AntiRecoil = 15;   //Anti Recoil
+    int Horizontal_AntiRecoil = 0;    //Anti Recoil Horizontal (seperate from BaseAim)
+    int AntiRecoil_Invert = 1; //Change 1 to -1 If you play with Inverted
+    
+    //Anti Hit Mods
+    int Dropshot = FALSE;      // -> Only enable one at a time or leave both disabled!  <-
+    int Jumpshot = FALSE;      // -> Only enable one at a time or leave both disabled!  <-
+    
+    //Auto Ping
+    int AutoPing = TRUE;
+    define AutoPing_DetectionRate = 25;   //How fWZ2AIMt Auto ping releWZ2AIMes markers
+    
+    //Don't touch 	
+    function a_f(p,m) {
+    if(abs(get_val(p)) < Release)
+    return m;
+    return get_val(p);}
+    
+    
+    //Triggers
+    define FIRE_BTN = XB1_RT;
+    define ADS_BTN = XB1_LT;
+
+    //Bumpers
+    define TACTICAL = XB1_LB;
+    define LETHAL = XB1_RB;
+
+    //Sticks
+    define CROUCH_BTN = XB1_RS;
+    define SPRINT_BTN = XB1_LS;
+
+    //Buttons
+    define RELOAD_BTN = XB1_X
+    define JUMP_BTN = XB1_A;
+    define MELEE_BTN = XB1_B;
+    define SWAP_BTN = XB1_Y;
+
+    //DPad
+    define UP = XB1_UP;
+    define LEFT = XB1_LEFT;
+    define RIGHT = XB1_RIGHT;
+    define DOWN = XB1_DOWN;
+
+    //Ignore
+    define RX = XB1_RX;
+    define RY = XB1_RY;
+    define LX = XB1_LX;
+    define LY = XB1_LY;
+
+//==============================================================*/
+
+    main {
+    if(get_val(7)) combo_run(WZ2AIM);
+    if(get_val(4)) combo_run(WZ2AIMnew);
+    combo_run(WZ2AIMdynamic);
+    if(get_val(7) && get_val(4))
+    combo_run(Vertical_AntiRecoil);
+    if(abs(get_val(10)) > Vertical_AntiRecoil + 2 || abs(get_val(9)) > Vertical_AntiRecoil + 2) {
+    combo_stop(Vertical_AntiRecoil);}
+    if (Dropshot)
+    if(get_val(XB1_RT) > 99){
+    combo_run(DROPSHOT);}
+    if (Jumpshot)  
+    if(get_val(XB1_RT) > 99){
+    combo_run(JUMPSHOT);}
+    if (AutoPing)
+    if(get_val(7) && get_val(4)){
+    combo_run(Auto_Ping);}}
+    combo WZ2AIM { 
+    set_val(10,a_f(10,AIMBOTpro_WZ2max));
+    wait(Delay)
+    set_val(9,a_f(9,AIMBOTpro_WZ2max));
+    wait(Delay)
+    set_val(10,a_f(10,AIMBOTpro_WZ2min));
+    wait(Delay)
+    set_val(9,a_f(9,AIMBOTpro_WZ2min));
+    wait(Delay)}
+    combo WZ2AIMnew { 
+    set_val(10,a_f(10,AIMBOTpro_WZ2maxDynamic));
+    wait(Delay)
+    set_val(9,a_f(9,AIMBOTpro_WZ2maxDynamic));
+    wait(Delay)
+    set_val(10,a_f(10,AIMBOTpro_WZ2minDynamic));
+    wait(Delay)
+    set_val(9,a_f(9,AIMBOTpro_WZ2minDynamic));
+    wait(Delay)}
+    combo WZ2AIMdynamic { 
+    set_val(10,a_f(10,AIMBOTpro_WZ2));
+    wait(Delay)
+    set_val(9,a_f(9,AIMBOTpro_WZ2));
+    wait(Delay)
+    set_val(10,a_f(10,AIMBOTpro_WZ2Neg));
+    wait(Delay)
+    set_val(9,a_f(9,AIMBOTpro_WZ2Neg));
+    wait(Delay)}
+    combo Vertical_AntiRecoil {
+    ARS = get_val(10) + Vertical_AntiRecoil;
+    if(ARS > 100) ARS = 100;
+    set_val(10,ARS * AntiRecoil_Invert);
+    ARS = get_val(9) + Horizontal_AntiRecoil;
+    if(ARS > 100) ARS = 100;
+    set_val(9,ARS);}
+    combo DROPSHOT {
+    set_val(XB1_RS, 100);
+    wait(1200);}
+    combo JUMPSHOT {
+    set_val(XB1_A, 100);
+    wait(100); 
+    wait(300);   }
+    combo Auto_Ping {
+    set_val(XB1_UP,100);
+   wait(AutoPing_DetectionRate);
+   set_val(XB1_UP,0);
+   wait(AutoPing_DetectionRate);}
