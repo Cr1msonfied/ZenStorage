@@ -1,0 +1,131 @@
+//DeadZone
+define DeadZone	   	= 11;
+//Modifcations
+define Rotational	= TRUE;		//Movement On Legs
+define TouchPadFix 	= TRUE;		//TouchPad Fix
+define AutoAim	  	= TRUE;		//Constant Aimbooster1
+define AutoAim2		= TRUE;		//Fire Aimbooster
+define ConstantAA	= TRUE;		//Constant Aimbooster2
+define EditRefresh	= TRUE;		//Fast Reset With Builds
+define PickUpMacro	= FALSE;	//Allways Win 50/50 When Held Down Make Sure It's TRUE First
+define EditHold		= FALSE;	//Recomended FALSE
+int StrafeShot = TRUE; // [ STRAFE SHOT MOD TOGGLE ] \\
+int StrafeWait = 125; // [  STRAFE WAIT TIME      ] 
+define EditHoldTime	= 10;
+//Anti-Recoil
+int LegacyARecoil   = TRUE;
+int LegacyInvert	= Off;
+int ExpoAntiRecoil 	= 25;		//You can Change the value to your liking 
+//Buttons
+define Ads			= XB1_LT;
+define Fire			= XB1_RT;
+define pickup		= XB1_X;
+define Confirm		= XB1_RS;
+define Edit			= XB1_B;
+define Select		= XB1_RT;
+define Reset		= XB1_RS;
+
+
+//Aim Strength
+int AutoAim_Strength1 = 12;	 //Change values To 1 above Deadzone.
+int Auto2AA_Strength = 15;  //Change values For XB1_RX and XB1_RY.Shake on Fire For More aim Assist Higher More Shake Lower Less Shake.
+//Aim Strength2
+int AimStrength1 = 12;	//Const Power +1 or +2 of Deadzone.
+int AimStrength2 = 12;	//Const Power +1 or +2 of Deadzone.
+int AimStrength3 = 12;	//Const Power +1 or +2 of Deadzone.
+int AimStrength4 = 12;	//Const Power +1 or +2 of Deadzone.
+int AimStrength5 = 14;	//Const Power +1 or +2 of Deadzone.
+//Main Power
+int EA1 = 13;	//Const Power +1 or +2 of Deadzone.
+int EA2 = 13;	//Const Power +1 or +2 of Deadzone.
+int EA3 = 18;	//Power On Ads.
+int EA4 = 15;	//Power On Fire.
+//Leave Alone mostly unless different Deadzone 
+int LEGACYZAA_DZ = +14;//+2 of Deadzone.
+int DZ_LEGACYZ_MOVEMENT = +17;//+6 of Deadzone. 
+
+
+
+main{
+ExpoAntiRecoil()
+if (LegacyARecoil){AR_Value = ArLegacyXB1_RY;  if ((((!LegacyRumble) && (LegacyARHip)) && (get_ival(Ads) || get_ival(Fire))) || ((!LegacyRumble) && (!LegacyARHip) && get_ival(Ads) && get_ival(Fire))) {
+LegacyAR();}                    
+else if ((((LegacyRumble) && (LegacyARHip)) && (get_ival(Ads) || get_ival(Fire)) && get_rumble(RUMBLE_A)) || ((LegacyRumble) && (!LegacyARHip) && get_ival(Ads) && get_ival(Fire) && get_rumble(RUMBLE_A))) {
+LegacyAR();}}
+if(get_ival(XB1_LT) > 1)set_val(XB1_LT, 100);if(get_ival(XB1_RT) > 1)set_val(XB1_RT, 100);
+if(TouchPadFix && get_console() == PIO_XB360 && get_controller() == PIO_PS4) swap(PS4_TOUCH,PS4_SHARE);
+if (EditRefresh)vm_tctrl(0); block_rumble();if (EditHold) {if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) {Edit1 = TRUE;Edit2 = TRUE;}}else if (event_press(Edit)) {Edit1 = TRUE;Edit2 = TRUE;}if (Edit2) {if (event_release(Select)) {  Edit1 = FALSE;Edit2 = FALSE;}}if (Edit1 || Edit2) if (event_press(Reset)) {  combo_run(InstantReset)Edit1 = FALSE;Edit2 = FALSE;}
+if(AutoAim){
+combo_run(AimStrength1)if(abs(get_val(XB1_RX)) > 18 || abs(get_val(XB1_RY)) > 18)combo_stop(AimStrength1)
+combo_run(AimStrength2)if(abs(get_val(XB1_RX)) > 19 || abs(get_val(XB1_RY)) > 19)combo_stop(AimStrength2)
+combo_run(AimStrength3)if(abs(get_val(XB1_RX)) > 20 || abs(get_val(XB1_RY)) > 20)combo_stop(AimStrength3)
+combo_run(AimStrength4)if(abs(get_val(XB1_RX)) > 21 || abs(get_val(XB1_RY)) > 21)combo_stop(AimStrength4)
+combo_run(AimStrength5)if(abs(get_val(XB1_RX)) > 23 || abs(get_val(XB1_RY)) > 23)combo_stop(AimStrength5)
+combo_run(AimStrength6)if(abs(get_val(XB1_RX)) > 22 || abs(get_val(XB1_RY)) > 22 || abs(get_val(SWI_LY)) > 15 || abs(get_val(SWI_LX)) > 15)combo_stop(AimStrength6)}
+combo_run(AimStrength7) if(abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) > DeadZone || abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) < -DeadZone)combo_stop(AimStrength7)
+if (get_val (Ads))combo_run(AimStrength8) if(abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) > DeadZone + 1 || abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) < -DeadZone + 1)combo_stop(AimStrength8)
+if (get_val(Ads))combo_run(AimStrength9) if(abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) > DeadZone + 2 || abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) < -DeadZone + 2)combo_stop(AimStrength9)
+if (get_val(Ads))combo_run(AimStrength10)if(abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) > DeadZone + 3 || abs(get_val(XB1_RX)) + abs(get_val(XB1_RY)) < -DeadZone + 3)combo_stop(AimStrength10)
+if(AutoAim2){
+combo_run(DeadzoneAimStrength1)if(abs(get_val(XB1_RX)) > 15 || abs(get_val(XB1_RY)) > 15)combo_stop(DeadzoneAimStrength1)
+combo_run(DeadzoneAimStrength2)if(abs(get_val(XB1_RX)) > 16 || abs(get_val(XB1_RY)) > 16)combo_stop(DeadzoneAimStrength2)
+combo_run(DeadzoneAimStrength3)if(abs(get_val(XB1_RX)) > 17 || abs(get_val(XB1_RY)) > 17)combo_stop(DeadzoneAimStrength3)}
+//Rotational
+if(Rotational){
+if(get_ival(PS4_L2) && (get_ival(PS4_R2))) {
+combo_run(Rotational);}}
+if (ConstantAA)if(get_val(PS4_R2)> 0){ combo_run(ConstantAA2);}
+if(abs(get_val(9)) > 19 || abs(get_val(10)) > 19) 
+combo_stop(ConstantAA2);
+if (PickUpMacro && get_val(pickup)) combo_run(PickupSpam); 
+combo_run(RGB)
+if (StrafeShot) {
+        
+            if (get_ival(Ads) && get_ival(Fire)) {
+            
+                if (abs(get_ival(Strafe)) <= 35 && abs(get_ival(Walk)) <= 35) {    
+                
+                    combo_run(StrafeShot);
+            
+                } else {
+                    
+                    combo_stop(StrafeShot);
+                }
+            }
+        }
+}
+combo StrafeShot {set_val(Strafe,-100);wait(StrafeWait);set_val(Strafe,100);wait(StrafeWait);
+}int Delay = 1;int Edit1,Edit2;int AR_Value;int AntiRecoilFunction;
+combo Rotational {Set_Val(PS4_LX, inv(100));wait(8);Set_Val(PS4_LX, 100);wait(8);}
+function LegacyAR () {if(LegacyInvert) {set_Val(XB1_RY,AR_Value * -1);}else {set_Val(XB1_RY,AR_Value);}}
+function set_Val(Input,Output) {set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,+100));return; }
+function ExpoAntiRecoil(){if(get_val(PS4_R2) && get_val(PS4_L2))combo_run(ExpoAntiRecoil)if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > ExpoAntiRecoil - 100 + 100)combo_stop(ExpoAntiRecoil)return;}
+combo ExpoAntiRecoil{AntiRecoilFunction=get_ival(PS4_RY)+ExpoAntiRecoil;if(AntiRecoilFunction >  100 + 100 - 100 )ExpoAntiRecoil = 100 - 100 + 100;set_val(PS4_RY,ExpoAntiRecoil)}
+function Set_Val(Stick, Value) {if(Value){set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100,100));}else{set_val(Stick, clamp(Value * (-100 + abs(get_val(Stick))) / -100 + get_val(Stick), -100, 100));}}
+combo AimStrength1 {set_val(XB1_RX,AimStrength1)wait(Delay)set_val(XB1_RY,AimStrength1) set_val(XB1_RX,-AimStrength1)wait(Delay)set_val(XB1_RY,-AimStrength1)}
+combo AimStrength2 {set_val(XB1_RX,AimStrength2) set_val(XB1_RY,AimStrength2) set_val(XB1_RX,-AimStrength2)wait(Delay)set_val(XB1_RY,-AimStrength2)}
+combo AimStrength3 {set_val(XB1_RX,AimStrength3)wait(Delay)set_val(XB1_RY,AimStrength3) set_val(XB1_RX,-AimStrength3) set_val(XB1_RY,-AimStrength3)}
+combo AimStrength4 {set_val(XB1_RX,AimStrength4)wait(Delay)set_val(XB1_RY,AimStrength4) set_val(XB1_RX,-AimStrength4)wait(Delay)set_val(XB1_RY,-AimStrength4)}
+combo AimStrength5 {set_val(XB1_RX,AimStrength5)wait(Delay)set_val(XB1_RY,AimStrength5) wait(Delay)set_val(XB1_RX,-AimStrength5)wait(Delay)set_val(XB1_RY,-AimStrength5)}
+combo AimStrength6 {set_val(XB1_RX,AutoAim_Strength1)wait(Delay)set_val(XB1_RY,AutoAim_Strength1)}
+combo AimStrength7 {set_val(XB1_RX,EA1)wait(Delay)set_val(XB1_RY,EA1)wait(Delay)set_val(XB1_RX,-EA1)wait(Delay)set_val(XB1_RY,-EA1)wait(Delay)set_val(XB1_RY,-EA1)wait(Delay)}
+combo AimStrength8 {set_val(XB1_RX,EA2)wait(Delay)set_val(XB1_RY,EA2)wait(Delay)set_val(XB1_RX,-EA2)wait(Delay)set_val(XB1_RY,-EA2)wait(Delay)}
+combo AimStrength9 {set_val(XB1_RX,EA3)wait(Delay)set_val(XB1_RY,EA3)wait(Delay)set_val(XB1_RX,-EA3)wait(Delay)set_val(XB1_RY,-EA3)wait(Delay)}
+combo AimStrength10 {set_val(XB1_RX,EA4)wait(Delay)set_val(XB1_RY,EA4)wait(Delay)set_val(XB1_RX,-EA4)wait(Delay)set_val(XB1_RY,-EA4)wait(Delay)}
+combo DeadzoneAimStrength1 {set_val(XB1_RX,LEGACYZAA_DZ)wait(Delay)set_val(XB1_RY,LEGACYZAA_DZ) set_val(XB1_RX,-LEGACYZAA_DZ)wait(Delay)set_val(XB1_RY,-LEGACYZAA_DZ) Dz()}
+combo DeadzoneAimStrength2 {set_val(XB1_RX,LEGACYZAA_DZ) set_val(XB1_RY,LEGACYZAA_DZ) set_val(XB1_RX,-LEGACYZAA_DZ)wait(Delay)set_val(XB1_RY,-LEGACYZAA_DZ) Dz()}
+combo DeadzoneAimStrength3 {set_val(XB1_RX,LEGACYZAA_DZ)wait(Delay)set_val(XB1_RY,LEGACYZAA_DZ) set_val(XB1_RX,-LEGACYZAA_DZ) set_val(XB1_RY,-LEGACYZAA_DZ) Dz()}
+combo ConstantAA2 {set_val(10, (Auto2AA_Strength)); wait(10)set_val(9, (Auto2AA_Strength)); wait(10)set_val(10, Auto2AA_Strength * -1); wait(10)set_val(9, Auto2AA_Strength * -1); wait(10)}
+function Dz (){if(XB1_RX + XB1_RY - SWI_LY + SWI_LX > 0)DZ_LEGACYZ_MOVEMENT = -8 if(XB1_RX + XB1_RY - SWI_LY + SWI_LX > -0)DZ_LEGACYZ_MOVEMENT = +8 return;}
+combo Confirm {set_val(Confirm,100);wait(50);set_val(Confirm,0);wait(100);}
+combo InstantReset {wait(20)combo_run(Confirm);}int LegacyRumble= Off;int LegacyARHip= Off;
+combo PickupSpam {set_val(pickup, 100);wait(5);set_val(pickup, 0); }
+ int inc=1,dec,color[3];define Off = FALSE; define On = TRUE;define Strafe        = XB1_LX;define Walk          = XB1_LY;
+combo RGB { wait(1);set_rgb(color, color[1], color[2]);color[dec] -= 1; color[inc] += 1;if(!color[dec]) { inc = (inc + 1) % 3; dec = (dec + 1) % 3; }}
+function center_x(f_chars,f_font) {return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2);}int ArLegacyXB1_RY= 25;
+const string TextLineName []  = {"Scrap_ScrimsFN",""};
+const string TextLine1 []  = {"Custom_ZaZa",""};
+const string TextLine2 [] = {"",""};
+const string TextLine3 [] = {"",""};
+const string TextLine4 [] = {"",""};
+init { color = 255;cls_oled(1);print(center_x(18, OLED_FONT_SMALL_WIDTH),5,OLED_FONT_SMALL,OLED_BLACK,TextLineName[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),15,OLED_FONT_SMALL,OLED_BLACK,TextLine1[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),25,OLED_FONT_SMALL,OLED_BLACK,TextLine2[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_BLACK,TextLine3[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),45,OLED_FONT_SMALL,OLED_BLACK,TextLine4[0]);} ˙πã≥Å≥Ä∞áøåæà∞Å¿
