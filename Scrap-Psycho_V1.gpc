@@ -1,0 +1,127 @@
+/*DeadZone/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+define DeadZone	   		= 10;		/*Match Number With In game DeadZone.*/
+/*Button_Layout////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+define Ads     			= XB1_LT;	/*Match Ads With In game Buttons.*/
+define Fire    			= XB1_RT;	/*Match Fire With In game Buttons.*/
+define Edit    			= XB1_B;	/*Match Edit With In game Buttons.*/
+define Select  			= XB1_RT; 	/*Match Select With In game Buttons.*/
+define Reset   			= XB1_RS;	/*Match Reset With In game Buttons.*/
+define Confirm 			= PS4_R3;	/*Match Confirm With In game Buttons.*/
+/*Anti_Recoil//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+define Anti_Recoil    	= 22		// Really No Need To Change But I Recomend Anywhere From 18 - 25
+/*Aim_Booster//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+define AdaptiveAbuse    = FALSE;	/* Don't Change But I Recomend FALSE*/
+define AdaptiAAHip      = TRUE;		/* [(On) or (Off)] = Operate on Fire Only [If FALSE It Will Only Run On ADS & FIRE]*/
+define ExtraAA			= TRUE;		/* Don't Change But I Recomend TRUE*/
+define LongRangeAA		= TRUE;		/* Really No Need To Change But I Recomend TRUE*/
+define BloomReducer		= TRUE;		/* Really No Need To Change Unless You Dont like Your Foot Movement But I Recomend TRUE*/
+define PolarStabilizers	= TRUE;		/* Don't Change But I Recomend TRUE*/
+define AimExploit		= TRUE;		/* Really No Need To Change But I Recomend TRUE*/
+/*Macros///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+define InstaEditReset 	= TRUE; 	// [TRUE / FALSE] Normal Instant Edit/Reset
+define EditHold       	= FALSE; 	// [TRUE / FALSE] SET On WHEN USING EDIT HOLD TIME TO EDIT ( MATCH TO IN GAME SETUP ) [FALSE = INSTANT PRESS]
+define EditHoldTime   	= 0;  		// Time If Using Hold to Edit In game [Setting To Be Matched To In Game Time]
+/*Shake_Assist_On_Fire/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+define AimAssistTime		=  20;	// Aim Assist Time \\ Higher = Slower Time // Lower = Faster Time \\ // Adjust Time by Increasing/Decreasing the value by 10's
+define AimAssistSize		=  17;	// Aim Assist Size \\ Higher = More Strength - More Screen Shake // Lower = Less Strength - Less Screen Shake 
+define Assist_Strength1 	=   9;	/* Change to liked values. - I Recomend To Change to +DeaDeadZoneone.*/
+define Assist_Strength2 	= -10;	/* Change to liked values. - I Recomend To Change to -DeaDeadZoneone.*/
+/*
+ _   _           _   _               _     _______
+| \ | |         | \ | |             | |   |__   __|
+|  \| | ___     |  \| | ___  ___  __| |      | | ___
+|   ` |/ _ \    |   ` |/ _ \/ _ \/ _` |      | |/ _ \
+| |\  | (_) |   | |\  |  __/  __/ (_| |      | | (_) |
+|_| \_|\___/    |_| \_|\___|\___|\__,_|      |_|\___/
+             _ _           _                                ______          _   _
+    /\      | (_)         | |         /\                   |  ____|        | | | |
+   /  \   __| |_ _   _ ___| |_       /  \   _ __  _   _    | |__ _   _ _ __| |_| |__   ___ _ __
+  / /\ \ / _` | | | | / __| __|     / /\ \ | '_ \| | | |   |  __| | | | '__| __| '_ \ / _ \ '__|
+ / ____ \ (_| | | |_| \__ \ |_     / ____ \| | | | |_| |   | |  | |_| | |  | |_| | | |  __/ |
+/_/    \_\__,_| |\__, |___/\__|   /_/    \_\_| |_|\__, |   |_|   \__,_|_|   \__|_| |_|\___|_|
+           _ /  |                                  _ / |
+          |__ /                                   |___/                                         
+*/
+main{if (InstaEditReset)vm_tctrl(0);
+if (EditHold) {if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) {Edit1 = TRUE;Edit2 = TRUE;}}
+else if (event_press(Edit)) {Edit1 = TRUE;Edit2 = TRUE;}if (Edit2) {if (event_release(Select)) {  Edit1 = FALSE;Edit2 = FALSE;}}
+if (Edit1 || Edit2) if (event_press(Reset)) {  combo_run(InstantReset)Edit1 = FALSE;Edit2 = FALSE;}
+if(AimExploit){if(get_ival(Ads))combo_run(AimExploit);else combo_stop(AimExploit);}
+if(PolarStabilizers ) { 
+if (get_ival(Ads) && get_ptime(Ads) <= PolarTime || PolarStabilizers && get_ival(Fire) && get_ptime(Fire) <= PolarTime) { AAPS(); } } else 
+if (get_ival(Ads)|| PolarStabilizers && get_ival(Fire)) { AAPS(); } 
+if (!get_ival(Ads) && !get_ival(Fire)) { AAT = 0; Axis = 0; }
+Anti_Recoil();
+if (AimExploit)
+if ((get_ival(Ads) || get_ival(Fire)) && abs(get_ival(RX)) <= DeadZone && abs(get_ival(RY)) <= DeadZone) {Speed += Angle;
+if (Speed >= 360) Speed = 0;
+if (get_ival(Fire)) {Radius = FireSpeed;Angle  = FireSpeed;}else {Radius = BaseSpeed;Angle  = BaseSpeed;}set_polar(POLAR_RS,Speed,(abs(get_ival(POLAR_RX)) + abs(get_ival(POLAR_RY))) / 3 + Radius * 327);}
+if ((get_ival(Ads) || get_ival(Fire)) && (abs(get_ival(RX)) > DeadZone || abs(get_ival(RY)) > DeadZone)) {actual_X = get_ival(RX);actual_Y = get_ival(RY);actual_Magnitude = isqrt(pow(actual_X,2) + pow(actual_Y,2));max_Magnitude = (actual_Magnitude < 100);
+if (get_ival(Fire)) {Radius = FireSpeed;Angle  = FireSpeed;}else {Radius = ZoneSpeed;Angle  = ZoneSpeed;}angle += Angle;angle = angle % 360;sin_angle = DamPolar[angle % 360];cos_angle = DamPolar[(angle + 270) % 360];cos_angle = (cos_angle * Radius) / 100;sin_angle = (sin_angle * Radius) / 100;
+if (actual_Magnitude <= 20) { sin_angle -= actual_Y; cos_angle -= actual_X; }else { sin_angle = (sin_angle * (200 - ((abs(actual_Y) + actual_Magnitude) / 10) * 10) / 200) * max_Magnitude; cos_angle = (cos_angle * (200 - ((abs(actual_X) + actual_Magnitude) / 10) * 10) / 200) * max_Magnitude; } Set_Val(RX,cos_angle);Set_Val(RY,sin_angle); }
+combo_run(Hair_Trigger)
+if(abs(get_val(XB1_LT)) > 100 || abs(get_val(XB1_RT)) > 100)combo_stop(Hair_Trigger)
+if(BloomReducer  && (get_val(Fire) && get_val(Ads) ) ) if (get_val(XB1_LX) && (get_val(XB1_LY))){combo_run(BloomReducer);}if(abs(get_val(XB1_LX)) > 40||abs(get_val(XB1_LY)) > 40){ combo_stop(BloomReducer); }
+if (ExtraAA) {
+combo_run(Major_AA4)if(abs(get_val(RX)) > 17 || abs(get_val(RY)) > 14)combo_stop(Major_AA4)
+combo_run(Major_AA5)if(abs(get_val(RX)) > 18 || abs(get_val(RY)) > 15)combo_stop(Major_AA5)
+combo_run(Major_AA6)if(abs(get_val(RX)) > 19 || abs(get_val(RY)) > 16)combo_stop(Major_AA6)
+combo_run (AA7); combo_run (AA8); }
+if(LongRangeAA){
+if(get_ival(Fire)){
+if(abs(get_ival(RY))<=AimBot23_RELEASE&&abs(get_ival(RY))<=AimBot23_RELEASE){combo_run(LongRangeAA);}else{combo_stop(LongRangeAA); stick_input = (isqrt(pow(get_ival(PS4_RX), 2) + pow(get_ival(PS4_RY), 2)));}}}
+if(PolarStabilizers)combo_run(RGB);
+if (get_val (Ads) || get_val(Fire)) { combo_run (AA9);}
+if (AdaptiveAbuse) {
+if ((get_ival(Ads) >= 90) || (get_ival(Fire) && AdaptiAAHip)) {AdaptAbuse =  AdaptiveHold * 5 - isqrt((abs(get_ival(XB1_RX))) * (abs(get_ival(XB1_RX))) + (abs(get_ival(XB1_RY))) * (abs(get_ival(XB1_RY))) * 5);combo_run(AdaptiveAbuse);}else {combo_stop(AdaptiveAbuse);}
+}
+}
+
+
+
+
+
+
+
+
+define RY = XB1_RY;define RX = XB1_RX;define LY = XB1_LY;define LX = XB1_LX; int Edit1,Edit2;int Speed,AAT,Axis,Angle,Radius,actual_X,actual_Y,actual_Magnitude,max_Magnitude,angle,sin_angle,cos_angle,inc=1,dec,color[3],Recoil_Control;int Delay =1,AA4 = 9,AA5 = 9;int stick_input;int AdaptiveHold= 70,AdaptAbuse,AdaptiveWait= 15;
+combo Confirm {set_val(Confirm,100);wait(50);set_val(Confirm,0);wait(100);}
+combo InstantReset {wait(20)combo_run(Confirm);}
+function Set_Val(Input,Output) {set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,100));return; }
+combo AimExploit {Offset(RY, AimAssistSize);wait(AimAssistTime);Offset(RX, AimAssistSize);Offset(LX, AimAssistSize);wait(AimAssistTime);Offset(RY, inv(AimAssistSize));wait(AimAssistTime);Offset(RX, inv(AimAssistSize));Offset(LX, inv(AimAssistSize));wait(AimAssistTime);}
+function AAPS() { AAT += get_rtime(); if (!Axis) set_Val(RY,AAT * PolarPower / 10); if (Axis == 1) set_Val(RX,AAT * PolarPower / 10); if (Axis == 2) set_Val(RY,inv(AAT * PolarPower / 10)); if (Axis == 3) { set_Val(RX,inv(AAT * PolarPower / 10)); if (AAT > 50) { AAT = 0; Axis = 0; } } else if (AAT > 50) { AAT = 0; Axis += 1; } } function set_Val(Input,Output) { set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,100)); return; } 
+function Offset(Stick,Value) {set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));return;}
+combo Major_AA4 {set_val(XB1_RX,AA4)wait(Delay)set_val(XB1_RY,AA4)set_val(XB1_RX,-AA4)wait(Delay)set_val(XB1_RY,-AA4)}
+combo Major_AA5 {set_val(XB1_RX,AA5)wait(Delay)set_val(XB1_RY,AA5) wait(Delay)set_val(XB1_RX,-AA5)wait(Delay)set_val(XB1_RY,-AA5)}
+combo Major_AA6 {set_val(XB1_RX,Assist_Strength1)wait(Delay)set_val(XB1_RY,Assist_Strength1)set_val(XB1_RX,-Assist_Strength2)wait(Delay)set_val(XB1_RY,-Assist_Strength2)wait(Delay)}
+combo Hair_Trigger{if(get_ival(Ads) > 1)set_val(Ads, 100);if(get_ival(Fire) > 1)set_val(Fire, 100);}
+combo BloomReducer{ set_val(XB1_LX,-40); wait(50); set_val(XB1_LY,-40); wait(30);set_val(XB1_LX,+40); wait(50);set_val(XB1_LY,+40); wait(30);}
+combo RGB { wait(1);set_rgb(color, color[1], color[2]);color[dec] -= 1; color[inc] += 1;if(!color[dec]) { inc = (inc + 1) % 3; dec = (dec + 1) % 3; }}
+combo LongRangeAA{set_val(RY,inv(AimBot23_AARY));wait(AimBot23_AAWait);set_val(RX,AimBot23_AARX);wait(AimBot23_AAWait);set_val(RY,AimBot23_AARY);wait(AimBot23_AAWait);set_val(RX,inv(AimBot23_AARX));wait(AimBot23_AAWait);}
+combo AA7 { set_val (RY, get_ival (RY) - 5); wait(1); set_val (RY, get_ival (RY) + 4); wait(1); } 
+combo AA8 { set_val (RX, get_ival (RX) + 3); wait(2); set_val (RX, get_ival (RX) - 3); wait(2); }
+combo AA9 { set_val (RY, get_ival (RY) - 7); wait(1); set_val (RY, get_ival (RY) + 5); wait(1); } 
+combo AdaptiveAbuse {set_val(Ads,100);wait(AdaptAbuse);set_val(Ads,0);wait(AdaptiveWait);}
+combo Anti_Recoil{Recoil_Control=get_ival(PS4_RY)+Anti_Recoil;if(Recoil_Control >  100 + 100 - 100 )Recoil_Control = 100 - 100 + 100;set_val(PS4_RY,Anti_Recoil)}
+function Anti_Recoil(){if(get_val(Ads) && get_val(Fire))combo_run(Anti_Recoil)if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Anti_Recoil - 100 + 100)combo_stop(Anti_Recoil)return;}
+function center_x(f_chars,f_font) {return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2);}const string TextLineName []  = {"ScrapScriptMaker",""};const string TextLine1 []  = {"PsychoV1",""};const string TextLine2 [] = {"Discord",""};const string TextLine3 [] = {"Scrap's Scripts",""};const string TextLine4 [] = {"Best Scripts",""};
+init { color = 255;cls_oled(1);print(center_x(18, OLED_FONT_SMALL_WIDTH),5,OLED_FONT_SMALL,OLED_BLACK,TextLineName[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),15,OLED_FONT_SMALL,OLED_BLACK,TextLine1[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),25,OLED_FONT_SMALL,OLED_BLACK,TextLine2[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_BLACK,TextLine3[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),45,OLED_FONT_SMALL,OLED_BLACK,TextLine4[0]);} 
+const int8 DamPolar[]= {
+100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,
+71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,
+-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,
+-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,
+-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,
+-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,
+-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,
+11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,
+81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100};
+int PolarPower = 1; 
+int PolarTime = 5000;
+int AimBot23_AARY       = 11;
+int AimBot23_AARX       = 9;
+int AimBot23_AAWait     = 1;
+int AimBot23_RELEASE    = 1;
+int BaseSpeed = 12;// Real Polar (Zen) Under DeaDeadZoneone
+int ZoneSpeed = 12;// DAM Polar After DeaDeadZoneone
+int FireSpeed = 18;// Real Polar or DAM Polar Before Or After DeaDeadZoneone ˙πã≥Å≥Ä∞áøåæà∞Å¿
