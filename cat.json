@@ -214,6 +214,11 @@
       "name": "Hippo v1 (PS) - LethalPanda",
       "filename": "Hippo_V1_PS.gpc",
       "category": "Call of Duty"
+    },
+    {
+      "name": "Snake aim - LethalPanda",
+      "filename": "SnakeAimCobra_1.gpc",
+      "category": "Apex Legends"
     }
   ]
 }
