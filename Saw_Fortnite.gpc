@@ -1,0 +1,2155 @@
+/* 
+                                𝐌𝐔𝐒𝐓 𝐑𝐄𝐀𝐃
+		THIS SCRIPT IS FOR PUBLIC USE, IF SOMEONE HAS SOLD YOU THIS YOU HAVE BEEN SCAMMED!
+			
+DM me on discord if you have any questions or need help. Saw#1234 Here is my server link https://discord.gg/sawscripts
+			
+Make sure you are all set up good in ZEN studio, mainly for mouse and keyboard players.BUT WORKS WITH CONTROLLER
+
+    First steps after putting this script into the Zen slot:
+1. To access the main menu press L2/LT and menu/options
+2. Adjust VM speed:
+    For Mouse and Keyboard best is 8ms or default
+    For controller 6ms or 4ms
+    
+3.  Match you deadzone to in game one ( 1 = 0.01 )VERY IMPORTANT I USE .10  WITH THESE VALUES
+4.  Adjust Lazer Beam (Anti recoil)
+5.  Adjust "SOFT BTN_AIM" if you think it is too weak or too shaky, strength and boost, you can go up or down, evil has a shake effect increase/decrease to your liking.
+      (hip Boost increasing aa when hip firing) 
+6.  BTN_AIM hax: left/right strafe
+7.  target tracker BTN_AIM left and right tracking. higher vales will jitter your screen. Death Tracker, keep the same 
+11. Rat detector, keep the same if you new to zen, if not you can try to mess with these values. Diff shapes have diff effects.
+12. Silent tracker, keep the same if you new to zen, if not you can try to mess with these values.
+11. Headshot, headshot aa
+13. Trigger Bot(rapid BTN_FIRE) to use quick toggle the combo is hold L-DPAD and tap RT
+14. BTN_AIM glitch, BTN_AIM your gun in and out very fast
+
+
+*/
+
+/*
+=============================================================================================================================
+  Instructions - Please Read                                                                                            
+=============================================================================================================================
+        /*------------------------------- INSTRUCTIONS PLEASE READ ------------------------------------------
+        =====================================================================================================
+        Enter Mod Menu                        = hold BTN_AIM & press PS4_OPTIONS  
+        -----------------------------------------------------------------------------------------------------
+        Scroll between MODs  Go back          = PS4_UP 
+        -----------------------------------------------------------------------------------------------------
+        Scroll between MODs  Go forward       = PS4_DOWN 
+        -----------------------------------------------------------------------------------------------------
+        Scroll between Options Go back        = PS4_RIGHT 
+        -----------------------------------------------------------------------------------------------------
+        Scroll between Options Go forward     = PS4_LEFT 
+        -----------------------------------------------------------------------------------------------------
+        Exit Menu                             = PS4_CIRCLE 
+        -----------------------------------------------------------------------------------------------------
+        Enter Edit Menu To Change Values      = PS4_CROSS 
+        -----------------------------------------------------------------------------------------------------
+        Exit Edit Menu To Mod Menu            = PS4_CIRCLE
+        -----------------------------------------------------------------------------------------------------
+        Edit Menu - change values by 1        = hold BTN_AIM & press LEFT(decrease by 1)/RIGHT(increase by 1)
+        -----------------------------------------------------------------------------------------------------
+        Edit Menu - change values by 10       = hold BTN_AIM & press DOWN(decrease by 10)/UP(increase by 10)
+        -----------------------------------------------------------------------------------------------------
+        ====================================================================================================*/
+
+
+//===============================================================
+//    BUTTON LAYOUT                                              
+//===============================================================
+define BTN_FIRE             = PS4_R2;
+define BTN_AIM              = PS4_L2;
+define BTN_SPRINT           = PS4_L3;
+define BTN_CROUCH           = PS4_R3;
+define BTN_JUMP             = PS4_CROSS;
+define BTN_SWAP             = PS4_TRIANGLE;
+define BTN_RELOAD           = PS4_SQUARE;
+define BTN_MELEE            = PS4_R3;
+define BTN_TACTICAL         = PS4_L1;
+define BTN_LETHAL           = PS4_R1;
+define UP                   = PS4_UP;
+define RIGHT                = PS4_RIGHT;
+define DOWN                 = PS4_DOWN;
+define LEFT                 = PS4_LEFT;
+define aim_x                = PS4_RX;
+define aim_y                = PS4_RY;
+define strafe               = PS4_LX;
+define walk                 = PS4_LY;
+
+// 🅼🅰🆃🅲🅷 🅸🅽 🅶🅰🅼🅴 🅱🆄🆃🆃🅾🅽🆂
+// 🅲🅾🅼🅱🅰🆃 🅼🅾🅳🅴
+
+define Pickaxe  = PS4_TRIANGLE; // Pickaxe In Game
+define N_Weapon = PS4_R1;       // Next Weapon In Game
+define P_Weapon = PS4_L1;       // Previous Weapon In Game
+define Ping     = PS4_RIGHT;    // Ping In Game
+define BUILD 	= PS4_CIRCLE; 
+define ROOF     = PS4_L1;
+define FLOOR    = PS4_R1;
+define STAIRS   = PS4_L2;
+define WALL     = PS4_R2;
+///Insta Reset
+define Edit     = PS4_CIRCLE;		//Edit In Game No Hold Time
+define Select   = PS4_R2;       // Edit Select In Game
+define Confirm  = PS4_L2;       // Edit Confirm In Game    
+define Reset    = PS4_R3;       // Edit Reset In Game
+define FastReset = PS4_LEFT;
+define EditAssist = PS4_L3;
+
+//===============================================================
+//    ADJUSTABLE VARIABLES                                       
+//===============================================================
+// Index to find Value Name string - switchable in game with left/right in ModEdit
+int adjust_variable_idx;                  
+int AR_vertical;
+int AR_horizontal;
+int AimAssistTime;
+int AimAssistSize;
+int AimAssistOpSize;
+int AimAssistOpTime;
+int HIPBoost
+int Rot_AA_Size;
+int Rot_AA_Time;
+int DeadZoneSize;
+int TtSize;
+int TtTime;
+int RF_hold;
+int RF_release;
+int SlideDelay;                  
+int HeadShotStrength;     
+int HeadShotHoldTime;
+int polar_aasist_radius;
+int polar_aasist_steps;
+int trackingSize;  // Max should be around 8-9 ( any more it will be unstable  )
+int trackingSpeed;  // Max should be around 8-9 ( any more it will be unstable  ) 
+int aimglitch1;
+int aimglitch2;
+int antidw_vertical;
+int antidw_horizontal;
+int SteadyAimResolution;
+int TrackerStrength;
+int TrackerSpeed;
+////Led Lights
+int CountLED;
+int RED1;
+int BLUE1;
+int GREEN1;
+int RED=1;
+int GREEN=1;
+int BLUE=1;
+
+//---Adjustable Variables Count                          
+define AMOUNT_OF_VALNAME_IDX = 4; 
+//===============================================================
+//    MODS TOGGLE VARIABLES                                      
+//===============================================================
+// Number of MODS -----------------------------------------------
+define MAX_MODS_COUNT = 16;                          
+// Index to find Mod Toggle Variable 
+int modName_idx;  
+//  MODS Toggles ------------------------------------------------
+  int antirecoil_onoff; 
+  int SOFTAIM;
+  int ToggleStickyAim;
+  int TargetTracker;
+  int taylorTracking;
+  int polar_aim_assist_onoff;
+  int ToggleTracker;
+  int HeadShotAssist_onoff; 
+  int DeadZone;
+  int holdbreath_onoff;
+  int rapidfire_onoff;
+  int aimabuse_onoff;
+  int antidw_on;
+  int VM_Speed;
+  int BuildTracker;
+  int InstaFastReset;
+  int DropShot;
+//===============================================================
+//    MODS TEXT TO DISPLAY                                       
+//===============================================================
+// Mod Name      -   Text to Display
+  const string ANTIRECOIL           = "Anti Recoil" ;
+  const string AIMASSISTOP			= "Soft Aim";
+  const string STICKYAA       		= "Left St.Aim" ; 
+  const string TARGETTRACKER		= "Target Tracker";
+  const string TD_TRACKING		    = "Sweet Assist" ;
+  const string POLARAIMASSIST_TD    = "Aim Shapes" ;
+  const string SILENTTRACKER	    = "Silent Tracker" ;
+  const string HEADSHOT_ASSIST      = "HeadShot Hax" ; 
+  const string DEADZONE				= "Dead Zone";
+  const string HOLDBREATH           = "Hold Breath" ;
+  const string RAPIDFIRE            = "Rapid Fire" ;
+  const string AIMABUSE		        = "AIM Spam" ;
+  const string ANTIDW		        = "Anti Flinch" ;
+  const string VMSPEED              = "VM Speed" ;
+  const string BUILDTRACK           = "Fn Build" ;
+  const string INSTARESET           = "Insta Reset" ;
+  const string DROPSHOT      		= "FN Drop Shot" ;
+// Mod VALUES      -   Text to Display
+
+//===============================================================
+//    TITLE STRING                                               
+//===============================================================
+const string OFF   = "OFF";    
+const string ON    = "ON";   
+const string SCRIPT_ONOFF  = "SCRIPT WAS";   
+// Constant bytes - Convert numbers array - ASCII_NUM[column number] 
+const int8 ASCII_NUM[] =                          
+//      0  1  2  3  4  5  6  7  8  9  (column numbers)
+      {48,49,50,51,52,53,54,55,56,57};                
+                                                   
+const string NO_EDIT_VAR1  = "Nothing to";//  17 
+const string NO_EDIT_VAR2  = "change here";// 12       
+const uint8 Options [] = {
+  1 , // ANTIRECOIL # 1
+  1 , // AA OP 2
+  1 , // STICKYAA # 3
+  1, // target tracker4
+  1 ,//td track5
+  30, // POLARAIMASSIST_TD # 6
+  1, // silent tracker # 7
+  1, // Head Shot Assist # 7
+  1 , // DEADZONE8
+  1 , // HOLDBREATH # 9
+  9,  // RAPIDFIRE # 10
+  1, // BTN_AIM glitch # 12
+  1, //antidw 14
+  50,  // VMSPEED # 15
+  1, //fn build
+  1, //insta
+  1 //drop shot
+};
+const uint8 EditVal [] = {
+  1 , // ANTIRECOIL # 1
+  1 , // AA OP2
+  1 , // STICKYAA # 3
+  1, // target tracker4
+  1, //td track5
+  1, // POLARAIMASSIST_TD # 6
+  1, // silent tracker # 7
+  1, // Head Shot Assist # 7
+  1 , // DEADZONE8
+  0 , // HOLDBREATH # 9
+  1,  // RAPIDFIRE # 10
+  1, // BTN_AIM glitch # 12
+  1, //antidw 14
+  0,  // VMSPEED # 15
+  0, //fn build
+  0, //insta
+  0 //dropshot
+};
+const uint8 OptRange [][] = {
+  { 0 , 1 }, // ANTIRECOIL # 1
+  { 4 , 8 }, // AA OP2
+  { 2 , 3 }, // STICKYAA # 3
+  { 10 , 11 },  // target track4
+  { 19 , 20 }, //td track5
+  { 17 , 18 },  // POLARAIMASSIST_TD # 6
+  { 25 , 27 }, // silent tracker # 7
+  { 15 , 16 }, // Head Shot Assist # 7
+  { 9 , 9 },  // DEADZONE8
+  { 0 , 0 }, // HOLDBREATH # 9
+  { 12 , 13 }, // RAPIDFIRE # 10
+  { 21 , 22 },  // BTN_AIM glitch # 12
+  { 23 , 24 },  // antidw # 14
+  { 0 , 0 }, // VMSPEED # 15
+  { 0 , 0 }, //fn build
+  { 0 , 0 }, //insta
+  { 0 , 0 } //dropshot
+};
+const uint8 Min_Max_Options [][]={ 
+  { 0 , 1 }, // ANTIRECOIL # 1
+  { 0 , 1 },  // AA OP2
+  { 0 , 1 }, // STICKYAA # 3
+  { 0 , 1 },  // target track4
+  { 0 , 1 }, //td track5
+  { 0 , 5 },  // POLARAIMASSIST_TD # 6
+  { 0 , 1 }, // silent tracker # 7
+  { 0 , 1 }, // Head Shot Assist # 7
+  { 0 , 1 },   //DEADZONE8
+  { 0 , 1 }, // HOLDBREATH # 9
+  { 0 , 3 }, // RAPIDFIRE # 10
+  { 0 , 1 },  // BTN_AIM glitch # 12
+  { 0 , 1 },  // antidw # 14
+  { 0 , 5 },  // VMSPEED # 15
+  { 0 , 1 }, //fn build
+  { 0 , 1 }, //intsa
+  { 0 , 1 } //dropshot
+}; 
+       
+const string EditVarStr []={ 
+"AR Vertical", // 1
+"AR Horizont", // 2
+"Time", // 3
+"Strength",// 4
+"Soft Strength", // 5
+"Soft Boost",  // 6
+"Hip Assist", //7
+"Rot. Size", //8
+"Rot. Time", //9
+"DZ Size", // 10
+"Track Size", // 11
+"Track Time", // 12
+"RF Speed", // 13
+"RF Release", // 14
+"Slide Delay",  // 15
+"HeadShot Strength", //16
+"HeadShot Wait", //17
+"Rat Radius", // 18
+"Rat Steps",  // 19
+"Sweet Size",	//20
+"Sweet Speed",	//21
+"Aim Glitch",	//22
+"Aim Glitch ADS",//23
+"Vertical",	//24
+"Horizontal",//25
+"Resolution",//26
+"Strength",	//27
+"Speed"//28
+};
+/////////////////////////////////////////////////////////////////////////////  
+define TimeToShowIntroPicture = 30000;
+/////////////////////////////////////////////////////////////////////////////  
+///   INITIALIZATION BLOCK                                                      
+/////////////////////////////////////////////////////////////////////////////   
+init {  
+antirecoil_onoff     = get_pvar(SPVAR_1,1,1,0); 
+ToggleStickyAim 	= get_pvar(SPVAR_2,1,1,0);  
+SOFTAIM 			= get_pvar(SPVAR_4,1,1,0);
+DeadZone			= get_pvar(SPVAR_5,1,1,0);
+TargetTracker		= get_pvar(SPVAR_16,1,1,0);
+holdbreath_onoff  	= get_pvar(SPVAR_19,1,1,0);
+rapidfire_onoff   	= get_pvar(SPVAR_20,1,3,0);
+HeadShotAssist_onoff = get_pvar(SPVAR_25,1,1,0);
+polar_aim_assist_onoff = get_pvar(SPVAR_28,1,5,0);
+ToggleTracker 		= get_pvar(SPVAR_43,1,1,0);
+taylorTracking		 = get_pvar(SPVAR_31,1,1,0);
+aimabuse_onoff		 = get_pvar(SPVAR_34,1,1,0);
+antidw_on   	 	= get_pvar(SPVAR_38, 1, 1, 0);
+VM_Speed             = get_pvar(SPVAR_3,1,5,0);
+BuildTracker         = get_pvar(SPVAR_41,0,1,0);
+InstaFastReset         = get_pvar(SPVAR_47,0,1,0);
+DropShot	         = get_pvar(SPVAR_42,1,1,0);
+AR_vertical       	= get_pvar(SPVAR_6, 1,99, 13);
+AR_horizontal     	= get_pvar(SPVAR_7, -99,99, 0);
+AimAssistTime    	= get_pvar(SPVAR_8, 1,20, 20);
+AimAssistSize   	= get_pvar(SPVAR_9, 1,20, 5);
+AimAssistOpTime		= get_pvar(SPVAR_10, 1,20, 16); // time
+AimAssistOpSize		= get_pvar(SPVAR_11, 1,20, 15); // Strength
+HIPBoost			= get_pvar(SPVAR_12, 1,100, 10); // idle
+Rot_AA_Size			= get_pvar(SPVAR_13, 1,100, 30); // rot size
+Rot_AA_Time			= get_pvar(SPVAR_14, 1,100, 30); // rot time
+DeadZoneSize		= get_pvar(SPVAR_15, 1,20, 15);
+TtSize				= get_pvar(SPVAR_17, 1,20, 13);
+TtTime				= get_pvar(SPVAR_18, 1,20, 10);
+RF_hold       		= get_pvar(SPVAR_21, 1,1000, 30);
+RF_release    		= get_pvar(SPVAR_22, 1,1000, 40);
+SlideDelay     		= get_pvar(SPVAR_24,1,500, 300);
+HeadShotHoldTime    = get_pvar(SPVAR_26,1,2000,500); 
+HeadShotStrength    = get_pvar(SPVAR_27,1, 99,6);
+polar_aasist_radius  = get_pvar(SPVAR_29, 1,30, 15);
+polar_aasist_steps  = get_pvar(SPVAR_30,1,30, 18);
+trackingSize		  = get_pvar(SPVAR_32, 1,100, 12);
+trackingSpeed		  = get_pvar(SPVAR_33,1,100, 55);
+aimglitch1			  = get_pvar(SPVAR_35,1,200, 100);
+aimglitch2			  = get_pvar(SPVAR_36,1,100, 1);
+antidw_vertical 	= get_pvar(SPVAR_39, 1, 60, 60);
+antidw_horizontal 	= get_pvar(SPVAR_40, 1, 60, 60);
+SteadyAimResolution = get_pvar(SPVAR_44, 1, 40, 6);
+TrackerStrength		 = get_pvar(SPVAR_45, 1, 40, 15);
+TrackerSpeed 		= get_pvar(SPVAR_46, 1, 40, 10);
+combo_run(cboGreeting); // Run greeting
+active_strafing = (((360 + trackingSpeed)/trackingSpeed) + 1) * TrackerTurns;
+}// end of init block
+
+const int8 Polar_Array[]={100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100};
+const int16 TrackerCords[] = {0, 8, 17,23, 34, 41, 52, 59,63,69, 75 ,81,87, 90, 104, 121, 139, 156,173, 190, 207, 224, 241, 258, 275, 292, 309, 325,342, 358, 374, 390, 406, 422, 438, 453, 469, 484,500, 515, 529, 544, 559, 573, 587, 601, 615, 629,642, 656, 669, 682, 694, 707, 719, 731, 743, 754,766, 777, 788, 798, 809, 819, 829, 838, 848, 857,866, 874, 882, 891, 898, 906, 913, 920, 927, 933, 939, 945, 951, 956, 961, 965, 970, 974, 978, 981,984, 987, 990, 992, 994, 996, 997, 998, 999, 999,1000 }
+
+int angle,power,rnd,radius, CurRX, CurRY;
+int AY,AX,A,CA,SA,AM,MM,T;
+int Head;
+int ANTIWOBBLE, BOOST;
+int BuildSyncTime = 4000; // THIS IS THE BEST VALUE WHERE IT DOESNT DELAY AA AND KEEPS IT SMOOTH
+int BuildTrack,BuildCount;
+define On  = TRUE;
+define Off = FALSE;
+int TrackerAngle = 270,CurrentRX,CurrentRY,toggle_active_strafing,active_strafing_counter,active_strafing,TrackerTurns = 10;
+int ToggleSteadyAim = 1,ReT,first_strafe,lx_strafe,ly_strafe,input_mag,strafe_speed,rumble,strafe_width;
+int aimPressedTime = 0; // Variable to track the time BTN_FIRE button was presse
+int sensitivityIndex, sensitivityAdjustments[2];
+int firePressedTime = 0; // Variable to track the time Fire button was pressed
+const string sawscriptname[] = { "SawScript", "@", "Fortnite" };
+ const int8 fontWidth[] = { OLED_FONT_SMALL_WIDTH, OLED_FONT_MEDIUM_WIDTH, OLED_FONT_LARGE_WIDTH }
+      // (Display) Font height
+const int8 fontHeight[] = { OLED_FONT_SMALL_HEIGHT, OLED_FONT_MEDIUM_HEIGHT, OLED_FONT_LARGE_HEIGHT }
+enum {
+	alignCenter = -2, alignRight, alignLeft = 5,
+	alignBottom = -1, alignTop = 5
+}
+///////////////////////////////////////////////////////////////////////////// 
+///   MAIN BLOCK                                                             
+/////////////////////////////////////////////////////////////////////////////
+main {//---------------------------------
+	if(get_ival(BTN_AIM) > 1)
+    set_val(BTN_AIM, 100);
+
+    if(get_ival(BTN_FIRE) > 1)
+    set_val(BTN_FIRE, 100);
+	set_Virtual_Machine_Speed(VM_Speed);
+    if(RED==255){RED1=FALSE;}if(GREEN==255){GREEN1=FALSE;}if(BLUE==255){BLUE1=FALSE;}if(RED==1){RED1=TRUE;}if(GREEN==1){GREEN1=TRUE;}if(BLUE==1){BLUE1=TRUE;}CountLED = random(1,300);
+	if(((CountLED)>=1) && (CountLED)<=100){if(RED1==TRUE){RED+=1;set_rgb(RED,GREEN,BLUE);CountLED = random(1,300);}if(RED1==FALSE){RED-=1;set_rgb(RED,GREEN,BLUE);CountLED = random(1,300);}}
+	if(((CountLED)>=101) && (CountLED)<=200){if(GREEN1==TRUE){GREEN+=1;set_rgb(RED,GREEN,BLUE);CountLED = random(1,300);}if(GREEN1==FALSE){GREEN-=1;set_rgb(RED,GREEN,BLUE);CountLED = random(1,300);}}
+	if(((CountLED)>=201) && (CountLED)<=300){if(BLUE1==TRUE){BLUE+=1;set_rgb(RED,GREEN,BLUE);CountLED = random(1,300);}if(BLUE1==FALSE){BLUE-=1;set_rgb(RED,GREEN,BLUE);CountLED = random(1,300);}}
+   /////////////////////////////////////////
+ if(get_ival(BTN_AIM)){
+     if(event_press(PS4_SHARE)){
+         EntireScript_OnOff    = !EntireScript_OnOff;
+         blinck(EntireScript_OnOff);
+         cls_oled(0);
+         draw_rectangle();
+         //display_mod(f_idx, f_string, mod_name, f_toggle, f_option)
+         display_mod( center_x(sizeof(SCRIPT_ONOFF)- 1, OLED_FONT_MEDIUM_WIDTH) ,SCRIPT_ONOFF [0],EntireScript_OnOff ,1);
+         show_mesage_time = 2000;
+ 		 //--- Set Virtual Machine Speed to Default if script is OFF    
+ 		 if(!EntireScript_OnOff) set_Virtual_Machine_Speed(VM_Default); 
+     }
+ }
+                          
+ if(show_mesage_time){
+     show_mesage_time -= get_rtime();
+     if(show_mesage_time <= 0) {
+         cls_oled(0);    
+     }
+ }
+                               
+//============================================================
+// KILL SWITCH FOR ENTIRE SCRIPT
+//============================================================
+ if(EntireScript_OnOff){
+  //--- Set Virtual Machine Speed to Default for MENU                     
+	if(ModEdit || ModMenu)
+	set_Virtual_Machine_Speed(VM_Default);
+    if(display_EDIT){                
+    	  // Clear OLED screen         
+        cls_oled(0);                        
+       // display_edit(f_idx, f_string, f_print, f_val) 
+		if(EditVal[ modName_idx ] == 0 ){  
+			  //--- print label                
+		    line_oled(1,45,127,45,1,0);    
+		    print( center_x( 17, OLED_FONT_SMALL_WIDTH ), 20, OLED_FONT_SMALL, 1, NO_EDIT_VAR1[0] ); 
+		    print( center_x( 12, OLED_FONT_SMALL_WIDTH ), 33, OLED_FONT_SMALL, 1, NO_EDIT_VAR2[0] ); 
+		}                                                                                            
+		else {//----  ELSE BEGIN --------------  
+          display_edit( adjust_variable_idx [adjust_variable_idx + 1]);
+          adjust_variable_idx [adjust_variable_idx + 1] = edit_val(adjust_variable_idx [adjust_variable_idx + 1] );
+		}//--- ELSE END   ----------- 
+   }//  end of display edit  
+    if(refresh_OLED)
+    { 
+        // Clear OLED screen 
+        cls_oled(0);       
+                           
+        // Draw Rectangle 
+        draw_rectangle(); 
+        // Display Mod Name and togle status  : ON/OFF   
+        if(modName_idx == 0)display_mod( center_x(sizeof(ANTIRECOIL)- 1, OLED_FONT_SMALL_WIDTH) ,ANTIRECOIL[0],antirecoil_onoff,Options[ modName_idx ]);
+        if(modName_idx == 1)display_mod( center_x(sizeof(AIMASSISTOP)- 1, OLED_FONT_SMALL_WIDTH) ,AIMASSISTOP[0],SOFTAIM,Options[ modName_idx ]);
+        if(modName_idx == 2)display_mod( center_x(sizeof(STICKYAA)- 1, OLED_FONT_SMALL_WIDTH) ,STICKYAA[0],ToggleStickyAim,Options[ modName_idx ]);
+        if(modName_idx == 3)display_mod( center_x(sizeof(TARGETTRACKER)- 1, OLED_FONT_SMALL_WIDTH) ,TARGETTRACKER[0],TargetTracker,Options[ modName_idx ]);
+        if(modName_idx == 4)display_mod( center_x(sizeof(TD_TRACKING)- 1, OLED_FONT_SMALL_WIDTH) ,TD_TRACKING[0],taylorTracking,Options[ modName_idx ]);
+        if(modName_idx == 5)display_mod( center_x(sizeof(POLARAIMASSIST_TD)- 1, OLED_FONT_SMALL_WIDTH) ,POLARAIMASSIST_TD[0],polar_aim_assist_onoff,Options[ modName_idx ]);
+        if(modName_idx == 6)display_mod( center_x(sizeof(SILENTTRACKER)- 1, OLED_FONT_SMALL_WIDTH) ,SILENTTRACKER[0],ToggleTracker,Options[ modName_idx ]);
+        if(modName_idx == 7)display_mod( center_x(sizeof(HEADSHOT_ASSIST)- 1, OLED_FONT_SMALL_WIDTH) ,HEADSHOT_ASSIST[0],HeadShotAssist_onoff,Options[ modName_idx ]);
+        if(modName_idx == 8)display_mod( center_x(sizeof(DEADZONE)- 1, OLED_FONT_SMALL_WIDTH) ,DEADZONE[0],DeadZone,Options[ modName_idx ]);
+        if(modName_idx == 9)display_mod( center_x(sizeof(HOLDBREATH)- 1, OLED_FONT_SMALL_WIDTH) ,HOLDBREATH[0],holdbreath_onoff,Options[ modName_idx ]);
+        if(modName_idx == 10)display_mod( center_x(sizeof(RAPIDFIRE)- 1, OLED_FONT_SMALL_WIDTH) ,RAPIDFIRE[0],rapidfire_onoff,Options[ modName_idx ]);
+        if(modName_idx == 11)display_mod( center_x(sizeof(AIMABUSE)- 1, OLED_FONT_SMALL_WIDTH) ,AIMABUSE[0],aimabuse_onoff,Options[ modName_idx ]);
+        if(modName_idx == 12)display_mod( center_x(sizeof(ANTIDW)- 1, OLED_FONT_SMALL_WIDTH) ,ANTIDW[0],antidw_on,Options[ modName_idx ]);
+        if(modName_idx == 13)display_mod( center_x(sizeof(VMSPEED)- 1, OLED_FONT_SMALL_WIDTH) ,VMSPEED[0],VM_Speed,Options[ modName_idx ]);
+        if(modName_idx == 14)display_mod( center_x(sizeof(BUILDTRACK)- 1, OLED_FONT_SMALL_WIDTH) ,BUILDTRACK[0],BuildTracker,Options[ modName_idx ]);
+        if(modName_idx == 15)display_mod( center_x(sizeof(INSTARESET)- 1, OLED_FONT_SMALL_WIDTH) ,INSTARESET[0],InstaFastReset,Options[ modName_idx ]);
+        if(modName_idx == 16)display_mod( center_x(sizeof(DROPSHOT)- 1, OLED_FONT_SMALL_WIDTH) ,DROPSHOT[0],DropShot,Options[ modName_idx ]);
+         refresh_OLED = FALSE; 
+    } 
+    if(display_title){           
+          // clear OLED screen    
+    	    cls_oled(0);            
+    	    // Display Script Title      
+           // screen saver          
+	         ModMenu = FALSE;   
+           display_title = FALSE;  
+           display_black = TRUE;
+                                   
+    }                            
+      
+    //-----------------------------
+    // Screen saver (OLED off)   
+    if(display_black )         
+    {                            
+        count_black += get_rtime();
+        if(count_black >= TimeToShowIntroPicture)   
+        {                        
+            cls_oled(0);         
+            count_black = 0;      
+            display_black = FALSE; 
+        }                         
+    }                           
+                                
+   /////////////////////////////////////////////////////////
+   // MENU EDIT VALUES             
+   if(ModEdit){ 
+        block_all_inputs(); 
+        if(MenuTimeOut){
+            CheckIfBtnIsPressed();
+        } 
+       //--- Exit from EDIT MENU  
+       if(event_release(PS4_CIRCLE)){
+             ModEdit      = FALSE;           
+             display_EDIT = FALSE;           
+             ModMenu      = TRUE;            
+             refresh_OLED = TRUE;   // display MODS 
+       }                    
+        ////////////////////////////////////////////////////////////////////////////////  
+        //  GO FORWARD                                                                      
+        if(!get_ival(BTN_AIM) && event_press(PS4_DOWN)){            
+                                          
+        	   adjust_variable_idx ++;                 
+        	   if(adjust_variable_idx > OptRange[ modName_idx ][ 1 ])  adjust_variable_idx = OptRange[ modName_idx ][ 1 ]; 
+             refresh_OLED = FALSE;      
+             display_EDIT = TRUE;        
+        }          
+        ///////////////////////////////////////////////////////////////////////////////  
+        //  GO BACK                                                                      
+        if(!get_ival(BTN_AIM) && event_press(PS4_UP)){  
+                                                               
+        	   adjust_variable_idx --;                                      
+        	   if(adjust_variable_idx < OptRange[ modName_idx ][ 0 ]) adjust_variable_idx = OptRange[ modName_idx ][ 0 ];
+             refresh_OLED = FALSE;      
+             display_EDIT = TRUE;        
+        }                                                           
+            /////////////////////////////////////////////////////// 
+        if(MenuTimeOut){
+            CheckIfBtnIsPressed();
+        }
+   }// end of EDIT MENU    
+   /////////////////////////////////////////////////////////
+   // EDIT MENU ON/OFF            
+   if(get_ival(BTN_AIM) && event_press(PS4_OPTIONS)){  
+        ModMenu = TRUE;  
+        // toggle EditMenu ON/OFF                      
+                 modName_idx  = 0;                   
+                 refresh_OLED = TRUE;   // display Title    
+                 display_EDIT = FALSE;        
+                 MenuTimeOut  = menu_time_active;
+   }      
+   /////////////////////////////////////////////////////////
+   // MENU SYSTEM              
+   if(ModMenu){  
+   set_Virtual_Machine_Speed(VM_Default);
+        block_all_inputs(); 
+      //--- Exit from MENU  
+      if(event_press(PS4_CIRCLE)){
+          ModMenu = FALSE;                     
+          ModEdit = FALSE;              
+          combo_run(MESSAGE);             
+      }                    
+      //--- Enter in EDIT MENU 
+      if(event_press(PS4_CROSS)){
+          ModMenu             = FALSE;   
+          adjust_variable_idx = OptRange[ modName_idx ][ 0 ]; 
+          ModEdit             = TRUE;   
+          display_EDIT        = TRUE; 
+      }                    
+                                  
+        //Display MOD NAME and togle status 
+        // Switch MODs                     
+        if( !get_ival(BTN_AIM) && event_press(PS4_DOWN)){ 
+                                          
+        	   modName_idx ++;                 
+        	   if(modName_idx > MAX_MODS_COUNT) modName_idx = 0; 
+             //////////////////////////////////////
+        	   blinck( modName_idx[modName_idx + 1]); 
+             //////////////////////////////////////
+        }                          
+        if(!get_ival(BTN_AIM) && event_press(PS4_UP)){  
+                                                               
+        	  modName_idx --;                                      
+        	  if(modName_idx < 0) modName_idx = MAX_MODS_COUNT;
+             //////////////////////////////////////
+        	   blinck( modName_idx[modName_idx + 1]); 
+             //////////////////////////////////////
+          }                        
+        	//////////////////////////
+                                  
+                                  
+        // screen saver           
+        display_black = FALSE;    
+        display_title = FALSE;    
+        //////////////////////////////  
+        // display mod name and Toggle ON/OFF | Scroll Options 
+        if(!get_ival(BTN_AIM) ){    
+             if(event_press(PS4_RIGHT)){ //   go back
+                 modName_idx[modName_idx + 1] = f_go_back( modName_idx[modName_idx + 1] ); 
+             }// go back 
+             if(event_press(PS4_LEFT)){//   go forward
+                 modName_idx[modName_idx + 1] = f_go_forward( modName_idx[modName_idx + 1] );
+             }// go forward 
+       } 
+        refresh_OLED = TRUE;   
+        set_val(PS4_RIGHT,0); 
+        set_val(PS4_LEFT,0); 
+        set_val(PS4_UP,0); 
+        set_val(PS4_DOWN,0); 
+        if(MenuTimeOut){
+            CheckIfBtnIsPressed();
+        }
+    } 
+    /////////////////////////////////////////////////////////////
+    ///    END OF MENU  /////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
+//========================================================================================================== 
+   if(!ModEdit && !ModMenu){//  code for MODS
+             //--- LED COLOR INDICATION        
+         
+             //---Virtual Machine Speed  
+			block_rumble();
+			rnd = 359;
+			set_polar(POLAR_LS, (DeadZoneSize * 10), (100 * rnd));
+			set_polar(POLAR_RS, (DeadZoneSize * 10), (100 * rnd));
+	
+//===========================================
+    
+//   Insta Reset
+    
+//===========================================
+	
+	if (InstaFastReset) {
+        
+        if (event_press(FastReset)) {
+            
+            combo_run(FastReset);
+        }
+    }
+	
+//===========================================
+    
+//   BUILD TRACKER
+    
+//===========================================
+		
+	if (BuildTracker) {
+ 		if (event_press(BUILD)) {
+ 			BuildTrack = !BuildTrack;
+		}
+	    if (BuildTrack) {         
+	  		BuildCount += get_rtime();
+		
+			if (event_press(Pickaxe) || BuildCount >= BuildSyncTime) {
+				BuildTrack = Off;
+				BuildCount = Off;
+		    }
+	        if (get_ival(ROOF) || get_ival(FLOOR) || get_ival(STAIRS) || get_ival(WALL)){ 
+	  	      BuildCount = Off;
+	  	    }
+		}
+  }
+
+	
+	if(!BuildTrack) {
+	
+	//===========================================
+    //   FN DROP SHIT
+    //===========================================
+	
+	if(DropShot){
+		if(get_val(BTN_AIM)&&get_val(BTN_FIRE)){
+		combo_run(Dropshot);
+		        }
+		    }
+	
+	//===========================================
+    //   ANTI FLINCH 
+    //===========================================
+	if(antidw_on)
+				{
+					if((get_val(RUMBLE_A) || get_val(RUMBLE_B) || get_val(RUMBLE_LT) || get_val(RUMBLE_RT)) && !get_val(BTN_FIRE))
+					{
+						combo_run(anti_damage_wobble);
+						
+						if (get_val(BTN_LETHAL)){
+						combo_stop(anti_damage_wobble);}
+					}
+				}
+	
+	//===========================================
+    //   BTN_AIM ABUSE 
+    //===========================================
+		if (aimabuse_onoff){
+  		if( get_ival(BTN_AIM) && get_ival(BTN_FIRE )){
+  		    		combo_run (AIM_ABUSE);
+      }
+    }
+		    		
+	//===========================================
+    //   TD Track 
+    //===========================================
+			if(taylorTracking){
+				if( get_ival(BTN_AIM) || get_ival(BTN_FIRE )) {
+			Sweet_EviL_Strafe();
+				}
+				else{
+			first_strafe 			= 0;}
+					}
+	//===========================================
+    //   DoNotAtMe Polar BTN_AIM Assist with Taylordrift21 shapes 
+    //===========================================
+              if(polar_aim_assist_onoff){
+                               
+                  actual_X = get_ival(aim_x);   
+                  actual_Y = get_ival(aim_y); 
+                  
+                  actual_Magnitude = isqrt(pow(actual_X, 2) + pow(actual_Y, 2));  
+                  max_Magnitude = (actual_Magnitude < 100);                      
+                                                                        
+                  if(!(time++ % STEP_INTERVAL)){                                  
+                   angle += polar_aasist_steps;                                                 
+                  }                                                               
+                  angle = angle % 360;                                            
+                  sin_angle_tdrift = Polar_Array[angle % 360];                           
+                  cos_angle_tdrift = Polar_Array[(angle + 270) % 360]; 
+                                  
+                  if( get_ival(BTN_AIM) || get_ival(BTN_FIRE )){ 
+                      if(actual_Magnitude <= polar_aasist_radius){                                                      
+                          sin_angle_tdrift -= actual_Y;                                                              
+                          cos_angle_tdrift -= actual_X;                                                                 
+                      }else {                                                                                       
+                          sin_angle_tdrift = (sin_angle_tdrift * (200 - ((abs(actual_Y) + actual_Magnitude) / 10) * 10) / 200) * max_Magnitude; 
+                          cos_angle_tdrift = (cos_angle_tdrift * (200 - ((abs(actual_X) + actual_Magnitude) / 10) * 10) / 200) * max_Magnitude; 
+                      }                                                  
+                      GetShapes(polar_aasist_radius); 
+                  } 
+              } 
+
+			           
+                          
+    //===========================================
+    //   Sticky AIM 
+    //===========================================
+            if(ToggleStickyAim){
+                if( get_ival(BTN_AIM) && get_ival(BTN_FIRE ))
+                    combo_run(StickyAim);     
+            }
+	//===========================================
+    //   SOFT AIM 
+    //===========================================
+            if(SOFTAIM){
+            	
+				combo_run(SAW_movement_finder)
+				SAWMOVEMENTX()
+				combo_run(SAW6);
+				SAW6();
+				
+				if (get_val(BTN_FIRE ) && !get_val(BTN_AIM)){
+                    combo_run(HipBoost);
+				}
+				
+				
+                if( get_ival(BTN_AIM) || get_ival(BTN_FIRE )){
+                    	combo_run(SAWMOVE_);
+                    	combo_run(SAW666);
+						combo_stop(SAW6);
+						
+			// Track the time BTN_AIM button is pressed
+            if (aimPressedTime == 0 || get_val(BTN_FIRE)) {
+                aimPressedTime = get_ptime(BTN_AIM) < 0;
+            }
+            // Check if the time duration has passed for sensitivity adjustment
+            if (get_ptime(BTN_AIM) >= aimPressedTime + AimAssistOpTime) {
+                sensitivityIndex = (sensitivityIndex + 1) % 8; // Update sensitivity index
+                adjustSensitivity(sensitivityIndex); // Update sensitivity adjustments
+                aimPressedTime = get_ptime(BTN_AIM); // Update the tracking variable
+            }
+            // Apply sensitivity adjustments
+            SmartSens(aim_x, sensitivityAdjustments[0]);
+            SmartSens(aim_y, sensitivityAdjustments[1]);
+
+            // Check if BTN_FIRE is pressed and track the time
+            if (get_val(BTN_FIRE) || get_val(BTN_AIM) && get_val(BTN_FIRE)) {
+                if (firePressedTime == 0) {
+                    firePressedTime = get_ptime(BTN_FIRE) < 0;
+                }
+            } else {
+                firePressedTime = 0;
+            }
+        } else {
+            // Reset sensitivity adjustments when BTN_AIM is not pressed
+            sensitivityIndex = 0;
+            aimPressedTime = 0;
+            firePressedTime = 0;
+            adjustSensitivity(0); // Set sensitivity to default
+            SmartSens(aim_x, 0); // Reset aim_x to zero
+            SmartSens(aim_y, 0); // Reset aim_y to zero
+        }   
+            }
+
+	//===========================================
+    //   TARGET TRACK 
+    //===========================================
+            if(TargetTracker) {
+            if( get_ival(BTN_AIM) || get_ival(BTN_FIRE ))
+				{ power = POLAR_RS;
+				{ if(power >= 0 && power <= 100 )  
+				power = power; 
+				else power = random(0,100);}radius = POLAR_RADIUS;
+				{ if(radius >= -32768 && radius <= 32767 ) radius = radius;
+				else radius = random(-32768,32767);}angle = POLAR_ANGLE;
+				{if(angle >= 0 && angle <= 359 )angle = angle;
+				else angle = random(0, 359);}				
+				combo_run (AA1);
+				combo_run (AA2);
+				combo_run (AA3);
+				combo_run (AA4);
+				combo_run (SawAim);
+				combo_run(POLARTRACKER);
+				}
+				
+			if( get_ival(BTN_AIM) || get_ival(BTN_FIRE ))
+				{	AX = get_val(aim_x); AY = get_val(aim_y); 
+			AM = isqrt(pow(AX, 2) + pow(AY, 2) ); 
+			MM = (AM < 100); if(!(T++ % 1) ) //time 1
+			{ A += 40; } // reach time 35
+			A = A % 360;
+			SA = Polar_Array[A % 360];
+			CA = Polar_Array[(A + 270) % 360];
+			CA = (CA * 10) / 100; //size 10
+			SA = (SA * 10) / 100; //size 10
+			if (AM <= 10) //size 10
+			{ SA -= AY; CA -= AX; } 
+			else {
+			SA = (SA * (200 - ((abs(AY) + AM) / 10) * 10) / 200) * MM;
+			CA = (CA * (200 - ((abs(AX) + AM) / 10) * 10) / 200) * MM; 
+			} 
+			set_val(aim_x, clamp(AX + CA, -100, 100));
+			set_val(aim_y, clamp(AY + SA, -100, 100));}
+			}
+			//===========================================
+		    //   Steady Tracking
+		    //===========================================
+						
+			if(get_ival(BTN_AIM) || get_ival(BTN_FIRE) || get_ival(BTN_AIM) && get_ival(BTN_FIRE))
+						{
+					if(ToggleTracker)
+					{
+					CurRX = get_ival(aim_x);
+					CurRY = get_ival(aim_y);
+					
+
+						if(get_ival(BTN_AIM) || get_ival(BTN_FIRE) || get_ival(BTN_AIM) && get_ival(BTN_FIRE))
+						{
+							CurRX += get_polar_coordinate(TrackerStrength, sin___(TrackerAngle));
+							CurRY += get_polar_coordinate(TrackerStrength, cos___(TrackerAngle));
+						}
+						else
+						{
+							CurRY += get_polar_coordinate(TrackerStrength, cos___(TrackerAngle));
+							CurRX += get_polar_coordinate(TrackerStrength, sin___(TrackerAngle));
+						}
+							TrackerAngle = ((TrackerAngle + TrackerSpeed) % 360);
+							set_val(aim_x, clamp(CurRX, -100, 100));
+							set_val(aim_y, clamp(CurRY, -100, 100));
+						
+					}}
+					
+				if(ToggleSteadyAim){
+				if( get_ival(BTN_AIM) || get_ival(BTN_FIRE )){
+			CurrentRX = get_val(aim_x);
+			CurrentRY = get_val(aim_y);
+
+			CurrentRX = GetSteadyAim(CurrentRX, SteadyAimResolution);
+			CurrentRY = GetSteadyAim(CurrentRY, SteadyAimResolution);
+
+			set_val(aim_x, clamp(CurrentRX, -100, 100));
+			set_val(aim_y, clamp(CurrentRY, -100, 100));
+		}}
+		//===========================================
+        //   HOLD BREATH 
+        //===========================================
+		   if(holdbreath_onoff){
+				if(get_val(BTN_AIM))
+		    		set_val(BTN_SPRINT, 100);
+	                      
+	   			if(get_val(BTN_AIM) && get_lval(BTN_SPRINT)) 
+	       			set_val(BTN_SPRINT, 0);  
+	        }
+ 
+         //===========================================
+        //   RAPID BTN_FIRE ON/OFF
+        //===========================================
+        if(rapidfire_onoff) { 
+            if(get_ival(PS4_LEFT) && event_press(BTN_FIRE)){   
+                 KS_RapidFire = !KS_RapidFire;          
+                 set_rumble_tipe(rapidfire_onoff); 
+                 display_MOD_status(KS_RapidFire,sizeof(RAPIDFIRE)- 1,RAPIDFIRE[0]);
+                 set_val(BTN_FIRE,0);
+            }               
+        }
+        if(rapidfire_onoff && KS_RapidFire ) { 
+            /////////////////////////////////////////
+            if ((rapidfire_onoff == 2 && get_ival(BTN_AIM) && get_ival(BTN_FIRE)) || (rapidfire_onoff == 1 && get_ival(BTN_FIRE) && !get_ival(BTN_AIM)) || (rapidfire_onoff == 3 && get_ival(BTN_FIRE))) {
+                 combo_run(RAPID_FIRE_cmb);         
+            }                                       
+        }
+        //======================================================
+            //   HEAD SHOT ASSIST
+            //======================================================
+			
+			if(HeadShotAssist_onoff ) {
+		if(get_ival(BTN_AIM) && get_ptime(BTN_FIRE) < HeadShotHoldTime) {
+	        		
+	        		Head = HeadShotStrength;
+	        		combo_run(HeadAssist);
+			}
+		}
+		    //===========================================
+		    //   ANTI RECOIL 
+		    //===========================================
+if (antirecoil_onoff) {
+        if (get_val(BTN_AIM) && get_val(BTN_FIRE) || get_val(BTN_FIRE)) {
+            offsetAR(aim_y, AR_vertical);
+            offsetAR(aim_x, AR_horizontal);
+        }
+    }   
+            //--- CLEAR OLED SCREEN after message                                       
+            if(time_to_clear_screen){               
+                time_to_clear_screen -= get_rtime();
+                if(time_to_clear_screen <= 0 ){     
+                    QT_MESSAGE_TIMEOUT();     
+                }                              
+            } 
+       }
+            } //  end of MODS CODE 
+    } //  ENTIRE SCRIPT KILL SWITCH 
+} //  end of main block 
+///////////////////////////////////////////////////////////////////////////// 
+///   COMBO BLOCK                                                             
+/////////////////////////////////////////////////////////////////////////////
+const int16 ValRange [][] ={
+{ 1,99 }, // AR_vertical
+{ -99,99 }, // AR_horizontal
+{ 1,40 }, // AimAssistTime
+{ 1,40 }, // AimAssistSize
+{ 1,40 }, // AIMASSISTOPsize
+{ 1,40 }, // AIMASSISTOPtime
+{ 0,100 }, // Hip
+{ 0,100 }, // Rot. Size
+{ 1,100 }, // Rot. Time
+{ 0,40 }, //DeadZone
+{ 0,40 }, //ttsize
+{ 1,40 }, //tttime
+{ 1,1000 }, // RF_hold
+{ 1,1000 }, // RF_release
+{ 1,500 }, // Slide cancel
+{ 1,99 },  //HeadShotStrenght
+{ 1,2000 }, //HeadShotHoldTime
+{ 1,60 }, // polar_aasist_radius
+{ 1,60 },  // polar_aasist_steps
+{ 1,100 },	//td track
+{ 1,100 },	//td track
+{ 1,200 },	//BTN_AIM glitch1
+{ 1,200 },	//BTN_AIM glitch2
+{ 1,60 },	//antidw vert
+{ 1,60 },	//antidw hor
+{ 1,40 },	//RESOLUTION
+{ 1,40 },	//SILENT SPEED
+{ 1,40 }	//SILENT TIME
+};       
+       
+//-- VM Speed
+define VM_Default = 0;
+function set_Virtual_Machine_Speed (f_speed){
+    if     (f_speed == 0) vm_tctrl(-0);//10 ms Default
+    else if(f_speed == 1) vm_tctrl(-2);// 8 ms
+    else if(f_speed == 2) vm_tctrl(-4);// 6 ms
+    else if(f_speed == 3) vm_tctrl(-6);// 4 ms
+    else if(f_speed == 4) vm_tctrl(-8);// 2 ms
+    else if(f_speed == 5) vm_tctrl(-9);// 1 ms
+}
+           
+int time_to_clear_screen;
+function QT_MESSAGE_TIMEOUT (){     
+	// Clear OLED Screen              
+	cls_oled(0); // will clear oled   
+	display_title  = FALSE;           
+}                                  
+                                      
+                       
+int exit_wait = 1500;
+combo EXIT {     
+	wait(exit_wait);     
+	cls_oled(0);    
+	ModMenu = FALSE;  
+	ModEdit = FALSE;    
+	display_EDIT = FALSE; 
+	display_title = FALSE; 
+}                      
+
+define ColorOFF  = 0;
+define Blue      = 1;
+define Red       = 2;
+define Green     = 3;
+define Pink      = 4;
+define SkyBlue   = 5;
+define Yellow    = 6;
+define White     = 7;
+                      
+data(                 
+  0,0,0, //0. ColorOFF
+  2,0,0, //1. Blue     
+  0,2,0, //2. Red      
+  0,0,2, //3. Green    
+  2,2,0, //4. Pink     
+  2,0,2, //5. SkyBlue 
+  0,2,2, //6. Yellow   
+  2,2,2  //7. White    
+); // end of data segment-------------- 
+// COLOR LED function        
+//-------------------------------------------------------------- 
+                                       
+int data_indx;
+function colourled(color) {  
+    for( data_indx = 0; data_indx < 3; data_indx++ ) {
+        set_led(data_indx,duint8 ((color * 3) + data_indx));
+    }
+}
+
+// Refresh OLED              
+    int display_title = TRUE;
+    int display_black;      
+    int refresh_OLED;        
+    int ModMenu;    
+    int ModEdit;   
+    int display_EDIT;   
+    int EntireScript_OnOff = TRUE;// Kill Swith For Entire Script   
+    int show_mesage_time; 
+////////////////////////////////////// 
+/////////////////////////////////////// 
+int count_black;                                       
+int BlinckColor = 3; 
+int rumble_tipe = RUMBLE_A;
+int LED_OnOff;
+
+combo vibrate {                                   
+	set_rumble(rumble_tipe, 100);                   
+	wait(300);                                       
+	reset_rumble();                                 
+	wait(100);                                       
+	set_rumble(rumble_tipe, 100);                   
+	wait(300);                                       
+	reset_rumble();                                 
+}
+combo LED_BLINK {                                 
+	colourled(LED_OnOff);                           
+	wait(200);                                      
+	colourled(ColorOFF);                            
+	wait(100);                                      
+	colourled(LED_OnOff);                           
+	wait(200);                                      
+	colourled(ColorOFF);                             
+	wait(100);                                      
+}
+
+combo StickyAim {
+	offset_sticky_aa(strafe,AimAssistSize * 10);
+	wait(AimAssistTime  * 10);
+    offset_sticky_aa(strafe,inv(AimAssistSize * 10));
+    wait(AimAssistTime  * 10);
+    }
+    
+combo HipBoost {
+SmartSens(aim_x,AimAssistOpSize + HIPBoost)wait(AimAssistOpTime)
+SmartSens(aim_x,-AimAssistOpSize - HIPBoost)wait(AimAssistOpTime)
+SmartSens(aim_y,AimAssistOpSize + HIPBoost + 1)wait(AimAssistOpTime)
+SmartSens(aim_y,-AimAssistOpSize - HIPBoost - 1)wait(AimAssistOpTime)
+SmartSens(aim_y,AimAssistOpSize + HIPBoost + 1)wait(AimAssistOpTime)
+SmartSens(aim_x,-AimAssistOpSize - HIPBoost)wait(AimAssistOpTime)
+SmartSens(aim_x,AimAssistOpSize + HIPBoost)wait(AimAssistOpTime)
+SmartSens(aim_y,-AimAssistOpSize - HIPBoost - 1)wait(AimAssistOpTime)
+}
+combo cboGreeting {
+	call(cboClearScreen);
+	call(cboGreetingText);
+}
+combo cboGreetingText {
+	printText(alignCenter, 10, sawscriptname[0], OLED_FONT_SMALL, OLED_WHITE);
+	printText(alignCenter, 25, sawscriptname[1], OLED_FONT_SMALL, OLED_WHITE);
+	printText(alignCenter, 40, sawscriptname[2], OLED_FONT_SMALL, OLED_WHITE);
+	set_rumble(RUMBLE_A, 50);
+	wait(720);
+	set_rumble(RUMBLE_A, 50);
+	set_rumble(RUMBLE_B, 100);
+	wait(720);
+	reset_rumble();
+	wait(1440);
+	
+}
+combo cboClearScreen {
+	cls_oled(OLED_BLACK);
+}
+/////////////////////////////////////////////
+
+//===============================================================
+//   MODS COMBO SECTION
+//===============================================================
+define ACTIVE_WHEN_ADS    = TRUE;                     
+define ACTIVE_WHEN_FIRING = TRUE;  
+define STEP_INTERVAL =  1; 
+int KS_RapidFire = TRUE;
+int SAWAIM_MOVEMENT_TRACK;
+
+combo Dropshot{
+set_val(BTN_MELEE,100);
+wait(56);
+wait(38);
+set_val(BTN_MELEE,100);
+}
+
+  combo FastReset {
+    set_val(Edit,100);
+    wait(20)
+     set_val(Reset,100);        
+     wait(20);
+      combo_run(Confirm);
+}
+combo Confirm {
+    set_val(Confirm,100);
+    wait(20);
+     set_val(Confirm,0);
+     wait(20);
+}
+
+     combo AIM_ABUSE {
+ 	wait(aimglitch1);
+    set_val(BTN_AIM, 0);
+    wait(aimglitch2 - get_rtime());
+    set_val(BTN_AIM, 0);}
+    
+    combo anti_damage_wobble {
+	BOOST++;
+	ANTIWOBBLE = get_val(aim_y) + antidw_vertical + BOOST;
+	if(BOOST == 10) {
+	BOOST = 0; }
+	if(ANTIWOBBLE > 100) {
+	ANTIWOBBLE = 100; }
+	set_val(aim_y, ANTIWOBBLE * -1);
+	ANTIWOBBLE = get_val(aim_x) + antidw_horizontal;
+	if(ANTIWOBBLE > 100){
+	ANTIWOBBLE = 100; }
+	set_val(aim_x, ANTIWOBBLE);
+}
+
+combo RAPID_FIRE_cmb { 
+  set_val(BTN_FIRE, 100);
+  wait(RF_hold);
+  set_val(BTN_FIRE,   0);
+  wait(RF_release); 
+  }
+
+combo AA1 { 
+Offset (aim_y, ((DeadZoneSize - 4) - 2)); wait(TtTime);
+Offset (aim_y, ((-DeadZoneSize + 4) + 2));wait(TtTime);
+} 
+
+combo AA2 { 
+Offset (aim_x, ( (DeadZoneSize - 4) / 2)); wait(TtTime); 
+Offset (aim_x, ((-DeadZoneSize + 4) / 2)); wait(TtTime);
+} 
+
+combo AA3 { 
+Offset (aim_y, get_ival (aim_y)); wait(TtTime);
+Offset (aim_y, get_ival (aim_y)); wait(TtTime);
+}
+combo AA4 { 
+Offset (aim_x, get_ival (aim_x)); wait(TtTime); 
+Offset (aim_x, get_ival (aim_x)); wait(TtTime);
+}
+combo SawAim {
+Offset(aim_y,TtSize / 2)
+Offset(aim_x,-TtSize / 2)wait(TtTime)
+Offset(aim_y,-TtSize / 2)
+Offset(aim_x,TtSize / 2)wait(TtTime)
+Offset(aim_y,TtSize / 2)
+Offset(aim_x,TtSize / 2)wait(TtTime)
+Offset(aim_y,-TtSize / 2)
+Offset(aim_x,TtSize / 2)wait(TtTime)
+Offset(aim_y,TtSize / 2)
+Offset(aim_x,-TtSize / 2)wait(TtTime)
+Offset(aim_y,-TtSize / 2)
+Offset(aim_x,TtSize / 2)wait(TtTime)
+}
+combo SAW6 {
+SAWMOVE(aim_x,HIPBoost)wait(1)
+SAWMOVE(aim_x,-HIPBoost)wait(1)
+SAWMOVE(aim_y,HIPBoost)wait(1)
+SAWMOVE(aim_y,-HIPBoost)wait(1)
+SAWMOVE(aim_y,HIPBoost)wait(1)
+SAWMOVE(aim_x,-HIPBoost)wait(1)
+SAWMOVE(aim_x,HIPBoost)wait(1)
+SAWMOVE(aim_y,-HIPBoost)wait(1)
+}
+
+combo SAWMOVE_ {
+SAWMOVE(strafe,Rot_AA_Size)
+SAWMOVE(walk,-Rot_AA_Size)
+wait(Rot_AA_Time)
+SAWMOVE(strafe,-Rot_AA_Size)
+SAWMOVE(walk,Rot_AA_Size)
+wait(Rot_AA_Time)
+SAWMOVE(strafe,Rot_AA_Size)
+SAWMOVE(walk,Rot_AA_Size)
+wait(Rot_AA_Time)
+SAWMOVE(strafe,-Rot_AA_Size)
+SAWMOVE(walk,-Rot_AA_Size)
+wait(Rot_AA_Time)
+}
+combo SAW666 {
+SAWMOVE(strafe,10)wait(10)
+SAWMOVE(strafe,-10)wait(10)
+SAWMOVE(walk,10)wait(10)
+SAWMOVE(walk,-10)wait(10)
+SAWMOVE(walk,10)wait(10)
+SAWMOVE(strafe,-10)wait(10)
+SAWMOVE(strafe,10)wait(10)
+SAWMOVE(walk,-10)wait(10)
+}
+
+combo POLARTRACKER {	    	  	
+		set_val(POLAR_RX,xy_val(POLAR_RX, AimAssistOpSize)); wait(AimAssistOpTime); 
+		set_val(POLAR_RX,xy_val(POLAR_RX, AimAssistOpSize * -1));  wait(AimAssistOpTime);
+		set_val(POLAR_RY,xy_val(POLAR_RY, AimAssistOpSize))wait(AimAssistOpTime);
+		set_val(POLAR_RY,xy_val(POLAR_RY, AimAssistOpSize * -1)); wait(AimAssistOpTime);
+		set_val(POLAR_RY,xy_val(POLAR_RY, AimAssistOpSize))wait(AimAssistOpTime);
+		set_val(POLAR_RX,xy_val(POLAR_RX, AimAssistOpSize * -1));  wait(AimAssistOpTime);
+		set_val(POLAR_RX,xy_val(POLAR_RX, AimAssistOpSize)); wait(AimAssistOpTime);
+		set_val(POLAR_RY,xy_val(POLAR_RY, AimAssistOpSize * -1)); wait(AimAssistOpTime);
+		}
+		
+combo SAW_movement_finder {
+SAWAIM_MOVEMENT_TRACK = 1
+if(get_val(aim_x) > 15 ||get_val(aim_y) < -15)
+SAWAIM_MOVEMENT_TRACK = 1
+if(get_val(aim_x) > 15 ||get_val(aim_y) < -15)
+SAWAIM_MOVEMENT_TRACK = -1
+if(get_val(aim_x) > 15 ||get_val(aim_y) < -15)
+SAWAIM_MOVEMENT_TRACK = -1
+if(get_val(aim_x) > 15 ||get_val(aim_y) < -15)
+SAWAIM_MOVEMENT_TRACK = (-SAWAIM_MOVEMENT_TRACK + SAWAIM_MOVEMENT_TRACK)
+}
+ combo HeadAssist{
+
+	set_val(aim_y,inv(Head) + get_val(aim_y));
+}
+function set_rumble_tipe ( val) {                  
+	if( val){ rumble_tipe = RUMBLE_A ; LED_OnOff = Green;}  
+	else    { rumble_tipe = RUMBLE_B ; LED_OnOff = Red  ;} 
+	combo_run(vibrate);                     
+	combo_run(LED_BLINK);                   
+}
+function display_MOD_status(f_val,f_size,f_label){  
+    if(!ModMenu && !ModEdit){                                           
+        // Clear OLED Screen                          
+        cls_oled(0); // will clear oled   
+        print(f_size, 3, OLED_FONT_MEDIUM ,OLED_WHITE, f_label);   
+        if( f_val ){
+            print(center_x(sizeof(ON)  - 1, OLED_FONT_LARGE_WIDTH),37,OLED_FONT_LARGE,OLED_WHITE, ON[0]);//MOD is ON
+        }
+        else{
+            print(center_x(sizeof(OFF)  - 1, OLED_FONT_LARGE_WIDTH),37,OLED_FONT_LARGE,OLED_WHITE, OFF[0]);// MOD is OFF
+        }    
+        time_to_clear_screen = 1500; 
+    } 
+}
+
+function Offset (Axis,Value) { set_val(Axis, clamp(Value * (100 - abs(get_val(Axis))) / 100 + get_val(Axis), -100, 100)); return; }
+
+define fov = POLAR_RADIUS;
+
+function offset_sticky_aa(Stick,Value) {
+  set_val(Stick, clamp(Value * (100 - abs(get_ival(Stick))) / 100 + get_ival(Stick), -100, 100));
+  return;
+}
+int currentStickValue, adjustedValue;
+function offsetAR(Stick, Value) {
+    // Calculate the adjusted anti-recoil value based on the current stick value
+    currentStickValue = get_val(Stick);
+    adjustedValue = clamp(Value * (100 - abs(currentStickValue)) / 100 + currentStickValue, -100, 100);
+
+    // Apply the adjusted anti-recoil value to the stick
+    set_val(Stick, adjustedValue);
+    return;
+}
+//////////////////////////////////////////////////////////////////////////// 
+
+function SAW6() {
+if(abs(get_val(aim_x)) + abs(get_val(aim_y)) > 18 || abs(get_val(aim_x)) + abs(get_val(aim_y)) < -18)
+combo_stop(SAW6)return;}
+
+function SAWMOVEMENTX() {
+if(abs(get_val(aim_x)) + abs(get_val(aim_y)) > 20 || abs(get_val(aim_x)) + abs(get_val(aim_y)) < -20)
+combo_stop(SAW_movement_finder)return;} 
+
+function SAWMOVE(Stick, Value) {
+  if (Stick >= POLAR_LX) {
+    set_val(Stick, clamp(Value * (32767 - abs(get_val(Stick))) / 32767 + get_val(Stick), -32767, 32767));
+	return;}
+      set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));
+}
+
+function xy_val(f_axis,f_val) {	
+	if(abs(get_val(f_axis)) < DeadZoneSize)	
+		return f_val; 
+		return get_val(f_axis); 
+}
+function Sweet_EviL_Strafe()
+{
+	lx_strafe = get_ival(aim_x);
+	ly_strafe = get_ival(aim_y);
+		
+	input_mag = isqrt((lx_strafe * lx_strafe) + (ly_strafe * ly_strafe));
+	
+	// calculate the current STRAFE_SPEED of jolystick
+	if (input_mag < DeadZoneSize)
+	{
+		lx_strafe = 0;
+		ly_strafe = 0;
+	}
+	
+	if(first_strafe)
+	{
+		first_strafe = 1;
+		strafe_speed = atan2_16bits(ly_strafe, lx_strafe);
+	}
+	else
+	{
+		strafe_speed += trackingSpeed;
+		strafe_speed = (strafe_speed % 360);
+	}
+		
+	rumble = 0;
+	
+	
+	strafe_width = trackingSize + rumble;
+	
+	if(strafe_width > 32)
+	{
+		strafe_width = 32;
+	}
+	else if(strafe_width < inv(31))
+	{
+		strafe_width = inv(31);
+	}
+	
+	if(toggle_active_strafing)
+	{
+		lx_strafe = lx_strafe + ((strafe_width * cos_(strafe_speed)) / 1000);
+		ly_strafe = ly_strafe + ((strafe_width * sin_(strafe_speed)) / 1000);
+	}
+	else
+	{
+		lx_strafe = lx_strafe + ((strafe_width * sin_(strafe_speed)) / 1000);
+		ly_strafe = ly_strafe + ((strafe_width * cos_(strafe_speed)) / 1000);
+	}
+	
+	active_strafing_counter++;
+	
+	if(active_strafing == active_strafing_counter)
+	{
+		active_strafing_counter = 0;
+		toggle_active_strafing  = toggle_active_strafing ^^ 1;
+	}
+	
+	lx_strafe = clamp(lx_strafe, -100, 100);
+	ly_strafe = clamp(ly_strafe, -100, 100);	
+	
+	set_val(aim_x, lx_strafe);
+	set_val(aim_y, ly_strafe);
+}
+
+int _angle;
+function atan2_16bits( _y, _x)
+{
+// determine _angle
+	if (_y >= 0)
+	{ // oct 0,1,2,3
+		if (_x >= 0)
+		{ // oct 0,1
+			if (_x > _y)
+			{
+				_angle = ((_y * 300) / _x);
+			}
+			else
+			{
+				if (_y == 0)
+					_angle = 0; // (_x=0,_y=0)
+				else
+					_angle = 540 - ((_x * 300) / _y);
+
+			}
+		}
+		else
+		{ // oct 2,3
+		  // if (inv(_x) <= _y) {
+			if (_x >= inv(_y))
+			{
+				_angle = 540 - ((_x * 300) / _y);
+			}
+			else
+			{
+				_angle = 1080 + ((_y * 300) / _x);
+			}
+		}
+	}
+	else
+	{ // oct 4,5,6,7
+		if (_x < 0)
+		{ // oct 4,5
+		  // if (inv(_x) > inv(_y)) {
+			if (_x < _y)
+			{
+				_angle = ((_y * 300) / _x) - 1080;
+			}
+			else
+			{
+				_angle = ((inv(_x) * 300) / _y) - 540;
+			}
+		}
+		else
+		{ // oct 6,7
+		  // if (_x <= inv(_y)) {
+			if (inv(_x) >= _y)
+			{
+				_angle = ((inv(_x) * 300) / _y) - 540;
+			}
+			else
+			{
+				_angle = ((_y * 300) / _x);
+			}
+		}
+	}
+
+	return (_angle / 6);
+}
+
+ function sin_( _angle)
+{
+	if (_angle <= 90)
+	{
+		_ret = (TrackerCords[_angle]);
+	}
+	else if (_angle <= 180)
+	{
+		_ret = (TrackerCords[180 - _angle]);
+	}
+	else if (_angle <= 270)
+	{
+		_ret = inv(TrackerCords[_angle - 180]);
+	}
+	else
+	{
+		_ret = inv(TrackerCords[360 - _angle]);
+	}
+
+	return _ret;
+}
+
+//################################################################################################# 
+
+function cos_( _angle)
+{
+	if (_angle <= 90)
+	{
+		_ret = (TrackerCords[90 - _angle]);
+	}
+	else if (_angle <= 180)
+	{
+		_ret = inv(TrackerCords[_angle - 90]);
+	}
+	else if (_angle <= 270)
+	{
+		_ret = inv(TrackerCords[270 - _angle]);
+	}
+	else
+	{
+		_ret = (TrackerCords[_angle - 270]);
+	}
+
+	return _ret;
+}
+
+function adjustSensitivity(sensitivityIndex) {
+    // Sensitivity adjustments for each axis based on the sensitivityIndex
+    switch (sensitivityIndex) {
+        case 0: {
+            sensitivityAdjustments[0] = AimAssistOpSize; // x to y
+            sensitivityAdjustments[1] = 0;
+            break;
+        }
+        case 1: {
+            sensitivityAdjustments[0] = -AimAssistOpSize; // -x to y
+            sensitivityAdjustments[1] = 0;
+            break;
+        }
+        case 2: {
+            sensitivityAdjustments[0] = 0; // y to x
+            sensitivityAdjustments[1] = AimAssistOpSize;
+            break;
+        }
+        case 3: {
+            sensitivityAdjustments[0] = 0; // y to -x
+            sensitivityAdjustments[1] = -AimAssistOpSize;
+            break;
+        }
+        case 4: {
+            sensitivityAdjustments[0] = -AimAssistOpSize; // -x to -y
+            sensitivityAdjustments[1] = 0;
+            break;
+        }
+        case 5: {
+            sensitivityAdjustments[0] = AimAssistOpSize; // x to -y
+            sensitivityAdjustments[1] = 0;
+            break;
+        }
+        case 6: {
+            sensitivityAdjustments[0] = 0; // -y to -x
+            sensitivityAdjustments[1] = -AimAssistOpSize;
+            break;
+        }
+        case 7: {
+            sensitivityAdjustments[0] = 0; // -y to x
+            sensitivityAdjustments[1] = AimAssistOpSize;
+            break;
+        }
+    }
+}
+int input,sensitivity,modifiedSensitivity,newValue,clampedValue;
+function SmartSens(f_axis, f_val) {
+    input = get_val(f_axis);
+    sensitivity = 100 - abs(input);
+    modifiedSensitivity = f_val * (sensitivity / 100);
+    newValue = input + modifiedSensitivity;
+    clampedValue = clamp(newValue, -100, 100);
+    set_val(f_axis, clampedValue);
+}
+int Position,SpiralPosition1,SpiralPosition2,InnerSpiral,OuterSpiral; 
+int MinRadius = 1;  // Leave Alone , This can be left alone and not need adjusted. \\
+int time;                                             
+int  cos_angle_tdrift, sin_angle_tdrift;                      
+int actual_X, actual_Y, actual_Magnitude, max_Magnitude; 
+
+function GetShapes(f_var) {     
+   
+    if(!SpiralPosition1)                                
+    {
+        InnerSpiral -= 1;
+        if(InnerSpiral < MinRadius)
+            SpiralPosition1 = TRUE;
+    }
+    else
+    {
+        InnerSpiral += 1;
+        if(InnerSpiral > f_var)
+            SpiralPosition1 = FALSE;
+    }
+    if(!SpiralPosition2)
+    {
+        OuterSpiral -= 1;
+        if(OuterSpiral < MinRadius)
+            SpiralPosition2 = TRUE;
+    }
+    else
+    {
+        OuterSpiral += 1;
+        if(OuterSpiral >  f_var)
+            SpiralPosition2 = FALSE;
+    } 
+    if( polar_aim_assist_onoff == 1)                    
+    { 
+        sin_angle_tdrift = (sin_angle_tdrift * f_var) /100;
+        cos_angle_tdrift = (cos_angle_tdrift * f_var) /100;  
+    } 
+    if( polar_aim_assist_onoff == 2)        
+    { 
+        sin_angle_tdrift = (sin_angle_tdrift * f_var)/100;
+        cos_angle_tdrift = (cos_angle_tdrift * f_var/2)/100; 
+    }
+    if( polar_aim_assist_onoff == 3)                     
+    { 
+        cos_angle_tdrift = (cos_angle_tdrift * f_var) /100;  
+        sin_angle_tdrift = (sin_angle_tdrift * f_var/2)/100;  
+    } 
+    if( polar_aim_assist_onoff == 4)                  
+    {
+        sin_angle_tdrift = (sin_angle_tdrift * InnerSpiral) /100;
+        cos_angle_tdrift = (cos_angle_tdrift * OuterSpiral) /100;  
+    }
+    if( polar_aim_assist_onoff == 5)
+    {
+        if(Position == 0 || Position == 1)
+        {  
+            actual_X = (get_ival(aim_x)) + ((cos_angle_tdrift * f_var))/100;
+        }
+        if(Position == 2 || Position == 3)
+        {  
+            actual_Y = (get_ival(aim_y)) + ((sin_angle_tdrift * f_var))/100;
+        }
+            Position++;        
+            
+        if(Position == 4)
+        {
+            Position = 0;
+        }    
+    }
+    if(polar_aim_assist_onoff == 5 )
+    {
+           set_val(aim_x, actual_X);
+           set_val(aim_y, actual_Y); 
+    } 
+    else
+    {
+        set_val(aim_x, calculate(actual_X + cos_angle_tdrift, -100, 100));
+        set_val(aim_y, calculate(actual_Y + sin_angle_tdrift, -100, 100)); 
+          
+    }   
+ }
+function calculate(int v, int lo, int hi) { 
+  if(v < lo) return lo;               
+  if(v > hi) return hi;        
+  return v;     
+}  
+int _ret;
+
+function sin___(angle){
+
+if(angle <= 90)
+	{             
+		_ret = (TrackerCords[angle]);
+	}
+	else if (angle <= 180)
+	{      
+		_ret = (TrackerCords[180 - angle]);
+	}
+	else if (angle <= 270)
+	{
+		_ret = inv(TrackerCords[angle - 180]);     
+	}
+	else 
+	{
+		_ret = inv(TrackerCords[360 - angle]);      
+	}
+	
+	return _ret;
+  }
+  function cos___(angle){
+if(angle <= 90)
+	{             
+		_ret = (TrackerCords[90 - angle]);
+	}
+	else if (angle <= 180)
+	{      
+		_ret = inv(TrackerCords[angle - 90]);
+	}
+	else if (angle <= 270)
+	{
+		_ret = inv(TrackerCords[270 - angle]);       
+	}
+	else 
+	{
+		_ret = (TrackerCords[angle - 270]);       
+	}
+	
+	return _ret;
+  }
+  function GetSteadyAim(Axis, _Resolution) {
+	if (Axis >= 0)
+	{
+		ReT = (Axis % _Resolution);
+
+		if (ReT >= (_Resolution / 2))
+			Axis = Axis + (_Resolution - ReT);
+		else
+			Axis -= ReT;
+	}
+	else
+	{
+		ReT = (Axis % _Resolution);
+
+		if (abs(ReT) >= (_Resolution / 2))
+			Axis = Axis - (_Resolution + ReT);
+		else
+			Axis += abs(ReT);
+	}
+		return Axis;
+}
+
+function get_polar_coordinate(Radius, coef){
+
+if((Radius>20) )
+	{
+		Radius = 20;
+	}
+	else if((Radius > 32))
+	{
+		Radius = 32;
+	}
+	
+	return((Radius * coef) / 1000);		
+}
+         
+      
+define FONT_STATS_INDEX_WIDTH    = 0; 
+define FONT_STATS_INDEX_HEIGHT   = 1; 
+define FONT_STATS_INDEX_MAXCHARS = 2; 
+                                      
+                                      
+//////////////////////////////////////////////////////////////// 
+function horizontal_center_offset(number_characters, font_size) { 
+    return (128 - number_characters * FONT_STATS[font_size][FONT_STATS_INDEX_WIDTH]) / 2;
+}             
+              
+const string EXIT_TXT1 = "OP MOD";  
+const string EXIT_TXT2 = "UPDATED"; 
+                                     
+////////////////////////////////////////////////////////////////////////////// 
+///  SAVE  
+function save_toggles () {  
+                    
+     set_pvar(SPVAR_1,antirecoil_onoff); 
+     set_pvar(SPVAR_2,ToggleStickyAim); 
+     set_pvar(SPVAR_3,VM_Speed); 
+     set_pvar(SPVAR_4,SOFTAIM); 
+     set_pvar(SPVAR_5,DeadZone); 
+     set_pvar(SPVAR_16,TargetTracker);
+     set_pvar(SPVAR_19,holdbreath_onoff);
+     set_pvar(SPVAR_20,rapidfire_onoff);
+     set_pvar(SPVAR_25,HeadShotAssist_onoff);
+     set_pvar(SPVAR_28,polar_aim_assist_onoff);
+     set_pvar(SPVAR_31,taylorTracking);
+     set_pvar(SPVAR_43,ToggleTracker);
+     set_pvar(SPVAR_34,aimabuse_onoff);
+     set_pvar(SPVAR_38,antidw_on);
+     set_pvar(SPVAR_41,BuildTracker);
+     set_pvar(SPVAR_47,InstaFastReset);
+     set_pvar(SPVAR_42,DropShot);
+     set_pvar(SPVAR_6,AR_vertical); 
+     set_pvar(SPVAR_7,AR_horizontal); 
+     set_pvar(SPVAR_8,AimAssistTime); 
+     set_pvar(SPVAR_9,AimAssistSize);
+     set_pvar(SPVAR_10,AimAssistOpTime);
+     set_pvar(SPVAR_11,AimAssistOpSize);
+     set_pvar(SPVAR_12,HIPBoost);
+     set_pvar(SPVAR_13,Rot_AA_Size);		
+     set_pvar(SPVAR_14,Rot_AA_Time);		
+     set_pvar(SPVAR_15,DeadZoneSize);
+     set_pvar(SPVAR_17,TtSize);
+     set_pvar(SPVAR_18,TtTime);
+     set_pvar(SPVAR_21,RF_hold); 
+     set_pvar(SPVAR_22,RF_release);
+     set_pvar(SPVAR_24,SlideDelay);
+     set_pvar(SPVAR_26,HeadShotHoldTime);
+     set_pvar(SPVAR_27,HeadShotStrength);
+     set_pvar(SPVAR_29,polar_aasist_radius); 
+     set_pvar(SPVAR_30,polar_aasist_steps);
+     set_pvar(SPVAR_32,trackingSize);
+     set_pvar(SPVAR_33,trackingSpeed);
+     set_pvar(SPVAR_35,aimglitch1);
+	 set_pvar(SPVAR_36,aimglitch2);
+	 set_pvar(SPVAR_39,antidw_vertical);
+	 set_pvar(SPVAR_40,antidw_horizontal);
+	 set_pvar(SPVAR_44,SteadyAimResolution);
+	 set_pvar(SPVAR_45,TrackerStrength);
+	 set_pvar(SPVAR_46,TrackerSpeed);
+    combo_run(EXIT);                  
+      
+}// end of save   
+                      
+combo MESSAGE {       
+    wait(20);         
+    save_toggles ();  
+    cls_oled(0);      
+    print(horizontal_center_offset(sizeof(EXIT_TXT1), OLED_FONT_MEDIUM ), 2, OLED_FONT_MEDIUM, 1, EXIT_TXT1[0]); 
+    print(horizontal_center_offset(sizeof(EXIT_TXT2), OLED_FONT_MEDIUM ), 23, OLED_FONT_MEDIUM, 1, EXIT_TXT2[0]);
+    exit_wait = 2000;     
+}                        
+function blinck ( var){  
+	if(var){               
+		BlinckColor = Green;
+	}else{                 
+		BlinckColor = Red;    
+	}                       
+	combo_run(BLINK_NOTIFY); 
+}                           
+                            
+combo BLINK_NOTIFY {        
+	colourled(BlinckColor);   
+	wait(300);                 
+	colourled(ColorOFF);        
+	wait(100);                  
+	colourled(BlinckColor);      
+	wait(300);                   
+	colourled(ColorOFF);          
+}                                
+
+                                
+                                
+                                
+const uint8 FONT_STATS[][] = {  
+    {  7, 10, 18 }, // Small    
+    { 11, 18, 11 }, // Medium   
+    { 16, 26,  7 }  // Large    
+};                              
+                                
+function display_edit(  f_val) {
+    print(2, 5, OLED_FONT_SMALL, OLED_WHITE, EditVarStr[adjust_variable_idx]); 
+    number_to_string(f_val, find_digits(f_val));     
+}       
+        
+function f_go_forward (f_variable) {
+    f_variable       +=1;   
+    if(f_variable  > Min_Max_Options[modName_idx][1] )f_variable  = Min_Max_Options[modName_idx][0]; // max option     
+    blinck( f_variable );
+    return f_variable;
+}
+
+function f_go_back (f_variable) {
+    f_variable       -=1;   
+    if(f_variable  < Min_Max_Options[modName_idx][0] )f_variable  = Min_Max_Options[modName_idx][1];       
+    blinck( f_variable );
+    return f_variable;
+}
+// Variables for function number_to_string()  
+int ssss;                            
+int c_c_c,c_val;   
+function number_to_string(f_val,f_digits) {                  
+//=======================================================
+//  number_to_string(value to convert, # of digits in value) 
+//                                                           
+//  Display Up to Max 16-bit Signed Integer (-32,768 to 32,767) 
+//                                                      
+//      Convert digits to ASCII                         
+//      Add ASCII character to print buffer            
+//      Print string centered X & Y on OLED             
+//                                                       
+//======================================================
+    ssss = 1;  c_val = 10000;                            
+                                                      
+    if(f_val < 0) //--neg numbers                     
+    {                                                 
+         putc_oled(ssss,45);    //--add leading "-"      
+         ssss += 1;                                      
+         f_val = abs(f_val);                          
+    }                                                 
+                                                      
+    for(c_c_c = 5; c_c_c >= 1; c_c_c--)                           
+    {                                                 
+        if(f_digits >= c_c_c)                             
+        {                                             
+            putc_oled(ssss,ASCII_NUM[f_val / c_val]);    
+            f_val = f_val % c_val;                    
+            ssss +=  1;                                  
+            if(c_c_c == 4)                               
+            {                                         
+                putc_oled(ssss,44);   //--add ","        
+                ssss += 1;                               
+            }                                        
+        }                                             
+        c_val /= 10;                                  
+    }                                                
+    puts_oled(center_x(ssss - 1,OLED_FONT_LARGE_WIDTH),37,OLED_FONT_LARGE,ssss - 1,OLED_WHITE); // adjustable value centered in X 
+}                                                     
+int n_str_;                     
+                             
+function print_number(f_val,f_digits ,print_s_x , print_s_y , f_font) { 
+                                                      
+    n_str_ = 1;  c_val = 10000;                       
+                                                      
+    if(f_val < 0) //--neg numbers                     
+    {                                                 
+         putc_oled(n_str_,45);    //--add leading "-" 
+         n_str_ += 1;                                 
+         f_val = abs(f_val);                          
+                                                      
+    }                                                 
+                                                      
+    for(c_c_c = 5; c_c_c >= 1; c_c_c--)                           
+    {                                                 
+        if(f_digits >= c_c_c)                             
+        {                                              
+            putc_oled(n_str_,ASCII_NUM[f_val / c_val]);
+            f_val = f_val % c_val;                    
+            n_str_ +=  1;                             
+                                                      
+        }                                             
+        c_val /= 10;                                  
+    }                                                 
+    puts_oled(print_s_x,print_s_y,f_font,n_str_ - 1,OLED_WHITE); // adjustable value centered in X
+}                                       
+                                                      
+                                                      
+int f_min, f_max;
+function edit_val( f_val ) {  // antirecoil = edit_val( 0 , antirecoil, 99  , 99  ) 
+    line_oled(1,18,127,18,1,1);                                        
+    f_min = ValRange[adjust_variable_idx][0];                          
+    f_max = ValRange[adjust_variable_idx][1];                          
+    print_number(f_min ,find_digits(f_min) ,4 , 22 , OLED_FONT_SMALL); 
+    // on the right: max value                                         
+    print_number(f_max ,find_digits(f_max) ,97 , 22 , OLED_FONT_SMALL);
+                                          
+    if(get_ival(BTN_AIM)){                  
+		if(press_hold(PS4_RIGHT)){            
+			f_val ++;                           
+			if(f_val > f_max ) f_val = f_max;   
+			display_EDIT = TRUE;                            
+		}                                     
+                                          
+		if(press_hold(PS4_LEFT)){             
+			f_val --;                           
+			if(f_val < f_min ) f_val = f_min;   
+			display_EDIT = TRUE;                           
+		}                                     
+		if(press_hold(PS4_UP)){               
+			f_val +=10;                         
+			if(f_val > f_max ) f_val = f_max;   
+			display_EDIT = TRUE;                            
+		}                                     
+                                          
+		if(press_hold(PS4_DOWN)){             
+			f_val -=10;                         
+			if(f_val < f_min ) f_val = f_min;   
+			display_EDIT = TRUE;                             
+		}                                     
+	}                                      
+    return f_val;                        
+}                                        
+                                             
+                                   
+function press_hold(f_btn) {       
+//  return TRUE - event_press()    
+//- every 250ms when button is held 
+	  return event_press(f_btn) || get_ival(f_btn) && get_ptime(f_btn) > 250 
+	       && get_ptime(f_btn) % (get_rtime() * 8) == 0;
+}               
+                
+function find_digits(f_num) {                         
+//  find_digits(value)                                
+//        return Number of Digits in Value Passed     
+                                                      
+    f_num = abs(f_num);                               
+    if(f_num / 10000 > 0) return 5;                   
+    if(f_num /  1000 > 0) return 4;                   
+    if(f_num /   100 > 0) return 3;                   
+    if(f_num /    10 > 0) return 2;                   
+                          return 1;                  
+}  
+// Prints text to the screen
+ function printText(x, y, text, size, color) {
+	insertString(text);
+	flushBuffer(x, y, size, color);
+}
+function insertString(s) {
+	// Loop through each character of the string
+    do {
+    	insertCharacter(dint8(s)); // Insert character into display buffer
+    	s++; // Move to next character of the string
+    } while(dint8(s)) // Check if a next character exists
+}
+int displayBuffer;
+function flushBuffer(x, y, size, color) {
+	// Decrement display buffer value for proper arithmetic
+	displayBuffer--; 
+	
+	// Check horizontal alignment
+	switch(x) { 
+		case alignRight {
+			x = OLED_WIDTH - (displayBuffer * fontWidth[size]) - 4; // Additional 4 for padding from border
+			break;	
+		} case alignCenter {
+			x = (OLED_WIDTH >> 1) - ((displayBuffer * fontWidth[size]) >> 1);
+			break;
+		}
+		// No alignLeft case is needed because alignLeft is set to the proper left alignment already
+	}
+	
+	// Check vertical alignment
+	switch(y) { 
+		case alignCenter {
+			y = (OLED_HEIGHT >> 1) - (fontHeight[size] >> 1);
+			break;
+		} case alignBottom {
+			y = OLED_HEIGHT - fontHeight[size] - 4; // Additional 4 for padding from border
+			break;	
+		}
+		// No alignTop case is needed because alignTop is set to the proper top alignment already
+	}
+	
+	puts_oled(x, y, size, displayBuffer, color); // Output display buffer
+	displayBuffer = 1; // Reset display buffer
+}
+function insertCharacter(int value) {
+	putc_oled(displayBuffer, value);
+	displayBuffer++;
+}
+///////////////////////////////////////////////
+//  FUNCTIONS                                 
+                                              
+function center_x(f_chars,f_font) {           
+//  center_x(number of chars,font size);     
+//        return X for Centering String Horizontally 
+                                                      
+    return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2); 
+}                                                      
+                                                       
+function draw_rectangle()        
+{
+    line_oled(1,25,127,25,1,1); 
+    rect_oled(0, 0,OLED_WIDTH,64,FALSE,1); 
+}
+const string ModOption_30_0 = "Disable"; 
+const string ModOption_30_1 = "Circular"; 
+const string ModOption_30_2 = "Tall Oval"; 
+const string ModOption_30_3 = "Wide Oval"; 
+const string ModOption_30_4 = "Spiral"; 
+const string ModOption_30_5 = "Helix";
+const string ModOption_50_0 = "Default"; 
+const string ModOption_50_1 = "8 ms"; 
+const string ModOption_50_2 = "6 ms"; 
+const string ModOption_50_3 = "4 ms"; 
+const string ModOption_50_4 = "2 ms"; 
+const string ModOption_50_5 = "1 ms"; 
+define ShotModOptions = 31;
+define FireModOptions =  9;
+const string ModOption_31_0 = "Disable"; 
+const string ModOption_31_1 = "BTN_FIRE Only"; 
+const string ModOption_31_2 = "BTN_AIM & BTN_FIRE"; 
+const string ModOption_31_3 = "BTN_AIM Only"; 
+const string ModOption_31_4 = "On BTN_FIRE"; 
+function display_mod( f_string, mod_name, f_toggle, f_option) {   
+        // Display MOD_NAME                                    
+        print(f_string, 8, OLED_FONT_SMALL, OLED_WHITE, mod_name); 
+        if(f_option == 1)                              
+        {                                                     
+        // Display Disable / Enable                                 
+            if(f_toggle == 1)                                                             
+                print(center_x(sizeof(ON)  - 1, OLED_FONT_LARGE_WIDTH),37,OLED_FONT_LARGE,OLED_WHITE, ON[0]);// Enable 
+            else                                                                                               
+                print(center_x(sizeof(OFF) - 1, OLED_FONT_LARGE_WIDTH),37,OLED_FONT_LARGE,OLED_WHITE,OFF[0]);// Disable 
+        }            
+        if(f_option == ShotModOptions)// 31    
+        {                                                     
+            if(f_toggle == 0)                                                             
+                print(center_x(sizeof(ModOption_31_0)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_0[0]);// Disable
+                                                                                                                           
+            if(f_toggle == 1)                                                             
+                print(center_x(sizeof(ModOption_31_1)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_1[0]);// BTN_FIRE Only
+                                                                                                                           
+            if(f_toggle == 2)                                                             
+                print(center_x(sizeof(ModOption_31_2)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_2[0]);// BTN_AIM & BTN_FIRE
+                                                                                                                           
+            if(f_toggle == 3)                                                             
+                print(center_x(sizeof(ModOption_31_3)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_3[0]);// BTN_AIM Only
+                                                                                                                           
+        }            
+        if(f_option == FireModOptions)// 9 FireModOptions   
+        {                                                     
+            if(f_toggle == 0)                                                             
+                print(center_x(sizeof(ModOption_31_0)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_0[0]);// Disable
+                                                                                                                           
+            if(f_toggle == 1)                                                             
+                print(center_x(sizeof(ModOption_31_1)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_1[0]);// BTN_FIRE Only
+                                                                                                                           
+            if(f_toggle == 2)                                                             
+                print(center_x(sizeof(ModOption_31_2)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_2[0]);// BTN_AIM & BTN_FIRE
+                                                                                                                 
+            if(f_toggle == 3)                                                             
+                print(center_x(sizeof(ModOption_31_4)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_31_4[0]);// On BTN_FIRE
+                                                                                                                 
+        }         
+
+        if(f_option == 50)   
+        {                                                     
+            if(f_toggle == 0)                                                             
+                print(center_x(sizeof(ModOption_50_0)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_50_0[0]);// Default
+                                                                                                                           
+            if(f_toggle == 1)                                                             
+                print(center_x(sizeof(ModOption_50_1)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_50_1[0]);// 8 ms
+                                                                                                                           
+            if(f_toggle == 2)                                                             
+                print(center_x(sizeof(ModOption_50_2)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_50_2[0]);// 6 ms
+                                                                                                                           
+            if(f_toggle == 3)                                                             
+                print(center_x(sizeof(ModOption_50_3)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_50_3[0]);// 4 ms
+                                                                                                                           
+            if(f_toggle == 4)                                                             
+                print(center_x(sizeof(ModOption_50_4)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_50_4[0]);// 2 ms
+                                                                                                                           
+            if(f_toggle == 5)                                                             
+                print(center_x(sizeof(ModOption_50_5)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_50_5[0]);// 1 ms
+                                                                                                                           
+        }
+        
+                                if(f_option == 30)   
+        {                                                     
+            if(f_toggle == 0)                                                             
+                print(center_x(sizeof(ModOption_30_0)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_30_0[0]);// Disable
+                                                                                                                           
+            if(f_toggle == 1)                                                             
+                print(center_x(sizeof(ModOption_30_1)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_30_1[0]);// Circular
+                                                                                                                           
+            if(f_toggle == 2)                                                             
+                print(center_x(sizeof(ModOption_30_2)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_30_2[0]);// Tall Oval
+                                                                                                                           
+            if(f_toggle == 3)                                                             
+                print(center_x(sizeof(ModOption_30_3)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_30_3[0]);// Wide Oval
+                                                                                                                           
+            if(f_toggle == 4)                                                             
+                print(center_x(sizeof(ModOption_30_4)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_30_4[0]);// Spiral
+                                                                                                                           
+            if(f_toggle == 5)                                                             
+                print(center_x(sizeof(ModOption_30_5)  - 1, OLED_FONT_MEDIUM_WIDTH),37,OLED_FONT_MEDIUM,OLED_WHITE, ModOption_30_5[0]);// Helix
+                                                                                                                           
+        }
+  
+}//display mod end           
+     
+const uint8 MenuButtons [] = {  
+  PS4_RIGHT , //0. Up
+  PS4_LEFT , //1. Down
+  PS4_UP , //2. go back
+  PS4_DOWN , //3. go forward
+  PS4_CROSS , //4. enter in Edit Menu
+  PS4_CIRCLE , //5. exit  Menu
+  PS4_OPTIONS , //5. enter in  Menu
+  PS4_L2     //6. hold BTN_AIM
+};//--- End Menu Buttons  
+
+int menu_btn_indx;
+int MenuTimeOut;
+define menu_time_active = 30000;
+function CheckIfBtnIsPressed (){  
+    for(menu_btn_indx = 0; menu_btn_indx < 7; menu_btn_indx++){
+         if(event_press(MenuButtons[menu_btn_indx]) ){
+             MenuTimeOut = menu_time_active;
+         }
+         if(MenuTimeOut){              
+            MenuTimeOut -=1;
+            if(MenuTimeOut <= 0 ){    
+                ModMenu = FALSE;      
+                ModEdit = FALSE;      
+                display_EDIT  = FALSE; 
+                display_black = TRUE; 
+            }
+        }
+    }
+}
+ ����������������
