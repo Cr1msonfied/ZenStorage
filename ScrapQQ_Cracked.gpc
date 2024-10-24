@@ -1,0 +1,205 @@
+//Deadzone
+int Deadzone    = 10;// Change to 
+//Controller layout
+define Ads 	   = XB1_LT;//if for PS4 you put PS4_L2
+define Fire	   = XB1_RT;//if for PS4 you put PS4_R2
+define Edit    = XB1_B; //you put Edit Button
+define Select  = XB1_RT;//Change to Select Button
+define Reset   = XB1_RS;//Change to Reset Button
+define Confirm = PS4_R2;//Change to Confirm Button
+define pickup  = XB1_X; //Change to PickUp Button
+define Crouch  = XB1_RS;//Change to Crouch Button
+define EditHoldTime = 0;// Time If Using Hold to Edit In game [Setting To Be Matched To In Game Time]
+//Anti-Recoil
+int   Anti_Recoil    = 23; // Really No Need To Change But I Recomend Anywhere From 18 - 25
+//Aim Assist(Toggles and values)
+int   Block_Rumble    = True;	//Block Controller Rumble
+int   AA_Assist_Togle = True;	// [TRUE / FALSE] Helps Improve Aim - I Recomend
+int   Track_AA 	      = True;	// [TRUE / FALSE] Track_AA - I Recomend
+int   InstaEditReset  = True; 	// [TRUE / FALSE] Normal Instant Edit/Reset
+int   EditHold        = True; 	// [TRUE / FALSE] SET On WHEN USING EDIT HOLD TIME TO EDIT ( MATCH TO IN GAME SETUP ) [Off = INSTANT PRESS]
+int PlayStationOnXbox = True;   // [TRUE / FALSE] PS4/5 On PC/Xbox [Touchpad Button Fix]
+int	  BloomReducer    = True;	// [TRUE / FALSE] Keep True - Don't Touch.
+int   Drop_Shot		  = False;	// [TRUE / FALSE] Turn To True if You Want to Crouch When You Shoot.
+int   PickUpMacro	  = False;  // [TRUE / FALSE] Turn To True if Allways Want to Win 50/50.
+int   Assist_Strength1 =  10;	//Change to liked values. - I Recomend To Change to +DeadZone.
+int   Assist_Strength2 = -12;	//Change to liked values. - I Recomend To Change to -DeadZone.
+int   RightStick_AA_Strength = 25;
+int   Delay	= 1;// No Need To Change
+int   Dlay2 = 1;// No Need To Change
+int   DropShotWait     = 90;// WITH LESS VALUE, OUR CHARACTER WILL GO DOWN AND GET UP FASTER
+
+
+
+
+
+main{if (InstaEditReset)vm_tctrl(-4);if (EditHold) {if (get_ival(Edit) && get_ptime(Edit) > EditHoldTime) {Edit1 = True;Edit2 = True;}}
+else if (event_press(Edit)) {Edit1 = True;Edit2 = True;}if (Edit2) {if (event_release(Select)) {  Edit1 = False;Edit2 = False;}}
+if (Edit1 || Edit2) 
+if (event_press(Reset)) {  combo_run(InstantReset)Edit1 = False;Edit2 = False;}
+if(BloomReducer) 
+if (get_val(LX) && (get_val(LY)))
+{combo_run(BloomReducer);}
+if(abs(get_val(LX)) > 12||abs(get_val(LY)) > 12){ combo_stop(BloomReducer); }
+combo_run(Hair_Trigger)
+if(abs(get_val(XB1_RT)) > 100 || abs(get_val(XB1_LT)) > 100)combo_stop(Hair_Trigger)
+Anti_Recoil();
+ZeroDelay();
+combo_run(RGB);
+if (Block_Rumble) block_rumble();
+if (PlayStationOnXbox && get_console() == PIO_XB360 && get_controller() == PIO_PS4)  swap(PS4_TOUCH,PS4_SHARE);
+if (PickUpMacro && get_val(pickup)) combo_run(PickupSpam);}
+
+combo Major_AA4 {
+set_val(PS4_RX,AA4)
+wait(Dlay2)
+set_val(PS4_RY,AA4)
+set_val(PS4_RX,-AA4)
+wait(Dlay2)
+set_val(PS4_RY,-AA4)}
+
+combo Major_AA5 {
+set_val(PS4_RX,AA5)
+wait(Dlay2)
+set_val(PS4_RY,AA5) 
+wait(Dlay2)
+set_val(PS4_RX,-AA5)
+wait(Dlay2)
+set_val(PS4_RY,-AA5)}
+
+combo Major_AA6 {
+set_val(PS4_RX,Assist_Strength1)
+wait(Dlay2)
+set_val(PS4_RY,Assist_Strength1)
+set_val(PS4_RX,-Assist_Strength2)
+wait(Dlay2)
+set_val(PS4_RY,-Assist_Strength2)wait(Dlay2)
+}
+
+main{
+if(AA_Assist_Togle)
+if(get_val(Ads))
+combo_run(AA_Assist)
+if(RX > 0)
+RX += 1
+if(RY > 0)
+RY += 1
+if(RX < 0)
+RX -= 5
+if(RY < 0)
+RY -= 5
+if(RX + RY >= 10 || RX + RY <= -10)
+combo_stop(AA_Assist)
+}
+main{if(Track_AA)
+combo_run(AA1) if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Deadzone + 1 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -Deadzone - 1)combo_stop(AA1)
+combo_run(AA2) if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Deadzone + 2 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -Deadzone + 2)combo_stop(AA2)
+combo_run(AA3)if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Deadzone + 3*1 || abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) < -Deadzone - 3*1)combo_stop(AA3)
+combo_run(Major_AA4)if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15)combo_stop(Major_AA4)
+combo_run(Major_AA5)if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15)combo_stop(Major_AA5)
+combo_run(Major_AA6)if(abs(get_val(PS4_RX)) > 13 || abs(get_val(PS4_RY)) > 13)combo_stop(Major_AA6)
+if (Drop_Shot && get_ival(Ads)&& get_ival(Fire)) {combo_run(DropShot);}   else {combo_stop(DropShot);}
+}
+
+combo AA1 {set_val(PS4_RX,Val2)wait(Dlay)set_val(PS4_RY,Val2)wait(Dlay)set_val(PS4_RX,-Val2)wait(Dlay)set_val(PS4_RY,-Val2)wait(Dlay)}
+
+combo DropShot {
+set_val(Crouch,100);
+wait(50);
+set_val(Crouch,0);
+wait(30);
+wait(DropShotWait);}
+
+combo AA_Assist {
+set_val(PS4_RX,RightStick_AA_Strength)
+wait(Delay)
+set_val(PS4_RX,PS4_RY/RightStick_AA_Strength)
+wait(Time)
+set_val(PS4_RY,RightStick_AA_Strength)
+wait(Delay)
+set_val(PS4_RX,-RightStick_AA_Strength)//or you can put -RightStick_AA_Strength)
+wait(Delay)
+set_val(XB1_RX,-RightStick_AA_Strength)
+wait(Delay)
+set_val(PS4_RX,PS4_RY*-RightStick_AA_Strength)//or you can put -RightStick_AA_Strength
+wait(Delay)
+}
+combo Confirm {set_val(Confirm,100);wait(50);set_val(Confirm,0);wait(100);}
+combo InstantReset {wait(20)combo_run(Confirm);}
+
+combo RGB { wait(1);set_rgb(color, color[1], color[2]);color[dec] -= 1; color[inc] += 1;if(!color[dec]) { inc = (inc + 1) % 3; dec = (dec + 1) % 3; }}
+
+combo AA2 {set_val(PS4_RX,Val3)wait(Dlay)set_val(PS4_RY,Val3)wait(Dlay)set_val(PS4_RX,-Val3)wait(Dlay)set_val(PS4_RY,-Val3)wait(Dlay)}
+
+combo BloomReducer{ set_val(XB1_LX,-2); wait(50); set_val(XB1_LY,-2); wait(30);set_val(XB1_LX,+1); wait(50);set_val(XB1_LY,+2); wait(30);}
+
+combo Hair_Trigger{if(get_ival(Ads) > 1)set_val(Ads, 100);if(get_ival(Fire) > 1)set_val(Fire, 100);}
+
+combo AA3 {set_val(PS4_RX,Val4)wait(Dlay)set_val(PS4_RY,Val4)wait(Dlay)set_val(PS4_RX,-Val4)wait(Dlay)set_val(PS4_RY,-Val4)wait(Dlay)}
+
+combo Anti_Recoil{
+Recoil_Control=get_ival(PS4_RY)+Anti_Recoil;
+if(Recoil_Control >  100 + 100 - 100 )
+Anti_Recoil = 100 - 100 + 100;
+set_val(PS4_RY,Anti_Recoil)
+}
+function Anti_Recoil(){
+if(get_val(Ads) && get_val(Fire))
+combo_run(Anti_Recoil)
+if(abs(get_val(PS4_RX)) + abs(get_val(PS4_RY)) > Anti_Recoil - 100 + 100)
+combo_stop(Anti_Recoil)return;}
+
+combo PickupSpam {
+set_val(pickup, 100);
+wait(5);
+set_val(pickup, 0); }
+
+function center_x(f_chars,f_font) {return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2);}
+
+const string TextLineName []  = {"Pefect",""};
+const string TextLine1 []  = {"Crazy_V1",""};
+const string TextLine2 [] = {"Discord",""};
+const string TextLine3 [] = {"Scrap's Scripts",""};
+const string TextLine4 [] = {"Best Scripts",""};
+
+function ZeroDelay() {
+if(get_ival(PS4_UP)){set_val(PS4_UP, 100)}//DPAD
+if(get_ival(PS4_DOWN)){set_val(PS4_DOWN, 100)}//DPAD
+if(get_ival(PS4_LEFT)){set_val(PS4_LEFT, 100)}//DPAD
+if(get_ival(PS4_RIGHT)){set_val(PS4_RIGHT, 100)}//DPAD
+if(get_ival(PS4_SQUARE)){set_val(PS4_SQUARE, 100)}//BUTTONS
+if(get_ival(PS4_TRIANGLE)){set_val(PS4_TRIANGLE, 100)}//BUTTONS
+if(get_ival(PS4_CIRCLE)){set_val(PS4_CIRCLE, 100)}//BUTTONS
+if(get_ival(PS4_CROSS)){set_val(PS4_CROSS, 100)}//BUTTONS
+if(get_ival(PS4_L1)){set_val(PS4_L1, 100)}//BUMPERS
+if(get_ival(PS4_R1)){set_val(PS4_R1, 100)}//BUMPERS
+if(get_ival(PS4_L2)){set_val(PS4_L2, 100)}//TRIGGERS      **I GUESS WE DONT NEED IT ON TRIGGERS**
+if(get_ival(PS4_R2)){set_val(PS4_R2, 100)}//TRIGGERS    *JUST IN CASE U DONT WANT/NEED HAIRTRIGGERS*
+if(get_ival(PS4_L3)){set_val(PS4_L3, 100)}//STICK CLICK
+if(get_ival(PS4_R3)){set_val(PS4_R3, 100)}//STICK CLICK
+if(!get_ival(PS4_L2)){
+if(get_ival(PS4_SHARE)){set_val(PS4_SHARE, 100)}//MISCELLANEOUS
+if(get_ival(PS4_TOUCH)){set_val(PS4_TOUCH, 100)}//MISCELLANEOUS
+if(get_ival(PS4_OPTIONS)){set_val(PS4_OPTIONS, 100)}}//MISCELLANEOUS
+if(!get_ival(PS4_TOUCH)){
+if(get_ival(PS4_PS)){set_val(PS4_PS, 100)}}else {//MISCELLANEOUS
+if(event_release(PS4_UP)){set_val(PS4_UP, 0)}//DPAD
+if(event_release(PS4_DOWN)){set_val(PS4_DOWN, 0)}//DPAD
+if(event_release(PS4_LEFT)){set_val(PS4_LEFT, 0)}//DPAD
+if(event_release(PS4_RIGHT)){set_val(PS4_RIGHT, 0)}//DPAD
+if(event_release(PS4_SQUARE)){set_val(PS4_SQUARE, 0)}//BUTTONS
+if(event_release(PS4_TRIANGLE)){set_val(PS4_TRIANGLE, 0)}//BUTTONS
+if(event_release(PS4_CIRCLE)){set_val(PS4_CIRCLE, 0)}//BUTTONS
+if(event_release(PS4_CROSS)){set_val(PS4_CROSS, 0)}//BUTTONS
+if(event_release(PS4_L1)){set_val(PS4_L1, 0)}//BUMPERS
+if(event_release(PS4_R1)){set_val(PS4_R1, 0)}//BUMPERS
+if(event_release(PS4_L2)){set_val(PS4_L2, 0)}//TRIGGERS     **BUT WE NEED THE RELEASE**
+if(event_release(PS4_R2)){set_val(PS4_R2, 0)}//TRIGGERS      *SO IT CAN GO TO 0 QUICK*
+if(event_release(PS4_L3)){set_val(PS4_L3, 0)}//STICK CLICK
+if(event_release(PS4_R3)){set_val(PS4_R3, 0)}//STICK CLICK
+if(event_release(PS4_SHARE)){set_val(PS4_SHARE, 0)}//MISCELLANEOUS
+if(event_release(PS4_TOUCH)){set_val(PS4_TOUCH, 0)}//MISCELLANEOUS
+if(event_release(PS4_OPTIONS)){set_val(PS4_OPTIONS, 0)}//MISCELLANEOUS
+if(event_release(PS4_PS)){set_val(PS4_PS, 0)}}}//MISCELLANEOUS
+define True=TRUE,False=FALSE,On=TRUE,Off=FALSE;int RY = XB1_RY,RX = XB1_RX,LX = XB1_LX,LY = XB1_LY,Time=-9;int Val2 = 8;int Val3 = 8;int Val4 = 8,Dlay = 1;int Recoil_Control;int inc=1,dec,color[3];int AA4 = 8,AA5 = 8:int Edit1,Edit2;
+init { color = 255;cls_oled(1);print(center_x(18, OLED_FONT_SMALL_WIDTH),5,OLED_FONT_SMALL,OLED_BLACK,TextLineName[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),15,OLED_FONT_SMALL,OLED_BLACK,TextLine1[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),25,OLED_FONT_SMALL,OLED_BLACK,TextLine2[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),35,OLED_FONT_SMALL,OLED_BLACK,TextLine3[0]); print(center_x(18, OLED_FONT_SMALL_WIDTH),45,OLED_FONT_SMALL,OLED_BLACK,TextLine4[0]);} ˙πã≥Å≥Ä∞áøåæà∞Å¿
