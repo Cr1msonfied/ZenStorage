@@ -309,6 +309,11 @@
       "name": "Saw - Fortnite",
       "filename": "Saw_Fortnite.gpc",
       "category": "Fortnite"
+    },
+    {
+      "name": "Fortnite LCS Script v21",
+      "filename": "Fortnite_LCS_Script_V21_Consoles.gpc",
+      "category": "Fortnite"
     }
   ]
 }
