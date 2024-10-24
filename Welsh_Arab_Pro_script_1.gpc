@@ -1,0 +1,148 @@
+define welsharab1 = XB1_LT; 
+define welsharab2 = XB1_RT;
+define welsharab3 = XB1_RT;
+define welsharab4 = XB1_LT; 
+define welsharab5 = XB1_X; 
+define welsharab6 = XB1_RB;
+define welsharab7 = XB1_LB; 
+define welsharab33_o = TRUE;
+define welsharab34_f = FALSE;
+int consolearab;
+int consolearab1 = welsharab33_o;
+int consolearab2 = welsharab34_f;
+int consolearab3 = welsharab33_o;
+int consolearab4 = welsharab34_f;
+int consolearab5 = welsharab33_o;
+int consolearab6 = welsharab34_f; 
+int consolearab7 = welsharab34_f;
+define welsharab8 = XB1_Y;
+define welsharab9 = XB1_A;
+define welsharab10 = XB1_RS;
+define welsharab11 = XB1_UP;
+define welsharab12 = XB1_LT;
+define welsharab13 = XB1_LS;
+define welsharab14 = XB1_LS;
+define welsharab15 = XB1_RB;
+define welsharab16 = XB1_RT;
+define welsharab17 = XB1_LB;
+define welsharab18 = XB1_LT;
+define welsharab19 = XB1_RT;
+define welsharab20 = XB1_LT;
+define welsharab21 = XB1_RB;
+define welsharab22 = XB1_UP;
+define welsharab23 = XB1_DOWN;
+define welsharab24 = XB1_LEFT;
+define welsharab25 = XB1_RIGHT;
+define welsharab26 = XB1_RX; 
+define welsharab27 = XB1_RY; 
+define welsharab28 = XB1_LX; 
+define welsharab29 = XB1_LY; 
+define welsharab30 = POLAR_RY;
+define welsharab31 = POLAR_RX;
+define welsharab32 = POLAR_RS;
+int consolearab8 = welsharab33_o;
+int consolearab9 = welsharab33_o;
+int consolearab10 = welsharab33_o;
+int consolearab11 = welsharab33_o;
+int consolearab12 = welsharab34_f;
+int consolearab13 = welsharab34_f;
+int consolearab14 = welsharab34_f;
+int consolearab15 = welsharab34_f;
+int consolearab16 = welsharab34_f;
+int consolearab17 = welsharab34_f;
+int consolearb18 = 20;
+define consolearab19 = PS4_CROSS;
+define consolearab20 = XB1_X;
+define consolearab21 = XB1_DOWN;
+int consolearab50=10.3; 
+int consolearab51=11;
+int consolearab54=14; 
+int consolearab53=15; 
+int consolearab22 = 2.51;
+int consolearab23 = 1000;
+int consolearab24 = 9;
+int consolearab25 = 9; 
+int consolearab26 = 22; 
+int consolearab27 = 90;
+int consolearab381 = 100; 
+int consolearab350 =1; 
+int consolearab40=42;
+int consolearab43= 75;
+int consolearab44= 83;
+int consolearab28 = 10;
+int consolearab29 = 30; 
+int consolearab30 = 47;
+int consolearab31 = 60;
+int consolearab32 = 2; 
+int consolearab33 = 190;
+int consolearab34 = 25;
+int consolearab35 = welsharab34_f;
+int consolearab36 = welsharab33_o;
+define consolearab37 = 5;
+int consolearab38 = 100;
+int consolearab39 =1;
+int consolearab41= 75;
+int consolearab42= 83;
+int welsharab7000 = welsharab33_o;
+define welsharab3000 = XB1_B;
+define welsharab5000 = XB1_B;
+int LED = welsharab33_o;
+main{ if(consolearab13) { swap(PS4_SHARE, PS4_TOUCH) }
+block_rumble();
+if(consolearab35) { VM(consolearab37); }
+if (consolearab12) { if (get_ival(welsharab13)) { BuildPro = welsharab33_o;
+if (consolearab11) BuildTrack = welsharab33_o; }
+if (BuildPro && event_release(welsharab13)){ combo_run(BuildPro);BuildPro = welsharab34_f; 
+if (consolearab11) BuildTrack = welsharab33_o; } }
+if (consolearab11) { if (event_press(welsharab14)) { BuildTrack = !BuildTrack; } 
+if (BuildTrack && !BuildPro) { BuildCount += get_rtime(); 
+if (event_press(welsharab8) || BuildCount == consolearab38) { BuildTrack = welsharab34_f; BuildCount = 0; } 
+if (get_ival(welsharab18) || get_ival(welsharab19) || get_ival(welsharab17) || get_ival(welsharab15)) BuildCount = 0; } }
+if (consolearab36) {deadzone(welsharab1, welsharab2,100 ,100) } 
+if (!BuildTrack) if (consolearab1){ if ((get_ival(welsharab4)) || (get_ival(welsharab3) && consolearab2)) { if (abs(get_ival(welsharab26)) <= consolearab27 && abs(get_ival(welsharab27)) <= consolearab27) { combo_run(Sticky); } } else { combo_stop(Sticky); } }
+{ if (consolearab9) { if (get_ival(welsharab4) && get_ival(welsharab3) || consolearab2 && get_ival(welsharab3)) { if (abs(get_ival(welsharab27)) < consolearab34) { Head += consolearab32; combo_run(HeadshotS); } } 
+if (!get_ival(welsharab3)) Head = 0; 
+if (Head >= consolearab34) combo_stop(HeadshotS); } 
+if (consolearab6) { if (get_ival(welsharab4) >= 95 && get_ival(welsharab3) || (consolearab7 && get_ival(welsharab3))) { TimeValue += get_rtime();
+if (TimeValue > 30){ AxisLY = get_lval(welsharab27); AxisCY = get_ival(welsharab27); }
+if (abs(AxisCY) != abs(AxisLY)) BoostAR = ((AxisCY - AxisLY) * 4); 
+if ((BoostAR != 0) && (TimeValue > 40)) { BoostAR = 0; TimeValue = 0; }
+if (consolearab8) { RecoilTimer += get_rtime();
+if (RecoilTimer > consolearab31) { ARValue = consolearab29; RecoilTimer = 0; } 
+else { ARValue = 0; } } AROutPut = (consolearab30 + ARValue + BoostAR); Set_Val(welsharab27,AROutPut); }
+if (!get_ival(welsharab3)) { RecoilTimer = 0; TimeValue = 0; BoostAR = 0; } } 
+if (consolearab3) { if (consolearab4) { if (get_ival(welsharab4) && get_ptime(welsharab4) <= consolearab23 || consolearab5 && get_ival(welsharab3) && get_ptime(welsharab3) <= consolearab23) { AimAssist(); } }
+else if (get_ival(welsharab4)|| consolearab5 && get_ival(welsharab3)) { AimAssist(); } 
+if (!get_ival(welsharab4) && !get_ival(welsharab3)) { AAT = 0; Axis = 0; } } } } 
+combo BuildPro { set_val(welsharab14,0); wait(50); set_val(welsharab14,100); wait(50); }
+combo HeadshotS { set_val(welsharab27,inv(Head) + get_val(welsharab27)); }
+combo ConsoleAAs { set_val(welsharab26, (consolearab24)); wait(10) set_val(welsharab27, (consolearab24)); wait(10) set_val(welsharab26, consolearab24 * -1); wait(10) set_val(welsharab27, consolearab24 * -1); wait(10) }
+function AimAssist() { AAT += get_rtime(); if (!Axis) set_Val(welsharab27,AAT * consolearab22 / 10); 
+if (Axis == 1) set_Val(welsharab26,AAT * consolearab22 / 10);
+if (Axis == 2) set_Val(welsharab27,inv(AAT * consolearab22 / 10)); 
+if (Axis == 3) { set_Val(welsharab26,inv(AAT * consolearab22 / 10));
+if (AAT > 50) { AAT = 0; Axis = 0; } }
+else if (AAT > 50) { AAT = 0; Axis += 1; } }
+combo Sticky { Set_Val(welsharab27,consolearab24); wait(consolearab28); Set_Val(welsharab26,consolearab25);
+if (abs(get_ival(welsharab28)) < 20) Set_Val(welsharab28,consolearab26); wait(consolearab28); Set_Val(welsharab27,consolearab24 * -1); wait(consolearab28); Set_Val(welsharab26,consolearab25 * -1); 
+if (abs(get_ival(welsharab28)) < 20) Set_Val(welsharab28,consolearab26 * -1); wait(consolearab28); }
+function VM (f_speed) { if (f_speed == 0) vm_tctrl(-0);
+else if(f_speed == 1) vm_tctrl(-2); 
+else if(f_speed == 2) vm_tctrl(-4); 
+else if(f_speed == 3) vm_tctrl(-6); 
+else if(f_speed == 4) vm_tctrl(-8); 
+else if(f_speed == 5) vm_tctrl(-9); } 
+function set_Val(Input,Output) { set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,100)); return; } 
+function Set_Val(Input,Output) { set_val(Input,clamp(Output * (100 - abs(get_val(Input))) / 100 + get_val(Input),-100,100)); return; } 
+int BuildTrack, BuildCount, AAT, Axis, TimeValue, AxisLY, AxisCY, ARValue, AROutPut, BoostAR, RecoilTimer, Head,BuildPro;combo bhop{ set_val(XB1_A,100); wait(1); set_val(XB1_A,0);} 
+main {  if ((welsharab7000) && get_val (welsharab5000) && get_val (welsharab3000)) { combo_run (welsharab200);} 
+if (LED) { set_rgb (255,0,0) } 
+else { set_rgb (255,0,0) } }
+function Text (Character, Font) { return (OLED_WIDTH / 2 + 1) - (( Character * Font) / 2 + 1); } 
+init { cls_oled(1);print (Text (18, OLED_FONT_SMALL_WIDTH), 3 , OLED_FONT_SMALL,OLED_BLACK, T1 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 15, OLED_FONT_SMALL,OLED_BLACK, T2 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 26, OLED_FONT_SMALL,OLED_BLACK, T3 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 38, OLED_FONT_SMALL,OLED_BLACK, T4 [0]); print (Text (18, OLED_FONT_SMALL_WIDTH), 50, OLED_FONT_SMALL,OLED_BLACK, T5 [0]); }
+const string T1[]={" @WelshArabFN on ",""}
+const string T2[]={" Twitter ",""}
+const string T3[]={" Best Zen Scripts ",""}
+const string T4[]={" ",""} 
+const string T5[]={"    P9",""}
+combo welsharab200 { set_val (welsharab5000, 100); wait(1); set_val (welsharab5000, 0); wait(1);} //P9 ú¸‹¾Šº‹²‚³¸º‹¿
