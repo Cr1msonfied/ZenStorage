@@ -344,6 +344,11 @@
       "name": "Veriatas 9.2.3 Attackers",
       "filename": "VeritasR6Attakers_9.2.3.gpc",
       "category": "Rainbow Six Siege"
+    },
+    {
+      "name": "Veritas 9.2.3 Defenders",
+      "filename": "VeritasR6Defenders_9.2.3.gpc",
+      "category": "Rainbow Six Siege"
     }
   ]
 }
