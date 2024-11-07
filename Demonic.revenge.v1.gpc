@@ -1,0 +1,899 @@
+// DEMONIC REVENGE.
+
+/// MATCH YOUR IN-GAME BINDS \\\
+define Fire            = XB1_RT;                                         // THE BUTTON YOU SHOOT WITH (TYPICALLY R2)
+define Ads             = XB1_LT;                                         // THE BUTTON YOU AIM DOWN SIGHTS WITH (TYPICALLY L2)
+define P_Weapon        = XB1_LB;                                         // THE LEFT WEAPON SELECT BUTTON (TYPICALLY L1)
+define Crouch          = XB1_RS;                                         // THE BUTTON YOU CROUCH WITH 
+define Pickaxe         = XB1_Y;                                          // TOGGLE PICKAXE BUTTON
+define Edit            = XB1_RIGHT;                                      // THE BUTTON YOU PRESS TO EDIT
+define Select          = XB1_RT;                                         // THE BUTTON YOU PRESS TO SELECT EDIT TILES WITH
+define Reset           = XB1_LT;                                         // THE BUTTON YOU PRESS TO RESET A BUILD 
+define Confirm         = XB1_B;                                          // THE BUTTON YOU PRESS TO CONFIRM AN EDIT
+define Jump            = XB1_A;                                          // THE BUTTON YOU JUMP WITH
+define Build           = XB1_B;                                          // SWITCH MODE BUILD BUTTON 
+define Wall            = XB1_RT;                                         // BUTTON YOU PRESS WHILE IN BUILD MODE TO BUILD A WALL
+define Cone            = XB1_LB;                                         // BUTTON YOU PRESS WHILE IN BUILD MODE TO BUILD A CONE
+define Ramp            = XB1_LT;                                         // BUTTON YOU PRESS WHILE IN BUILD MODE TO BUILD A RAMP
+define Floor           = XB1_RB;                                         // BUTTON YOU PRESS WHILE IN BUILD MODE TO BUILD A FLOOR
+define Trap            = XB1_X;                                          // BUTTON YOU PRESS TO PLACE TRAP/LAUNCHPAD
+define Map             = PS4_SHARE;                                      // BUTTON YOU PRESS TO OPEN YOUR MAP
+define Up              = XB1_UP;
+define Left            = XB1_LEFT;
+define On              = TRUE;
+define Off             = FALSE; 
+///////////////////////////////////////////////
+/////// MOD TOGGLES \\\\\\
+/////////////////////////////////////////////////
+define BloomReducer    =         On;                                   // While ADS and FIRE the character will move back and forth, then the crosses get smaller by the minute, that's why we'll reduce the bloom.
+int ast                =         80;                                   // The time while our character moves, against more value slower, less value more speed. (Hint: a value less than 100 is best. 
+/////////////////////////////////////////////////
+// QUICK EDIT BUTTON \\
+int QuickEditAssist    =        On;                                    // EDIT ASSIST TOGGLE
+define EditAssist      = XB1_RIGHT;                                    // MAKE THIS THE SAME BUTTON YOU USE AS EDIT IN-GAME!  
+////////////////////////////////////////////////
+// WALL TAKE / REPLACE//
+int    WallR           =     On;
+define WallTakeHold    = XB1_RT;
+define WallTakePress   =  XB1_B;
+// CONE WALL REPLACE \\
+int ConeWallReplace    =     On;                                       // CONE WALL REPLACE TOGGLE 
+define Hold            = XB1_RT;                                       // CONE WALL REPLACE HOLD
+define Press           =  XB1_X;                                       // CONE WALL REPLACE PRESS/ACTIVATOR 
+/////////////////////////////////////////////////
+// Crouch Spam \\
+int Ndrop = On;                                                       // while holding fire, tap crouch button to spam crouch while firing. release fire to stop spam crouch.
+/////////////////////////////////////////////////
+// Progression Head Shot Assist
+define HeadAssist    = On;                                            // Main Toggle ON/OFF
+define HeadHipAssist = On;                                            // Operate on Fire Only [If FALSE It Will Only Run On ADS & FIRE]
+define HeadStep      =  2;                                            // Step Increment Increasing Until Its Reached HeadMax
+define HeadMax       = 20;                                            // Max Head Assist Value
+///////////////////////////////////////////////////
+// Hair Triggers
+define HairTriggers  = On;                                            // Instant Triggers [100%]
+//////////////////////////////////////////////////
+// Build Monitor
+define BuildTracker  = Off;     //needs fixing.                       // Isolate Aim Assist And Head Shot Mod In Build Mode
+define BuildSyncTime = 2000;                                          // Auto De-Sync After 2 Seconds Of being Idol [Pickaxe == Manual Re-Sync]
+//////////////////////////////////////////////////
+
+////// AIM ASSISTS \\\\\\
+// BATTSAA
+define BattStickyPower    =  20;
+define BattStickyWait     =  20;
+define BattsStickyAA      =  On;
+define BattsAAHip         =  On;
+ // AIM ASSIST 1 \\ 
+
+// DoGz Polar Version XIII [Real Zen Polar {STAGE 1 of 2}]
+int DoGzZenPolar = On;        // MASTER AIM ASSIST TOGGLE
+int PolarOrientation = On;    // Orientation Enabled {Clockwise <=> AntiClockwise} or Disabled {Standard Clockwise}
+int PolarCoil = On;           // Polar Coil Enabled 
+int ZenPolarRadius = 3;       // Power Of Radius
+int ZenPolarAngle = 11;       // Speed Of Angle	[Angle 5 / Counter 150 (2 360's PolarOrientation Enabled (NO Increment Used (PolarCoil Disabled))]
+int RotateCounter = 150; 	  // Rotate Counter [Before PolarOrientation Inverts] 
+int Increment = 2;            // Increment Value [Max n Min + Radius (Default = Min 5 Max 17)]
+int ZenPolarChangeSpeed = 10; // Speed Of Increment
+int ZenPolarRelease = 12; 	  // Value To Change Aim Assist [Below ZenPolarRelease Zen Polar {STAGE 1} Will Run && Above One Of {STAGE 2} Methods Will Run]  
+// DAM POLAR/DoGz Reducer {STAGE 2 of 2}
+int DoGzReleasMode = 1;       // [1]DoGzDamPolar or [2]DoGzReducer
+// DamPolar
+int DamAdsRadius  = 3;		    // Power Of Radius On Ads Only
+int DamAdsAngle   = 11;         // Speed Of Angle On Ads Only
+int DamFireRadius = 3;		    // Power Of Radius On Fire
+int DamFireAngle  = 30;         // Speed Of Angle On Fire
+// DoGzReducer                 
+int ReducerPower = 3;		    // Power Of Reducer Combo
+int ReducerTime = 10;		    // Speed Of Reducer Combo [10/20/30]
+
+ // TAYLORS TAA_v5_-_F4D3_v1.00. 
+int aimAssist      =  3;        // Aim Assist = 1 (v5 Only) - AimAssist = 2 (v5 + SpeedBoost) - AimAssist = 3 (F4D3 AA) - AimAssist = 4 (F4D3 AA + SpeedBoost) 
+int taylorShapes   =  1;        // Circle,T.Oval,W.Oval,Helix,Kitt,V.Flare,Tartan,Jupiter,Oscilirate,Rose,Atomic 
+int spiralChange   =  0;        // Enable if you want Spiral for the shapes
+int speedAngle     =  6;
+int radiusSize     = 10;
+int taylorTracking =  1;        // Enable if you want to move the shape (oscilirating affect) 
+int trackingSize   =  2;        // Max should be around 8-9 ( any more it will be unstable  )
+int trackingSpeed  =  2;        // Max should be around 8-9 ( any more it will be unstable  ) 
+
+
+
+
+
+/* Display Variables / ScreenSaver / Strings/Text  */
+int displayTitle = TRUE;
+
+
+main {  	// vm_tctrl(-2); // added for personal choice. not recommended.
+     	Axis = isqrt(abs(get_ival(AimX)) * abs(get_ival(AimX)) + abs(get_ival(AimY)) * abs(get_ival(AimY)));
+	  		
+	  	  if(displayTitle){ 
+            cls_oled(0);
+            displayTitle = FALSE;
+           
+            //run = 1;
+            //combo_run(rgb);
+            rect_oled(0, 0, OLED_WIDTH, OLED_HEIGHT, OLED_BLACK, OLED_WHITE);
+            print(centerPosition(getStringLength(misc[0]) ,OLED_FONT_SMALL_WIDTH), 6  ,OLED_FONT_SMALL , OLED_WHITE , misc[0]);
+            print(centerPosition(getStringLength(misc[1]) ,OLED_FONT_SMALL_WIDTH),21  ,OLED_FONT_SMALL , OLED_WHITE , misc[1]);
+            print(centerPosition(getStringLength(misc[2]) ,OLED_FONT_SMALL_WIDTH),36  ,OLED_FONT_SMALL , OLED_WHITE , misc[2]);
+            print(centerPosition(getStringLength(misc[3]) ,OLED_FONT_SMALL_WIDTH),50  ,OLED_FONT_SMALL , OLED_WHITE , misc[3]);    
+        }if(aimAssist >= 1){ 
+			RX = get_val(POLAR_RX);
+			RY = get_val(POLAR_RY);
+			polarAngle = get_polar(POLAR_RS, POLAR_ANGLE);
+			GetAngle(taylorShapes,angle,radiusSize * 327);
+			if(taylorTracking){ 
+				trackingAngle    = (trackingAngle + trackingSpeed) % 360;
+				trackingAngleOne = ((trackingSize * 327) * sin(trackingAngle)/23170);
+			    trackingAngleTwo = ((trackingSize * 327) * cos(trackingAngle)/23170);
+			}
+			if(aimAssist == 1 ^^ aimAssist == 3){ 
+				angle = (angle + speedAngle) % 360;
+			} 
+		    if(aimAssist == 2 ^^ aimAssist == 4){ 
+				speedBoostAngle += get_rtime();
+				angle = (angle + (speedBoostAngle / 100)) % 360;
+			} 
+			if(aimAssist == 1 ^^ aimAssist == 2){ 
+				if(get_ival(Ads) || get_ival(Fire)){ 
+					set_val(POLAR_RX,clamp(RX + cosAngle,-32767,32767));
+					set_val(POLAR_RY,clamp(RY + sinAngle,-32767,32767));
+				} 
+				if(event_release(Ads) || event_release(Fire)){ 
+					speedBoostAngle = 0;
+				}
+			} 
+			if(aimAssist == 3 || aimAssist == 4){ 
+				if(get_ival(Ads) || get_ival(Fire)){ 
+					if(get_ival(Fire)){ 
+						PolarAimAssist = get_ptime(Fire);	
+						if(PolarAimAssist <= PolarStart){
+			     			offset(POLAR_RY,sinAngle);
+					   		offset(POLAR_RX,cosAngle);
+			     		}
+			     		if((PolarAimAssist > PolarStart) && (PolarAimAssist <= PolarMid)){
+			         		set_val(POLAR_RX,clamp(RX + cosAngle,-32767,32767));
+							set_val(POLAR_RY,clamp(RY + sinAngle,-32767,32767));
+					    } 
+			     		if(PolarAimAssist > PolarMid) {	
+		         			set_val(POLAR_RX,clamp(RX + cosAngle,-32767,32767));
+							set_val(POLAR_RY,clamp(RY + sinAngle,-32767,32767));
+			     		}
+			     	}
+			     	else { 
+			     		offset(POLAR_RY,sinAngle);
+					   	offset(POLAR_RX,cosAngle);
+					}
+				}
+				if(event_release(Ads) && !get_val(Fire) || event_release(Fire) && !get_ival(Ads)){ 
+					speedBoostAngle = 0;
+					PolarAimAssist  = 0;
+				} 
+			}
+		}    
+	        
+		          if (DoGzZenPolar) {
+		    
+		        if ((get_ival(Ads) || get_ival(Fire)) && 
+		               Axis < ZenPolarRelease) {
+	            
+	                if (PolarOrientation) {
+	                
+	                    if (Count < RotateCounter) {
+	                    	
+	                    	Rotation += ZenPolarAngle;
+	                    
+	                    	if (Rotation > 359) { 
+	                    		
+	                    		Rotation = 0;
+	                    	}
+	                    	Count++;
+	                    }
+	                    
+	                    if (Count >= RotateCounter) {
+	                    
+	                    	Rotation -= ZenPolarAngle;
+	                    
+	                    	if (Rotation < 0) { 
+	                    
+	                    		Rotation = 359;
+	                    	}	
+	                    	Count++;
+	                    }
+	                    
+	                    if (Count == RotateCounter * 2) { 
+	                    
+	                    	Count = 0;
+	                    }	
+	                } else {
+	                
+	                		Rotation += ZenPolarAngle;
+	                
+	                	if (Rotation > 359) { 
+	                		
+	                		Rotation = 0;
+	                	}
+	                }
+	                	    
+	                set_polar(PS,Rotation,(Axis * PolarValue / 3) + (ZenPolarRadius * PolarValue) + Counter);
+	                
+	                if (PolarCoil) {
+	                
+	                	if (Inverter) {
+	                		
+	                		Counter += ZenPolarChangeSpeed;
+	                	
+	                	} else {
+	                	
+	                		Counter -= ZenPolarChangeSpeed;
+                        }
+                        
+	                	if (Counter > Increment * PolarValue) {
+	                		
+	                		Inverter = !Inverter;
+	                	}
+	                
+	                	if (Counter < inv(Increment) * PolarValue) {
+	                		
+	                		Inverter = !Inverter;
+	                	}
+	                }
+		        }
+		      } 		        if ((get_ival(Ads) || get_ival(Fire)) && Axis >= ZenPolarRelease) {
+                    
+                    if (DoGzReleasMode == DoGzDamPolar) {    
+		            	
+		            	if (get_ival(Fire)) {
+                            
+                     		DamRadius = DamFireRadius;
+                        	DamAngle  = DamFireAngle;
+                    	
+                    	} else {
+                                
+                     		DamRadius = DamAdsRadius;
+                        	DamAngle  = DamAdsAngle;
+                        }
+		            	
+		            	Angle += DamAngle;
+                    	Angle = Angle % 360;
+                    	Sin = DamPolarArray[Angle % 360];
+                    	Cos = DamPolarArray[(Angle + 270) % 360];
+                    	Cos = (Cos * DamRadius) / 100;
+                    	Sin = (Sin * DamRadius) / 100;
+		            
+                    	set_Val(AimX,Cos);
+                    	set_Val(AimY,Sin); 
+    	            
+    	            } else if (DoGzReleasMode == DoGzReducer) {
+    	        
+    	        		combo_run(DoGzReducer);
+    	        	}	
+		        } else {
+		        	
+		        	combo_stop(DoGzReducer);
+		        }
+ 	if (BuildTracker) {
+        
+        if (event_press(Build)) {
+            
+            BuildTrack = !BuildTrack;
+        }
+    
+        if (BuildTrack) {
+            
+            BuildCount += get_rtime();
+            
+            if (event_press(Pickaxe) || BuildCount == BuildSyncTime) {
+                
+                BuildTrack = FALSE;
+                BuildCount = 0;
+            }
+            
+            if (get_ival(Roof) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap)) 
+                
+                BuildCount = 0;
+        }
+    }
+  	if (HairTriggers) { 
+   		
+   		deadzone(PS4_L2,PS4_R2,100,100);
+   	}
+  	    if (HeadAssist) {
+	        
+	        if (get_ival(Ads) && get_ival(Fire) || HeadHipAssist && get_ival(Fire)) {
+	        
+	        	if (abs(get_ival(AimY)) < HeadMax) { 
+	        		
+	        		Head += HeadStep;
+	        		combo_run(HeadAssist);
+	        	}	
+	        }
+	        
+	        if (!get_ival(Fire)) Head = 0;
+	        	
+	        if (Head >= HeadMax) combo_stop(HeadAssist);
+	    }if (BattsStickyAA) {
+    
+        if (get_ival(Ads) || (BattsAAHip && get_ival(Fire))) {
+        
+            combo_run(BattsStickyAssist);
+        
+        } else {
+        
+            combo_stop(BattsStickyAssist); 
+        }
+    } 
+	
+	 if (WallR) {
+            if (get_ival(WallTakeHold) && event_press(WallTakePress)) {
+                Shunt = WallTakePress;
+                combo_run(WallR);
+                WallReplace = On;
+            }
+                if (WallR && !combo_running(WallR) && event_release(WallTakeHold)) {
+                    WallR = Off;
+                }
+        }
+      		
+	
+   if(BloomReducer) {
+ 
+     if(get_val(Ads) && (get_val(Fire))) {        
+  
+        combo_run(AntiBloom);
+}
+     if(abs(get_val(PS4_LX)) > 40 || abs(get_val(PS4_LY)) > 40){
+ 
+        combo_stop(AntiBloom);
+       }
+}
+		//ANTI BLOOM REDUCER - END   
+	 
+	   if(Ndrop) 
+		if(event_release(Fire))
+		{
+			Ndrop = FALSE;
+		}
+		{if(get_val(Fire) && event_press(Crouch))
+			{Ndrop = TRUE;}}
+		{if(Ndrop)
+			{if(get_ival(Fire))
+				{combo_run(NDropShot);
+				}
+			}
+		}
+	
+
+	if(Ndrop)
+	{if(get_ival(Fire))
+		{	combo_run(NDropShot);
+		}
+	} if (Shunt) {
+        
+        if (event_release(Shunt)) {
+            
+            Shunt = Off;
+        
+        } else {
+            
+            set_val(Shunt,Off);
+        }
+    }	if (QuickEditAssist) {
+	 	
+	 	if (get_ival(EditAssist)) {
+			
+			EditAssist();
+			Edit1 = On;
+		}
+
+		if (event_release(EditAssist)) {
+			
+			EditT = Off;	
+			Edit1 = Off;
+		}
+		
+		if (Edit1 && event_press(Reset)) {  
+            
+        	combo_run(InstantReset);
+            Edit1 = Off;
+        }
+	}
+	
+	 if (ConeWallReplace) {
+            if (get_ival(Hold) && event_press(Press)) {
+                Shunt = Press;
+                combo_run(WallReplace);
+                WallReplace = On;
+            }
+                if (WallReplace && !combo_running(WallReplace) && event_release(Hold)) {
+                    
+                    WallReplace = Off;
+                }
+        }
+        
+    	block_rumble();
+
+
+} 
+
+//combos..
+combo DoGzReducer {
+
+	set_Ival(AimX,ReducerPower);
+	set_Ival(AimY,ReducerPower);
+	wait(ReducerTime);
+	set_Ival(AimX,inv(ReducerPower));
+	set_Ival(AimY,inv(ReducerPower));
+	wait(ReducerTime);
+}
+combo HeadAssist{
+
+	set_val(AimY,inv(Head) + get_val(AimY));
+}
+combo WallR {
+    
+    wait(10);
+    set_val (Fire,100);
+    wait(WallTakeHTime);
+    set_val(Build,100);
+    wait(WallTakeHTime);
+    set_val(Wall,100);
+    wait(WallTakeHTime);
+    set_val(Build,100);
+    wait(10);
+}
+combo AntiBloom { 
+	
+  set_val(PS4_LX,-40);
+  wait(ast);
+  set_val(PS4_LX, 40);
+  wait(ast);
+  if(ast < 160){ast = ast + 10;}
+  else {ast = 100;
+   }
+}
+combo NDropShot {
+    set_val(Crouch, 100); 
+    wait(60);
+    set_val(Crouch, 0);
+    wait(30);
+    wait(DropShotSpeed);
+}
+
+combo Confirm {
+
+    set_val(Confirm,100);
+    wait(10);
+    set_val(Confirm,0);
+    wait(10);
+}
+combo InstantReset {
+
+    wait(20)
+    combo_run(Confirm);
+}
+combo WallReplace {
+    wait(1);
+    set_val(Wall,0);
+    set_val (Fire,100);
+    wait(HTime);
+    set_val(Build,100);
+    wait(HTime);
+    set_val(Cone,100);
+    wait(HTime);
+    set_val(Cone,100);
+    wait(HTime);
+    set_val(Wall,100);
+    wait(HTime);
+    set_val(Wall,100);
+    wait(HTime);
+  
+    }
+    combo BattsStickyAssist {
+   
+   set_val(AimY,AxisRelease(AimY,BattStickyPower));
+   wait(BattStickyWait);
+   set_val(AimX,AxisRelease(AimX,BattStickyPower));
+   set_val(Strafe,AxisRelease(Strafe,BattStickyPower));
+   wait(BattStickyWait);
+   set_val(AimY,AxisRelease(AimY,inv(BattStickyPower)));
+   wait(BattStickyWait);
+   set_val(AimX,AxisRelease(AimX,inv(BattStickyPower)));
+   set_val(Strafe,AxisRelease(Strafe,inv(BattStickyPower)));
+   wait(BattStickyWait);
+}
+
+/* 
+ .~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~. 
+(                   Functions                        ) 
+ `-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-* 
+*/
+const int16 TaylorShapesInfo[][] = {
+// Shape ID - CosAngle - SinAngle - DivisableRadiusCos - DivisableRadiusSin - NonSpiral 
+{      0    ,    0     ,    0     ,          1         ,         1          ,     0 }, // Circular 
+{      1    ,    0     ,    0     ,          2         ,         1          ,     0 }, // TallOval
+{      2    ,    0     ,    0     ,          1         ,         2          ,     0 }, // WideOval
+{      3    ,    0     ,    0     ,          1         ,         1          ,     1 }, // Helix
+{      4    ,    0     ,    0     ,          1         ,         0          ,     0 }, // Kitt 
+{      5    ,    0     ,    0     ,          0         ,         1          ,     0 }, // Vertical Flare
+{      6    ,   45    ,   135     ,          1         ,         1          ,     2 }, // Tartan 
+{      7    ,  180    ,   315     ,          1         ,         1          ,     0 }, // Jupiter
+{      8    ,  315    ,   180     ,          1         ,         1          ,     0 }  // Osclirate  //  Rose // Atomic 
+} 
+int helixPosition,increase;
+int innerSpiral,outerSpiral;
+function Spiral(Rad){ 
+	if(!(cycleRefresh++ % timeInterval)){
+        if(!spiralPosition1){
+            innerSpiral -= 327
+            if(innerSpiral < 654)
+                spiralPosition1 = 1;   
+        }
+        else{
+            innerSpiral += 327;
+            if(innerSpiral > Rad)
+                spiralPosition1 = 0;
+        }
+        if(!spiralPosition2){
+            outerSpiral -= 327;
+            if(outerSpiral < 654)
+                spiralPosition2 = 1;
+        }
+        else{
+            outerSpiral += 327;
+            if(outerSpiral > Rad)
+                spiralPosition2 = 0
+                
+        }
+        cycleRefresh = 0;
+	}    
+}			
+function GetAngle(getShapes,getSinCos,Rad){ 
+	Rad = Rad >> 1;
+	if(TaylorShapesInfo[getShapes][5] == 0){ // Circular Shapes 
+		if(spiralChange){ 
+			Spiral(Rad)
+			cosAngle  = ((cos(TaylorShapesInfo[getShapes][1] + getSinCos) * innerSpiral/TaylorShapesInfo[getShapes][3] )/(23170) << 1) + trackingAngleOne;
+    		sinAngle  = ((sin(TaylorShapesInfo[getShapes][2] + getSinCos) * outerSpiral/TaylorShapesInfo[getShapes][4] )/(23170) << 1) + trackingAngleTwo; 
+       	}
+        else { 
+			cosAngle  = ((cos(TaylorShapesInfo[getShapes][1] + getSinCos) * Rad/TaylorShapesInfo[getShapes][3])/ (23170) << 1) + trackingAngleOne;
+			sinAngle  = ((sin(TaylorShapesInfo[getShapes][2] + getSinCos) * Rad/TaylorShapesInfo[getShapes][4])/ (23170) << 1) + trackingAngleTwo;
+		} 
+	} 
+    if(TaylorShapesInfo[getShapes][5] == 1){  // Helix 
+    	Helix();
+    	if(spiralChange){ 
+    		Spiral(Rad)
+        	cosAngle  = ((innerSpiral * y)/(23170) << 1)+ trackingAngleOne;
+            sinAngle  = ((outerSpiral * x)/(23170) << 1)+ trackingAngleTwo;
+        }
+        else { 
+        	cosAngle  = ((Rad * y)/(23170) << 1)+ trackingAngleOne;
+            sinAngle  = ((Rad * x)/(23170) << 1)+ trackingAngleTwo;
+        } 	
+    } 
+	if(TaylorShapesInfo[getShapes][5] == 2){  // Tartan 
+		if(Positionv3 == 0){ 
+			cosAngle  = ((cos(TaylorShapesInfo[getShapes][1] + getSinCos) * Rad/TaylorShapesInfo[getShapes][3])/(23170) << 1) + trackingAngleOne;
+			sinAngle  = ((sin(TaylorShapesInfo[getShapes][2] + getSinCos) * Rad/TaylorShapesInfo[getShapes][4])/(23170) << 1) + trackingAngleTwo;
+		} 
+		if(Positionv3 == 1){ 
+			cosAngle  = ((cos(TaylorShapesInfo[getShapes][2] + getSinCos) * Rad/TaylorShapesInfo[getShapes][3])/(23170) << 1) + trackingAngleOne;
+		   	sinAngle  = ((sin(TaylorShapesInfo[getShapes][1] + getSinCos) * Rad/TaylorShapesInfo[getShapes][4])/(23170) << 1) + trackingAngleTwo;   	
+		} 
+	    Positionv3 ++ 
+		if(Positionv3 == 2){ 
+		  	Positionv3= 0;
+		}
+	} 
+	if(getShapes == 9) {   
+	    if(spiralChange){ 
+	    	Spiral(Rad);
+	    } 
+		if(polarAngle < 45) {
+			if(spiralChange){
+		    	cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // / 
+		   	 	sinAngle = ((outerSpiral * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		   	}
+		   	else { 
+		   		cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // / 
+		   	 	sinAngle = ((Rad * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		   	 }  
+		} 
+		else if(polarAngle <  90) { 
+			if(spiralChange){ 
+				cosAngle = ((innerSpiral/2 * cos(getSinCos))/ (23170) << 1)+ trackingAngleOne; // | 
+		    	sinAngle = ((outerSpiral   * sin(getSinCos))/(23170) << 1) + trackingAngleTwo;
+		    }
+		    else { 
+		    	cosAngle = ((Rad/2 * cos(getSinCos))/ (23170) << 1)+ trackingAngleOne; // | 
+		    	sinAngle = ((Rad   * sin(getSinCos))/(23170) << 1) + trackingAngleTwo;
+		    }
+		} 
+		else if(polarAngle < 135) { 
+			if(spiralChange){ 
+				cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // \ 
+		    	sinAngle = ((outerSpiral * sin(225 + getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }
+		    else { 
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // \ 
+		    	sinAngle = ((Rad * sin(225 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		}  
+		else if(polarAngle < 180) {
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral * cos(getSinCos))/ (23170) << 1)  + trackingAngleOne;
+		    	sinAngle = ((outerSpiral/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		    else { 
+		    	cosAngle = ((Rad * cos(getSinCos))/ (23170) << 1)  + trackingAngleOne;
+		    	sinAngle = ((Rad/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		}
+		else if(polarAngle < 225) { 
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // / 
+		    	sinAngle = ((outerSpiral * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		    else { 
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // / 
+		    	sinAngle = ((Rad * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		}  
+		else if(polarAngle < 270) { 
+			if(spiralChange){
+		    	cosAngle = ((innerSpiral/2 * cos(getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((outerSpiral * sin(getSinCos))/ (23170) << 1)+ trackingAngleTwo;
+		    }
+		    else {
+		    	cosAngle = ((Rad/2 * cos(getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((Rad * sin(getSinCos))/ (23170) << 1)+ trackingAngleTwo; 
+		    }
+		}
+		else if(polarAngle < 315) { 
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // \ 
+		    	sinAngle = ((outerSpiral * sin(225 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		    else { 
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; // \ 
+		    	sinAngle = ((Rad * sin(225 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    } 
+		}
+		else { 
+			if(spiralChange){ 
+		  		cosAngle = ((innerSpiral *   cos(getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((outerSpiral/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }else { 
+		    	cosAngle = ((Rad *   cos(getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((Rad/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    } 
+		}
+	}
+	if(getShapes == 10) { 
+		if(spiralChange){ 
+			Spiral(Rad);
+		} 
+		if(anglePosition == 0){ 
+			if(spiralChange){ 
+				cosAngle = ((innerSpiral   * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+			    sinAngle = ((outerSpiral/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+			}else{ 
+				cosAngle = ((Rad   * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((Rad/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }
+		} 
+		if(anglePosition == 1){  
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((outerSpiral * sin(225 + getSinCos))/ (23170) << 1)+ trackingAngleTwo; 
+		    }else { 
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((Rad * sin(225 + getSinCos))/ (23170) << 1)+ trackingAngleTwo; 
+		    } 
+		} 
+		if(anglePosition == 2){  
+			if(spiralChange){ 
+				cosAngle = ((innerSpiral/2 * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((outerSpiral   * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }else { 
+		    	cosAngle = ((Rad/2 * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((Rad   * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    } 
+		}  
+		if(anglePosition == 3){ 
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((outerSpiral * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }else { 
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((Rad * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    } 
+		}
+		if(anglePosition == 4){  
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral   * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((outerSpiral/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }else{ 
+		    	cosAngle = ((Rad   * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((Rad/2 * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    } 
+		}  
+		if(anglePosition == 5){ 
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((outerSpiral * sin(225 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }else{ 
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		    	sinAngle = ((Rad * sin(225 + getSinCos))/ (23170) << 1) + trackingAngleTwo; 
+		    }
+		}
+		if(anglePosition == 6){ 
+			if(spiralChange){ 
+		    	cosAngle = ((innerSpiral/2 * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		        sinAngle = ((outerSpiral   * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }else { 
+		    	cosAngle = ((Rad/2 * cos(getSinCos))/ (23170) << 1) + trackingAngleOne; 
+		        sinAngle = ((Rad   * sin(getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }
+		}
+		if(anglePosition == 7){ 
+			if(spiralChange){ 
+				cosAngle = ((innerSpiral * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((outerSpiral * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    }else {
+		    	cosAngle = ((Rad * cos(180 + getSinCos))/ (23170) << 1) + trackingAngleOne;
+		    	sinAngle = ((Rad * sin(135 + getSinCos))/ (23170) << 1) + trackingAngleTwo;
+		    } 
+	    } 
+	    timer++
+		if(timer >= speedAngle){ 
+			anglePosition ++
+			timer = 0;
+		} 
+		if(anglePosition == 8) 
+			anglePosition = 0;
+	}
+} 
+
+int cycleRefresh;
+int timeInterval = 4;
+int spiralPosition1,spiralPosition2;
+function Helix(){ 
+    increase = (increase % 32767);
+    if(helixPosition == 0){ 
+        x = increase; y = 32767 - increase;
+       } 
+    else if (helixPosition == 1){ 
+        x = 32767 - increase; y = - increase; 
+    }
+    else if (helixPosition == 2){
+        x = -increase; y = -32767 + increase; 
+    }
+    else if(helixPosition == 3) {  
+        x = -32767 + increase; y = increase; 
+    }
+    helixPosition ++;
+    if(helixPosition == 4){ 
+        helixPosition = 0;
+    }    
+ } 
+function correctAngle(angle){
+  if (angle < 0) angle = 360 + (angle % 360);
+  angle = (angle + 90) % 360;
+  return angle;
+}
+function sin(angle){
+  return lerp_16(pollarArr[(correctAngle(angle - 1))], pollarArr[(correctAngle(angle + 1))], 0x8000);
+}
+function cos(angle){
+  return lerp_16(pollarArr[((correctAngle(angle - 1) + 90) % 360)],  pollarArr[((correctAngle(angle + 1) + 90) % 360)], 0x8000);
+}
+function lerp_16(a, b, t) { return fix_to_int(lerp(int_to_fix(a), int_to_fix(b), t)); }
+function int_to_fix(a) { return a * 0x10000; }
+function fix_to_int(a) { if (a >= 0) return (a + 0x10000 >> 1) / 0x10000; return (a - 0x10000 >> 1) / 0x10000; }
+function fix_mul(v1, v2) { return ((v1 >> 8) * (v2 >> 8)); }
+function lerp(a, b, f) { return fix_mul((0x10000 - f), a) + fix_mul(f, b); }
+function offset(Stick, Value) {
+  if (Stick >= POLAR_RX) {
+    set_val(Stick, clamp(Value * (32767 - abs(get_val(Stick))) / 32767 + get_val(Stick), -32767, 32767));
+    return;
+  }
+  set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));
+}
+function set_Ival(Input,Output) {
+
+      set_val(Input,clamp(Output * (100 - abs(get_val(Input))) / 100 + get_val(Input),-100,100));
+        
+      return; 
+}
+function set_Val(Input,Output) {
+
+      set_val(Input,clamp(Output * (100 - abs(get_val(Input))) / 100 + get_val(Input),-100,100));
+        
+      return; 
+}
+function AxisRelease(AxisXY,AxisVal) {
+    
+    if (abs(get_ival(AxisXY)) <= BattStickyPower) 
+        
+        return AxisVal;
+    
+    return get_ival(AxisXY); 
+}
+
+ function EditAssist () {
+
+    EditT += get_rtime();
+        
+        if (get_ival(EditAssist)) {
+            
+            if (EditT >= EditDelay)
+                  
+           		Press(Select);
+        }
+}
+
+function Press (Button) {
+
+    if (get_ival(Button))
+        
+   		return;
+            
+            set_val(Button,100);
+}
+
+// Variables 
+int RX,RY,polarAngle,trackingAngle,trackingAngleOne,trackingAngleTwo,angle,speedBoostAngle,PolarAimAssist,cosAngle,sinAngle;
+int anglePosition,timer;
+int Positionv3;
+int PolarStart	= 1000;
+int PolarMid   	= 1200;
+int Rotation,Count,Counter,Inverter,Axis,Angle,Cos,Sin,DamRadius,DamAngle;
+int x,y;
+define PolarValue = 327;
+define DoGzDamPolar = 0,DoGzReducer = 1;
+define Polar = 0,Linear = 1;
+define Circle = 0,TallOval = 1,WideOval = 2,Spiral = 3,Helix = 4,KITT = 5,VerticalFlare = 6,TartanArmy = 7,Blade = 8,Bishop = 9,Jupiter = 10,Oscillerate = 11; // Polar
+define Diamond = 0,TallDiamond = 1,WideDiamond = 2,SpiralDiamond = 3,HelixDiamond = 4,KITTL = 5,VerticalFlareL = 6,TartanArmyL = 7,BladeL = 8,BishopL = 9,JupiterL = 10,OscillerateL = 11; //Linear
+define False              = FALSE;
+define True               = TRUE;
+int Edit1,EditT,Shunt,WallReplace;
+int EditDelay = 17;  
+int HTime = 50;
+int DropShotSpeed  = 80;
+int WallTakeHTime = 40;
+int Head;
+int BuildTrack;
+int BuildCount;
+define TimeInterval = 4;	               
+define Walk			   = XB1_LY;		                         
+define PS              = POLAR_RS;                                                                            
+define Roof            = XB1_LT;
+define AimY            = XB1_RY; 
+define AimX            = XB1_RX;  
+define Strafe          = PS4_LX; 
+int stringLength;
+const string misc[]      = {"Demonic","revenge","FORTNITE","v1.00",""}; 
+function getStringLength(offset) { 
+    stringLength = 0;
+    do { 
+        offset++;
+        stringLength++;
+    } while (duint8(offset));
+    return stringLength;
+ }
+function centerPosition(f_chars,f_font) {
+
+    return (OLED_WIDTH / 2) - ((f_chars * f_font) / 2);
+}
+const int8 DamPolarArray[]= { 100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100};
+const int16 pollarArr[] =
+{ 23170,  23167,  23156,  23139,  23114,  23082,  23044,  22998,  22945,  22885,  22818,  22745,  22664,  22577,  22482,  22381,  22273,  22158,  22036,  21908,  21773,  21632,  21483,  21329,  21167,  21000,  20825,  20645,  20458,  20265,  20066,  19861,  19650,  19432,  19209,  18980,  18745,  18505,  18259,  18007,  17750,  17487,  17219,  16946,  16667,  16384,  16096,  15802,  15504,  15201,  14894,  14582,  14265,  13944,  13619,  13290,  12957,  12620,  12278,  11934,  11585,  11233,  10878,  10519,  10157,  9792,  9424,  9053,  8680,  8304,  7925,  7544,  7160,  6774,  6387,  5997,  5605,  5212,  4817,  4421,  4024,  3625,  3225,  2824,  2422,  2019,  1616,  1213,  809,  404,  00,  -404,  -809,  -1213,  -1616,  -2019,  -2422,  -2824,  -3225,  -3625,  -4024,  -4421,  -4817,  -5212,  -5605,  -5997,  -6387,  -6774,  -7160,  -7544,  -7925,  -8304,  -8680,  -9053,  -9424,  -9792,  -10157,  -10519,  -10878,  -11233,  -11585,  -11934,  -12278,  -12620,  -12957,  -13290,  -13619,  -13944,  -14265,  -14582,  -14894,  -15201,  -15504,  -15802,  -16096,  -16384,  -16667,  -16946,  -17219,  -17487,  -17750,  -18007,  -18259,  -18505,  -18745,  -18980,  -19209,  -19432,  -19650,  -19861,  -20066,  -20265,  -20458,  -20645,  -20825,  -21000,  -21167,  -21329,  -21483,  -21632,  -21773,  -21908,  -22036,  -22158,  -22273,  -22381,  -22482,  -22577,  -22664,  -22745,  -22818,  -22885,  -22945,  -22998,  -23044,  -23082,  -23114,  -23139,  -23156,  -23167,  -23170,  -23167,  -23156,  -23139,  -23114,  -23082,  -23044,  -22998,  -22945,  -22885,  -22818,  -22745,  -22664,  -22577,  -22482,  -22381,  -22273,  -22158,  -22036,  -21908,  -21773,  -21632,  -21483,  -21329,  -21167,  -21000,  -20825,  -20645,  -20458,  -20265,  -20066,  -19861,  -19650,  -19432,  -19209,  -18980,  -18745,  -18505,  -18259,  -18007,  -17750,  -17487,  -17219,  -16946,  -16667,  -16384,  -16096,  -15802,  -15504,  -15201,  -14894,  -14582,  -14265,  -13944,  -13619,  -13290,  -12957,  -12620,  -12278,  -11934,  -11585,  -11233,  -10878,  -10519,  -10157,  -9792,  -9424,  -9053,  -8680,  -8304,  -7925,  -7544,  -7160,  -6774,  -6387,  -5997,  -5605,  -5212,  -4817,  -4421,  -4024,  -3625,  -3225,  -2824,  -2422,  -2019,  -1616,  -1213,  -809,  -404,  00,  404,  809,  1213,  1616,  2019,  2422,  2824,  3225,  3625,  4024,  4421,  4817,  5212,  5605,  5997,  6387,  6774,  7160,  7544,  7925,  8304,  8680,  9053,  9424,  9792,  10157,  10519,  10878,  11233,  11585,  11934,  12278,  12620,  12957,  13290,  13619,  13944,  14265,  14582,  14894,  15201,  15504,  15802,  16096,  16384,  16667,  16946,  17219,  17487,  17750,  18007,  18259,  18505,  18745,  18980,  19209,  19432,  19650,  19861,  20066,  20265,  20458,  20645,  20825,  21000,  21167,  21329,  21483,  21632,  21773,  21908,  22036,  22158,  22273,  22381,  22482,  22577,  22664,  22745,  22818,  22885,  22945,  22998,  23044,  23082,  23114,  23139,  23156,  23167,  23170 };
+
+
+
+ ú¸‹¿Œ¹Š²„¶„¶€²ƒÁ
