@@ -359,6 +359,11 @@
       "name": "EXSC FREE V1",
       "filename": "EXSC_FREE_V1.gpc",
       "category": "Fortnite"
+    },
+    {
+      "name": "Apollo 100",
+      "filename": "apollo_100.gpc",
+      "category": "Fortnite"
     }
   ]
 }
