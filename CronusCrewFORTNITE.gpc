@@ -1,0 +1,303 @@
+define FIRE = PS4_R2;
+define ADS = PS4_L2;
+define AIM_MAGNITUDE = PS4_RX; // Use right stick X-axis for magnitude
+define AIM_ANGLE = PS4_RY; // Use right stick Y-axis for angle
+define STRAFE = PS4_LX;
+define WALK = PS4_LY;
+int BUILD = PS4_CIRCLE; // SWITCH MODE BIND INGAME { IF YOU PLAY NO BUILDS PUT THIS AT FALSE }
+int PICKAXE  = PS4_RIGHT;
+int ROOF     = PS4_SQUARE;
+int FLOOR    = PS4_L3;
+int STAIRS   = PS4_RIGHT;
+int WALL     = PS4_LEFT;
+int healButton = XB1_RS; // put this as crouch { healButton + XB1_LT/PS4_L2 = RapidFire off }
+
+//|||||||||Right Stick Deadzone||||||||||||||||||||||//
+define DEADZONE_SIZE = 10;////////////////////////////
+//|||||||||||||||||||||||||||||||||||||||||||||||||||//
+
+//--Bloom Reducer---------------------------------------------------------------//
+int CronusCrewBloomBlock = TRUE;////////////////////////////////////////
+int Sensitivity = 20;  // Adjust this value to change the sensitivity
+int WaitTime = 2;      // Adjust this value to change the delay between shots
+//-----------------------------------------------------------------------------//
+
+//--CronusCrew AR---------------------------------------------------//
+int ANTI_RECOIL_OFFSET = DEADZONE_SIZE ;///////////////////////////////////////
+//---------------------------------------------------------------------------//
+
+//--CronusCrew Tripe Threat AA-----------------------------------//
+int CPTripleThreat = TRUE;///////////////////////////////////////////////////
+int ADS_Size = 4000; // Use magnitude value of 4000 for ADS
+int ADS_Wait_Value = 15;////////////////////////////////////////////////////
+int ADS_FIRE_Size = 20000; // Use magnitude value of 20000 for ADS + FIRE
+int ADS_FIRE_Wait_Value = 15;//////////////////////////////////////////////
+int HIPFIRE_Size = 30000; // Use magnitude value of 30000 for hipfire
+int HIPFIRE_Wait_Value = 15;//////////////////////////////////////////////
+//---------------------------------------------------------------------//
+
+//--CronusCrew Lock-----------------------------------------// 
+int CronusCrewLock = TRUE;///////////////////////////////////
+int AIM_ASSIST_RADIUS = DEADZONE_SIZE * 3;////////////////////////////
+int AIM_ASSIST_SPEED = 20;///////////////////////////////////////////
+//-----------------------------------------------------------------//
+
+//-- Aimlock--------------------------------------------//
+int Aimlock = TRUE;///////////////////////////////////////
+int closestEnemyDistance = 99999;/////////////////////////////////
+int closestEnemyDirection = 0;///////////////////////////////////
+//-------------------------------------------------------------//
+
+//--CC Magnet-----------------------------------------//
+int Precision = TRUE;/////////////////////////////////////////
+//----------------------------------------------------------//
+
+
+//--Cronus Sticky Assist--------------------------------//
+int PolarSticky = TRUE;/////////////////////////////////////
+//--------------------------------------------------------//
+
+
+//--Variable, Leave Alone
+int LeftStick, LeftAxis;int result;int currentVal;int offsetVal;int newVal;define AIM_ASSIST_RANGE = 50;
+int Aim_Mag, Aim_Angle;int rapidFire = TRUE;int Tracker  =  TRUE;int i;int MAX_ITERATIONS = 10;int Wait_Val;int a;
+int Track,Count;define On  = TRUE;define Off = FALSE;int rx;int ry;int distance;int angle;int PI = 31416 / 10000;
+int rightStickMagnitude,aimAssistEnabled = TRUE, aimAssistDirection, aimAssistCounter;int  y1, y2, y3;
+
+main {
+rightStickMagnitude = isqrt(pow(get_val(PS4_RX), 2) + pow(get_val(PS4_RY), 2));
+LeftStick = (isqrt(pow(get_ival(PS4_LX), 2) + pow(get_ival(PS4_LY), 2)));
+ if (Tracker) {
+        
+        if (event_press(BUILD)) {
+            Track = !Track;
+            
+        }
+    
+        if (Track) {
+            Count += get_rtime();
+            
+            if (event_press(PICKAXE) || Count == 4000) {
+                Track = Off;
+                Count = Off;
+            }
+            
+                if (get_ival(ROOF) || get_ival(FLOOR) || get_ival(STAIRS) || get_ival(WALL)) 
+                    Count = Off;
+        }
+    }
+    if(!Tracker) {
+    if(Precision){
+    if (get_val(XB1_RT)) {
+    if (LeftStick <= DEADZONE_SIZE) {
+      LeftAxis = (LeftAxis + 30) % 360;
+      Offset(POLAR_LS, (DEADZONE_SIZE * 360));
+    }
+  }
+
+  if (get_val(XB1_LT) && get_val(XB1_RT)) {
+    if (LeftStick <= DEADZONE_SIZE) {
+      LeftAxis = (LeftAxis + 30) % 360;
+      Offset(POLAR_LS, (DEADZONE_SIZE * 360));
+    }
+  }
+
+  if (event_release(XB1_LT) || event_release(XB1_RT)) {
+    if (LeftStick <= DEADZONE_SIZE) {
+      LeftAxis = (LeftAxis + 30) % 360;
+      Offset(POLAR_LS, (DEADZONE_SIZE * 360));
+    }
+  }
+  }
+  if (CronusCrewLock) {
+  if (rightStickMagnitude > DEADZONE_SIZE && aimAssistEnabled && rightStickMagnitude <= AIM_ASSIST_RADIUS) {
+    aimAssistCounter++;
+    if (aimAssistCounter >= AIM_ASSIST_SPEED) {
+        aimAssistDirection = (aimAssistDirection + 30) % 360;
+        set_polar(POLAR_RS, aimAssistDirection, (AIM_ASSIST_RADIUS * 32767 / (rightStickMagnitude - DEADZONE_SIZE)));
+        aimAssistCounter = 0;
+    }
+} else {
+    aimAssistCounter = 0;
+}
+}
+if (Aimlock) {
+for (i = 0; i < MAX_ITERATIONS; i++) {
+        rx = get_val(PS4_RX, i);
+        ry = get_val(PS4_RY, i);
+        distance = isqrt(rx*rx + ry*ry);
+        if (rx > 0 && distance < AIM_ASSIST_RANGE && distance < closestEnemyDistance) {
+            closestEnemyDistance = distance;
+            closestEnemyDirection = atan2(ry, rx) * 360 / 65535;
+        }
+    }
+if (closestEnemyDistance < AIM_ASSIST_RANGE) {
+        set_val(PS4_RX, closestEnemyDirection);
+        set_val(PS4_RY, 100);
+    }
+
+}
+if (CPTripleThreat) {
+  if(get_ival(ADS) && !get_ival(FIRE)) {
+combo_run(Sticky_AA);
+Aim_Mag = ADS_Size;
+Wait_Val = ADS_Wait_Value;
+} else if(get_ival(ADS) && get_ival(FIRE)) {
+combo_run(Sticky_AA);
+Aim_Mag = ADS_FIRE_Size;
+Wait_Val = ADS_FIRE_Wait_Value;
+} else if(!get_ival(ADS) && get_ival(FIRE)) {
+combo_run(Sticky_AA);
+Aim_Mag = HIPFIRE_Size;
+Wait_Val = HIPFIRE_Wait_Value;
+} else {
+combo_stop(Sticky_AA);
+}
+}
+ if (PolarSticky) {            
+             if (get_val(PS4_L2) || get_val(PS4_R2)) {
+
+            combo_run(StickyAssist);
+
+        } else {
+
+            combo_stop(StickyAssist); 
+        }
+        }
+        if ( CronusCrewBloomBlock){
+        if(get_val(PS4_R2) && get_val(PS4_L2)) {  
+          combo_run(PrecisionBloomLock);
+          combo_run(LongRangeAccuracyAssist);
+          } else {
+          combo_stop(PrecisionBloomLock);
+          combo_stop(LongRangeAccuracyAssist);
+          }
+          }
+  if (get_val(PS4_L2) && get_val(PS4_R2)) {
+        set_val(PS4_RY, get_val(PS4_RY) + ANTI_RECOIL_OFFSET);
+      }
+    if (get_val(PS4_R2)) {
+      combo_run(RapidFire);
+    }
+    if (event_press(healButton) && get_val(XB1_LT)) {
+    combo_stop(RapidFire);
+} else if (rapidFire) {
+    combo_run(RapidFire);
+}
+
+}
+}
+
+combo PrecisionBloomLock {
+set_val(PS4_RX, get_val(PS4_RX) * Sensitivity);  
+set_val(PS4_RY, get_val(PS4_RY) * Sensitivity);  
+wait(WaitTime); 
+}
+combo LongRangeAccuracyAssist {
+  set_val(PS4_RX, get_ival(PS4_RX) + 1);
+  wait(4);
+  set_val(PS4_RY, get_ival(PS4_RY) - 1);
+  wait(4);
+  set_val(PS4_RX, get_ival(PS4_RX) - 1);
+  wait(4);
+  set_val(PS4_RY, get_ival(PS4_RY) + 1);
+  wait(4);
+}
+
+combo RapidFire {
+    set_val(XB1_RT, 100);
+    wait(20);
+    set_val(XB1_RT, 0);
+    wait(20);
+    set_val(XB1_RT, 0);
+}
+
+combo StickyAssist {
+
+    set_val(XB1_RY, polarize(get_val(XB1_RY), DEADZONE_SIZE));
+    wait(10);
+    set_val(XB1_RX, polarize(get_val(XB1_RX), DEADZONE_SIZE));
+    set_val(XB1_LX, polarize(get_val(XB1_LX), DEADZONE_SIZE));
+    wait(10);
+    set_val(XB1_RY, polarize(get_val(XB1_RY), -DEADZONE_SIZE));
+    wait(10);
+    set_val(XB1_RX, polarize(get_val(XB1_RX), -DEADZONE_SIZE));
+    set_val(XB1_LX, polarize(get_val(XB1_LX), -DEADZONE_SIZE));
+    wait(10);
+}
+
+combo Sticky_AA {
+a = random(-5000, 5000); // Use a larger range of values for strafing
+Aim_Mag = get_val(AIM_MAGNITUDE); // Get current magnitude value
+Aim_Angle = get_val(AIM_ANGLE); // Get current angle value
+Aim_Angle += get_val(XB1_RX) / 256; // Convert X-axis input to angle
+Aim_Mag += get_val(XB1_RY) * 10; // Convert Y-axis input to magnitude
+set_val(AIM_MAGNITUDE, Aim_Mag); // Set new magnitude value
+set_val(AIM_ANGLE, Aim_Angle); //
+}
+
+function polarize(int AxisXY, int Power) {
+
+    if (abs(AxisXY) <= Power) {
+        if (AxisXY >= 0) {
+            result = Power;
+        } else {
+            result = -Power;
+        }
+    } else {
+        result = AxisXY;
+    }
+
+    return result;
+}
+
+function Offset(Axis, Value) {
+    currentVal = get_val(Axis);
+    offsetVal = Value * (100 - abs(currentVal)) / 100;
+    newVal = clamp(currentVal + offsetVal, -100, 100);
+    set_val(Axis, newVal);
+    return;
+}
+
+function atan2(int y, int x) {
+    if (x == 0) {
+        if (y > 0) {
+            angle = 90;
+        } else if (y < 0) {
+            angle = -90;
+        } else {
+            angle = 0;
+        }
+    } else {
+        angle = atan(y * 32767 / x) * 180 / PI;
+        if (x < 0) {
+            angle += 180;
+        }
+    }
+    return angle;
+}
+
+function atan(int x) {
+    if (x >= 0) {
+        y1 = x / (32767 / 2);
+        y2 = (y1 * y1) / 2;
+        y3 = (y1 * y1 * y1) / 3;
+        angle = atanTable[0][0] * y1 + atanTable[0][1] * y2 + atanTable[0][2] * y3;
+    } else {
+        y1 = -x / (32767 / 2);
+        y2 = (y1 * y1) / 2;
+        y3 = (y1 * y1 * y1) / 3;
+        angle = -atanTable[0][0] * y1 - atanTable[0][1] * y2 - atanTable[0][2] * y3;
+    }
+    return angle / (32767 / 180);
+}
+
+const int16 atanTable[][] = {
+    {0,     716,   1433},
+    {2148,  2866,  3583},
+    {4295,  5012,  5729}
+}
+
+
+
+ ú¹ˆ¾†·ƒ´‚´†¿‰½‹³
