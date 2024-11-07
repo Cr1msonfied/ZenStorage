@@ -1,0 +1,67 @@
+// Mods
+int BuildTracker = TRUE;
+int PickupMacro = FALSE;
+int InstaReset = FALSE;
+int antirecoil = TRUE;
+int AimAssist_Strength = 100;
+int antirecoil_strength = 65;
+int AutoAim = TRUE;
+define autoaimtoggle = PS4_SHARE;
+
+
+
+
+
+// Keybinds
+define FireBtn    = XB1_RB;
+define AdsBtn     = XB1_LB;     
+	define Edit = PS4_L3; //
+	define Reset = PS4_R3; //
+	define Interact = PS4_SQUARE; //         
+	define Pickaxe    = PS4_TRIANGLE; //
+	define Switch   = PS4_CIRCLE; //
+define Wall     = PS4_R2;
+define Floor    = PS4_R1; 
+define Ramp     = PS4_L2; 
+define Trap     = PS4_SQUARE; 
+define Roof     = PS4_L1;
+	define Build = PS4_CIRCLE; //
+	define instareset = PS4_LEFT; //
+
+
+
+
+
+
+
+     // thunderaim Private Script - https://discord.gg/yZEhGBPAB3 - The Best Zen Scripts Since 2023
+
+/*   ______  __ __  __ __  ____   ___      ___  ____        ____  ____  ___ ___ 
+|      ||  |  ||  |  ||    \ |   \    /  _]|    \      /    ||    ||   |   |
+|      ||  |  ||  |  ||  _  ||    \  /  [_ |  D  )    |  o  | |  | | _   _ |
+|_|  |_||  _  ||  |  ||  |  ||  D  ||    _]|    /     |     | |  | |  \_/  |__||____||___|___|
+                                                  
+  |  |  |  |  ||  :  ||  |  ||     ||   [_ |    \     |  _  | |  | |   |   |
+  |  |  |  |  ||     ||  |  ||     ||     ||  .  \    |  |  | |  | |   |   |
+  |__|  |__|__| \__,_||__|__||_____||_____||__|\_|    |__|                        
+
+
+                                                                      
+                                                                                                                           
+                                                                                                                           */
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+
+																																																																																																																																define Up     = PS4_UP;   define Left    = PS4_LEFT;   define RX       = PS4_RX;define Down   = PS4_DOWN; define Right   = PS4_RIGHT;  define RY       = PS4_RY;define aimY   = PS4_RY;   define LX      = PS4_LX;     define On       = TRUE;define aimX   = PS4_RX;   define LY      = PS4_LY;     define Off      = FALSE;int Anti_Recoil =  FALSE;int aabooster = FALSE;int StrafeWait = 1;int BuildTrack,BuildCount;int BuildSyncTime;define LegacyRumble = Off;define LegacyInvert = Off;define LegacyARHip  = Off;int StrafeShot = TRUE; define Strafe   = PS4_LX;define Walk     = PS4_LY;int greetings = TRUE;int AR_Ver;int AR_Horiz;int AntirecoilVertical,AntirecoilHorizontal;init {  Anti_Recoil         = get_pvar(SPVAR_3,  1,    1,   1); AR_Ver              = get_pvar(SPVAR_11, 1,   99,  antirecoil_strength);AR_Horiz            = get_pvar(SPVAR_12,-99,  99,   0);}init{if(AutoAim){    cls_oled(OLED_BLACK);    print(20,25,OLED_FONT_MEDIUM,OLED_WHITE,Features[0]);    print(38,45,OLED_FONT_SMALL,OLED_WHITE,Script[0])    print(30,10,OLED_FONT_SMALL,OLED_WHITE,AutoOn[0]);    set_rgb(242, 0, 245);}else{if(!AutoAim){    cls_oled(OLED_BLACK);    print(20,25,OLED_FONT_MEDIUM,OLED_WHITE,Features[0]);    print(38,45,OLED_FONT_SMALL,OLED_WHITE,Script[0]);    set_rgb(242, 0, 245);}} }main {if (BuildTracker) {            if (event_press(Build)) {                    BuildTrack = !BuildTrack;    }            if (BuildTrack)         {                        BuildCount += get_rtime();                        if (event_press(Pickaxe) || BuildCount == BuildSyncTime)             {                                BuildTrack = FALSE;                BuildCount = 0;            }                        if (get_ival(Roof) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap))                                 BuildCount = 0;        }    }   if(greetings){combo_run(vibrate1);}   if (!BuildTrack) {       if(aabooster){         combo_run(FeatureAimbot)         if(abs(get_val(PS4_RX)) >= 15 || abs(get_val(PS4_RX)) >= 15 || abs(get_val(PS4_LY)) <= 15 || abs(get_val(PS4_LX)) <= 15)combo_stop(FeatureAimbot)                   combo_run(FeatureExpo2)if(abs(get_val(PS4_RX)) > 16 || abs(get_val(PS4_RY)) > 16 || abs(get_val(PS4_LX)) > 16 || abs(get_val(PS4_LY)) > 16)         combo_stop(FeatureExpo2)               combo_run(FeatureExpo3)if(abs(get_val(PS4_RX)) > 17 || abs(get_val(PS4_RY)) > 17 || abs(get_val(PS4_LX)) > 16 || abs(get_val(PS4_LY)) > 16)         combo_stop(FeatureExpo3)}                            	if(PickupMacro){ 	if(get_val(Interact))   	    combo_run(pickupmacro);} 	if(event_release(Interact)){ combo_stop(pickupmacro);}   	if(get_val(PS4_L2)){combo_stop(pickupmacro);}  	  		if(InstaReset){ 	if(get_val(instareset)) 		combo_run(insta);} 		if(antirecoil) {    if (get_ival(AdsBtn) && get_ival(FireBtn))     {            combo_run(AntiRecoil);	}}if(AutoAim){if(StrafeShot){	if(event_press(autoaimtoggle)){		StrafeShot = FALSE;		autoaim(FALSE)}}else{	if(event_press(autoaimtoggle)){		StrafeShot = TRUE;		autoaim(TRUE)}}}if(AutoAim){		if(StrafeShot){	combo_run(StrafeShot)}if (StrafeShot){	if (StrafeShot && abs(get_ival(Strafe)) <= 35 && abs(get_ival(Walk)) <= 35){		combo_run(StrafeShot);}	else{		combo_stop(StrafeShot);}}}}}     combo FeatureAimbot {set_val(PS4_RX,AimAssist_Strength)set_val(PS4_RY,AimAssist_Strength)wait(1)set_val(PS4_RX,-AimAssist_Strength)set_val(PS4_RY,-AimAssist_Strength)wait(1)}int Feature1 = 8;combo FeatureExpo2 {set_val(PS4_RX,Feature1)wait(1)set_val(PS4_RY,Feature1)wait(1) }combo FeatureExpo3 {set_val(PS4_RX,Feature1)wait(1)set_val(PS4_RY,Feature1)wait(1)} combo pickupmacro {    set_val(Interact, 100);wait(80);    set_val(Interact, 0);}    combo insta {	set_val(Edit, 100); wait(40);	set_val(Reset, 100); wait(80)} combo AntiRecoil {    AntirecoilVertical = get_val(PS4_RY) + AR_Ver;      if(AntirecoilVertical > 100) AntirecoilVertical = 100;    if(abs(get_val(PS4_RY)) < abs(AR_Ver) +  5)    set_val(PS4_RY, (AntirecoilVertical));    AntirecoilHorizontal = get_val(PS4_RX) + AR_Horiz;    if(AntirecoilHorizontal > 100) AntirecoilHorizontal = 100;    if(abs(get_val(PS4_RX)) < abs(AR_Horiz)  + 5)    set_val(PS4_RX, AntirecoilHorizontal);}combo vibrate1{set_rumble(RUMBLE_A, 50);	wait(300);	set_rumble(RUMBLE_A, 100)wait(600);	reset_rumble();	greetings = FALSE;}combo StrafeShot{	set_val(Strafe,-70);	wait(StrafeWait);	set_val(Strafe,70);}int AR_Value;const string Features = "PRIVATE";const string Script = "thunder aim"; const string AutoOn = "Autoaim ON";const string AutoOff = "Autoaim OFF";function autoaim(state){ if(state){   cls_oled(OLED_BLACK);   print(20,25,OLED_FONT_MEDIUM,OLED_WHITE,Features[0]);   print(38,45,OLED_FONT_SMALL,OLED_WHITE,Script[0])   print(30,10,OLED_FONT_SMALL,OLED_WHITE,AutoOn[0]);   set_rgb(242, 0, 245);   combo_run(vibon);} if(!state){    cls_oled(OLED_BLACK);    print(20,25,OLED_FONT_MEDIUM,OLED_WHITE,Features[0]);    print(38,45,OLED_FONT_SMALL,OLED_WHITE,Script[0])    print(30,10,OLED_FONT_SMALL,OLED_WHITE,AutoOff[0]);    set_rgb(245, 0, 90);	combo_run(viboff);}}combo vibon{set_rumble(RUMBLE_A, 50);wait(100);set_rumble(RUMBLE_A, 0)}combo viboff{set_rumble(RUMBLE_B, 50);wait(100);set_rumble(RUMBLE_B, 0) }
+
+
+
+           
+   ÃƒÆ’Ã‚ÂºÃƒâ€šÃ‚Â¾Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â¼ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦Ãƒâ€šÃ‚Â±Ãƒâ€ Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â±Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¶Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â´ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â± ÃƒÂºÃ‚Â¸Ã¢â‚¬Â¹Ã‚Â¹Ã¢â€šÂ¬Ã‚Â±Ã¢â‚¬Å¡Ã‚Â²Ã¢â‚¬Â¦Ã‚Â±Ã¢â€šÂ¬Ã‚Â²Ã¢â‚¬Å¾Ã‚Â´Ã¢â‚¬Â¦Ã‚Â² ÃºÂ¸â€¹Â¹â‚¬Â±â€šÂ²â€¦Â±â‚¬Â²â€žÂ´â€¦Â² ú¾¿Š²†¶†µ‡·€´…¼
+ ����������������
