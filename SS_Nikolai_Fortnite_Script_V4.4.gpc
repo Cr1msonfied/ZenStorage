@@ -1,0 +1,4002 @@
+																																																																																			/*
+                         _____    _____            _   _   _   _              _           _    _
+                        / ____|  / ____|          | \ | | (_) | |            | |         (_)  ( )
+                       | (___   | (___            |  \| |  _  | | __   ___   | |   __ _   _   |/   ___
+                        \___ \   \___ \           | . ` | | | | |/ /  / _ \  | |  / _` | | |      / __|
+                        ____) |  ____) |          | |\  | | | |   <  | (_) | | | | (_| | | |      \__ \
+                       |_____/  |_____/           |_| \_| |_| |_|\_\  \___/  |_|  \__,_| |_|      |___/
+                                          ______
+                                         |______|
+									  ______                  _             _   _
+									 |  ____|                | |           (_) | |
+									 | |__      ___    _ __  | |_   _ __    _  | |_    ___
+									 |  __|    / _ \  | '__| | __| | '_ \  | | | __|  / _ \
+									 | |      | (_) | | |    | |_  | | | | | | | |_  |  __/
+									 |_|       \___/  |_|     \__| |_| |_| |_|  \__|  \___|
+										   _____                 _           _
+										  / ____|               (_)         | |
+										 | (___     ___   _ __   _   _ __   | |_
+										  \___ \   / __| | '__| | | | '_ \  | __|
+										  ____) | | (__  | |    | | | |_) | | |_
+										 |_____/   \___| |_|    |_| | .__/   \__|
+																	| |
+																	|_|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+						Note From CHI CHI / ErickCHIN :
+					- UP & DOWN to Select the value to edit.
+					- LEFT & RIGHT to increase or decrease Selected value
+					- If this does not make sense just give it a try and you will understand.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 					Credits To The Following People Below :
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- ErikChin / CHI CHI For His Mod Menu Screen
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- Sweet_Evil for his Save & Load Values Propely Code
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- ItzSnack for Rapid Fire, Drop shot
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- DjangoKill for Chicken Mod idea
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- Crescens For Aim Sensitivity Corrections
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- DoGzTheFiGhTeRz Polar Aim Assist With Radius and Angle Boost Option
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- DoNotAtMe For His Zen Eye Colour Pulsing & Polar Aim Assist
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- TaylorDrift For Customizing DNAM Polar With Shapes & Helping me with so much
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	- Me, SS_Nikolai for putting all this together & Coding some of the build mods
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~																																																																																			*/
+
+//--Combat Mode -- Match These To Your In-Game Buttons
+	define Fire_BTN				= PS4_R2;       // Fire In Game
+	define Ads_BTN				= PS4_L2;       // Ads In Game
+	define PickAxe_BTN			= PS4_TRIANGLE; // Pickaxe In Game
+	define NextWeapon_BTN		= PS4_R1;       // Next Weapon In Game
+	define PreviousWeapon_BTN	= PS4_L1;       // Previous Weapon In Game
+	define Reload_BTN			= PS4_SQUARE;   // Reload In Game
+	define Jump_BTN				= PS4_CROSS;    // Jump In Game
+	define Crouch_BTN			= PS4_R3;       // Crouch In Game
+	define Ping_BTN				= PS4_RIGHT;    // Ping In Game
+
+//--Build Mode
+	define Build_BTN			= PS4_CIRCLE;	// Build In Game  { Switch/Edit or Switch }
+	define Switch_BTN			= PS4_LEFT;		// Switch In Game { Switch Only }
+	define Wall_BTN				= PS4_R2;		// Wall In Game
+	define Floor_BTN			= PS4_R1;		// Floor In Game
+	define Ramp_BTN				= PS4_L2;		// Ramp In Game
+	define Trap_BTN				= PS4_SQUARE;	// Trap In Game
+	define Roof_BTN				= PS4_L1;		// Roof In Game
+
+//--Edit Mode
+	define Edit_BTN				= PS4_CIRCLE;	// Edit In Game (Use This Button If Using HoldTime In Game Or NOT Edit Assist Without Hold Time)
+	define Select_BTN			= PS4_R2;		// Edit Select Piece In Game
+	define Confirm_BTN			= PS4_CIRCLE;	// Edit Confirm In Game	
+	define Reset_BTN			= PS4_R3;		// Edit Reset In Game
+
+//--Movement & Aim Sticks
+	int    InvertedPlayer		=      1;		// Make 2 If you play Inverted
+	define AimY					= PS4_RY;		// Vertical Aim Axis In Game
+	define AimX					= PS4_RX;		// Horizontal Aim Axis In Game
+	define Strafe				= PS4_LX;		// Horizontal Walk Axis In Game
+	define Walk					= PS4_LY;		// Vertical Walk Axis In Game
+
+//--If Enabled Hold Ads_BTN + NextWeapon_BTN To Perform 1 Shot With Perfect Accuracy
+	define PerfectAccuracy		= TRUE;
+
+//--Stick Drift Removal
+	define StickDriftRemoval	= TRUE; // Crescens Polar WILL NOT WORK With This Enabled Unfortunately
+	define DeadZoneValue		=   13; // Any Value Under This Will Be Registered As 0 - Good For Old Controllers That Drift Off - If The Value Exceeds 15 You Need A New Controller
+
+//--If Set To TRUE Then When Your Controller Reaches Below 10% Your Controller Will Vibrate 3 Times Every 5 Seconds Until Charger Is Connected
+	define BatteryWarning		= FALSE;
+
+//--Polar Radius and Angle Booster
+	int RadiusBoost				=  TRUE;
+	int AngleBoost				=  TRUE;
+
+//--Edit_BTN BUTTON IN GAME CANNOT HAVE HOLD TIME (USED AS Edit_BTN ASSIST BUTTON)
+	define EditAssist_BUTTON	= PS4_L3;
+	define EditDelay			=	  20; //DELAY BEFORE Edit_BTN ASSIST BUTTON TRIGGERS HOLDING OF Fire_BTN
+
+//--Safe Quick Box Button
+	define SafetyBox_BUTTON		= PS4_RIGHT;
+
+//--Ramp Floor Wall Button
+	define RampFloorWall_BUTTON	= PS4_SQUARE;
+
+//--Fast Reset Button
+	define FastReset_BUTTON		= PS4_TOUCH;
+
+//--Window Edit Shot Button
+	define WindowEditShot_BUTTON = PS4_RIGHT;
+
+//--Quick Toggle Button Combos
+	define QuickToggles			 =    TRUE;			// If You Want To Enable RapidFire or DropShot Without Entering The Menu Keep This TRUE. Otherwise Make It FALSE
+	define QuickToggleHoldButton =    PS4_L2;		// Hold This Button & Tap One Of The Buttons Below To Activate A Quick Mod
+	define RapidFireQT			 =    PS4_RIGHT;	// QuickToggleHoldButton + This Button To Activate Rapid Fire
+	define DropShotQT			 =    PS4_UP;		// QuickToggleHoldButton + This Button To Activate Drop Shot
+																																																																																														/*
+						 _   _           _   _               _     _______
+						| \ | |         | \ | |             | |   |__   __|
+						|  \| | ___     |  \| | ___  ___  __| |      | | ___
+						| . ` |/ _ \    | . ` |/ _ \/ _ \/ _` |      | |/ _ \
+						| |\  | (_) |   | |\  |  __/  __/ (_| |      | | (_) |
+						|_| \_|\___/    |_| \_|\___|\___|\__,_|      |_|\___/
+				  _ _           _                                ______          _   _
+		 /\      | (_)         | |         /\                   |  ____|        | | | |
+	    /  \   __| |_ _   _ ___| |_       /  \   _ __  _   _    | |__ _   _ _ __| |_| |__   ___ _ __
+       / /\ \ / _` | | | | / __| __|     / /\ \ | '_ \| | | |   |  __| | | | '__| __| '_ \ / _ \ '__|
+	  / ____ \ (_| | | |_| \__ \ |_     / ____ \| | | | |_| |   | |  | |_| | |  | |_| | | |  __/ |
+	 /_/    \_\__,_| |\__,_|___/\__|   /_/    \_\_| |_|\__, |   |_|   \__,_|_|   \__|_| |_|\___|_|
+                  _/ |                                  __/ |
+                 |__/                                  |___/                                            																																																													*/
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | | I | N | I | T | I | L | I | Z | A | T | I | O | N | | | | | | | | S | S | _ | N | i | k | o | l | a | i | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+init {
+	Load_PVARs();
+
+	combo_run(cSS_Nikolai);
+
+	if(InvertedPlayer == 2)
+		Inverted = -1;
+	else
+		Inverted = 1;
+
+	if(TaylorShape == 4)
+	{
+		InnerSpiral = TaylorRadius >> 1;
+		OuterSpiral = TaylorRadius;
+	}
+}
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |M|A|I|N| | |S|E|C|T|I|O|N| | | | | S | S | _ | N | i | k | o | l | a | i | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+main {
+	// STICK DRIFT REMOVAL - START
+	if(StickDriftRemoval)
+	{
+		applyDeadzone();
+	}
+	// STICK DRIFT REMOVAL - END
+
+	RightStickRadius = isqrt(pow(get_ival(AimX)  , 2) + pow(get_ival(AimY), 2));
+	LeftStickRadius	 = isqrt(pow(get_ival(Strafe), 2) + pow(get_ival(Walk), 2));
+	PS4SwapFix();
+
+	// BLOCK RUMBLE - START
+	if(RumbleBlock)
+		block_rumble();
+	// BLOCK RUMBLE - END
+
+	//BATTERY WARNING - START
+	if(BatteryWarning)
+	{
+		if(RunRumble && !combo_running(cVibrate2))
+		{
+			RunRumble -= 1;
+			combo_restart(cVibrate2);
+		}
+
+		if(get_battery() <= 5) 
+		{
+			MS += get_rtime();
+
+			if(MS == 5000)
+			{
+				Rumble(FALSE, 3);
+				MS = 0;
+			}
+		}
+	}
+	//BATTERY WARNING - END
+
+	if(ZenScreen == MenuClose)
+	{
+
+		//QUICK TOGGLE - START
+		if(QuickToggles)
+		{
+			if(get_ival(QuickToggleHoldButton))
+			{
+				if(event_press(RapidFireQT))
+				{
+					RapidFire = !RapidFire;
+					combo_run(cVibrate);
+					LEDBlink(RapidFire);
+				}
+
+				if(event_press(DropShotQT))
+				{
+					StandardDropShot = !StandardDropShot;
+					combo_run(cVibrate);
+					LEDBlink(StandardDropShot);
+				}
+					block(DropShotQT , get_ptime(QuickToggleHoldButton) + 50);
+					block(RapidFireQT, get_ptime(QuickToggleHoldButton) + 50);
+			}
+		}
+		//QUICK TOGGLE - END
+
+		//RAMP, FLOOR, WALL - START	
+		if(RampFloorWall)
+		{
+			if(get_ival(RampFloorWall_BUTTON))
+			{
+				set_val(RampFloorWall_BUTTON, 0);
+				combo_run(cRampFloorWall);
+			}
+		}
+	    //RAMP, FLOOR, WALL - END
+
+		//SAFETY BOX - START
+		if(QuickBox)
+		{	
+			if(get_ival(SafetyBox_BUTTON))
+			{
+				set_val(SafetyBox_BUTTON, 0);
+				combo_run(cTunnelBox);
+			}
+		}
+		//SAFETY - END 
+
+		//BLOCK SHOT - START
+		if(BlockShotToggle)
+		{
+			if(get_ival(Ads_BTN))
+			{
+				if(get_ival(PS4_L1))
+				{
+					combo_run(cBlockShot);
+				}
+					block(Ads_BTN, get_ptime(PS4_L1) + 50)
+			}
+		}
+		//BLOCK SHOT - END
+
+		//FAST RESET - START
+		if(FastReset && !get_ival(Ads_BTN) && event_press(FastReset_BUTTON))
+		{ 
+			set_val(FastReset_BUTTON, 0);
+			combo_run(cFastReset);
+		}
+		//FAST RESET - END
+
+		// WINDOW EDIT SHOT - START
+		if(WindoWEditShot)
+		{
+			if(event_press(WindowEditShot_BUTTON))
+			{
+				set_val(WindowEditShot_BUTTON, 0);
+				combo_run(cWindowEditShot);
+			}
+		}
+		// WINDOW EDIT SHOT - END
+
+	    //PUMP WALL - START
+		if(PumpWall)
+		{
+			if(get_ival(Fire_BTN))
+			{
+				if(event_press(NextWeapon_BTN))
+				{
+					combo_run(cPumpWall);
+				}
+					block(NextWeapon_BTN, get_ptime(Fire_BTN) + 50);
+			}
+		}
+	    //PUMP WALL - END
+
+		//EDIT ASSIST - START
+		if(EditAssist)
+		{
+			if(get_ival(EditAssist_BUTTON))
+			{
+				EditAssist();
+				Edit1 = TRUE;
+			}
+
+			if(event_release(EditAssist_BUTTON))
+			{	
+				EditT = 0;	
+				Edit1 = FALSE;
+			}
+		}
+
+		if(Edit1)
+		{
+			if(event_press(Reset_BTN))
+			{
+				combo_run(cInstaReset);
+				Edit1	   = FALSE;
+				BuildTrack = FALSE;
+			}
+
+			if(event_press(PickAxe_BTN) || event_press(Ads_BTN))
+			{
+				Edit1	   = FALSE;
+				BuildTrack = FALSE;
+			}
+		}
+		//EDIT ASSIST - END
+
+	//BUILD MODE - START
+	if(BuildTracker) 
+	{
+		if(event_press(Build_BTN))
+		{
+            BuildTrack = !BuildTrack;
+        	set_rgb(255, 0, 0);
+        }
+			if(BuildTrack)
+			{
+				BuildCount += get_rtime();
+
+				if(event_press(PickAxe_BTN) || BuildCount == 3000)
+				{
+					BuildTrack = FALSE;
+					BuildCount = 0;
+				}
+
+				if(get_ival(PreviousWeapon_BTN) || get_ival(NextWeapon_BTN) || get_ival(Ramp_BTN) || get_ival(Wall_BTN) || get_ival(Trap_BTN)) 
+					BuildCount = 0;
+			}
+	}
+
+    if(!BuildTrack)
+	{
+		set_rgb(0, 255, 0);
+
+	    //RAPIDFIRE - START
+		if(RapidFire)
+		{
+			if(get_ival(Fire_BTN))
+				combo_run(cRapidFire);
+			if(event_release(Fire_BTN))
+				combo_stop(cRapidFire);
+		}
+		//RAPIDFIRE - END
+			
+		//PERFECT ACCURACY - START
+		if(PerfectAccuracy) 
+		{
+			if(get_ival(Ads_BTN))
+			{
+				if(get_ival(NextWeapon_BTN))
+				{
+					combo_run(cPerfectionAccuracy);
+				}
+					block(NextWeapon_BTN, get_ptime(Ads_BTN) + 50);
+			}
+		}
+		//PERFECT ACCURACY - END
+
+		//DROPSHOT - START
+		if(StandardDropShot)
+		{
+			if(get_ival(Fire_BTN))
+			{
+				combo_run(cDropShot);
+			}
+		}
+
+		if(NikolaiDropShot)
+		{
+			if(event_release(Fire_BTN))
+			{
+				DropShotVariable = FALSE;
+			}
+
+			if(!BuildTrack)
+			{
+				if(get_val(Fire_BTN) && event_press(Crouch_BTN))
+				{
+					DropShotVariable = TRUE;
+				}
+			}
+
+			if(!BuildTrack)
+			{
+				if(DropShotVariable)
+				{
+					if(get_ival(Fire_BTN))
+					{
+						combo_run(cDropShot);
+					}
+				}
+			}
+		}
+		//DROPSHOT - END
+
+		//PUMP SMG - START
+		if(PumpSMG)
+		{
+			if(R2Block)
+			{
+				set_val(Fire_BTN, 0);
+			}
+
+			if(event_press(Fire_BTN))
+			{
+				if(!Tap)
+				{
+					Tap = TRUE;
+					combo_run(cPumpSmG);
+					set_val(Fire_BTN, 0);
+				}
+			}
+
+			if(event_press(NextWeapon_BTN))
+			{
+				Tap = FALSE;
+			}
+
+			if(event_press(PreviousWeapon_BTN))
+			{
+				Tap = TRUE;
+			}
+		}
+		//PUMP SMG - END
+
+		//Strafe - START
+		if(StrafeShot)
+		{
+			if(get_ival(Fire_BTN))
+				combo_run(cStrafeShot);
+			if(event_release(Fire_BTN))
+				combo_stop(cStrafeShot);
+		}
+		//Strafe - END
+
+		//SLIDE SHOT - START
+		if(SlideShot)
+		{
+            if(!get_ival(Ads_BTN) && event_press(Fire_BTN))
+			{
+                combo_run(cSlideShot);
+            }
+
+            if(event_release(Fire_BTN))
+			{
+            	combo_run(cSlideShot);
+        	}
+
+        	if(combo_running(cSlideShot))
+			{
+        		set_val(Fire_BTN, 0);
+        	}
+        }
+		//SLIDE SHOT - END
+
+		// STICKY AIM - START
+		if(StickyAimAssist)
+		{
+			if(StickyAimActivation())
+				combo_run(cStickyAA);
+			else
+				combo_stop(cStickyAA);
+		}
+		// STICKY AIM - END
+
+		//ANTI BLOOM REDUCER - START
+		if(BloomReducer)
+		{
+			if(get_val(Ads_BTN) && (get_val(Fire_BTN)))
+			{
+				combo_run(cAntiBloom);
+				combo_run(cRapidBloom);
+			}
+				if(LeftStickRadius > 60)
+				{
+					combo_stop(cAntiBloom);
+					combo_stop(cRapidBloom);
+				}
+		}
+		//ANTI BLOOM REDUCER - END
+
+	    //DoGz V7 Polar - START
+		if(DoGzV7Polar)
+		{
+			if(get_ival(Fire_BTN))
+			{
+				if(RadiusBoost)
+				{
+					Radius = PolarRadius + PolarRBoost;
+				}
+
+				if(AngleBoost)
+				{
+					Angle = PolarAngle + PolarABoost;
+				} 
+			}
+			else
+			{
+				Radius = PolarRadius;
+				Angle  = PolarAngle;
+			}
+
+			if(CrescensAimActivation())
+			{
+				if(RightStickRadius < 20)
+				{
+					set_polar(POLAR_RS, Speed = (Speed + Angle) % 360, (Radius * random(326, 328)) + get_polar(POLAR_RS, 0));
+				}
+				else
+				{
+					combo_run(cPolar);
+				}
+			}
+		}
+		//DoGz V7 Polar - END
+
+		// SS_NIKOLAI'S RANDOMIZED AIM ASSIST - START
+		if(SS_Nikolai_Aim)
+		{
+			if(SS_NikolaiAimActivation())
+			{
+				combo_run(cNikoAim);
+			}
+
+			if(event_release(Ads_BTN) || event_release(Fire_BTN))
+			{
+				combo_stop(cNikoAim)
+			}
+		}
+		// SS_NIKOLAI'S RANDOMIZED AIM ASSIST - END
+
+		//DNAM Polar With Taylor Shapes - START
+		if(TaylorShape)
+		{
+			CycleRefresh	+= get_rtime();
+			polarAngle		 = get_polar(POLAR_RS, POLAR_ANGLE);
+			Angle			 = (Angle + TaylorAngle) % 360;
+
+			switch(TaylorTracking)
+			{
+				case OriginalTracking
+				{
+					TrackingAngle = (TrackingAngle + TrackingSpeed) % 360;
+
+					TrackingAngleOne = (TrackingSize * SIN(TrackingAngle) / 100);
+					TrackingAngleTwo = (TrackingSize * COS(TrackingAngle) / 100);
+
+				break;
+				}
+
+				case DynamicSmallTracking
+				{
+					DynamicTracking = (TrackingSize * (100 - RightStickRadius)) / 100;
+
+					TrackingAngleOne = (DynamicTracking * SIN(TrackingAngle) / 100);
+					TrackingAngleTwo = (DynamicTracking * COS(TrackingAngle) / 100);
+				break;
+				}
+
+				case DynamicBigTracking
+				{
+					DynamicTracking = ((TrackingSize << 1) * 100) + 100 + RightStickRadius * (TrackingSize) / 100;
+
+					TrackingAngleOne = (DynamicTracking * SIN(TrackingAngle) / 100);
+					TrackingAngleTwo = (DynamicTracking * COS(TrackingAngle) / 100);
+				break;
+				}
+			}
+
+			if(TaylorAimActivation())
+			{
+				TaylorShape(POLAR_RS, Angle, TaylorRadius);
+			}
+		}
+		//DNAM Polar With Taylor Shapes - END
+
+		// DoGz TIMED AIM ASSIST - START
+		if(DoGzTimeAA)
+		{
+			if(DoGzTimedAimActivation())
+			{
+				DoGzTimeAim();
+			}
+
+			if(event_release(Ads_BTN) || event_release(Fire_BTN))
+			{
+				AAT 	= 0;
+				AxisT	= 0;
+			}
+		}
+		// DoGz TIMED AIM ASSIST - END
+
+		// DoGz Echo AIM ASSIST - START
+		if(DoGzEcho)
+		{
+			if(DoGzEchoAimActivation())
+			{
+				AimAssistEcho();
+			}
+
+			if(event_release(Ads_BTN) || event_release(Fire_BTN))
+			{
+				TimerEcho = 0;
+			}
+		}
+		// DoGz Echo AIM ASSIST - END
+
+		// SWEET_EVIL STEADY AIM - START
+		if(SteadyAimToggle)
+		{
+			CurrentRX = get_ival(AimX);
+			CurrentRY = get_ival(AimY);
+
+			CurrentRX = GetSteadyAim(CurrentRX, SteadyAimResolution);
+			CurrentRY = GetSteadyAim(CurrentRY, SteadyAimResolution);
+
+			set_val(AimX, clamp(CurrentRX, -100, 100));
+			set_val(AimY, clamp(CurrentRY, -100, 100));
+		}
+		// SWEET_EVIL STEADY AIM - END
+
+		//Strafe ASSIST - START
+		switch(StrafeAimAssist)
+		{
+			case Circular
+			{
+				if(LeftStickRadius > 0)
+				{
+					aimAssistAngle += StrafeAssistSpeed * get_rtime();
+				}
+				else
+				{
+					aimAssistAngle -= StrafeAssistSpeed * get_rtime();
+				}
+
+				if(StrafeAssistActivation())
+				{
+					Set_Val(Strafe, (StrafeAssistRadius << 1 * COS(aimAssistAngle) / 100));
+					Set_Val(Walk  , (StrafeAssistRadius << 1 * SIN(aimAssistAngle) / 100));
+				}
+			break;
+			}
+
+			case Diamond
+			{
+				if(StrafeAssistActivation())
+				{
+					combo_run(cRotationalAimAssist);
+				}
+				else
+				{
+					combo_stop(cRotationalAimAssist);
+				}
+			break;
+			}
+		}
+		//Strafe ASSIST - END
+
+	    //CHICKEN MODE - START
+		if(ChickenMode)
+		{
+			if(get_ival(Fire_BTN))
+				combo_run(cStrafeShot);
+				combo_run(cDropShot);
+
+			if(event_release(Fire_BTN))
+				combo_stop(cStrafeShot);
+				combo_stop(cDropShot); 
+		}
+	  	//CHICKEN MODE - END	
+	  	
+	  	//AUTO AIM - START
+		if(AimAbuse)
+		{
+			if(get_ival(Ads_BTN) > 95)
+				combo_run(cAimAbuse); 
+			if(event_release(Ads_BTN))
+				combo_stop(cAimAbuse); 
+		}
+		//AUTO AIM - END
+
+		//HEADSHOT ASSIST - START
+		if(HeadShotAssist)
+		{
+			RY = inv(HeadShotStrength);
+
+			if(get_ival(Fire_BTN) && get_ptime(Fire_BTN) < HeadShotHoldTime)
+			{
+				Set_Val(AimY, RY);	
+			}
+		}
+		//HEADSHOT ASSIST - END
+
+		//GHOST PEEK - START
+		if(GhostPeekToggle)
+		{
+			if(get_ival(Ads_BTN))
+			{
+				if(get_ival(PS4_DOWN))
+				{
+					combo_run(cGhostPeek);
+				}
+					block(PS4_DOWN, get_ptime(PS4_DOWN) + 50);
+			}
+		}
+		//GHOST PEEK - END
+
+		//INSTANT PICKAXE - START
+		if(InstantPickaxe)
+		{
+			if(event_press(PickAxe_BTN)) 
+				Axe = TRUE;
+
+				if(Axe)
+				{
+					if(event_press(Build_BTN) || event_press(Ads_BTN) || event_press(NextWeapon_BTN) || event_press(PreviousWeapon_BTN)) 
+						Axe = FALSE;
+
+					if(event_release(Fire_BTN))
+						combo_run(cPickaxe);
+				}
+		}
+		//INSTANT PICKAXE - END
+
+		//AIM CORRECTION - START
+		if(AimSensCorrections)
+		{
+			ADS_Grenade_Sens = 100 - (AimCorrectionsValue);
+			ADS_Fire_Sens    = 96  - (AimCorrectionsValue);
+			Actual_Sens      = 100;
+
+			if(!get_ival(Ads_BTN) && !get_ival(Fire_BTN) && !get_ival(NextWeapon_BTN) && !get_ival(PreviousWeapon_BTN))
+			{
+				Sens = Actual_Sens;
+			}
+			else if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+			{
+				Sens = ADS_Grenade_Sens;
+			}
+			else if(!get_ival(Ads_BTN) && get_ival(Fire_BTN))
+			{
+				Sens = Actual_Sens;
+			}
+			else if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+			{
+				Sens = ADS_Fire_Sens;
+			}
+			else if(get_ival(PreviousWeapon_BTN) || get_ival(NextWeapon_BTN))
+			{
+				Sens = ADS_Grenade_Sens;
+			}
+
+			if(RightStickRadius > Radius)
+			{
+				if(Sens > 100)
+					Sens = 100;
+					sensitivity(AimX, NOT_USE, Sens);
+					sensitivity(AimY, NOT_USE, Sens);
+			}
+		}
+		//AIM CORRECTION - END
+
+		//ANTIRECOIL - START
+		switch(AntiRecoilType)
+		{
+			case Boost_
+			{
+				if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				{
+					combo_run(cBoostRecoil);
+				}
+
+				if(event_release(Fire_BTN))
+				{
+					combo_stop(cBoostRecoil);
+				}
+			break;
+			}
+
+			case Legacy
+			{
+				if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				{
+					if(RightStickRadius > (DeadZoneValue))
+					{
+						Set_Val(AimY, (VerticalValue - (DeadZoneValue * Inverted)));
+						Set_Val(AimX, HorizontalValue);
+					}
+
+					if(RightStickRadius < (DeadZoneValue))
+					{
+						Set_Val(AimY, (VerticalValue - get_ival(AimY) * Inverted));
+						Set_Val(AimX, HorizontalValue);
+					}
+				}
+			break;
+			}
+
+			case Rumble
+			{
+				if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				{
+					TimeValue += get_rtime();
+
+					if(TimeValue > 30)
+					{
+						AxisLY = get_lval(AimY);
+						AxisCY = get_ival(AimY);
+					}
+
+					if(abs(AxisCY) != abs(AxisLY))
+					{
+						BoostAR = ((AxisCY - AxisLY) * 4);
+					}
+
+					if((BoostAR != 0) && (TimeValue > 40))
+					{
+						BoostAR   = 0;
+						TimeValue = 0;
+					}
+
+					if(get_rumble(RUMBLE_A))
+					{
+						RumValue = get_rumble(RUMBLE_A) / 3;
+					}
+					else
+					{
+						RumValue = 0;
+					}
+						OutPut = (VerticalValue + RumValue + BoostAR);
+						Set_Val(AimY, OutPut * Inverted);
+						Set_Val(AimX, HorizontalValue);
+				}
+
+					if(!get_ival(Fire_BTN))
+					{
+						RecoilTimer = 0;
+						TimeValue   = 0;
+						BoostAR     = 0;
+					}
+			break;
+			}
+
+			case Timed
+			{
+				if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				{
+					TimeValue += get_rtime();
+
+					if(TimeValue > 30)
+					{
+						AxisLY = get_lval(AimY);
+						AxisCY = get_ival(AimY);
+					}
+
+					if(abs(AxisCY) != abs(AxisLY))
+					{
+						BoostAR = ((AxisCY - AxisLY) * 4);
+					}
+
+					if((BoostAR != 0) && (TimeValue > 40))
+					{
+						BoostAR   = 0;
+						TimeValue = 0;
+					}
+
+					RecoilTimer += get_rtime();
+
+					if(RecoilTimer > 70)
+					{
+						RumValue    = 15;
+						RecoilTimer =  0;
+					}
+					else
+					{
+						RumValue = 0;
+					}
+						OutPut = (VerticalValue + RumValue + BoostAR);
+						Set_Val(AimY, OutPut* Inverted);
+						Set_Val(AimX, HorizontalValue);
+				}
+
+					if(!get_ival(Fire_BTN))
+					{
+						RecoilTimer = 0;
+						TimeValue   = 0;
+						BoostAR     = 0;
+					}
+			break;
+			}
+		}
+		//ANTIRECOIL - END
+
+		//BUILD MODE - END
+	}
+		//Build_BTN MODE - END
+
+		if(get_ival(PS4_L2))
+		{
+			if(event_press(PS4_OPTIONS))
+			{
+				ZenScreen 	= MainMods;
+				Display		= TRUE;
+			}
+				block(PS4_OPTIONS, get_ptime(PS4_L2) + 50);
+		}
+	}
+
+	SS_NikolaiCheck();
+
+	if(ZenScreen == MainMods)
+	{
+		block_all_inputs();
+		BlockAllOutPuts();
+
+		if(RumbleBlock)
+			block_rumble();
+
+		DoGzV7Polar			= ToggleSwitch(1,  DoGzV7Polar			, 0,  1);
+		TaylorShape			= ToggleSwitch(2,  TaylorShape			, 0, 15);
+		TaylorTracking		= ToggleSwitch(3,  TaylorTracking		, 0,  3);
+		StickyAimAssist		= ToggleSwitch(4,  StickyAimAssist		, 0,  1);
+		SS_Nikolai_Aim		= ToggleSwitch(5,  SS_Nikolai_Aim		, 0,  1);
+		DoGzTimeAA			= ToggleSwitch(6,  DoGzTimeAA			, 0,  1);
+		DoGzEcho			= ToggleSwitch(7,  DoGzEcho				, 0,  1);
+		SteadyAimToggle		= ToggleSwitch(8,  SteadyAimToggle		, 0,  1);
+		StrafeAimAssist		= ToggleSwitch(9,  StrafeAimAssist		, 0,  2);
+		AimAbuse			= ToggleSwitch(10, AimAbuse				, 0,  1);
+		AimSensCorrections	= ToggleSwitch(11, AimSensCorrections	, 0,  1);
+		AntiRecoilType		= ToggleSwitch(12, AntiRecoilType		, 0,  4);
+		RapidFire			= ToggleSwitch(13, RapidFire			, 0,  1);
+		StandardDropShot	= ToggleSwitch(14, StandardDropShot		, 0,  1);
+		NikolaiDropShot		= ToggleSwitch(15, NikolaiDropShot		, 0,  1);
+		PumpSMG				= ToggleSwitch(16, PumpSMG				, 0,  1);
+		PumpWall			= ToggleSwitch(17, PumpWall				, 0,  1);
+		ChickenMode			= ToggleSwitch(18, ChickenMode			, 0,  1);
+		FastReset			= ToggleSwitch(19, FastReset			, 0,  1);
+		EditAssist			= ToggleSwitch(20, EditAssist			, 0,  1);
+		RampFloorWall		= ToggleSwitch(21, RampFloorWall		, 0,  1);
+		QuickBox			= ToggleSwitch(22, QuickBox				, 0,  1);
+		WindoWEditShot		= ToggleSwitch(23, WindoWEditShot		, 0,  1);
+		BloomReducer		= ToggleSwitch(24, BloomReducer			, 0,  1);
+		SlideShot			= ToggleSwitch(25, SlideShot			, 0,  1);
+		StrafeShot			= ToggleSwitch(26, StrafeShot			, 0,  1);
+		HeadShotAssist		= ToggleSwitch(27, HeadShotAssist		, 0,  1);
+		BuildTracker		= ToggleSwitch(28, BuildTracker			, 0,  1);
+		RumbleBlock			= ToggleSwitch(29, RumbleBlock			, 0,  1);
+		InstantPickaxe		= ToggleSwitch(30, InstantPickaxe		, 0,  1);
+		GhostPeekToggle		= ToggleSwitch(31, GhostPeekToggle		, 0,  1);
+		BlockShotToggle		= ToggleSwitch(32, BlockShotToggle		, 0,  1);
+
+		if(Mod == 1)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				CrescensAimActivationType	= Cycle(CrescensAimActivationType + 1, 0, 5);
+				Display						= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				CrescensAimActivationType	= Cycle(CrescensAimActivationType - 1, 0, 5);
+				Display						= TRUE;
+            }
+		}
+
+		if(Mod == 2)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				TaylorAimActivationType	= Cycle(TaylorAimActivationType + 1, 0, 5);
+				Display					= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				TaylorAimActivationType	= Cycle(TaylorAimActivationType - 1, 0, 5);
+				Display					= TRUE;
+            }
+		}
+
+		if(Mod == 4)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				StickyAimActivationType	= Cycle(StickyAimActivationType + 1, 0, 5);
+				Display					= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				StickyAimActivationType	= Cycle(StickyAimActivationType - 1, 0, 5);
+				Display					= TRUE;
+            }
+		}
+
+		if(Mod == 5)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				SS_NikolaiAimActivationType	= Cycle(SS_NikolaiAimActivationType + 1, 0, 5);
+				Display						= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				SS_NikolaiAimActivationType	= Cycle(SS_NikolaiAimActivationType - 1, 0, 5);
+				Display						= TRUE;
+            }
+		}
+
+		if(Mod == 6)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				DoGzAimActivationType	= Cycle(DoGzAimActivationType + 1, 0, 5);
+				Display					= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				DoGzAimActivationType	= Cycle(DoGzAimActivationType - 1, 0, 5);
+				Display					= TRUE;
+            }
+		}
+
+		if(Mod == 7)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				DoGzEchoAimActivationType	= Cycle(DoGzEchoAimActivationType + 1, 0, 5);
+				Display						= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				DoGzEchoAimActivationType	= Cycle(DoGzEchoAimActivationType - 1, 0, 5);
+				Display						= TRUE;
+            }
+		}
+
+		if(Mod == 9)
+		{
+			if(event_press(PS4_RIGHT))
+			{
+				StrafeAssistActivationType	= Cycle(StrafeAssistActivationType + 1, 0, 5);
+				Display						= TRUE;
+			}
+
+			if(event_press(PS4_LEFT))
+			{
+				StrafeAssistActivationType	= Cycle(StrafeAssistActivationType - 1, 0, 5);
+				Display						= TRUE;
+            }
+		}
+
+		if(event_press(PS4_SQUARE))
+		{
+			if(EditableMods[Mod] == 1)
+			{
+				ZenScreen	= EditMods;
+				Display 	= TRUE;
+			}
+		}
+
+		if(event_press(PS4_UP))
+		{
+			Mod		= Cycle(Mod - 1, 1, NumOfMods);
+			Display = TRUE;
+		}
+
+		if(event_press(PS4_DOWN))
+		{
+			Mod		= Cycle(Mod + 1, 1, NumOfMods);
+			Display = TRUE;
+		}
+
+		if(event_press(PS4_CIRCLE))
+		{
+			ZenScreen	= MenuClose;
+			Pin			= random(102, 999);
+			Frame		= -1;
+			Display		= TRUE;
+			combo_restart(cSS_Nikolai);
+			SavePVARS();
+		}
+	}
+
+	if(ZenScreen == EditMods)
+	{
+		block_all_inputs();
+		BlockAllOutPuts();
+
+		if(RumbleBlock)
+			block_rumble();
+
+		if(event_press(PS4_CIRCLE))
+		{
+			ZenScreen	= MainMods;
+			Display		= TRUE;
+		}
+
+		if(event_press(PS4_UP))
+		{
+			Scroll	= Cycle(Scroll + 1, 0, 2);
+			Display = TRUE;
+		}
+
+		if(event_press(PS4_DOWN))
+		{
+			Scroll	= Cycle(Scroll - 1, 0, 2);
+			Display = TRUE;
+		}
+
+		if(Mod == 1)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			if(Tab == 0)
+			{
+				if(event_press(PS4_R1))
+				{
+					Tab += 1;
+					Display = TRUE;
+				}
+					PolarRadius = EditValues(1, PolarRadius, 1, 0, 50);
+					PolarAngle  = EditValues(0, PolarAngle , 1, 0, 50);
+			}
+			if(Tab == 1)
+			{
+				if(event_press(PS4_L1))
+				{
+					Tab -= 1;
+					Display = TRUE;
+				}
+					PolarRBoost = EditValues(1, PolarRBoost, 1, 0, 50);
+					PolarABoost = EditValues(0, PolarABoost, 1, 0, 50);
+			}
+		}
+
+		if(Mod == 2)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			TaylorRadius = EditValues(1, TaylorRadius, 1, 0,  50);
+			TaylorAngle  = EditValues(0, TaylorAngle , 1, 0, 100);
+		}
+
+		if(Mod == 3)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			TrackingSize  = EditValues(1, TrackingSize , 1, 0, 10);
+			TrackingSpeed = EditValues(0, TrackingSpeed, 1, 0, 10);
+		}
+
+		if(Mod == 4)
+		{
+			Scroll = 1;
+
+			if(Tab == 0)
+			{
+				if(event_press(PS4_R1))
+				{
+					Tab += 1;
+					Display = TRUE;
+				}
+					StickyAimSize = EditValues(1, StickyAimSize, 1, 0, 50);
+			}
+
+			if(Tab == 1)
+			{
+				if(event_press(PS4_L1))
+				{
+					Tab -= 1;
+					Display = TRUE;
+				}
+					StickyAimTime = EditValues(1, StickyAimTime, 10, 0, 100);
+			}
+		}
+
+		if(Mod == 5)
+		{
+			Scroll = 1;
+
+			if(Tab == 0)
+			{
+				if(event_press(PS4_R1))
+				{
+					Tab += 1;
+					Display = TRUE;
+				}
+					AimAssistStrength = EditValues(1, AimAssistStrength, 1, 0, 50);
+			}
+
+			if(Tab == 1)
+			{
+				if(event_press(PS4_L1))
+				{
+					Tab -= 1;
+					Display = TRUE;
+				}
+					AimAssistWaitTime = EditValues(1, AimAssistWaitTime, 10, 0, 100);
+			}
+		}
+
+		if(Mod == 6)
+		{
+			Scroll = 1;
+
+			Strength = EditValues(1, Strength, 1, 0, 10);
+		}
+
+		if(Mod == 7)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			if(Tab == 0)
+			{
+				if(event_press(PS4_R1))
+				{
+					Tab += 1;
+					Display = TRUE;
+				}
+					EchoValue	= EditValues(1, EchoValue, 1, 1, 30);
+					Increase	= EditValues(0, Increase , 1, 1,  6);
+			}
+			if(Tab == 1)
+			{
+				if(event_press(PS4_L1))
+				{
+					Tab -= 1;
+					Display = TRUE;
+				}
+					EchoDelay	= EditValues(1, EchoDelay, 10, 10,  200);
+					StepTime	= EditValues(0, StepTime , 50, 10, 1500);
+			}
+		}
+
+		if(Mod == 8)
+		{
+			Scroll = 1;
+
+			SteadyAimResolution	= EditValues(1, SteadyAimResolution, 1, 0, 100);
+		}
+
+		if(Mod == 9)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			StrafeAssistRadius	= EditValues(1, StrafeAssistRadius, 1, 0,  50);
+			StrafeAssistSpeed	= EditValues(0, StrafeAssistSpeed , 1, 0, 100);
+		}
+
+		if(Mod == 11)
+		{
+			Scroll = 1;
+
+			AimCorrectionsValue = EditValues(1, AimCorrectionsValue, 1, 0, 20);
+		}
+
+		if(Mod == 12)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			VerticalValue	= EditValues(1, VerticalValue  , 1,    0, 100);
+			HorizontalValue = EditValues(0, HorizontalValue, 1, -100, 100);
+		}
+
+		if(Mod == 13)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			RapidFireHold		= EditValues(1, RapidFireHold   , 10,    0, 100);
+			RapidFireRelease	= EditValues(0, RapidFireRelease, 10, -100, 100);
+		}
+
+		if(Mod == 14 || Mod == 15)
+		{
+			Scroll = 1;
+
+			DropShotSpeed = EditValues(1, DropShotSpeed, 10, 30, 200);
+		}
+
+		if(Mod == 25)
+		{
+			Scroll = 1;
+
+			SlideShotWait = EditValues(1, SlideShotWait, 10, 30, 300);
+		}
+
+		if(Mod == 27)
+		{
+			if(Scroll < 0)
+				Scroll = 0;
+			if(Scroll > 1)
+				Scroll = 1;
+
+			HeadShotStrength = EditValues(1, HeadShotStrength,   1, 0,   99);
+			HeadShotHoldTime = EditValues(0, HeadShotHoldTime, 100, 0, 4000);
+		}
+	}
+
+	if(screenSaver)
+	{	
+		if(ZenScreen == MenuClose)
+			SS_NikolaiTextOne();
+
+		if(ZenScreen == MainMods)
+			SS_NikolaiTextTwo();
+
+		rect_oled(0, 0, 128, 64, 0, 1);
+    	CountDown += get_rtime();
+		SS_NikolaiScreenSaver();
+   
+		if(CountDown >= 9000)
+		{
+      		cls_oled(0);
+      		CountDown = 0;
+      		screenSaver = FALSE;
+    	}
+	}
+	
+	if(Display)
+	{
+		cls_oled(0);
+		CountDown = 0;
+
+		if(ZenScreen == MenuClose)
+		{
+			print (CenterX(GetChars(0), OLED_FONT_SMALL_WIDTH), 18, 0, 1, ModsString[0]);
+		}
+		
+		if(ZenScreen == MainMods)
+		{
+			print (CenterX(GetChars(Mod), OLED_FONT_SMALL_WIDTH), CenterY(OLED_FONT_SMALL_HEIGHT), 0, 1, ModsString[Mod]);
+
+			if(Mod == 1)
+			{
+				switch(CrescensAimActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+	
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 2)
+			{
+				print(CenterX(AimAssistShape_Chars(TaylorShape), OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, AimPatterns[TaylorShape]);
+
+				switch(TaylorAimActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)		- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 3)
+			{
+				switch(TaylorTracking)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)			- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(Original)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, Original[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(DynamicSmall)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, DynamicSmall[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(DynamicBig)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, DynamicBig[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 4)
+			{
+				switch(StickyAimActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+	
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 5)
+			{
+				switch(SS_NikolaiAimActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)			- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+	
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 6)
+			{
+				switch(DoGzAimActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)			- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+	
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 7)
+			{
+				switch(DoGzEchoAimActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)			- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+	
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 9)
+			{
+				switch(StrafeAimAssist)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(ModIsOFF)		- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, ModIsOFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(CircularStrA)	- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, CircularStrA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(DiamondStrA)	- 1, OLED_FONT_SMALL_WIDTH), 37, OLED_FONT_SMALL, OLED_WHITE, DiamondStrA[0]);
+					break;
+					}
+				}
+
+				switch(StrafeAssistActivationType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)			- 1, OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);
+					break;
+					}
+	
+					case 1
+					{
+						print(CenterX(sizeof(AdsOrFireAA)	- 1, OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, AdsOrFireAA[0]);
+					break;
+					}
+	
+					case 2
+					{
+						print(CenterX(sizeof(AdsFireAA)		- 1, OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, AdsFireAA[0]);
+					break;
+					}
+						
+					case 3
+					{
+						print(CenterX(sizeof(FireOnlyAA)	- 1, OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, FireOnlyAA[0]);
+					break;
+					}
+	
+					case 4
+					{
+						print(CenterX(sizeof(AdsOnlyAA)		- 1, OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, AdsOnlyAA[0]);
+					break;
+					}
+
+					case 5
+					{
+						print(CenterX(sizeof(AdsFireOrFire)	- 1, OLED_FONT_SMALL_WIDTH), 49, OLED_FONT_SMALL, OLED_WHITE, AdsFireOrFire[0]);
+					break;
+					}
+				}
+			}
+
+			if(Mod == 12)
+			{
+				switch(AntiRecoilType)
+				{
+					case 0
+					{
+						print(CenterX(sizeof(OFF)			- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, OFF[0]);	
+					break;
+					}
+
+					case 1
+					{
+						print(CenterX(sizeof(BOOSTRECOIL)	- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, BOOSTRECOIL[0]);
+					break;
+					}
+
+					case 2
+					{
+						print(CenterX(sizeof(LEGACYAR)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, LEGACYAR[0]);
+					break;
+					}
+
+					case 3
+					{
+						print(CenterX(sizeof(RUMBLEAR)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, RUMBLEAR[0]);
+					break;
+					}
+
+					case 4
+					{
+						print(CenterX(sizeof(TIMEDAR)		- 1, OLED_FONT_SMALL_WIDTH), 42, OLED_FONT_SMALL, OLED_WHITE, TIMEDAR[0]);
+					break;
+					}
+				}
+			}
+		}
+
+		if(ZenScreen == EditMods)
+		{
+			print (CenterX(GetChars(Mod), OLED_FONT_SMALL_WIDTH), 3, 0, 1, ModsString[Mod]);
+
+			if(Mod == 1)
+			{
+				if(Tab == 0)
+				{
+					NumberToStringRegular(PolarRadius, FindDigits (PolarRadius), 23);
+					NumberToStringRegular(PolarAngle , FindDigits (PolarAngle) , 41);
+				}
+
+				if(Tab == 1)
+				{
+					NumberToStringRegular(PolarRBoost, FindDigits (PolarRBoost), 23);
+					NumberToStringRegular(PolarABoost, FindDigits (PolarABoost), 41);
+				}
+			}
+
+			if(Mod == 2)
+			{
+				NumberToStringRegular(TaylorRadius, FindDigits (TaylorRadius), 23);
+				NumberToStringRegular(TaylorAngle , FindDigits (TaylorAngle) , 41);
+			}
+
+			if(Mod == 3)
+			{
+				NumberToStringRegular(TrackingSize , FindDigits (TrackingSize) , 21);
+				NumberToStringRegular(TrackingSpeed, FindDigits (TrackingSpeed), 41);
+			}
+
+			if(Mod == 4)
+			{
+				if(Tab == 0)
+				{
+					NumberToStringRegular(StickyAimSize, FindDigits (StickyAimSize), 25);
+				}
+
+				if(Tab == 1)
+				{
+					NumberToStringRegular(StickyAimTime, FindDigits (StickyAimTime), 25);
+				}
+			}
+
+			if(Mod == 5)
+			{
+				if(Tab == 0)
+				{
+					NumberToStringRegular(AimAssistStrength, FindDigits (AimAssistStrength), 25);
+				}
+
+				if(Tab == 1)
+				{
+					NumberToStringRegular(AimAssistWaitTime, FindDigits (AimAssistWaitTime), 25);
+				}
+			}
+
+			if(Mod == 6)
+			{
+				NumberToStringRegular(Strength, FindDigits (Strength), 25);
+			}
+
+			if(Mod == 7)
+			{
+				if(Tab == 0)
+				{
+					NumberToStringRegular(EchoValue, FindDigits (EchoValue), 23);
+					NumberToStringRegular(Increase , FindDigits (Increase) , 41);
+				}
+
+				if(Tab == 1)
+				{
+					NumberToStringRegular(EchoDelay, FindDigits (EchoDelay), 23);
+					NumberToStringSmall(StepTime   , FindDigits (StepTime), 41);
+				}
+			}
+
+			if(Mod == 8)
+			{
+				NumberToStringRegular(SteadyAimResolution, FindDigits (SteadyAimResolution), 25);
+			}
+
+			if(Mod == 9)
+			{
+				NumberToStringRegular(StrafeAssistRadius, FindDigits (StrafeAssistRadius), 23);
+				NumberToStringRegular(StrafeAssistSpeed , FindDigits (StrafeAssistSpeed) , 41);
+			}
+
+			if(Mod == 11)
+			{
+				NumberToStringRegular(AimCorrectionsValue, FindDigits (AimCorrectionsValue), 25);
+			}
+
+			if(Mod == 12)
+			{
+				NumberToStringRegular(VerticalValue  , FindDigits (VerticalValue)  , 23);
+				NumberToStringRegular(HorizontalValue, FindDigits (HorizontalValue), 41);
+			}
+
+			if(Mod == 13)
+			{
+				NumberToStringRegular(RapidFireHold   , FindDigits (RapidFireHold)   , 23);
+				NumberToStringRegular(RapidFireRelease, FindDigits (RapidFireRelease), 41);
+			}
+
+			if(Mod == 14 || Mod == 15)
+			{
+				NumberToStringRegular(DropShotSpeed, FindDigits (DropShotSpeed), 25);
+			}
+
+			if(Mod == 25)
+			{
+				NumberToStringRegular(SlideShotWait, FindDigits (SlideShotWait), 25);
+			}
+
+			if(Mod == 27)
+			{
+				NumberToStringRegular(HeadShotStrength, FindDigits (HeadShotStrength), 23);
+				NumberToStringSmall(HeadShotHoldTime  , FindDigits (HeadShotHoldTime), 41);
+			}
+
+			if(Scroll == 2)
+				line_oled(30, 20, 40, 20, 3, 1);
+			if(Scroll == 1)
+				line_oled(30, 33, 40, 33, 3, 1);
+			if(Scroll == 0)
+				line_oled(30, 46, 40, 46, 3, 1);
+		}
+			rect_oled(0, 0, 128, 64, 0, 1);
+			screenSaver	=  TRUE;
+			Display		= FALSE;
+	}
+		//set_val(TRACE_1, Pin);
+}
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |C|O|M|B|O| |S|E|C|T|I|O|N| | | | | | S | S | _ | N | i | k | o | l | a | i | | | | | | | | 
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+combo cVibrate {
+	set_rumble(RUMBLE_A, 90);
+	wait(230);
+	reset_rumble();
+}
+
+combo cVibrate2 {
+	set_rumble(RumbleSide, 100);
+	wait(RumbleTime);
+	reset_rumble();
+	wait(100);
+}
+
+combo cFlashGreen {
+	set_rgb(0, 255, 0);
+	wait(100);
+	set_rgb(0, 0, 0);
+	wait(100);
+	set_rgb(0, 255, 0);
+	wait(100);
+	set_rgb(0, 0, 0);
+	wait(100);
+	set_rgb(0, 255, 0);
+	wait(2000);
+	set_rgb(0, 0, 0);
+}
+
+combo cFlashRed {
+	set_rgb(255, 0, 0);
+	wait(100);
+	set_rgb(0, 0, 0);
+	wait(100);
+	set_rgb(255, 0, 0);
+	wait(100);
+	set_rgb(0, 0, 0);
+	wait(100);
+	set_rgb(255, 0, 0);
+	wait(2000);
+	set_rgb(0, 0, 0);
+}
+
+combo cStickyAA {
+	Set_Val(AimY, StickyAimSize);
+	wait(StickyAimTime);
+	Set_Val(AimX, StickyAimSize);
+	wait(StickyAimTime);
+	Set_Val(AimY, inv(StickyAimSize));
+	wait(StickyAimTime);
+	Set_Val(AimX, inv(StickyAimSize));
+	wait(StickyAimTime);
+}
+
+combo cNikoAim {
+	WaitStrength	= random(AimAssistWaitTime >> 1 , AimAssistWaitTime);
+	AimStrength		= random(inv(AimAssistStrength), AimAssistStrength);
+
+	Set_Val(AimY,	AimStrength);
+	wait(WaitStrength);
+	Set_Val(AimX,	AimStrength);
+	wait(WaitStrength);
+	Set_Val(AimY,	inv(AimStrength));
+	wait(WaitStrength);
+	Set_Val(AimX,	inv(AimStrength));
+	wait(WaitStrength);
+}
+
+combo cPolar {
+	Set_Ival(AimX,	Radius);
+	wait(20);
+	Set_Ival(AimY,	Radius);
+	wait(20);
+	Set_Ival(AimX,	inv(Radius));
+	wait(20);
+	Set_Ival(AimY,	inv(Radius));
+	wait(20);
+}
+
+combo cEchoAssist {
+	Set_Val(AimY, EchoVal);
+	wait(EchoDelay);
+	Set_Val(AimX, inv(EchoVal));
+	wait(EchoDelay);
+	Set_Val(AimX, EchoVal);
+	wait(EchoDelay);
+	Set_Val(AimY, inv(EchoVal));
+	wait(EchoDelay);
+}
+
+combo cRotationalAimAssist {
+	Set_Val(Strafe, 	StrafeAssistRadius << 1);
+	Set_Val(Walk  , inv(StrafeAssistRadius << 1));
+	wait(StrafeAssistSpeed);
+	Set_Val(Strafe, inv(StrafeAssistRadius << 1));
+	Set_Val(Walk  , 	StrafeAssistRadius << 1);
+	wait(StrafeAssistSpeed);
+	Set_Val(Walk  , StrafeAssistRadius << 1);
+	Set_Val(Strafe, StrafeAssistRadius << 1);
+	wait(StrafeAssistSpeed);
+	Set_Val(Strafe, inv(StrafeAssistRadius << 1));
+	Set_Val(Walk  , inv(StrafeAssistRadius << 1));
+	wait(StrafeAssistSpeed);
+}
+
+combo cBoostRecoil {
+	Boost++;
+
+	Recoil = get_ival(AimY) + VerticalValue + Boost;
+
+	if(Boost == 10)
+	{
+		Boost = 0;
+	}
+
+	if(Recoil > 100)
+	{
+		Recoil = 100;
+	}
+
+	Set_Val(AimY, Recoil * Inverted);
+
+	Recoil = get_ival(AimX) + HorizontalValue;
+
+	if(Recoil > 100)
+	{
+		Recoil = 100;
+	}
+
+	set_val(AimX, Recoil);
+}
+
+combo cStrafeShot {
+    Set_Val(Strafe, inv(100));
+    wait(160);
+	wait(10);
+    Set_Val(Strafe, 100);
+    wait(160);
+	wait(10);
+}
+
+combo cPickaxe {
+    set_val(PickAxe_BTN, 100);
+    wait(20);
+    Axe = FALSE;
+}
+
+combo cPumpWall {
+    set_val(Fire_BTN, 100);
+    wait(50);
+ 	set_val(Build_BTN, 100);
+    wait(50);
+    set_val(Wall_BTN, 100);
+    wait(50);
+    set_val(Build_BTN, 100);
+    wait(50);
+    wait(30);
+}
+
+combo cWindowEditShot {
+	set_val(Wall_BTN, 100);	
+	wait(90);
+	set_val(Wall_BTN, 0);
+	wait(90);
+	set_val(Build_BTN, 100);
+	wait(50);
+	set_val(Build_BTN, 0);
+	wait(50);
+	set_val(Wall_BTN, 100);
+	wait(50);
+	set_val(Wall_BTN, 0);
+	wait(50);
+	set_val(Build_BTN, 100);
+	wait(125);
+	set_val(Build_BTN, 0);
+	wait(125);
+	set_val(Wall_BTN, 100);
+	wait(100);
+	wait(200);
+	set_val(Build_BTN, 100);
+	wait(100);
+	set_val(Build_BTN, 0);
+	wait(100);
+}
+
+combo cFastReset {
+	set_val(EditAssist_BUTTON, 100);
+	wait(20);
+	set_val(Reset_BTN, 100);
+	wait(20);
+
+	combo_run(cConfirm);
+}
+
+combo cPumpSmG {
+    R2Block = TRUE;
+    set_val(Fire_BTN, 100);
+    wait(30);
+    wait(10);
+    set_val(Ads_BTN, 100);
+    set_val(PreviousWeapon_BTN, 100);
+    wait(30);
+    R2Block = FALSE;
+}
+
+combo cInstaReset {
+    wait(20);
+    combo_run(cConfirm);
+}
+
+combo cConfirm {
+    set_val(Confirm_BTN, 100);
+    wait(50);
+    set_val(Confirm_BTN, 0);
+    wait(100);
+}
+
+combo cRampFloorWall {
+	set_val(Ramp_BTN, 100);
+	wait(60);
+	wait(30);
+	set_val(Floor_BTN, 100);
+	wait(60);
+	wait(30);
+	set_val(Wall_BTN, 100);
+	wait(60);
+	wait(40);
+}
+
+combo cTunnelBox {
+	wait(20);
+	set_val(Build_BTN, 100);
+	wait(30);
+	set_val(AimY, 100);
+	wait(30);
+	set_val(Wall_BTN, 100);
+	set_val(AimX, 100);
+	wait(430);
+	set_val(AimY, -60);
+	wait(50);
+	set_val(AimY, -100);
+	wait(120);
+	set_val(NextWeapon_BTN, 100);
+	wait(40);
+	set_val(AimY, 100);
+	wait(120);
+	set_val(Build_BTN, 100);
+	wait(30);
+}
+
+combo cGhostPeek {
+	set_val(Crouch_BTN, 100);
+	wait(30);
+	wait(30);
+	set_val(Fire_BTN, 100);
+	wait(30);
+	set_val(Crouch_BTN, 100);
+	wait(30);
+	wait(130);
+}
+
+combo cBlockShot {
+	set_val(Fire_BTN, 100);
+	wait(50);
+	set_val(Build_BTN, 100);
+	wait(50);
+	set_val(Wall_BTN, 100);
+	wait(30);
+	set_val(Floor_BTN, 100);
+	wait(30);
+	set_val(Wall_BTN, 100);
+	wait(30);
+	set_val(Floor_BTN, 100);
+	wait(30);    
+	set_val(Build_BTN, 100);
+	wait(50);
+	wait(30);
+}
+
+combo cAimAbuse {
+	set_val(Ads_BTN, 100);
+	wait(random(440, 750));	// Hold Time Between 440ms and 730ms
+	set_val(Ads_BTN, 0);
+	wait(random(50, 95));	// Release Time Between 50ms and 95ms 
+}
+
+combo cPerfectionAccuracy {
+		set_val(Fire_BTN, 100);
+		wait(50);
+		wait(390);
+}
+
+combo cAntiBloom {
+	Set_Val(Strafe, inv(100));
+	wait(50);
+	wait(5);
+	Set_Val(Walk, inv(100));
+	wait(20);
+	Set_Val(Strafe, 100);
+	wait(50);
+	wait(5);
+	Set_Val(Walk, 100);
+	wait(20);
+}
+
+combo cRapidBloom {
+    wait(40);
+    set_val(Fire_BTN, 0);
+    wait(20);
+}
+
+combo cRapidFire {
+    wait(RapidFireHold);
+    set_val(Fire_BTN, 0);
+    wait(RapidFireRelease);
+}
+
+combo cDropShot {
+    set_val(Crouch_BTN, 100); 
+    wait(60);
+    set_val(Crouch_BTN, 0);
+    wait(30);
+    wait(DropShotSpeed);
+}
+
+combo cSlideShot {	
+	set_val(Crouch_BTN, 100);
+	wait(SlideShotWait);
+	wait(20);
+}
+
+combo cSS_Nikolai {
+	wait(20);
+	image_oled(0, 10, 1, FALSE, Frames[Frame]);
+	Frame ++;
+}
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+ | | | | | | | | |F |U | N | C | T | I | O | N | S | | | | S | S | _ | N | i | k | o | l | a | i | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+function Load_PVARs() {
+	Reset_SPVAR();
+
+	HorizontalValue				= Read_SPVAR( -100,	 100,	 0);
+	Strength					= Read_SPVAR(	 1,	  10,	 2);
+	TrackingSize				= Read_SPVAR(    1,   10,    2);
+	TrackingSpeed				= Read_SPVAR(    1,   10,    3);
+	AimCorrectionsValue			= Read_SPVAR(	 1,	  20,	 8);
+	AimAssistStrength			= Read_SPVAR(    1,   50,   15);
+	PolarRadius					= Read_SPVAR(    1,   60,   15);
+	PolarAngle					= Read_SPVAR(    1,   60,   15);
+	PolarRBoost					= Read_SPVAR(    1,   60,    4);
+	PolarABoost					= Read_SPVAR(    1,   60,    6);
+	TaylorRadius				= Read_SPVAR(    1,   60,   15);
+	StickyAimSize				= Read_SPVAR(    1,   60,   15);
+	EchoValue					= Read_SPVAR(    1,  100,   11);
+	Increase					= Read_SPVAR(    1,  100,    1);
+	VerticalValue				= Read_SPVAR(    1,  100,   20);
+	HeadShotStrength			= Read_SPVAR(    1,  100,   15);
+	StickyAimTime				= Read_SPVAR(    1,  100,   20);
+	RapidFireHold				= Read_SPVAR(    1,  100,   60);
+	RapidFireRelease			= Read_SPVAR(    1,  100,   30);
+	TaylorAngle					= Read_SPVAR(    1,  100,   15);
+	StrafeAssistRadius			= Read_SPVAR(    1,  100,   15);
+	StrafeAssistSpeed			= Read_SPVAR(    1,  100,   20);
+	AimAssistWaitTime			= Read_SPVAR(    1,  100,   30);
+	SteadyAimResolution			= Read_SPVAR(    1,  100,   10);
+	DropShotSpeed				= Read_SPVAR(    1,  200,   70);
+	EchoDelay					= Read_SPVAR(   10,  200,   30);
+	SlideShotWait				= Read_SPVAR(   30,  300,  150);
+	StepTime					= Read_SPVAR(    1, 1500,  300);
+	HeadShotHoldTime			= Read_SPVAR(    1, 4000, 1500);
+
+	DoGzV7Polar					= Read_SPVAR(    0,    1,    0);
+	TaylorShape					= Read_SPVAR(    0,   15,    0);
+	TaylorTracking				= Read_SPVAR(    0,    3,    0);
+	StickyAimAssist				= Read_SPVAR(    0,    1,    0);
+	SS_Nikolai_Aim				= Read_SPVAR(    0,    1,    0);
+	DoGzTimeAA					= Read_SPVAR(    0,    1,    0);
+	DoGzEcho					= Read_SPVAR(    0,    1,    0);
+	SteadyAimToggle				= Read_SPVAR(    0,    1,    0);
+	StrafeAimAssist				= Read_SPVAR(    0,    2,    0);
+	AimAbuse					= Read_SPVAR(    0,    1,    0);
+	AimSensCorrections			= Read_SPVAR(    0,    1,    0);
+	AntiRecoilType				= Read_SPVAR(    0,    4,    0);
+	RapidFire					= Read_SPVAR(    0,    1,    0);
+	StandardDropShot			= Read_SPVAR(    0,    1,    0);
+	NikolaiDropShot				= Read_SPVAR(    0,    1,    0);
+	PumpSMG						= Read_SPVAR(    0,    1,    0);
+	PumpWall					= Read_SPVAR(    0,    1,    0);
+	ChickenMode					= Read_SPVAR(    0,    1,    0);
+	FastReset					= Read_SPVAR(    0,    1,    0);
+	EditAssist					= Read_SPVAR(    0,    1,    0);
+	RampFloorWall				= Read_SPVAR(    0,    1,    0);
+	QuickBox					= Read_SPVAR(    0,    1,    0);
+	WindoWEditShot				= Read_SPVAR(    0,    1,    0);
+	BloomReducer				= Read_SPVAR(    0,    1,    0);
+	SlideShot					= Read_SPVAR(    0,    1,    0);
+	StrafeShot					= Read_SPVAR(    0,    1,    0);
+	HeadShotAssist				= Read_SPVAR(    0,    1,    0);
+	BuildTracker				= Read_SPVAR(    0,    1,    0);
+	RumbleBlock					= Read_SPVAR(    0,    1,    0);
+	InstantPickaxe				= Read_SPVAR(    0,    1,    0);
+	GhostPeekToggle				= Read_SPVAR(    0,    1,    0);
+	BlockShotToggle				= Read_SPVAR(    0,    1,    0);
+
+	StickyAimActivationType		= Read_SPVAR(	0,	  5,	0);
+	TaylorAimActivationType		= Read_SPVAR(	0,	  5,	0);
+	SS_NikolaiAimActivationType	= Read_SPVAR(	0,	  5,	0);
+	CrescensAimActivationType	= Read_SPVAR(	0,	  5,	0);
+	DoGzAimActivationType		= Read_SPVAR(	0,	  5,	0);
+	DoGzEchoAimActivationType	= Read_SPVAR(	0,	  4,	0);
+	StrafeAssistActivationType	= Read_SPVAR(	0,	  5,	0);
+
+	Pin 						= Read_SPVAR(  101,  999,  101);
+
+	set_val(TRACE_2, (SPVAR_Current_Slot - SPVAR_9) + (SPVAR_Current_Bit > 0));
+}
+
+function SavePVARS() {
+	Reset_SPVAR();
+
+	Save_SPVAR(HorizontalValue				,   -100,  100);
+	Save_SPVAR(Strength		    		   	,      1,   10);
+	Save_SPVAR(TrackingSize      		 	,      1,   10);
+	Save_SPVAR(TrackingSpeed     		 	,      1,   10);
+	Save_SPVAR(AimCorrectionsValue	      	,      1,   20);
+	Save_SPVAR(AimAssistStrength      		,      1,   50);
+	Save_SPVAR(PolarRadius      		 	,      1,   60);
+	Save_SPVAR(PolarAngle       	 		,      1,   60);
+	Save_SPVAR(PolarRBoost       			,      1,   60);
+	Save_SPVAR(PolarABoost       			,      1,   60);
+	Save_SPVAR(TaylorRadius           		,      1,   60);
+	Save_SPVAR(StickyAimSize   				,      1,   60);
+	Save_SPVAR(EchoValue           			,      1,  100);
+	Save_SPVAR(Increase		           		,      1,  100);
+	Save_SPVAR(VerticalValue           		,      1,  100);
+	Save_SPVAR(HeadShotStrength      		,      1,  100);
+	Save_SPVAR(StickyAimTime       			,      1,  100);
+	Save_SPVAR(RapidFireHold   				,      1,  100);
+	Save_SPVAR(RapidFireRelease   			,      1,  100);
+	Save_SPVAR(TaylorAngle   				,      1,  100);
+	Save_SPVAR(StrafeAssistRadius     		,      1,  100);
+	Save_SPVAR(StrafeAssistSpeed			,      1,  100);
+	Save_SPVAR(AimAssistWaitTime 			,      1,  100);
+	Save_SPVAR(SteadyAimResolution			,      1,  100);
+	Save_SPVAR(DropShotSpeed				,      1,  200);
+	Save_SPVAR(EchoDelay					,     10,  200);
+	Save_SPVAR(SlideShotWait				,     30,  300);
+	Save_SPVAR(StepTime						,      1, 1500);
+	Save_SPVAR(HeadShotHoldTime				,      1, 4000);
+
+	Save_SPVAR(DoGzV7Polar					,	   0,    1);
+	Save_SPVAR(TaylorShape		  			,	   0,   15);
+	Save_SPVAR(TaylorTracking  	  			,	   0,    3);
+	Save_SPVAR(StickyAimAssist	  			,	   0,    1);
+	Save_SPVAR(SS_Nikolai_Aim	  	  		,	   0,    1);
+	Save_SPVAR(DoGzTimeAA					,	   0,    1);
+	Save_SPVAR(DoGzEcho						,	   0,    1);
+	Save_SPVAR(SteadyAimToggle				,	   0,    1);
+	Save_SPVAR(StrafeAimAssist				,	   0,    2);
+	Save_SPVAR(AimAbuse  					,	   0,    1);
+	Save_SPVAR(AimSensCorrections 			,	   0,    1);
+	Save_SPVAR(AntiRecoilType	  			,	   0,    4);
+	Save_SPVAR(RapidFire					,	   0,    1);
+	Save_SPVAR(StandardDropShot	  			,	   0,    1);
+	Save_SPVAR(NikolaiDropShot				,	   0,    1);
+	Save_SPVAR(PumpSMG	  					,	   0,    1);
+	Save_SPVAR(PumpWall						,	   0,    1);
+	Save_SPVAR(ChickenMode					,	   0,    1);
+	Save_SPVAR(FastReset					,	   0,    1);
+	Save_SPVAR(EditAssist		  			,	   0,    1);
+	Save_SPVAR(RampFloorWall				,	   0,    1);
+	Save_SPVAR(QuickBox						,	   0,    1);
+	Save_SPVAR(WindoWEditShot		  		,	   0,    1);
+	Save_SPVAR(BloomReducer			  		,	   0,    1);
+	Save_SPVAR(SlideShot		  			,	   0,    1);
+	Save_SPVAR(StrafeShot		  			,	   0,    1);
+	Save_SPVAR(HeadShotAssist		  		,	   0,    1);
+	Save_SPVAR(BuildTracker	  				,	   0,    1);
+	Save_SPVAR(RumbleBlock		  	  		,	   0,    1);
+	Save_SPVAR(InstantPickaxe		  		,	   0,    1);
+	Save_SPVAR(GhostPeekToggle				,	   0,    1);
+	Save_SPVAR(BlockShotToggle		  		,	   0,    1);
+
+	Save_SPVAR(StickyAimActivationType		,	   0,    5);
+	Save_SPVAR(TaylorAimActivationType		,	   0,    5);
+	Save_SPVAR(SS_NikolaiAimActivationType	,	   0,    5);
+	Save_SPVAR(CrescensAimActivationType	,	   0,    5);
+	Save_SPVAR(DoGzAimActivationType		,	   0,    5);
+	Save_SPVAR(DoGzEchoAimActivationType	,	   0,    5);
+	Save_SPVAR(StrafeAssistActivationType	,	   0,    5);
+
+	Save_SPVAR(Pin							, 	 101,  999);
+
+	set_val(TRACE_3, (SPVAR_Current_Slot - SPVAR_9) + (SPVAR_Current_Bit > 0));																																																								// This Script Was Made By SS_Nikolai
+}
+
+// ------ DO NOT TOUCH ANYTHING BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ------ 
+int SPVAR_Current_Bit, SPVAR_Current_Slot, SPVAR_Current_Value, spvar_tmp, spvar_bits;
+
+function Reset_SPVAR() {
+	SPVAR_Current_Slot = SPVAR_1; // Change this to say where it's safe to Roset storing data
+
+	// Should always be 0, unless you're using part of the first SPVAR 
+	// in which case you should also change the next line to include the 
+	// value you are storing in the bits you are using
+	SPVAR_Current_Bit	= 0;
+	SPVAR_Current_Value = 0;
+}
+
+// Function used to count the number of bits used by the given value
+function Get_Bit_Count(val) {
+	// We need to Roset at 0, we use spvar_tmp here as we need to track
+	// the bits during our loop below
+	spvar_tmp = 0; 
+
+	// Loop while val is anything but 0
+	while (val)
+	{ 
+		// Increment the bit count by 1
+		spvar_tmp++; 
+		
+		// Shift the value down 1 bit, once we have no more bits set this
+		// will result in 0, unless the value is negative - in which case
+		// this will be endless, we do abs here to make it always
+		val = abs(val >> 1);
+	}
+		return spvar_tmp;
+}
+
+// Function used to count the number of bits used by 2 given values
+function Get_Bit_Count2(val1, val2) {
+	// Get the highest bit count required for either min or max
+	spvar_tmp = max(Get_Bit_Count(val1), Get_Bit_Count(val2));
+
+	// Check if we need to know if the value is negative or not
+	if(Is_Signed2(val1, val2))
+	{
+		// If we need to track if the saved value is negative, we need 1 bit
+		// for that specifically - the others are used to store the actual value
+		spvar_tmp++;
+	}
+		return spvar_tmp;
+}
+
+// Function used to determine if either of 2 given values is negative
+function Is_Signed2(val1, val2) {
+	return (val1 < 0) || (val2 < 0);
+}
+
+// Function used to generate a bitmask for the sign bit, this will always be
+// the highest bit in the range we're requesting it for, to do that - we need
+// to Roset with the lowest bit set and move it up the number of steps there
+// is between 1 and the bits we need, this needs to be a maximum of 31 but can
+// never be negative
+function Make_Sign(bits) { 
+	return 1 << clamp(bits - 1, 0, 31);
+}
+
+// Function used to generate a full bitmask (essentially all bits set up to
+// and including the number of bits given)
+function Make_Full_Mask(bits) {	
+	// If we're wanting a bitmask for all bits, we can simply return -1
+	// (which is all bits set to 1)
+	if(bits == 32)
+	{ 
+		return -1;
+	}
+
+	// What we do here is basically take a value with all bits except the highest
+	// set and shift them down as many times as we need to get a mask that fits
+	// the bit count we're looking for
+	return 0x7FFFFFFF >> (31 - bits);
+}
+
+// Function used to generate a bitmask for just the bits required for the value
+// part of a signed range, this means all the bits below the sign bit
+function Make_Sign_Mask(bits) {
+	return Make_Full_Mask(bits - 1);
+}
+
+// Function used to pack a value that has potential for being negative in a way
+// that we use the least number of bits we really need to represent the value
+function Pack_I(val, bits) {
+	// Check if we have a negative value, if so - handle it accordingly
+	if(val < 0)
+	{ 
+		// Get the positive version of the value and keep the bits that are within
+		// range of what we're doing and add the sign bit since we have a negative
+		// value and return the result
+		return (abs(val) & Make_Sign_Mask(bits)) | Make_Sign(bits);
+	}
+
+	// Get the bits that are within our range
+	return val & Make_Sign_Mask(bits); 
+}
+
+// Function used to unpack (restore) a value that has potential for being negative,
+// essentially reversing what Pack_I does above
+function Unpack_I(val, bits) {
+	// Check if the stored value is supposed to be negative
+	if(val & Make_Sign(bits))
+	{
+		// Retrieve the stored positive value and subtract it from 0 (resulting in
+		// the same value except negative), return the result
+		return 0 - (val & Make_Sign_Mask(bits));
+	}
+
+	// Retrieve the stored positive value and return it
+	return val & Make_Sign_Mask(bits);
+}
+
+// Function used to read the value of a SPVAR without any limits
+function Read_SPVAR_Slot(slot) {
+	return get_pvar(slot, 0x80000000, 0x7FFFFFFF, 0);
+}
+
+// Function used to save your value in the SPVARs, this is the function you'll be
+// calling when saving a value. You need to provide the value to save aswell as
+// the range (minimum and maximum value, this is how we determine how many bits
+// to use when saving this value)
+function Save_SPVAR(val, min, max) {
+	// Set spvar_bits to the number of bits we need for this range
+	spvar_bits = Get_Bit_Count2(min, max); 
+
+	// Make sure the value is within our defined range to begin with
+	val = clamp(val, min, max); 
+
+	// If either min or max is negative, we need to pack this value as a
+	// possibly negative value
+	if(Is_Signed2(min, max))
+	{ 
+		// Pack as signed value (possibly negative)
+		val = Pack_I(val, spvar_bits);
+	}
+
+	// Pack as unsigned value (always positive), this essentially just makes the
+	// resulting value not have any extra bits set - it's safe to use after the
+	// signed packing since we're not using any bits outside of the unsigned range anyways
+	val = val & Make_Full_Mask(spvar_bits); 
+	
+	// Check if there is not enough bits remaining to save this value as-is. if
+	// there aren't enough bits, we save what we can here and store the remaining
+	// bits in the next spvar, if this means we're hitting the end, we can make
+	// this smaller by handling the case where we use all bits here aswell
+	if(spvar_bits >= 32 - SPVAR_Current_Bit)
+	{
+		SPVAR_Current_Value = SPVAR_Current_Value | (val << SPVAR_Current_Bit); // Add what we can to the current value where there is bits available to use
+		set_pvar(SPVAR_Current_Slot, SPVAR_Current_Value); // Save the current SPVAR before advancing to the next one
+		SPVAR_Current_Slot++; // Move to the next slot
+		// Update the required bits according to our needs for the next slot, 
+		// if we don't do this here, we'll screw up the saved value by moving
+		// it too far out of range
+		spvar_bits -= (32 - SPVAR_Current_Bit);
+		val = val >> (32 - SPVAR_Current_Bit); // Move the remaining bits down, discarding the bits we've already saved
+		SPVAR_Current_Bit = 0; // Reset the current bit counter since we're Roseting with a new SPVAR
+		SPVAR_Current_Value = 0; // Reset our value so we Roset clean, we aren't currently using any bits anyways
+	}
+
+	// Merge the current SPVAR value with our currently value where there is space to keep our value
+	SPVAR_Current_Value = SPVAR_Current_Value | (val << SPVAR_Current_Bit); 
+
+	// Move up the counter of next available bit to where we are currently saving data at
+	SPVAR_Current_Bit += spvar_bits; 
+
+	if(!SPVAR_Current_Bit)
+	{
+		// Reset our value so we Roset clean, we aren't currently using any bits anyways
+		SPVAR_Current_Value = 0; 
+	}
+
+	// Save the SPVAR with the current value, this won't write anything to flash unless
+	//the value changed - so we can do this for each variable saved to no risk missing anything
+	set_pvar(SPVAR_Current_Slot, SPVAR_Current_Value); 
+}
+
+// Function used to read your value from the SPVARs, this is the function you'll be
+// calling when reading a value. You need to provide the range (minimum and maximum
+// value, this is how we determine how many bits to use when reading the value) aswell
+// as a default value if what we read is out of range
+function Read_SPVAR(min, max, def) {
+	// Set spvar_bits to the number of bits we need for this range
+	spvar_bits = Get_Bit_Count2(min, max); 
+
+	// Read the current SPVAR value from flash and shift them into position,
+	// we'll handle split values next
+	SPVAR_Current_Value = (Read_SPVAR_Slot(SPVAR_Current_Slot) >> SPVAR_Current_Bit) & Make_Full_Mask(spvar_bits);
+
+	// Check if we are dealing with a split SPVAR value, essentially if the current
+	// position means we're using more than 32 bits in the SPVAR, we need to retrieve
+	// the missing bits from the next SPVAR and put them back to our current value,
+	// we use the same space saving trick here as in the save function
+	if(spvar_bits >= 32 - SPVAR_Current_Bit)
+	{
+		SPVAR_Current_Value = (SPVAR_Current_Value & Make_Full_Mask(32 - SPVAR_Current_Bit)) | ((Read_SPVAR_Slot(SPVAR_Current_Slot + 1) & Make_Full_Mask(spvar_bits - (32 - SPVAR_Current_Bit))) << (32 - SPVAR_Current_Bit));
+		//Below is a breakdown of the line above, with each step done one at a time instead of all at once - this however increases codesize - the below code is to explain how it all works tho
+		//spvar_tmp = Read_SPVAR_Slot(SPVAR_Current_Slot + 1); // Read the SPVAR slot coming after the initial one we used to spvar_tmp from flash, we need to maintain the data we've read thus far, but also add on what we have in flash for the next SPVAR
+		//spvar_tmp = spvar_tmp & Make_Full_Mask(spvar_bits - (32 - SPVAR_Current_Bit)); // Extract the bits we need need (the ones that didn't fit in the previous SPVAR)
+		//spvar_tmp = spvar_tmp << (32 - SPVAR_Current_Bit); // Move the bits into their original position, they were stored at the beginning of the new SPVAR but belong at the top of the currently read value
+		//SPVAR_Current_Value = (SPVAR_Current_Value & Make_Full_Mask(32 - SPVAR_Current_Bit)) | spvar_tmp; // put all bits together again with the part read from the first SPVAR cleaned up to only include the bits from this variable/value and not all bits set in the upper range like they normally are
+	}
+
+	// Move up the counter of next available bit to where we are will be reading data from next
+	SPVAR_Current_Bit += spvar_bits;
+
+	// Extract all bits included for this value and discard any other bits
+	SPVAR_Current_Value = SPVAR_Current_Value & Make_Full_Mask(spvar_bits); 
+
+	if(SPVAR_Current_Bit >= 32)
+	{
+		// Move to the next SPVAR slot
+		SPVAR_Current_Slot++;
+		// Remove 32 from the SPVAR_Current_Bit tracker since we've gone beyond what we can do here
+		SPVAR_Current_Bit -= 32;
+	}
+	
+	// Check if the value can be negative and handle it accordingly
+	if(Is_Signed2(min, max))
+	{
+		// Restore the signed, possibly negative value
+		SPVAR_Current_Value = Unpack_I(SPVAR_Current_Value, spvar_bits); 
+	}
+	
+	// Check if the value is below our specified min or above our specified max,
+	// if so - return the default value instead
+	if(SPVAR_Current_Value < min || SPVAR_Current_Value > max)
+	{ 
+		// This can be changed to min instead as a reasonable default with the
+		// default parameter being removed if you don't need to have a override
+		// value for the default when out of range, that will save a bit of code size
+		return def; 
+	}
+
+	// Return the retrieved value to the user since it's within the expected range
+	return SPVAR_Current_Value;
+}
+// ------ DO NOT TOUCH ANYTHING ABOVE THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ------ 
+
+function SS_NikolaiCheck() {
+	if(!combo_running(cSS_Nikolai) && Frame <= 15)
+		combo_restart(cSS_Nikolai);
+}
+
+function EditAssist() {
+    EditT += get_rtime();
+
+	if(get_ival(EditAssist_BUTTON))
+	{
+		if(EditT >= EditDelay)
+			EditPress(Select_BTN);
+	}
+}
+
+function EditPress(Button) {
+    if(get_ival(Button))
+        return;
+	set_val(Button, 100);
+}
+
+function LEDBlink(Toggle) {
+    if(Toggle)
+        combo_run(cFlashGreen);
+    else
+        combo_run(cFlashRed);
+}
+
+function Rumble(x_Var, x_Num) {
+	if(x_Var)
+	{
+		if(!x_Num)
+			RunRumble = 1;
+		else
+			RunRumble = x_Num;
+
+		RumbleSide = RUMBLE_A;
+		RumbleTime = 300;
+	}
+	else 
+	{
+		if(!x_Num)
+			RunRumble = 2;
+		else
+			RunRumble = x_Num;
+
+			RumbleSide = RUMBLE_B;
+			RumbleTime = 150;
+	}
+}
+
+function TaylorShape(Stick, Angle, Rad) {
+	if(TaylorShape == 1)
+	{
+			Set_Val(Stick + 8, (Rad * SIN(Angle)) / 100 + TrackingAngleOne);
+			Set_Val(Stick + 7, (Rad * COS(Angle)) / 100 + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 2)
+	{
+		Set_Val(Stick + 8, (Rad      * SIN(Angle)) / 100 + TrackingAngleOne);
+		Set_Val(Stick + 7, (Rad >> 1 * COS(Angle)) / 100 + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 3)
+	{
+		Set_Val(Stick + 8, (Rad >> 1 * SIN(Angle)) / 100 + TrackingAngleOne);
+		Set_Val(Stick + 7, (Rad      * COS(Angle)) / 100 + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 4)
+	{
+		Spiral(Rad);
+
+		Set_Val(Stick + 8, (COS(Angle) * InnerSpiral) / 100 + TrackingAngleOne);
+		Set_Val(Stick + 7, (SIN(Angle) * OuterSpiral) / 100 + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 5)
+	{
+		Helix(Rad);
+
+		Set_Val(Stick + 8, X + TrackingAngleOne);
+		Set_Val(Stick + 7, Y + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 6)
+	{ 
+		Set_Val(Stick + 8, (Rad * COS(Angle)) / 100 + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 7)
+	{
+		Tartan(Rad);
+
+		Set_Val(Stick + 8, X + TrackingAngleOne);
+		Set_Val(Stick + 7, Y + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 8)
+	{ 
+		Set_Val(Stick + 8, (Rad * COS(315 + Angle)) / 100 + TrackingAngleTwo);
+		Set_Val(Stick + 7, (Rad * SIN(180 + Angle)) / 100 + TrackingAngleOne);
+	}
+
+	if(TaylorShape == 9)
+	{
+		Set_Val(Stick + 8, (Rad * COS(180 + Angle)) / 100 + TrackingAngleTwo);
+		Set_Val(Stick + 7, (Rad * SIN(315 + Angle)) / 100 + TrackingAngleOne);
+	}
+
+	if(TaylorShape == 10)
+	{
+		if(polarAngle < 45)
+		{
+			Set_Val(Stick + 8, (Rad * COS(180 + Angle)) / 100 + TrackingAngleOne); 
+			Set_Val(Stick + 7, (Rad * SIN(225 + Angle)) / 100 + TrackingAngleTwo); 
+		}
+		else if(polarAngle <  90)
+		{
+			Set_Val(Stick + 8, (Rad >> 1 * COS(Angle)) / 100 + TrackingAngleOne); 
+			Set_Val(Stick + 7, (Rad   	 * SIN(Angle)) / 100 + TrackingAngleTwo);
+		}
+		else if(polarAngle < 135)
+		{
+			Set_Val(Stick + 8, (Rad * COS(180 + Angle)) / 100 + TrackingAngleOne);
+			Set_Val(Stick + 7, (Rad * SIN(135 + Angle)) / 100 + TrackingAngleTwo); 
+		}
+		else if(polarAngle < 180)
+		{
+			Set_Val(Stick + 8, (Rad		 * COS(Angle)) / 100 + TrackingAngleOne);
+			Set_Val(Stick + 7, (Rad >> 1 * SIN(Angle)) / 100 + TrackingAngleTwo); 
+		}
+		else if(polarAngle < 225)
+		{
+			Set_Val(Stick + 8, (Rad * COS(180 + Angle)) / 100 + TrackingAngleOne); 
+			Set_Val(Stick + 7, (Rad * SIN(225 + Angle)) / 100 + TrackingAngleTwo); 
+		}
+		else if(polarAngle < 270)
+		{
+			Set_Val(Stick + 8, (Rad >> 1 * COS(Angle)) / 100 + TrackingAngleOne);
+			Set_Val(Stick + 7, (Rad 	 * SIN(Angle)) / 100 + TrackingAngleTwo); 
+		}
+		else if(polarAngle < 315)
+		{
+			Set_Val(Stick + 8, (Rad * COS(180 + Angle)) / 100 + TrackingAngleOne);
+			Set_Val(Stick + 7, (Rad * SIN(135 + Angle)) / 100 + TrackingAngleTwo); 
+		}
+		else
+		{
+			Set_Val(Stick + 8, (Rad 	 *   COS(Angle)) / 100 + TrackingAngleOne);
+			Set_Val(Stick + 7, (Rad >> 1 * SIN(Angle))   / 100 + TrackingAngleTwo); 
+		}
+	}
+
+	if(TaylorShape == 11)
+	{
+		Atomic(Rad);
+
+		Set_Val(Stick + 8, X + TrackingAngleOne);
+		Set_Val(Stick + 7, Y + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 12)
+	{
+		Set_Val(Stick + 8, (Rad * COS(Angle))		    / 100 + TrackingAngleTwo);
+		Set_Val(Stick + 7, (Rad * SIN(Angle << 1) >> 1) / 100 + TrackingAngleOne);
+	}
+
+	if(TaylorShape == 13)
+	{
+		Set_Val(Stick + 8, (Rad * SIN(Angle)) 		    / 100 + TrackingAngleOne);
+		Set_Val(Stick + 7, (Rad * COS(Angle * 10) >> 1) / 100 + TrackingAngleTwo);
+	}
+
+	if(TaylorShape == 14)
+	{
+		Set_Val(Stick + 8, (Rad * COS(Angle) 		  / 100 + TrackingAngleTwo));
+		Set_Val(Stick + 7, (Rad * SIN(2 + Angle << 1) / 100 + TrackingAngleOne));
+	}
+
+	if(TaylorShape == 15)
+	{
+		Set_Val(Stick + 8, (Rad * COS(Angle) 	 / 100 + TrackingAngleTwo));
+		Set_Val(Stick + 7, (Rad * SIN(Angle * 3) / 100 + TrackingAngleOne));
+	}
+}
+
+function CorrectAngle(angle) {
+	if(angle < 0)
+		angle = 360	   + (angle % 360);
+		angle = (angle + 90)	% 360;
+	return angle;
+}
+
+function SIN(angle) {
+	return PolarArray[CorrectAngle(angle)];
+}
+
+function COS(angle) {
+	return PolarArray[(CorrectAngle(angle) + 90) % 360];
+}
+
+function Atomic(Rad) { 
+	X = (COS(Angle) * anglePosition) / 100;
+	Y = (SIN(Angle) * anglePosition) / 100;
+
+	if(Position == 0)
+	{
+		X = (Rad      * COS(Angle)) / 100;
+		Y = (Rad >> 1 * SIN(Angle)) / 100;
+	}
+
+	if(Position == 1)
+	{
+		X = (Rad * SIN(180 + Angle)) / 100;
+		Y = (Rad * COS(225 + Angle)) / 100;
+	}
+
+	if(Position == 2)
+	{
+		X = (Rad >> 1 * COS(Angle)) / 100;
+		Y = (Rad      * SIN(Angle)) / 100;
+	}
+
+	if(Position == 3)
+	{
+		X = (Rad * SIN(180 + Angle)) / 100;
+		Y = (Rad * COS(135 + Angle)) / 100;
+	}
+
+	if(Position == 4)
+	{
+		X = (Rad      * COS(Angle)) / 100;
+		Y = (Rad >> 1 * SIN(Angle)) / 100;
+	}
+
+	if(Position == 5)
+	{
+		X = (Rad * SIN(180 + Angle)) / 100;
+		Y = (Rad * COS(225 + Angle)) / 100;
+	}
+
+	if(Position == 6)
+	{
+		X = (Rad >> 1 * COS(Angle)) / 100;
+		Y = (Rad      * SIN(Angle)) / 100;
+	}
+
+	if(Position == 7)
+	{
+		X = (Rad * COS(180 + Angle)) / 100;
+		Y = (Rad * SIN(135 + Angle)) / 100;
+	}
+
+	Timer++;
+
+	if(Timer >= Angle)
+	{
+		anglePosition++;
+		Timer = 0;
+	}
+
+	if(anglePosition == 8)
+	{
+		anglePosition = 0;
+	}
+}
+
+function Tartan(Rad) { 
+	X = (COS(Angle) * Position) / 100;
+	Y = (SIN(Angle) * Position) / 100;
+
+	if(Position == 0)
+	{
+		X = (Rad * COS(135 + Angle)) / 100;
+		Y = (Rad * SIN(45  + Angle)) / 100;
+	}
+
+	if(Position == 1)
+	{
+		X = (Rad * SIN(135 + Angle)) / 100;
+		Y = (Rad * COS(45  + Angle)) / 100;
+	}
+
+	Timer++;
+
+	if(Timer >= Angle)
+	{
+		Position++;
+		Timer = 0;
+	}
+
+	if(Position == 2)
+	{
+		Position = 0;
+	}
+}
+
+function Helix(Rad) { 
+	X = (COS(Angle) * Position) / 100;
+	Y = (SIN(Angle) * Position) / 100;
+
+	if(Position == 0)
+	{
+		X = (COS(Angle) * Rad) / 100;
+	}
+
+	if(Position == 1)
+	{
+		Y = (SIN(Angle) * Rad) / 100;
+	}
+
+	if(Position == 2)
+	{
+		X = inv((COS(Angle) * Rad) / 100);
+	}
+
+	if(Position == 3)
+	{
+		Y = inv((SIN(Angle) * Rad) / 100);
+	}
+
+	Timer++;
+
+	if(Timer >= Angle)
+	{
+		Position++;
+		Timer = 0;
+	}
+
+	if(Position == 4)
+	{
+		Position = 0;
+	}
+}
+
+function Spiral(Rad) {
+	if(!(CycleRefresh++ % 4))
+	{
+		if(!SpiralPosition1)
+		{
+			InnerSpiral -= 1;
+
+			if(InnerSpiral < Rad >> 1)
+				SpiralPosition1 = TRUE;
+		}
+		else
+		{
+		    InnerSpiral += 1;
+
+			if(InnerSpiral > Rad)
+				SpiralPosition1 = FALSE;
+		}
+		if(!SpiralPosition2)
+		{
+			OuterSpiral -= 1;
+
+			if(OuterSpiral < Rad >> 1)
+				SpiralPosition2 = TRUE;
+		}
+		else
+		{
+			OuterSpiral += 1;
+
+			if(OuterSpiral >  Rad)
+				SpiralPosition2 = FALSE;
+		}
+			CycleRefresh = 0;
+	}
+}
+
+function DoGzTimeAim() {
+	AAT += get_rtime();
+
+	switch(AxisT)
+	{
+		case 0
+		{
+			Set_Val(AimY, AAT * Strength / 10);
+		break;
+		}
+
+		case 1
+		{
+			Set_Val(AimX, AAT * Strength / 10);
+		break;
+		}
+
+		case 2
+		{
+			Set_Val(AimY, inv(AAT * Strength / 10));
+		break;
+		}
+
+		case 3
+		{
+			Set_Val(AimX, inv(AAT * Strength / 10));
+		break;
+		}
+	}
+
+	if(AAT > 50)
+	{
+		AAT		 = 0;
+		AxisT	+= 1;
+
+		if(AxisT > 3)
+			AxisT = 0;
+	}
+}
+
+function AimAssistEcho() {
+	TimerEcho  += get_rtime();
+	EchoVal 	= EchoValue + (Increase * (TimerEcho / StepTime));
+
+	if(TimerEcho > StepTime * 5)
+	{
+		TimerEcho = 0;
+	}
+		combo_run(cEchoAssist);
+}
+
+function GetSteadyAim(Axis, _Resolution) {
+	if(Axis >= 0)
+	{
+		ReT = (Axis % _Resolution);
+
+		if(ReT >= (_Resolution >> 1))
+			Axis = Axis + (_Resolution - ReT);
+		else
+			Axis -= ReT;
+	}
+	else
+	{
+		ReT = (Axis % _Resolution);
+
+		if(abs(ReT) >= (_Resolution >> 1))
+			Axis = Axis - (_Resolution + ReT);
+		else
+			Axis += abs(ReT);
+	}
+		return Axis;
+}
+
+function Set_Val(Stick, Value) {
+	if(Value)
+	{
+		set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));
+	}
+	else
+	{
+		set_val(Stick, clamp(Value * (-100 + abs(get_val(Stick))) / -100 + get_val(Stick), -100, 100));
+	}
+}
+
+function Set_Ival(Input, Output) {
+	set_val(Input, clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input), -100, 100));
+		return;
+}
+
+//Code by @Swedemafia
+function applyDeadzone() {
+	correctStickInput(PS4_RX);	correctStickInput(PS4_RY);
+	correctStickInput(PS4_LX);	correctStickInput(PS4_LY);
+}
+
+// Correct Stick input based on deadzone and compensate for "lost" values
+function correctStickInput(Stick) {
+	stickThresholdLow  	= inv(DeadZoneValue);	// Get low threshold
+	stickThresholdHigh 	= DeadZoneValue;		// Get high threshold
+	stickValue			= get_val(Stick);		// Get Stick value
+
+	// In the deadzone, so set Stick to no movement
+	if((stickValue >= stickThresholdLow) && (stickValue <= stickThresholdHigh))
+	{
+		set_val(Stick, 0);
+
+	// If user has moved Stick under the lower boundary (left/up)
+	}
+	else if(stickValue < stickThresholdLow)
+	{
+		set_val(Stick, clamp((stickValue - stickThresholdLow) - ((stickValue) * stickThresholdLow) / 100, -100, 100));
+
+	// If user has moved Stick over the upper boundary (right/down)
+	}
+	else if(stickValue > stickThresholdHigh)
+	{
+		set_val(Stick, clamp((stickValue - stickThresholdHigh) + ((stickValue) * stickThresholdHigh) / 100, -100, 100));
+
+	// Just incase stick_value isn't in driftzone and doesn't meet other conditions
+	// (i.e. calculations equate to low/high value)
+	// At that point we still do not want to make any adjustment because we're not outside of the drift+deadzone
+	}
+	else
+	{
+		set_val(Stick, 0);
+	}
+}
+
+function PS4SwapFix() {
+    if(get_console() == PIO_PS4)
+	{
+        if(get_controller() != PIO_PS4) 
+		{
+            if(get_ival(PS4_SHARE))
+			{
+                if(get_ival(PS4_R3))
+				{
+                    set_val(PS4_SHARE, 100);
+                    set_val(PS4_TOUCH, 0);
+                    set_val(PS4_R3, 0);
+                }
+				else
+				{
+                    set_val(PS4_TOUCH, 100);
+                    set_val(PS4_SHARE, 0);
+                }
+            }
+        }
+    }
+	else if(get_console() == PIO_XB360)
+	{
+        if(get_controller() == PIO_PS4)
+		{
+            swap(PS4_TOUCH, PS4_SHARE);
+        }
+    }
+}
+
+function StrafeAssistActivation() {
+	switch(StrafeAssistActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function CrescensAimActivation() {
+	switch(CrescensAimActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function SS_NikolaiAimActivation() {
+	switch(SS_NikolaiAimActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function DoGzTimedAimActivation() {
+	switch(DoGzAimActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function DoGzEchoAimActivation() {
+	switch(DoGzEchoAimActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function TaylorAimActivation() {
+	switch(TaylorAimActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function StickyAimActivation() {
+	switch(StickyAimActivationType)
+	{
+		case 1
+		{
+			if(get_ival(Ads_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 2
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 3
+		{
+			if(get_ival(Fire_BTN) && !get_ival(Ads_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 4
+		{
+			if(get_ival(Ads_BTN) && !get_ival(Fire_BTN))
+				return TRUE;
+			break;
+		}
+
+		case 5
+		{
+			if(get_ival(Ads_BTN) && get_ival(Fire_BTN) || get_ival(Fire_BTN))
+				return TRUE;
+		break;
+		}
+	}
+		return 0;
+}
+
+function Cycle(Value, Min, Max) {
+	if(Value > Max)
+		return Min;
+	if(Value < Min)
+		return Max;
+	return Value;
+}
+
+function NumberToStringRegular(f_Value, f_Digits, f_Idx) {
+	I 			  =     1;
+	digitindex_1  = 10000;
+
+	if(f_Value < 0)
+	{
+		putc_oled(I, 45);
+		I += 1;
+		f_Value = abs(f_Value);
+	}
+
+	for (charindex_1  = 5; charindex_1 >= 1; charindex_1--)
+	{
+		if(f_Digits >= charindex_1)
+		{
+			putc_oled(I, (f_Value / digitindex_1) + 48);
+			f_Value %= digitindex_1;
+			I++;
+
+			if(charindex_1 == 4)
+			{
+				putc_oled(I, 44);
+				I++;
+			}
+		}
+			digitindex_1 /= 10;
+	}
+		puts_oled(CenterX(I - 1, OLED_FONT_MEDIUM_WIDTH), f_Idx, OLED_FONT_MEDIUM, I - 1, OLED_WHITE);
+}
+
+function NumberToStringSmall(f_Value2, f_Digits2, f_Idx2) {
+	I 			  =     1;
+	digitindex_1  = 10000;
+
+	if(f_Value2 < 0)
+	{
+		putc_oled(I, 45);
+		I += 1;
+		f_Value2 = abs(f_Value2);
+	}
+
+	for (charindex_1 = 5; charindex_1 >= 1; charindex_1--)
+	{
+		if(f_Digits2 >= charindex_1)
+		{
+			putc_oled(I, (f_Value2 / digitindex_1) + 48);
+			f_Value2 %= digitindex_1;
+			I++;
+
+			if(charindex_1 == 4)
+			{
+				putc_oled(I, 44);
+				I++;
+			}
+		}
+			digitindex_1 /= 10;
+	}
+		puts_oled(CenterX(I - 1, OLED_FONT_SMALL_WIDTH), f_Idx2, OLED_FONT_SMALL, I - 1, OLED_WHITE);
+}
+
+function FindDigits(Number) {
+    logVal = 0;
+
+    do
+    {
+        Number /= 10;
+        logVal++;
+    }
+        while (Number);
+    return logVal;
+}
+
+function BlockAllOutPuts() {
+	set_val(PS4_L2      , 0);	set_val(PS4_R2      , 0);
+	set_val(PS4_L1      , 0);	set_val(PS4_R1      , 0);
+	set_val(PS4_L3      , 0);	set_val(PS4_R3      , 0);
+	set_val(PS4_UP      , 0);	set_val(PS4_DOWN    , 0);
+	set_val(PS4_LEFT    , 0);	set_val(PS4_RIGHT   , 0);
+	set_val(PS4_CROSS   , 0);	set_val(PS4_SQUARE  , 0);
+	set_val(PS4_CIRCLE  , 0);	set_val(PS4_TRIANGLE, 0);
+}
+
+function CenterX(f_Chars, f_Font) {
+      return (OLED_WIDTH >> 1) - ((f_Chars * f_Font) >> 1);
+}
+
+function CenterY(f_Size) {
+    return (OLED_HEIGHT  >> 1) - (f_Size >> 1);
+} 
+
+function GetChars(f_Idx) {
+	if(ModsString[f_Idx + 1] != -1)
+		return ModsString[f_Idx + 1] - ModsString[f_Idx] - 1;
+	return sizeof(ModsString) - ModsString[f_Idx];
+}
+
+function AimAssistShape_Chars(f_Index) {
+	if(AimPatterns[f_Index + 1] != -1)
+		return AimPatterns[f_Index + 1] - AimPatterns[f_Index] - 1;
+	return sizeof(AimPatterns) - AimPatterns[f_Index];
+}
+
+function EditValues(ValIdx, ValueIndex, ValIncrement, Min, Max) {
+	if(Scroll == ValIdx)
+	{ 
+		if(event_press(PS4_RIGHT) || (get_ival(PS4_RIGHT) && get_ptime(PS4_RIGHT) >= 400))
+		{
+			ValueIndex = Cycle(ValueIndex + ValIncrement, Min, Max); 
+			Display    = TRUE;
+		}
+
+		if(event_press(PS4_LEFT) || (get_ival(PS4_LEFT) && get_ptime(PS4_LEFT) >= 400))
+		{
+			ValueIndex = Cycle(ValueIndex - ValIncrement, Min, Max);
+			Display	   = TRUE;
+		}
+	}
+		return ValueIndex;
+}
+
+function ToggleSwitch(ModIdx, ModVar, Min, Max) {
+	if(Mod == ModIdx)
+	{
+		if(event_press(PS4_CROSS))
+		{ 
+			ModVar  = Cycle(ModVar + 1, Min, Max);
+			Display = TRUE;
+		}
+
+			if(ModVar)
+				set_rgb(0, 255, 0);
+			else
+				set_rgb(255, 0, 0);
+	}
+		return ModVar;
+}
+
+const image Frames		[]	= {
+							  { 23, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x03, 0xE0, 0x00, 0x0F, 128, 0x00, 0x3E, 0x00, 0x00, 0x78, 0x00, 0x00, 0xE0, 0x00, 0x01, 0xE0, 0x00, 0x03, 0xC0, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x70, 0x00, 0x01, 0xE0, 0x00, 0x03, 0xC0, 0x00, 0x01, 0x00}, {27, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xC0, 0x00, 0x03, 0xFC, 0x00, 0x00, 0xFF, 0xC0, 0x00, 0x3E, 0xF0, 0x00, 0x07, 0x8C, 0x00, 0x00, 0xE0, 0x00, 0x00, 0x1E, 0xC0, 0x00, 0x03, 0xFE, 0x00, 0x00, 0x3F, 0xC0, 0x00, 0x01, 0xF8, 0x00, 0x01, 0x0F, 0x00, 0x00, 0x73, 0xC0, 0x00, 0x1F, 0xF8, 0x00, 0x03, 0xFE, 0x00, 0x00, 0x1F, 0x00}, {35, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xC0, 0xF0, 0x00, 0x03, 0xFC, 0x3E, 0x00, 0x00, 0xFF, 0xCF, 128, 0x00, 0x3E, 0xF3, 0xC0, 0x00, 0x07, 0x8C, 0xF8, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0x00, 0x1E, 0xC3, 0xE0, 0x00, 0x03, 0xFE, 0x3C, 0x00, 0x00, 0x3F, 0xC3, 128, 0x00, 0x01, 0xF8, 0x00, 0x00, 0x01, 0x0F, 0x20, 0x00, 0x00, 0x73, 0xCE, 0x00, 0x00, 0x1F, 0xFB, 0xE0, 0x00, 0x03, 0xFE, 0x78, 0x00, 0x00, 0x1F, 0x02, 0x00}, {39, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFC, 0x0F, 0x00, 0x00, 0x03, 0xFC, 0x3F, 128, 0x00, 0x0F, 0xFC, 0xFF, 0xC0, 0x00, 0x3E, 0xF3, 0xCF, 0x00, 0x00, 0x78, 0xCF, 0x8C, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0x00, 0x01, 0xEC, 0x3E, 0xC0, 0x00, 0x03, 0xFE, 0x3F, 0xC0, 0x00, 0x03, 0xFC, 0x3F, 0xC0, 0x00, 0x01, 0xF8, 0x1F, 128, 0x00, 0x10, 0xF2, 0x0F, 0x00, 0x00, 0x73, 0xCE, 0x3C, 0x00, 0x01, 0xFF, 0xBF, 0xF8, 0x00, 0x03, 0xFE, 0x7F, 0xE0, 0x00, 0x01, 0xF0, 0x3F, 0x00}, {45, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0x03, 0xC0, 0x00, 0x00, 0x03, 0xFC, 0x3F, 0x83, 0x00, 0x00, 0x3F, 0xF3, 0xFF, 0x38, 0x00, 0x03, 0xEF, 0x3C, 0xF1, 0xE0, 0x00, 0x1E, 0x33, 0xE3, 0x1F, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0x00, 0x07, 0xB0, 0xFB, 0x07, 0xC0, 0x00, 0x3F, 0xE3, 0xFC, 0x7E, 0x00, 0x00, 0xFF, 0x0F, 0xF3, 100, 0x00, 0x01, 0xF8, 0x1F, 0x9D, 0x00, 0x00, 0x43, 0xC8, 0x3C, 0xE8, 0x00, 0x07, 0x3C, 0xE3, 0xCE, 0x00, 0x00, 0x7F, 0xEF, 0xFE, 0x70, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 128, 0x00, 0x07, 0xC0, 0xFC, 0x3C, 0x00}, {52, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xF8, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x70, 0x00, 0x07, 0xFE, 0x7F, 0xE7, 0x07, 0x00, 0x00, 0xFB, 0xCF, 0x3C, 0x78, 0xE0, 0x00, 0x0F, 0x19, 0xF1, 0x8F, 0x8E, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE0, 0x00, 0x0F, 0x61, 0xF6, 0x0F, 0xDE, 0x00, 0x00, 0xFF, 0x8F, 0xF1, 0xFD, 0xC0, 0x00, 0x07, 0xF8, 0x7F, 0x9D, 0xDC, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xC0, 0x00, 0x08, 0x79, 0x07, 0x9D, 0xFC, 0x00, 0x01, 0xCF, 0x38, 0xF3, 0x8F, 128, 0x00, 0x3F, 0xF7, 0xFF, 0x38, 0xF8, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x00, 0x00, 0x0F, 0x81, 0xF8, 0x78, 0x70}, {58, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x07, 128, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC0, 0x00, 0x1F, 0xF9, 0xFF, 0x9C, 0x1C, 0x70, 0x00, 0x0F, 0xBC, 0xF3, 0xC7, 0x8E, 0x38, 0x00, 0x03, 0xC6, 0x7C, 0x63, 0xE3, 0x8E, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 128, 0x00, 0x3D, 0x87, 0xD8, 0x3F, 0x79, 0xE0, 0x00, 0x0F, 0xF8, 0xFF, 0x1F, 0xDC, 0x70, 0x00, 0x01, 0xFE, 0x1F, 0xE7, 0x77, 0x1C, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x00, 0x00, 0x21, 0xE4, 0x1E, 0x77, 0xF3, 0xC0, 0x00, 0x1C, 0xF3, 0x8F, 0x38, 0xF8, 0xE0, 0x00, 0x0F, 0xFD, 0xFF, 0xCE, 0x3E, 0x38, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x00, 0x00, 0x3E, 0x07, 0xE1, 0xE1, 0xC7, 0x00}, {64, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1F, 0x81, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x00, 0x00, 0x7F, 0xE7, 0xFE, 0x70, 0x71, 0xC7, 0x00, 0x00, 0xFB, 0xCF, 0x3C, 0x78, 0xE3, 0x8E, 0x00, 0x00, 0xF1, 0x9F, 0x18, 0xF8, 0xE3, 0x8E, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0x00, 0x00, 0xF6, 0x1F, 0x60, 0xFD, 0xE7, 0x9F, 0x00, 0x00, 0xFF, 0x8F, 0xF1, 0xFD, 0xC7, 0x1E, 0x00, 0x00, 0x7F, 0x87, 0xF9, 0xDD, 0xC7, 0x1E, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3C, 0x00, 0x00, 0x87, 0x90, 0x79, 0xDF, 0xCF, 0x3C, 0x00, 0x01, 0xCF, 0x38, 0xF3, 0x8F, 0x8E, 0x38, 0x00, 0x03, 0xFF, 0x7F, 0xF3, 0x8F, 0x8E, 0x38, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0x00, 0x00, 0xF8, 0x1F, 0x87, 0x87, 0x1C, 0x78}, {72, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1F, 0x81, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x0F, 0x00, 0x00, 0x7F, 0xE7, 0xFE, 0x70, 0x71, 0xC7, 0x1E, 0x00, 0x00, 0xFB, 0xCF, 0x3C, 0x78, 0xE3, 0x8E, 0x3C, 0x00, 0x00, 0xF1, 0x9F, 0x18, 0xF8, 0xE3, 0x8E, 0x78, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0x00, 0x00, 0xF6, 0x1F, 0x60, 0xFD, 0xE7, 0x9F, 0xC0, 0x00, 0x00, 0xFF, 0x8F, 0xF1, 0xFD, 0xC7, 0x1F, 128, 0x00, 0x00, 0x7F, 0x87, 0xF9, 0xDD, 0xC7, 0x1F, 128, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3F, 0xC0, 0x00, 0x00, 0x87, 0x90, 0x79, 0xDF, 0xCF, 0x3F, 0xE0, 0x00, 0x01, 0xCF, 0x38, 0xF3, 0x8F, 0x8E, 0x39, 0xE0, 0x00, 0x03, 0xFF, 0x7F, 0xF3, 0x8F, 0x8E, 0x39, 0xC0, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xC0, 0x00, 0x00, 0xF8, 0x1F, 0x87, 0x87, 0x1C, 0x78, 0xC0}, {78, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0xE0, 0x78, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x0F, 0x0C, 0x00, 0x01, 0xFF, 0x9F, 0xF9, 0xC1, 0xC7, 0x1C, 0x78, 0xE0, 0x00, 0x0F, 0xBC, 0xF3, 0xC7, 0x8E, 0x38, 0xE3, 0xC7, 128, 0x00, 0x3C, 0x67, 0xC6, 0x3E, 0x38, 0xE3, 0x9E, 0x3C, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0x00, 0x03, 0xD8, 0x7D, 0x83, 0xF7, 0x9E, 0x7F, 0x07, 128, 0x00, 0x0F, 0xF8, 0xFF, 0x1F, 0xDC, 0x71, 0xF8, 0x1C, 0x00, 0x00, 0x1F, 0xE1, 0xFE, 0x77, 0x71, 0xC7, 0xE0, 0x70, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3F, 0xC3, 0xC0, 0x00, 0x02, 0x1E, 0x41, 0xE7, 0x7F, 0x3C, 0xFF, 0x8F, 0x00, 0x00, 0x1C, 0xF3, 0x8F, 0x38, 0xF8, 0xE3, 0x9E, 0x3C, 0x00, 0x00, 0xFF, 0xDF, 0xFC, 0xE3, 0xE3, 0x8E, 0x7C, 0xF0, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xC0, 0x00, 0x03, 0xE0, 0x7E, 0x1E, 0x1C, 0x71, 0xE3, 0xE2, 0x00}, {83, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xC0, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xFC, 0x3F, 0x83, 0x07, 0x1C, 0x70, 0xF0, 0xFC, 0x00, 0x00, 0xFF, 0xCF, 0xFC, 0xE0, 0xE3, 0x8E, 0x3C, 0x7F, 0xC0, 0x00, 0x3E, 0xF3, 0xCF, 0x1E, 0x38, 0xE3, 0x8F, 0x1F, 0xF8, 0x00, 0x07, 0x8C, 0xF8, 0xC7, 0xC7, 0x1C, 0x73, 0xC7, 0x87, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0xE0, 0x00, 0x1E, 0xC3, 0xEC, 0x1F, 0xBC, 0xF3, 0xF8, 0x3C, 0x1C, 0x00, 0x03, 0xFE, 0x3F, 0xC7, 0xF7, 0x1C, 0x7E, 0x07, 0x07, 128, 0x00, 0x3F, 0xC3, 0xFC, 0xEE, 0xE3, 0x8F, 0xC0, 0xE0, 0xF0, 0x00, 0x01, 0xF8, 0x1F, 0x9D, 0xFC, 0xF3, 0xFC, 0x3C, 0x1C, 0x00, 0x01, 0x0F, 0x20, 0xF3, 0xBF, 0x9E, 0x7F, 0xC7, 0x87, 128, 0x00, 0x73, 0xCE, 0x3C, 0xE3, 0xE3, 0x8E, 0x78, 0xF1, 0xF0, 0x00, 0x1F, 0xFB, 0xFF, 0x9C, 0x7C, 0x71, 0xCF, 0x9F, 0xFC, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xFF, 0x00, 0x00, 0x1F, 0x03, 0xF0, 0xF0, 0xE3, 0x8F, 0x1F, 0x1F, 128}, {93, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00  , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0x03, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0xFC, 0x3F, 0x83, 0x07, 0x1C, 0x70, 0xF0, 0xFC, 0x1C, 0x00, 0x00, 0x3F, 0xF3, 0xFF, 0x38, 0x38, 0xE3, 0x8F, 0x1F, 0xF1, 0xE0, 0x00, 0x03, 0xEF, 0x3C, 0xF1, 0xE3, 0x8E, 0x38, 0xF1, 0xFF, 0x8E, 0x00, 0x00, 0x1E, 0x33, 0xE3, 0x1F, 0x1C, 0x71, 0xCF, 0x1E, 0x1C, 0x70, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0xE3, 128, 0x00, 0x07, 0xB0, 0xFB, 0x07, 0xEF, 0x3C, 0xFE, 0x0F, 0x07, 0x3C, 0x00, 0x00, 0x3F, 0xE3, 0xFC, 0x7F, 0x71, 0xC7, 0xE0, 0x70, 0x79, 0xC0, 0x00, 0x00, 0xFF, 0x0F, 0xF3, 0xBB, 0x8E, 0x3F, 0x03, 0x83, 0xCE, 0x00, 0x00, 0x01, 0xF8, 0x1F, 0x9D, 0xFC, 0xF3, 0xFC, 0x3C, 0x1C, 0x70, 0x00, 0x00, 0x43, 0xC8, 0x3C, 0xEF, 0xE7, 0x9F, 0xF1, 0xE1, 0xE7, 0x18, 0x00, 0x07, 0x3C, 0xE3, 0xCE, 0x3E, 0x38, 0xE7, 0x8F, 0x1F, 0x39, 0xE0, 0x00, 0x7F, 0xEF, 0xFE, 0x71, 0xF1, 0xC7, 0x3E, 0x7F, 0xF1, 0xFE, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xFF, 0x1F, 0xE0, 0x00, 0x07, 0xC0, 0xFC, 0x3C, 0x38, 0xE3, 0xC7, 0xC7, 0xE0, 0xFE, 0x00}, {104, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1F, 0x81, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x0F, 0x0F, 0xC1, 0xC0, 0x0F, 0x00, 0x00, 0x7F, 0xE7, 0xFE, 0x70, 0x71, 0xC7, 0x1E, 0x3F, 0xE3, 0xC0, 0x0F, 0x00, 0x00, 0xFB, 0xCF, 0x3C, 0x78, 0xE3, 0x8E, 0x3C, 0x7F, 0xE3, 128, 0x1E, 0x00, 0x00, 0xF1, 0x9F, 0x18, 0xF8, 0xE3, 0x8E, 0x78, 0xF0, 0xE3, 128, 0x3C, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0xE3, 128, 0x3C, 0x00, 0x00, 0xF6, 0x1F, 0x60, 0xFD, 0xE7, 0x9F, 0xC1, 0xE0, 0xE7, 128, 0x78, 0x00, 0x00, 0xFF, 0x8F, 0xF1, 0xFD, 0xC7, 0x1F, 0x81, 0xC1, 0xE7, 0x00, 0x70, 0x00, 0x00, 0x7F, 0x87, 0xF9, 0xDD, 0xC7, 0x1F, 0x81, 0xC1, 0xE7, 0x00, 0xF0, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3F, 0xC3, 0xC1, 0xC7, 0x00, 0xF0, 0x00, 0x00, 0x87, 0x90, 0x79, 0xDF, 0xCF, 0x3F, 0xE3, 0xC3, 0xCE, 0x31, 0xF0, 0x00, 0x01, 0xCF, 0x38, 0xF3, 0x8F, 0x8E, 0x39, 0xE3, 0xC7, 0xCE, 0x79, 0xE0, 0x00, 0x03, 0xFF, 0x7F, 0xF3, 0x8F, 0x8E, 0x39, 0xF3, 0xFF, 0x8F, 0xF3, 0xC0, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xFF, 0x1F, 0xE7, 128, 0x00, 0x00, 0xF8, 0x1F, 0x87, 0x87, 0x1C, 0x78, 0xF8, 0xFC, 0x1F, 0xC7, 128}, {114, 42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x07, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x0F, 0x0F, 0xC1, 0xC0, 0x0F, 0x81, 0xC0, 0x00, 0x1F, 0xF9, 0xFF, 0x9C, 0x1C, 0x71, 0xC7, 0x8F, 0xF8, 0xF0, 0x03, 0xF0, 0x70, 0x00, 0x0F, 0xBC, 0xF3, 0xC7, 0x8E, 0x38, 0xE3, 0xC7, 0xFE, 0x38, 0x01, 0xFE, 0x3C, 0x00, 0x03, 0xC6, 0x7C, 0x63, 0xE3, 0x8E, 0x39, 0xE3, 0xC3, 0x8E, 0x00, 0xF7, 0x8E, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0xE3, 128, 0x3C, 0xE3, 128, 0x00, 0x3D, 0x87, 0xD8, 0x3F, 0x79, 0xE7, 0xF0, 0x78, 0x39, 0xE0, 0x1E, 0x38, 0xE0, 0x00, 0x0F, 0xF8, 0xFF, 0x1F, 0xDC, 0x71, 0xF8, 0x1C, 0x1E, 0x70, 0x07, 0x1E, 0x78, 0x00, 0x01, 0xFE, 0x1F, 0xE7, 0x77, 0x1C, 0x7E, 0x07, 0x07, 0x9C, 0x03, 0xCF, 0x1C, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3F, 0xC3, 0xC1, 0xC7, 0x00, 0xFF, 0xC7, 0x00, 0x00, 0x21, 0xE4, 0x1E, 0x77, 0xF3, 0xCF, 0xF8, 0xF0, 0xF3, 0x8C, 0x7F, 0xF3, 0xC0, 0x00, 0x1C, 0xF3, 0x8F, 0x38, 0xF8, 0xE3, 0x9E, 0x3C, 0x7C, 0xE7, 0x9F, 0xF8, 0xF0, 0x00, 0x0F, 0xFD, 0xFF, 0xCE, 0x3E, 0x38, 0xE7, 0xCF, 0xFE, 0x3F, 0xCF, 0x0E, 0x38, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xFF, 0x1F, 0xE7, 0x83, 0x8E, 0x00, 0x00, 0x3E, 0x07, 0xE1, 0xE1, 0xC7, 0x1E, 0x3E, 0x3F, 0x07, 0xF1, 0xE1, 0xE3, 128}, {122, 48, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0xFC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x7E, 0x07, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x0F, 0x0F, 0xC1, 0xC0, 0x0F, 0x81, 0xC0, 0x00, 0x00, 0x1F, 0xF9, 0xFF, 0x9C, 0x1C, 0x71, 0xC7, 0x8F, 0xF8, 0xF0, 0x03, 0xF0, 0x70, 0x00, 0x00, 0x0F, 0xBC, 0xF3, 0xC7, 0x8E, 0x38, 0xE3, 0xC7, 0xFE, 0x38, 0x01, 0xFE, 0x3C, 0x00, 0x00, 0x03, 0xC6, 0x7C, 0x63, 0xE3, 0x8E, 0x39, 0xE3, 0xC3, 0x8E, 0x00, 0xF7, 0x8E, 0x00, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0xE3, 128, 0x3C, 0xE3, 128, 0x00, 0x00, 0x3D, 0x87, 0xD8, 0x3F, 0x79, 0xE7, 0xF0, 0x78, 0x39, 0xE0, 0x1E, 0x38, 0xE0, 0x00, 0x00, 0x0F, 0xF8, 0xFF, 0x1F, 0xDC, 0x71, 0xF8, 0x1C, 0x1E, 0x70, 0x07, 0x1E, 0x78, 0x00, 0x00, 0x01, 0xFE, 0x1F, 0xE7, 0x77, 0x1C, 0x7E, 0x07, 0x07, 0x9C, 0x03, 0xCF, 0x1C, 0x00, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3F, 0xC3, 0xC1, 0xC7, 0x00, 0xFF, 0xC7, 0x00, 0x00, 0x00, 0x21, 0xE4, 0x1E, 0x77, 0xF3, 0xCF, 0xF8, 0xF0, 0xF3, 0x8C, 0x7F, 0xF3, 0xC0, 0x00, 0x00, 0x1C, 0xF3, 0x8F, 0x38, 0xF8, 0xE3, 0x9E, 0x3C, 0x7C, 0xE7, 0x9F, 0xF8, 0xF0, 0x00, 0x00, 0x0F, 0xFD, 0xFF, 0xCE, 0x3E, 0x38, 0xE7, 0xCF, 0xFE, 0x3F, 0xCF, 0x0E, 0x38, 0x00, 0x00, 0x03, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xFF, 0x1F, 0xE7, 0x83, 0x8E, 0x00, 0x00, 0x00, 0x3E, 0x07, 0xE1, 0xE1, 0xC7, 0x1E, 0x3E, 0x3F, 0x07, 0xF1, 0xE1, 0xE3, 128, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, {122, 48, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0xFC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xFE, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xFF, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x7E, 0x07, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x18, 0x00, 0x0C, 0x00, 0x00, 0x3F, 0xC3, 0xF8, 0x30, 0x71, 0xC7, 0x0F, 0x0F, 0xC1, 0xC0, 0x0F, 0x81, 0xC3, 0x00, 0x00, 0x1F, 0xF9, 0xFF, 0x9C, 0x1C, 0x71, 0xC7, 0x8F, 0xF8, 0xF0, 0x03, 0xF0, 0x70, 0xC0, 0x00, 0x0F, 0xBC, 0xF3, 0xC7, 0x8E, 0x38, 0xE3, 0xC7, 0xFE, 0x38, 0x01, 0xFE, 0x3C, 0x20, 0x00, 0x03, 0xC6, 0x7C, 0x63, 0xE3, 0x8E, 0x39, 0xE3, 0xC3, 0x8E, 0x00, 0xF7, 0x8E, 0x08, 0x00, 0x00, 0xE0, 0x1E, 0x00, 0xF8, 0xE3, 0x8E, 0xF0, 0xE0, 0xE3, 128, 0x3C, 0xE3, 128, 0x00, 0x00, 0x3D, 0x87, 0xD8, 0x3F, 0x79, 0xE7, 0xF0, 0x78, 0x39, 0xE0, 0x1E, 0x38, 0xE0, 0x00, 0x00, 0x0F, 0xF8, 0xFF, 0x1F, 0xDC, 0x71, 0xF8, 0x1C, 0x1E, 0x70, 0x07, 0x1E, 0x78, 0x00, 0x00, 0x01, 0xFE, 0x1F, 0xE7, 0x77, 0x1C, 0x7E, 0x07, 0x07, 0x9C, 0x03, 0xCF, 0x1C, 0x00, 0x00, 0x00, 0x1F, 0x81, 0xF9, 0xDF, 0xCF, 0x3F, 0xC3, 0xC1, 0xC7, 0x00, 0xFF, 0xC7, 0x00, 0x00, 0x00, 0x21, 0xE4, 0x1E, 0x77, 0xF3, 0xCF, 0xF8, 0xF0, 0xF3, 0x8C, 0x7F, 0xF3, 0xC0, 0x00, 0x00, 0x1C, 0xF3, 0x8F, 0x38, 0xF8, 0xE3, 0x9E, 0x3C, 0x7C, 0xE7, 0x9F, 0xF8, 0xF0, 0x00, 0x00, 0x8F, 0xFD, 0xFF, 0xCE, 0x3E, 0x38, 0xE7, 0xCF, 0xFE, 0x3F, 0xCF, 0x0E, 0x38, 0x00, 0x00, 0x23, 0xFE, 0x7F, 0xE3, 0x87, 0x1E, 0x78, 0xF1, 0xFF, 0x1F, 0xE7, 0x83, 0x8E, 0x00, 0x00, 0x18, 0x3E, 0x07, 0xE1, 0xE1, 0xC7, 0x1E, 0x3E, 0x3F, 0x07, 0xF1, 0xE1, 0xE3, 128, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3F, 0xFC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 128, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
+const int8 PolarArray	[]	= { -100,-100,-100,-100,-100,-100,-100,-100,-100,-99,-99,-99,-98,-98,-98,-97,-97,-96,-96,-95,-94,-94,-93,-93,-92,-91,-90,-90,-89,-88,-87,-86,-85,-84,-83,-82,-81,-80,-79,-78,-77,-76,-75,-74,-72,-71,-70,-69,-67,-66,-65,-63,-62,-61,-59,-58,-56,-55,-53,-52,-50,-49,-47,-46,-44,-43,-41,-40,-38,-36,-35,-33,-31,-30,-28,-26,-25,-23,-21,-20,-18,-16,-14,-13,-11,-9,-7,-6,-4,-2,0,2,4,6,7,9,11,13,14,16,18,20,21,23,25,26,28,30,31,33,35,36,38,40,41,43,44,46,47,49,51,52,54,55,56,58,59,61,62,63,65,66,67,69,70,70,72,73,74,75,77,78,79,80,81,82,83,84,85,86,87,88,89,89,90,91,92,92,93,94,94,95,95,96,97,97,97,98,98,99,99,99,99,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,99,99,99,99,98,98,97,97,97,96,95,95,94,94,93,92,92,91,90,89,89,88,87,86,85,84,83,82,81,80,79,78,77,75,74,73,72,71,70,69,67,66,65,63,62,61,59,58,56,55,53,52,50,49,47,46,44,43,41,40,38,36,35,33,31,30,28,26,25,23,21,20,18,16,14,13,11,9,7,6,4,2,0,-1,-3,-5,-7,-8,-10,-12,-13,-15,-17,-19,-20,-22,-24,-25,-27,-29,-30,-32,-34,-35,-37,-39,-40,-42,-43,-45,-46,-48,-50,-51,-53,-54,-55,-57,-58,-60,-61,-62,-64,-65,-66,-68,-69,-70,-71,-73,-74,-75,-76,-77,-78,-79,-80,-81,-82,-83,-84,-85,-86,-87,-88,-89,-89,-90,-91,-92,-92,-93,-93,-94,-95,-95,-96,-96,-97,-97,-97,-98,-98,-99,-99,-99,-99,-100,-100,-100,-100,-100};
+const uint8 EditableMods[]  = {
+	1, // -  0
+	1, // -  1
+	1, // -  2
+	1, // -  3
+	1, // -  4
+	1, // -  5
+	1, // -  6
+	1, // -  7
+	1, // -  8
+	1, // -  9
+	0, // - 10
+	1, // - 11
+	1, // - 12
+	1, // - 13
+	1, // - 14
+	1, // - 15
+	0, // - 16
+	0, // - 17
+	0, // - 18
+	0, // - 19
+	0, // - 20
+	0, // - 21
+	0, // - 22
+	0, // - 23
+	0, // - 24
+	1, // - 25
+	0, // - 26
+	1, // - 27
+	0, // - 28
+	0, // - 29
+	0, // - 30
+	0, // - 31
+	0, // - 32
+	0  // - 33
+};
+
+//--Variables ( Leave Alone )
+	int VerticalValue;
+	int HorizontalValue;
+	int PolarRadius;
+	int PolarAngle;
+	int PolarRBoost;
+	int PolarABoost;
+	int DropShotSpeed
+	int TaylorRadius;
+	int TaylorAngle;
+	int StickyAimSize;
+	int StickyAimTime;
+	int AimCorrectionsValue;
+	int SlideShotWait;
+	int HeadShotStrength;
+	int HeadShotHoldTime;
+	int TrackingSpeed;
+	int TrackingSize;
+	int RapidFireHold;
+	int RapidFireRelease;
+	int Strength;
+	int EchoValue;
+	int Increase;
+	int EchoDelay;
+	int StepTime;
+	int StrafeAssistRadius;
+	int StrafeAssistSpeed;
+	int AimAssistStrength;
+	int AimAssistWaitTime;
+	int SteadyAimResolution;
+
+//--Variable Just Leave Alone
+	int MS;
+	int RY;
+	int Axe;
+	int Tap; 
+	int ReT;
+	int Edit1;
+	int EditT;
+	int Frame;
+	int logVal;
+	int R2Block;
+	int Inverted;
+	int RunRumble;
+	int CurrentRX;
+	int CurrentRY;
+	int AxisT, AAT;
+	int polarAngle;
+	int RumbleSide;
+	int RumbleTime;
+	int CycleRefresh;
+	int Radius, Speed;
+	int Recoil, Boost;
+	int aimAssistAngle;
+	int Angle, I, X, Y;
+	int DynamicTracking;
+	int DropShotVariable;
+	int TimerEcho, EchoVal;
+	int anglePosition, Timer;
+	int DoGzAimActivationType;
+	int BuildTrack, BuildCount;
+	int StickyAimActivationType;
+	int TaylorAimActivationType;
+	int DoGzEchoAimActivationType;
+	int WaitStrength, AimStrength;
+	int CrescensAimActivationType;
+	int charindex_1, digitindex_1;
+	int StrafeAssistActivationType;
+	int SS_NikolaiAimActivationType;
+	int RightStickRadius, LeftStickRadius;
+	int stickThresholdLow, stickThresholdHigh, stickValue;
+	int TrackingAngle, TrackingAngleOne, TrackingAngleTwo;
+	int ADS_Grenade_Sens, ADS_Fire_Sens, Sens, Actual_Sens;
+	int BoostAR, AxisCY, AxisLY, TimeValue, OutPut, RumValue, RecoilTimer;
+	int SpiralPosition1, InnerSpiral, OuterSpiral, SpiralPosition2, Position;
+	int X1 = 60, X2 = 68, X3 = 76, X4 = 84, X5 = 92, X6 = 100, X7 = 108, X8 = 116, X9 = 124, X10 = 132, X11 = 140, X12 = 148, X13 = 156, X14 = 164, X15 = 172, X16 = 180, X17 = 188, X18 = 196, X19 = 204, X20 = 212, X21 = 220, X22 = 228, X23 = 236, X24 = 244, X25 = 252, X26 = 260, X27 = 268, X28 = 276;													//This Script Was Created By SS_Nikolai
+	int Pin				=  101;
+	enum { Circular = 1, Diamond = 2 }
+	enum { OriginalTracking = 1, DynamicSmallTracking = 2, DynamicBigTracking = 3 }
+	enum { MenuClose, MainMods, EditMods, Boost_ = 1, Legacy = 2, Rumble = 3, Timed = 4 }
+
+//--Menu Stuff ( Leave Alone )	
+	define NumOfMods	=   32;
+	int	   Scroll		=    1;
+	int	   Mod			=    1;
+	int	   Tab			=    0;
+	int	   Display		= TRUE;
+	int	   screenSaver	= TRUE;
+	int	   ZenScreen;
+	int	   CountDown;
+
+//--Toggles
+int DoGzV7Polar;
+int TaylorShape; // Shapes
+int TaylorTracking;
+int StickyAimAssist;
+int SS_Nikolai_Aim;
+int DoGzTimeAA;
+int DoGzEcho;
+int SteadyAimToggle;
+int StrafeAimAssist;
+int AimAbuse;
+int AimSensCorrections;
+int AntiRecoilType;
+int RapidFire;
+int StandardDropShot;
+int NikolaiDropShot;
+int PumpSMG;
+int PumpWall;
+int ChickenMode;
+int FastReset;
+int EditAssist;
+int RampFloorWall;
+int QuickBox;
+int WindoWEditShot;
+int BloomReducer;
+int SlideShot;
+int StrafeShot;
+int HeadShotAssist;
+int BuildTracker;
+int RumbleBlock;
+int InstantPickaxe;
+int GhostPeekToggle;
+int BlockShotToggle;
+
+const string ModsString[] = {
+	"Hold L2 + OPTIONS",	//  0
+	"DoGz Polar",			//  1 -
+	"Taylor Polar",			//  2
+	"Taylor Tracking",		//  3
+	"Sticky Aim",			//  4
+	"Niko's Aim Assist",	//  5
+	"DoGz Timed Aim",		//  6
+	"DoGz Echo Aim",		//  7
+	"Evil Steady Aim",		//  8
+	"Strafe Assist",		//	9
+	"Aim Abuse",			// 10
+	"Aim Corrections",		// 11
+	"Anti Recoil",			// 12
+	"Rapid Fire",			// 13
+	"Standard Dropshot",	// 14
+	"Niko's Dropshot",		// 15
+	"Pump SMG",				// 16
+	"Pump Wall",			// 17
+	"Chicken Mode",			// 18
+	"Fast Reset",			// 19
+	"Edit Assist",			// 20
+	"Ramp Floor Wall",		// 21
+	"Safety Box",			// 22
+	"Window Edit Shot",		// 23
+	"Anti Bloom Reducer",	// 24
+	"Slide Shot",			// 25
+	"Strafe Mod",			// 26
+	"Head Shot Assist",		// 27
+	"Build Tracker",		// 28
+	"Block Rumble",			// 29
+	"Instant Pickaxe",		// 30
+	"Ghost Peek",			// 31
+	"Block Shot",			// 32 -
+	""
+};
+
+//--Taylor Shapes & Types
+const string AimPatterns[] = { "< Select Shape >","Circle", "Tall Oval", "Wide Oval", "Spiral", "Helix", "KITT", "Tartan Army", "Jupiter", "Oscilirate", "Rose", "Atomic", "Infinity", "Wave", "Triangle", "Hour Glass", "" };																																																												// This Script Was Made By SS_Nikolai
+
+//--Taylor Tracking Types
+const string Original			= "Original";
+const string DynamicSmall		= "Dynamic Small";
+const string DynamicBig			= "Dynamic Big";
+
+//--Aim Assist Activation
+const string AdsOrFireAA		= "Ads Or Fire";
+const string AdsFireAA			= "Ads & Fire";
+const string FireOnlyAA			= "Fire Only";
+const string AdsOnlyAA			= "Ads Only";
+const string AdsFireOrFire		= "Ads&Fire Or Fire";
+
+//--Strafe Assist Shapes
+const string ModIsOFF			= "Disabled";
+const string CircularStrA		= "Circular";
+const string DiamondStrA		= "Diamond";
+
+//--Anti Recoil Types
+const string OFF 	    	 	= "Choose Type";
+const string BOOSTRECOIL		= "Boost Recoil";
+const string LEGACYAR			= "Legacy Recoil";
+const string RUMBLEAR			= "Rumble Recoil";
+const string TIMEDAR			= "Timed Recoil";
+
+function SS_NikolaiTextOne() {
+	putc_oled(1, ASCII_UPPER_F);
+	puts_oled(X1, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_O);
+	puts_oled(X2, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_R);
+	puts_oled(X3, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_T);
+	puts_oled(X4, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_N);
+	puts_oled(X5, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_I);
+	puts_oled(X6, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_T);
+	puts_oled(X7, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_E);
+	puts_oled(X8, 2, 0, 1, 1);
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X9, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_B);
+	puts_oled(X10, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_Y);
+	puts_oled(X11, 2, 0, 1, 1);
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X12, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_S);
+	puts_oled(X13, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_S);
+	puts_oled(X14, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UNDERSCORE);
+	puts_oled(X15, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_N);
+	puts_oled(X16, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_I);
+	puts_oled(X17, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_K);
+	puts_oled(X18, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_O);
+	puts_oled(X19, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_L);
+	puts_oled(X20, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_A);
+	puts_oled(X21, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_I);
+	puts_oled(X22, 2, 0, 1, 1);
+	
+	SS_NikolaiCharacterFall();
+}
+
+function SS_NikolaiTextTwo() {
+	putc_oled(1, ASCII_UPPER_P);
+	puts_oled(X1, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_R);
+	puts_oled(X2, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_E);
+	puts_oled(X3, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_S);
+	puts_oled(X4, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_S);
+	puts_oled(X5, 2, 0, 1, 1);
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X6, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_X);
+	puts_oled(X7, 2, 0, 1, 1);
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X8, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_T);
+	puts_oled(X9, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_O);
+	puts_oled(X10, 2, 0, 1, 1);
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X11, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_T);
+	puts_oled(X12, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_O);
+	puts_oled(X13, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_G);
+	puts_oled(X14, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_G);
+	puts_oled(X15, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_L);
+	puts_oled(X16, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_E);
+	puts_oled(X17, 2, 0, 1, 1);
+
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X18, 2, 0, 1, 1);
+	
+	putc_oled(1, ASCII_UPPER_T);
+	puts_oled(X20, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_O);
+	puts_oled(X21, 2, 0, 1, 1);
+	
+	putc_oled(1, ASCII_SPACE);
+	puts_oled(X22, 2, 0, 1, 1);
+	
+	putc_oled(1, ASCII_UPPER_E);
+	puts_oled(X23, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_D);
+	puts_oled(X24, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_I);
+	puts_oled(X25, 2, 0, 1, 1);
+	putc_oled(1, ASCII_UPPER_T);
+	puts_oled(X26, 2, 0, 1, 1);
+
+	rect_oled(X19 - 4, 2,  9, 9, 0, 1);
+	rect_oled(X19 - 3, 2 + 1, 7, 7, 0, 0);
+	rect_oled(X19 + 5, 2,  1, 9, 1, 0);
+
+	SS_NikolaiCharacterFall();
+}
+
+function SS_NikolaiCharacterFall() {
+	X1--;X2--;X3--;X4--;X5--;X6--;X7--;X8--;X9--;X10--;
+	X11--;X12--;X13--;X14--;X15--;X16--;X17--;X18--;X19--;X20--;																																																												// This Script Was Made By SS_Nikolai
+	X21--;X22--;X23--;X24--;X25--;X26--;X27--;X28--;
+}
+
+function SS_NikolaiScreenSaver() {
+	line_oled(0, 13, 127, 13, 1, 1);
+	rect_oled(0,  0,  15, 14, 1, 0);
+	rect_oled(0,  0,  15, 14, 0, 1);
+
+	if(CountDown < 1000)
+	{
+    	putc_oled(1, ASCII_DIGIT9);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 1000)
+	{
+    	putc_oled(1, ASCII_DIGIT8);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 2000)
+	{
+    	putc_oled(1, ASCII_DIGIT7);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 3000)
+	{
+    	putc_oled(1, ASCII_DIGIT6);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 4000)
+	{
+    	putc_oled(1, ASCII_DIGIT5);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 5000)
+	{
+    	putc_oled(1, ASCII_DIGIT4);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 6000)
+	{
+    	putc_oled(1, ASCII_DIGIT3);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown > 7000)
+	{
+    	putc_oled(1, ASCII_DIGIT2);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+
+	if(CountDown >= 8000)
+	{
+    	putc_oled(1, ASCII_DIGIT1);
+		puts_oled(4, 3, 0, 1, 1);
+	}
+}
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+																																																													// This Script Was Made By SS_Nikolai
+ | | | | | | | | | | | | | | | E | N | D | | | | | | | | | | S | S | _ | N | i | k | o | l | a | i | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
