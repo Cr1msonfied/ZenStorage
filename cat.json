@@ -434,6 +434,11 @@
       "name": "Pedros Nightmare v5.3",
       "filename": "Pedros_Nightmare_V5.3.gpc",
       "category": "Rust"
+    },
+    {
+      "name": "Rust Farming v10(.1.0)",
+      "filename": "RustFarmingv10_1_0.gpc",
+      "category": "Rust"
     }
   ]
 }
