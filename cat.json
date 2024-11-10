@@ -439,6 +439,11 @@
       "name": "Rust Farming v10(.1.0)",
       "filename": "RustFarmingv10_1_0.gpc",
       "category": "Rust"
+    },
+    {
+      "name": "32bit Pedros Nightmare 4.0",
+      "filename": "32_Bit_Pedros_Nightmare_4.0.gpc",
+      "category": "Rust"
     }
   ]
 }
