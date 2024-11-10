@@ -1,0 +1,105 @@
+// GPC Online Library
+// ps4ufc_combo_short_cut.gpc
+
+main {
+    // Mapped to Triangle
+    if(get_val(PS4_TRIANGLE)) {
+        combo_run(UFC1);
+    }
+    // Mapped to Square
+    if(get_val(PS4_SQUARE)) {
+        combo_run(UFC2);
+    }
+    // Mapped to Cross
+    if(get_val(PS4_CROSS)) {
+        combo_run(UFC3);
+    }
+    // Mapped to Circle
+    if(get_val(PS4_CIRCLE)) {
+        combo_run(UFC4);
+    }
+}
+
+combo UFC1 {
+    // Triangle
+    set_val(PS4_TRIANGLE, 100);
+    wait(250); wait(250);
+   
+    // Triangle
+    set_val(PS4_TRIANGLE, 100);
+    wait(250); wait(250);
+   
+    // Right Stick Left+Square
+    set_val(PS4_SQUARE, -100);
+    set_val(PS4_RY, 100);
+    wait(350); wait(350);
+   
+    // R1+Right Stick Left+Square
+    set_val(PS4_L1, 100);
+    set_val(PS4_RY, 100);
+    set_val(PS4_SQUARE, 100);
+    wait(300); wait(300);
+}
+
+combo UFC2 {
+    // Square
+    set_val(PS4_SQUARE, 100);
+    wait(200); wait(200);
+    
+    // Triangle
+    set_val(PS4_TRIANGLE, 100);
+    wait(200); wait(200);
+   
+    // Triangle
+    set_val(PS4_TRIANGLE, 100);
+    wait(200); wait(200);
+   
+    // R1+Right Stick Left+Square
+    set_val(PS4_R1, 100);
+    set_val(PS4_RY, -100);
+    set_val(PS4_SQUARE , 100);
+    wait(100); wait(100);
+}
+
+combo UFC3 {
+    // Right Stick Left+Cross
+    set_val(PS4_RY, -100);
+    set_val(PS4_CROSS, 100);
+    wait(250); wait(250);
+   
+    // Triangle
+    set_val(PS4_TRIANGLE, 100);
+    wait(200); wait(200);
+   
+    // Square
+    set_val(PS4_SQUARE, 100);
+    wait(200); wait(200);
+   
+    // L1+Right Stick Left+Triangle
+    set_val(PS4_L1, 100);
+    set_val(PS4_RY, -100);
+    set_val(PS4_TRIANGLE, 100);
+    wait(100); wait(100);
+}
+
+combo UFC4 {
+    // Right Stick Right+Circle
+    set_val(PS4_RY, 100);
+    set_val(PS4_CIRCLE, 100);
+    wait(250); wait(250);
+   
+    // Triangle
+    set_val(PS4_TRIANGLE, 100);
+    wait(250); wait(250);
+
+    // Square
+    set_val(PS4_SQUARE, 100);
+    wait(250); wait(250);
+   
+    // L1+Right Stick Right+Square
+    set_val(PS4_L1, 100);
+    set_val(PS4_L2, 100);
+    set_val(PS4_RY, -100);
+    set_val(PS4_SQUARE , 100);
+    wait(100); wait(100);
+}
