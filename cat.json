@@ -429,6 +429,11 @@
       "name": "Rust code raid V2.0",
       "filename": "Rust-Code-Raid-V2.0.gpc",
       "category": "Rust"
+    },
+    {
+      "name": "Pedros Nightmare v5.3",
+      "filename": "Pedros_Nightmare_V5.3.gpc",
+      "category": "Rust"
     }
   ]
 }
