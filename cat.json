@@ -419,6 +419,11 @@
       "name": "ps4 ufc combo shortcut",
       "filename": "ps4ufc_combo_short_cut_2.gpc",
       "category": "UFC"
+    },
+    {
+      "name": "Highwaters Script v6",
+      "filename": "highwaters-apex-script-v6.gpc",
+      "category": "Apex Legends"
     }
   ]
 }
