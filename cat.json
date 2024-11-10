@@ -409,6 +409,11 @@
       "name": "UFC 4 dro?",
       "filename": "UFC_4_Dro_2.gpc",
       "category": "UFC"
+    },
+    {
+      "name": "Mawk Script",
+      "filename": "Mawk_script_2_2.gpc",
+      "category": "UFC"
     }
   ]
 }
