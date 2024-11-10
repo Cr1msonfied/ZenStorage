@@ -454,6 +454,11 @@
       "name": "Weepings Revenge v1",
       "filename": "Weepings_Revenge_V1.0.gpc",
       "category": "Rust"
+    },
+    {
+      "name": "Pedros Purgatory v1.3",
+      "filename": "Pedros_Purgatory_V1.3.gpc",
+      "category": "Rust"
     }
   ]
 }
