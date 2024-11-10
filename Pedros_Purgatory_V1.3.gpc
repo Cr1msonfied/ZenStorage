@@ -1,0 +1,1248 @@
+/*
+
+                          ▄▄                                                                                                            
+░░░░░░  ░░░░░░░ ░░░░░░  ░░░░░░   ░░░░░░  ░░░░░░░     ░░░░░░  ░░    ░░ ░░░░░░   ░░░░░░   ░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░  ░░    ░░ 
+▒▒   ▒▒ ▒▒      ▒▒   ▒▒ ▒▒   ▒▒ ▒▒    ▒▒ ▒▒          ▒▒   ▒▒ ▒▒    ▒▒ ▒▒   ▒▒ ▒▒       ▒▒   ▒▒    ▒▒    ▒▒    ▒▒ ▒▒   ▒▒  ▒▒  ▒▒  
+▒▒▒▒▒▒  ▒▒▒▒▒   ▒▒   ▒▒ ▒▒▒▒▒▒  ▒▒    ▒▒ ▒▒▒▒▒▒▒     ▒▒▒▒▒▒  ▒▒    ▒▒ ▒▒▒▒▒▒  ▒▒   ▒▒▒ ▒▒▒▒▒▒▒    ▒▒    ▒▒    ▒▒ ▒▒▒▒▒▒    ▒▒▒▒   
+▓▓      ▓▓      ▓▓   ▓▓ ▓▓   ▓▓ ▓▓    ▓▓      ▓▓     ▓▓      ▓▓    ▓▓ ▓▓   ▓▓ ▓▓    ▓▓ ▓▓   ▓▓    ▓▓    ▓▓    ▓▓ ▓▓   ▓▓    ▓▓    
+██      ███████ ██████  ██   ██  ██████  ███████     ██       ██████  ██   ██  ██████  ██   ██    ██     ██████  ██   ██    ██    
+
+
+
+╔═╗┬─┐┌─┐┌┬┐┬┌┬┐
+║  ├┬┘├┤  │││ │ 
+╚═╝┴└─└─┘─┴┘┴ ┴ 
+~~~~~~~~~~~~~~~
+This was a collaboration between myself Jbaze122 and Redox.
+Also want to give credit to JT0810, XBL Jedi, Fadexz ,Taylordrift, Swizzy, LegitCloudzzz,Highwater,DoatMe 
+And anyone else that helped along the way or code may have been used. 
+
+Join the Discord
+https://discord.gg/8VpEKKM4hN
+https://discord.gg/8VpEKKM4hN
+
+╦ ╦┌─┐┌┬┐┌─┐┌┬┐┌─┐  ╔╗╔┌─┐┌┬┐┌─┐┌─┐
+║ ║├─┘ ││├─┤ │ ├┤   ║║║│ │ │ ├┤ └─┐
+╚═╝┴  ─┴┘┴ ┴ ┴ └─┘  ╝╚╝└─┘ ┴ └─┘└─┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+V1.1 Update
+	-Fixed LR hip fire for plug and play 1 and 2
+	-Changed it so the the PS or XB button is only blocked when using the killswitch and not the entire controller
+	-ADDED Micro Aiming. If you like how pedros nightmare V4.0 & V5.0  tracking was turn this on in the adjustable menus
+	 If you like V3.2 Tracking than turn this off.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+V1.2 Update
+	-Fixed LR hip fire for plug and play 3 and 4
+	-Y Sight Speed Not Working
+V1.3 Update
+	-Fixed some of the code so it allows it to work on beta 50 Fimware or Beta 68 Firmware
+	-Custom Hip Fire Fixed
+	-M39 4x Anti Recoil Adjusted
+	
+╦═╗┌─┐┌─┐┌┬┐  ╔╦╗┌─┐  ╔═╗┬┬─┐┌─┐┌┬┐
+╠╦╝├┤ ├─┤ ││  ║║║├┤   ╠╣ │├┬┘└─┐ │ 
+╩╚═└─┘┴ ┴─┴┘  ╩ ╩└─┘  ╚  ┴┴└─└─┘ ┴ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- YOU CANNOT HAVE YOUR TRIGGERS REMAPED ON YOUR CONSOLE. THE SCRIPT WILL NOT WORK IF YOU DO. 
+  UNMAP YOUR TRIGGERS ON YOUR CONSOLE AND REMAP THEM IN THE REMAP MENU.
+-This script is far differnt than Pedros Nightmare.
+-First off it has 4 differnt plug and plays which will be listed below.
+-Anti recoil works for each plug and play. No need for a hip fire value.
+-You can now move and shoot with the M249.Holo and Iron work great for plug and play 1 & 2. 4X movement is not that great for plug and play 1 & 2.
+-If you moving while using a M249 with a 4X on Plug and Play 1 & 2  make sure you are at FULL Speed.
+-There are no custom sens with this script. There are 4 plug and play options.
+-Set your ingame settings to one of the plug and plays. Choose the plug and play in the adjustable menu and your done.
+-If the aiming speed is to slow or fast. Use the differnt Sens adjustable for that sight to slow down or speed up your aim.
+-This script does have keyboard support read below for more detail.
+
+OK I'll get into everything above in more detail below.
+
+
+╔╦╗┌─┐┬┌┐┌  ╔═╗┌─┐┬─┐┌─┐┌─┐┌┐┌
+║║║├─┤││││  ╚═╗│  ├┬┘├┤ ├┤ │││
+╩ ╩┴ ┴┴┘└┘  ╚═╝└─┘┴└─└─┘└─┘┘└┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-This is for when you are not in the main menu
+-Bottom left corner of the screen is the quick toggle profile you are on.
+-Bottom right hand corner of the screen is the slot the script is saved too.
+-The active weapon and sight is listed on the bottom of the screen in the middle
+-After a set amount of time the screen saver will be turned on and the active weapon and sight will bounce around the screen.
+-Hold L1-LB and Press PS-XBOX to turn the kickswitch on and off. 
+-Weapon quick toggle by default is L2/LT and Press and hold R3 for 200 milli seconds. This can be changed in the remap menu.
+-Hold L2-LT and Press Options-Menu to open up the script Menu.
+
+
+
+╔╦╗┌─┐┌┐┌┬ ┬  ╔╗╔┌─┐┬  ┬┬┌─┐┌─┐┌┬┐┬┌─┐┌┐┌
+║║║├┤ ││││ │  ║║║├─┤└┐┌┘││ ┬├─┤ │ ││ ││││
+╩ ╩└─┘┘└┘└─┘  ╝╚╝┴ ┴ └┘ ┴└─┘┴ ┴ ┴ ┴└─┘┘└┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-Hold L2-LT and Press Options-Menu to open the menu
+-All buttons are blocked to the console while in the menu
+-Press Up or Down on the Dpad to change the line you are on.
+-There will be a box around the Words on the line you are on.
+-Pressing Left or Right on the Dpad will change the option on the Right Side of the Menu for the line you are on.
+-If you are changing a value in the adjustable menu you can either click the dpad or hold it to change the value.
+-Press L1-LB or R1-RB to change between the differnt menus.
+-Press PS - Xbox to save and exit the menu and return control back to the console. 
+
+
+╦ ╦┌─┐┌─┐┌─┐┌─┐┌┐┌  ╔╦╗┌─┐┌┐┌┬ ┬
+║║║├┤ ├─┤├─┘│ ││││  ║║║├┤ ││││ │
+╚╩╝└─┘┴ ┴┴  └─┘┘└┘  ╩ ╩└─┘┘└┘└─┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-Each gun is listed on a line and is on the left side of the screen
+-Each gun you can choose a sight on the right side of the screen.
+
+
+╦  ┌─┐┌─┐┌┬┐┌─┐┬ ┬┌┬┐  ╔╦╗┌─┐┌┐┌┬ ┬
+║  │ │├─┤ │││ ││ │ │   ║║║├┤ ││││ │
+╩═╝└─┘┴ ┴─┴┘└─┘└─┘ ┴   ╩ ╩└─┘┘└┘└─┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-This menu is used to set up your profiles so you can quick toggle between guns.
+-Stop being a grub and going into the weapon menu to change your gun each time.
+-It is far easier to change your weapon using a quick toggle and not having to enter a menu.
+-You have 4 profiles you can set up-
+-Each Profile can have a differnt gun and sight.
+
+
+╔═╗┌┬┐ ┬┬ ┬┌─┐┌┬┐┌─┐┌┐ ┬  ┌─┐┌─┐  ╔╦╗┌─┐┌┐┌┬ ┬
+╠═╣ ││ ││ │└─┐ │ ├─┤├┴┐│  ├┤ └─┐  ║║║├┤ ││││ │
+╩ ╩─┴┘└┘└─┘└─┘ ┴ ┴ ┴└─┘┴─┘└─┘└─┘  ╩ ╩└─┘┘└┘└─┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-Plug and Play -- First you need to match your ingame settings to one of the plug and plays. 
+ Than you match this to the plug and play you are using.
+
+-Block Rumble -- This will turn off the vibration to the controler since vibration is needed for hip fire anti recoil
+-Micro Aiming -- When this is on you are using Pedros Nightmare V4.0 and V5.0 Tracking. With this off you are using V3.2
+-Deadzone RS -- This will change the deadzone for the Right Stick
+-Deadzone LS -- This will change the deadzone for the Left Stick
+
+If you find it when your using a plug and play and you want to make the aim slower or faster the 
+Adjustables Listed below will do that without having to change your ingame settings.
+For all of these a negative value is slower than the standard ingame sens and postive is faster. 
+	-Hip Speed X & Y - This will speed up or slow down your hip sens while not aiming
+	-Iron Speed X & Y - This will speed up or slow down your aim while using a weapon with iron sight.
+	-Holo Speed X & Y - This will speed up or slow down your aim while using a weapon with Holo sight.
+	-4x Speed X & Y - This will speed up or slow down your aim while using a weapon with 4x sight.
+	
+
+╦═╗┌─┐╔╦╗┌─┐┌─┐  ╔╦╗┌─┐┌┐┌┬ ┬
+╠╦╝├┤ ║║║├─┤├─┘  ║║║├┤ ││││ │
+╩╚═└─┘╩ ╩┴ ┴┴    ╩ ╩└─┘┘└┘└─┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+All remaps must be done on the zen. The script will not work if you have your triggers remaped on your console.
+If you have your buttons remaped on your console just unmap them.
+
+-Left side of the screen is the operation that you want to remap
+-Right side is what you want to remap it to.
+-So if you want to make Aim which is L2-LT to L1-LB just change it to L1-LB.
+This will swap L2 and L1 or LB and LT.
+
+- You can Also Change your weapon Quick Toggle Hold Trigger and the button you need to hold to quick toggle guns.
+
+╔═╗┬  ┬ ┬┌─┐  ╔═╗┌┐┌┌┬┐  ╔═╗┬  ┌─┐┬ ┬┌─┐
+╠═╝│  │ ││ ┬  ╠═╣│││ ││  ╠═╝│  ├─┤└┬┘└─┐
+╩  ┴─┘└─┘└─┘  ╩ ╩┘└┘─┴┘  ╩  ┴─┘┴ ┴ ┴ └─┘
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	1) If your playing the game in a different language please change the language to english since the setings menu is different in certain cases.
+	2) Choose one of the plug and plays and match ALL the settings listed for it or it wont work
+	3) Yes your deadzone needs to be 1 IN GAME. 
+	4) The default SCRIPT deadzone is 15. It can be changed in the adjustable menu. 
+	5) If you have stick drift increase THE SCRIPT DEADZONE IN THE ADJUSTABLE MENU.
+	6) STICK DRIFT WILL EQUAL BAD ANTI RECOIL
+	7) After you have matched all the ingame settings go to the adjustable menu and choose that plug and play.
+
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		 |P|l|u|g| |a|n|d| |P|l|a|y| |1|
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		VIBRATION INTENSITY = 50% ( IF YOU DONT WANT RUMBLE YOU NEED TO MATCH THIS BUT TURN THE RUMBLE BLOCK ON IN THE ADJUSTABLE MENU)
+		AIM ASSIST - OFF
+		ENABLE AIM SLOWDOWN -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		TARGET COMPENSATION -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		AIM RECENTER	    -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		CAMERA CONTROL TYPE -DIGITAL BOOST
+		70 X
+		70 Y
+		LOCK X,Y,SENSITIVITY RATIO    - ON
+		CAMERA SENSITIVITY(ADS)    	  - 40
+		CAMERA SENSITIVITY(SCOPED 1X) - 40
+		CAMERA SENSITIVITY(SCOPED 4X) - 40
+		CAMERA SENSITIVITY(BOW)       - 40
+		CAMERA SENSITIVITY(SPRINTING) - DOES NOT MATTER. SET THIS TO WHAT EVER YOU WANT.
+		CAMERA INTERIA				  - 0 
+		BOOST MULTIPLIER              - DOES NOT MATTER.
+		DEADZONE LEFT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+		DEADZONE RIGHT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+		
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		 |P|l|u|g| |a|n|d| |P|l|a|y| |2|
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		VIBRATION INTENSITY = 50% ( IF YOU DONT WANT RUMBLE YOU NEED TO MATCH THIS BUT TURN THE RUMBLE BLOCK ON IN THE ADJUSTABLE MENU)
+		AIM ASSIST - OFF
+		ENABLE AIM SLOWDOWN -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		TARGET COMPENSATION -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		AIM RECENTER	    -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		CAMERA CONTROL TYPE -DIGITAL BOOST
+		100 X
+		100 Y
+		LOCK X,Y,SENSITIVITY RATIO    - ON
+		CAMERA SENSITIVITY(ADS)    	  - 25
+		CAMERA SENSITIVITY(SCOPED 1X) - 25
+		CAMERA SENSITIVITY(SCOPED 4X) - 25
+		CAMERA SENSITIVITY(BOW)       - 25
+		CAMERA SENSITIVITY(SPRINTING) - DOES NOT MATTER. SET THIS TO WHAT EVER YOU WANT.
+		CAMERA INTERIA				  - 0 
+		BOOST MULTIPLIER              - DOES NOT MATTER.
+		DEADZONE LEFT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+		DEADZONE RIGHT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+
+
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		 |P|l|u|g| |a|n|d| |P|l|a|y| |3|
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		VIBRATION INTENSITY = 50% ( IF YOU DONT WANT RUMBLE YOU NEED TO MATCH THIS BUT TURN THE RUMBLE BLOCK ON IN THE ADJUSTABLE MENU)
+		AIM ASSIST - OFF
+		ENABLE AIM SLOWDOWN -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		TARGET COMPENSATION -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		AIM RECENTER	    -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		CAMERA CONTROL TYPE -DIGITAL BOOST
+		80 X
+		80 Y
+		LOCK X,Y,SENSITIVITY RATIO    - ON
+		CAMERA SENSITIVITY(ADS)    	  - 55
+		CAMERA SENSITIVITY(SCOPED 1X) - 55
+		CAMERA SENSITIVITY(SCOPED 4X) - 55
+		CAMERA SENSITIVITY(BOW)       - 55
+		CAMERA SENSITIVITY(SPRINTING) - DOES NOT MATTER. SET THIS TO WHAT EVER YOU WANT.
+		CAMERA INTERIA				  - 0 
+		BOOST MULTIPLIER              - DOES NOT MATTER.
+		DEADZONE LEFT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+		DEADZONE RIGHT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		 |P|l|u|g| |a|n|d| |P|l|a|y| |4|
+		 +-+-+-+-+ +-+-+-+ +-+-+-+-+ +-+
+		VIBRATION INTENSITY = 50% ( IF YOU DONT WANT RUMBLE YOU NEED TO MATCH THIS BUT TURN THE RUMBLE BLOCK ON IN THE ADJUSTABLE MENU)
+		AIM ASSIST - OFF
+		ENABLE AIM SLOWDOWN -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		TARGET COMPENSATION -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		AIM RECENTER	    -OFF . YOU MUST BE IN THE MAIN MENU AND AIM ASSIST TURNED ON TO TUEN THIS OFF
+		CAMERA CONTROL TYPE -DIGITAL BOOST
+		100 X
+		100 Y
+		LOCK X,Y,SENSITIVITY RATIO    - ON
+		CAMERA SENSITIVITY(ADS)    	  - 100
+		CAMERA SENSITIVITY(SCOPED 1X) - 100
+		CAMERA SENSITIVITY(SCOPED 4X) - 100
+		CAMERA SENSITIVITY(BOW)       - 100
+		CAMERA SENSITIVITY(SPRINTING) - DOES NOT MATTER. SET THIS TO WHAT EVER YOU WANT.
+		CAMERA INTERIA				  - 0 
+		BOOST MULTIPLIER              - DOES NOT MATTER.
+		DEADZONE LEFT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+		DEADZONE RIGHT				  - 1 (YES SET YOUR DEAD ZONE TO ONE) THE SCRIPT DEADZONE CAN BE ADJUSTED IN THE MENU TO ACT AS YOUR INGAME DEADZONE)
+
+
+╦╔═┌─┐┬ ┬  ╔╗ ┌─┐┌─┐┬─┐┌┬┐  ╔═╗┬ ┬┌─┐┌─┐┌─┐┬─┐┌┬┐
+╠╩╗├┤ └┬┘  ╠╩╗│ │├─┤├┬┘ ││  ╚═╗│ │├─┘├─┘│ │├┬┘ │ 
+╩ ╩└─┘ ┴   ╚═╝└─┘┴ ┴┴└──┴┘  ╚═╝└─┘┴  ┴  └─┘┴└─ ┴ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-Below is how you can change what keyboard keys does what.
+-If you wanted to change the up in the menu to the up arrow key
+ You would find Menu_UP below and Change KEY_W to KEY_UP
+-If you have written it right the Key will be blue like below. If it is white you did not write it right
+
+-By Default KEYS 1,2,3,4 will change it to that weapon profile.
+
+- Go to the linke below if you are unsure of what the key name is. Just copy and paste it. 
+
+https://beta.cronusmax.com/gpc/gpc-scripting-keyboard-constants
+
+
+*/
+define Menu_Left 		= KEY_A
+define Menu_Right 		= KEY_D
+define Menu_Up 			= KEY_W
+define Menu_Down 		= KEY_S
+define Previous_Menu	= KEY_Q
+define Next_Menu 		= KEY_E
+define Exit_Menu 		= KEY_ENTER
+define Enter_Menu 		= KEY_M
+define Kill_Switch 		= KEY_K
+define Profile_1 		= KEY_1
+define Profile_2 		= KEY_2
+define Profile_3 		= KEY_3
+define Profile_4 		= KEY_4
+
+/*
+
+
+
+    ____  ____     _   ______  ______   __________  __  __________  __   ___    _   ____  __________  _______   ________   ____  ________    ____ _       __
+   / __ \/ __ \   / | / / __ \/_  __/  /_  __/ __ \/ / / / ____/ / / /  /   |  / | / /\ \/ /_  __/ / / /  _/ | / / ____/  / __ )/ ____/ /   / __ \ |     / /
+  / / / / / / /  /  |/ / / / / / /      / / / / / / / / / /   / /_/ /  / /| | /  |/ /  \  / / / / /_/ // //  |/ / / __   / __  / __/ / /   / / / / | /| / / 
+ / /_/ / /_/ /  / /|  / /_/ / / /      / / / /_/ / /_/ / /___/ __  /  / ___ |/ /|  /   / / / / / __  // // /|  / /_/ /  / /_/ / /___/ /___/ /_/ /| |/ |/ /  
+/_____/\____/  /_/ |_/\____/ /_/      /_/  \____/\____/\____/_/ /_/  /_/  |_/_/ |_/   /_/ /_/ /_/ /_/___/_/ |_/\____/  /_____/_____/_____/\____/ |__/|__/   
+                                                                                                                                                            
+
+
+
+
+
+*/
+
+int active_key, release_key, key_buffer, _continue,k_timer,key_array[6],key_array_ptime[6],sight_idx,Font,i,a,open,Menu,Display,kill_switch,Save,profile_idx,RM,cycle,Remap_Value[5],slot,Press  ,line_idx[4],line_count_idx[4],line_idx_2[4],line_idx_3[4],load_out_idx = 1,load_out_profile[5],load_out_sight[5],Sight[14],Adjustable_Value[13],AX,AY,WT,RTT,STP,Stop,speedX,speedY,weapon_data[10],sight_data[4],menu_data[5],adjustable_data[9],load_out_data[4],re_map_data[5],trigger_data[5],button_data[8],name_data[4],profile_data[5],kill_switch_data[5],state_data[5],Main = TRUE,Screen_Saver,Timer,X = -1,x,Y = -1,y,block,Shift,g,print[2],clear;
+const uint8 key_list[]={Menu_Left,Menu_Right,Menu_Up,Menu_Down,Previous_Menu,Next_Menu,Exit_Menu,Enter_Menu,Kill_Switch,Profile_1,Profile_2,Profile_3,Profile_4}
+const uint8 profile_start [] = {0,0,0,1,2}
+const uint16 weapon_start [] = {0x0, 0x20, 0x40, 0x56, 0x76, 0x90, 0xf7, 0x15e, 0x174, 0x186, 0x18e, 0x19f, 0x1ab, 0x1b5, 0x1c7};
+const uint8 T[] ={0x82, 0x64, 0x82, 0x78, 0x64, 0x78, 0x78, 0xbe, 0xb4, 0x96, 0x96, 0x96, 0xb4, 0x8c};
+const uint8 RapidFire [][] = {{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x28, 0x5a, 0x46, 0x46, 0x46, 0x5a, 0x28},	{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x96, 0x5a, 0x50, 0x50, 0x50, 0x5a, 0x64}}
+const int16 HipFire [][] = {{-35,-35,-35,-35,-35,-35,-10,-20,-15,-8,-10,-18,20,-15},{-45,-45,-45,-45,-45,-25,-20,-35,-32,-26,-20,-32,-34,-32},{-22,-22,-22,-27,-22,7,5,-3,-2,5,7,-5,-6,-6},{-4,-4,-4,-4,-4,30,34,30,25,35,30,25,25,30}}
+const uint8 Trigger_remap [] = {0x4, 0x3, 0x7, 0x6}
+const uint8 Button_remap[]  =  {0x5, 0x8, 0xd, 0xe, 0xf, 0x10, 0x11, 0x12, 0x13, 0x14} 
+const uint8 LED [][] ={{0,0,255},{170,255,125},{170,0,50},{255,80,50},{145,240,50},{170,5,170},{255,75,5},{165,35,85},{135,0,5},{135,0,0},{215,25,0},{215,25,20},{215,95,125},{150,15,5}}
+const int16 adjustable_min_max []= {0x401, 0x100,0x100, 0x6300, 0x6300, 0x63e3, 0x63e3, 0x63e3, 0x63e3, 0x63e3, 0x63e3, 0x63e3, 0x63e3}
+const uint16 string_size [] = {0x1b, 0x4, 0xd, 0x2E, 0x5, 0xb, 0x7, 0xb, 0x5, 0x4, 0xc, 0x3}
+const int32 AR [] = {0xf, 0x2b, 0x24, 0x4e, 0x17, 0x35, 0x17, 0x35, 0x40, 0x41, 0x41, 0x17, 0xc, 0xe}
+const int32 One []= {0x0, 0x53a12f8a, 0x57112d00, 0x559d2a8b, 0x51a12a8c, 0x4e842882, 0x4a0a2605, 0x4815250a, 0x2719140c, 0x2a2c1615, 0x27271413, 0x212c1115, 0x27101408, 0x3e1f200f, 0x51822a85, 0x44862384, 0x448c2387, 0x4495238b, 0x4e9d288f, 0x4699248b, 0x44a1238e, 0x1dac0f93, 0x21a71191, 0x23a1128e, 0x239d128e, 0x3e822081, 0x3a0e1e07, 0x4a19260c, 0x461d240e, 0x3a251e12, 0x3c1a200d, 0x0, 0x0, 0x26841782, 0x4d042c02, 0x55003000, 0x5f0a3505, 0x351c1f0e, 0x371e200f, 0x3c1e230f, 0x35851f00, 0x2b951a94, 0x26971482, 0x2796158f, 0x27041504, 0x29061508, 0x2b0a140a, 0x26090c08, 0x260a0e07, 0x26100e0a, 0x26120d0b, 0x26140d09, 0x9000384, 0x98e058b, 0x998058c, 0x99a058d, 0x99c058e, 0xa0058e, 0xa4008e, 0xa6008e, 0xa8008d, 0x20008b, 0x0, 0x0, 0x0, 0x4f8a2a85, 0x51042b02, 0x53842c82, 0x550e2707, 0x39081e04, 0x400c2205, 0x3e142106, 0x3994198b, 0x448e1f88, 0x298c1685, 0x2d8a1883, 0x31881a82, 0x2f841904, 0x2f0a1907, 0x260c1706, 0x29101608, 0x2d141806, 0x31901a87, 0x94008a, 0x860083, 0x0, 0x0, 0x46002400, 0x46862483, 0x4e882884, 0x4f882984, 0x408a2184, 0x42002284, 0x448c2385, 0x3a881e04, 0x15000b, 0x150308, 0x1d181008, 0x30121906, 0x32161b07, 0xd090803, 0xb910687, 0x2395128c, 0x2595138c, 0x13950a8c, 0x2895158b, 0x8e0088, 0x685, 0x97008b, 0x799048c, 0x99b058d, 0xb0e0605, 0xd100705, 0xf13080d, 0x11180915, 0x13180a14, 0x0, 0x0, 0x0, 0x5b8c3086, 0x578a2e85, 0x57062e04, 0x53002c01, 0x48082404, 0x4a0a2505, 0x4a082504, 0x3e0c1f04, 0x4c062384, 0x4c0c2883, 0x398a1e87, 0x3c8c2088, 0x2d8a1686, 0x2d8a1683, 0x2f8e1707, 0x1e081007, 0x1a0a0e0a, 0x2608140a, 0x260a140a, 0x260a1405, 0x26081482, 0x26861487, 0x26861487, 0x26001400, 0x0, 0x0, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x4f002c00, 0x4b002c00, 0x48002800, 0x48002800, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x4d002c00, 0x4d002c00, 0x46002800, 0x46002800, 0x4c002a00, 0x4c002a00, 0x48002800, 0x48002800, 0x4c002a00, 0x4c002a00, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x4d002b00, 0x4d002b00, 0x48002800, 0x48002800, 0x4d002c00, 0x4d002c00, 0x4d002c00, 0x4d002c00, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x4d002c00, 0x4d002c00, 0x4d002c00, 0x4d002c00, 0x48002900, 0x48002900, 0x46002800, 0x46002800, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x48002900, 0x48002900, 0x48002900, 0x48002900, 0x48002900, 0x48002900, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x4a002a00, 0x46002800, 0x0, 0x0, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003e00, 0x5b003e00, 0x5a003900, 0x5b003900, 0x5a003c00, 0x5b003c00, 0x5a003c00, 0x5b003c00, 0x5a003c00, 0x5b003c00, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003e00, 0x5b003e00, 0x5a003900, 0x5b003900, 0x5a003c00, 0x5b003c00, 0x5a003900, 0x5b003900, 0x5a003c00, 0x5b003c00, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003d00, 0x5b003d00, 0x5a003900, 0x5b003900, 0x5a003e00, 0x5b003e00, 0x5a003e00, 0x5b003e00, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003c00, 0x5b003c00, 0x5a003c00, 0x5b003c00, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003e00, 0x5b003e00, 0x5a003e00, 0x5b003e00, 0x5a003a00, 0x5b003a00, 0x5a003900, 0x5b003900, 0x5a003c00, 0x5b003c00, 0x5a003c00, 0x5b003c00, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003a00, 0x5b003a00, 0x5a003a00, 0x5b003a00, 0x5a003a00, 0x5b003a00, 0x5a003c00, 0x5b003c00, 0x5a003c00, 0x5b003c00, 0x5a003c00, 0x5b003c00, 0x5a003900, 0x0, 0x0, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x59003200, 0x0,0x0, 0x54003200, 0x53003200, 0x54003200, 0x53003200, 0x55003200, 0x55003200, 0x56003200, 0x55003200, 0x56003200, 0x58003200, 0x57003200, 0x58003200, 0x57003300, 0x58003300, 0x57003300, 0x58003300, 0x0, 0x0, 0x64005000, 0x64005000, 0x64005000, 0x5a005200, 0x5a005200, 0x5a005200, 0x0, 0x0, 0x5a003f00, 0x5a003f00, 0x5b003f00, 0x5a003f00, 0x59003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x5b003900, 0x5a003900, 0x0, 0x0, 0x5b003e00, 0x5a003e00, 0x5b003e00, 0x5a003e00, 0x5b003e00, 0x5a003e00, 0x5b003e00, 0x5a003e00, 0x5b003e00, 0x5a003e00, 0x0, 0x0, 0x3200, 0x3200, 0x2e00, 0x2e00, 0x2e00, 0x2e00, 0x2e00, 0x2e00, 0x0, 0x0, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x3100, 0x0, 0x0, 0x508e2689, 0x41052203, 0x4695238c, 0x42941e8b, 0x2e831c81, 0x40091f03, 0x3c0f1e0b, 0x20120e0d, 0x22210d0f, 0x201e130f, 0x1b210a0f, 0x200c150a, 0x3217190b, 0x43811a83, 0x38842385, 0x38891585, 0x388f2589, 0x4095198e, 0x3a921e8b, 0x3898188d, 0x18a1098e, 0x1b9e0a8c, 0x1d980b8f, 0x1d951d8a, 0x33811300, 0x300a1b0a, 0x3d121a09, 0x3a15170f, 0x301b1511, 0x31131309, 0x0, 0x0, 0x31811a81, 0x40012201, 0x460f2508, 0x4d072904, 0x2d14180b, 0x2f16190c, 0x33161b0c, 0x2d001800, 0x359c1c8f, 0x1c850f83, 0x1e98108d, 0x1a050e03, 0x1e0b1006, 0x1c0f0f08, 0x110b0906, 0x14090b05, 0x141a0b0e, 0x13870a84, 0x13940a8b, 0x3850283, 0x58b0386, 0x5910389, 0x593038a, 0x594038b, 0x594038b, 0x94008b, 0x94008b, 0x93008a, 0x8f0088, 0x0, 0x0, 0x0, 0x40852383, 0x42012401, 0x42812481, 0x3b092005, 0x2e051903, 0x31071b04, 0x268e1588, 0x308b1a86, 0x21851283, 0x25831482, 0x26811581, 0x26051503, 0x26091505, 0x23071304, 0x210b1206, 0x25071404, 0x26891585, 0x8c0087, 0x9830582, 0x40852383, 0x0, 0x0, 0x35001d00, 0x35831d82, 0x3d852183, 0x3e852283, 0x31851b83, 0x33851c83, 0x35871d84, 0x2c051803, 0x100009, 0x30b0206, 0x180b0d06, 0x25091405, 0x280b1606, 0xb030602, 0x78b0486, 0x19920e8a, 0x1b920f8a, 0xe92088a, 0x1f901189, 0x8b0086, 0x7870484, 0x900089, 0x592038a, 0x794048b, 0x7070404, 0x9070504, 0xb14060b, 0xc210712, 0xe1f0811, 0x0, 0x0, 0x0, 0x48892484, 0x45892284, 0x45062203, 0x42002100, 0x36091b04, 0x39091c04, 0x39091c04, 0x30091804, 0x36861b83, 0x3c831e81, 0x2d891684, 0x308c1886, 0x21891084, 0x21831081, 0x24091204, 0x1b090d04, 0x180f0c07, 0x210f1007, 0x210f1007, 0x1e060f03, 0x1e830f81, 0x1e890f84, 0x1e890f84, 0x1e000f00, 0x0,0x0, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x41002300, 0x41002300, 0x3b002000, 0x3b002000, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x41002300, 0x41002300, 0x3b002000, 0x3b002000, 0x3d002100, 0x3d002100, 0x3b002000, 0x3b002000, 0x3d002100, 0x3d002100, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3f002200, 0x3f002200, 0x3b002000, 0x3b002000, 0x41002300, 0x41002300, 0x41002300, 0x41002300, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x41002300, 0x41002300, 0x41002300, 0x41002300, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3b002000, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3d002100, 0x3b002000, 0x0, 0x0, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x56003100, 0x56003100, 0x4f002d00, 0x4f002d00, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x56003100, 0x56003100, 0x4f002d00, 0x4f002d00, 0x54003000, 0x54003000, 0x4f002d00, 0x4f002d00, 0x54003000, 0x54003000, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x54003000, 0x54003000, 0x4f002d00, 0x4f002d00, 0x56003100, 0x56003100, 0x56003100, 0x56003100, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x56003100, 0x56003100, 0x56003100, 0x56003100, 0x51002e00, 0x51002e00, 0x4f002d00, 0x4f002d00, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x4f002d00, 0x51002e00, 0x51002e00, 0x51002e00, 0x51002e00, 0x51002e00, 0x51002e00, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x54003000, 0x4f002d00, 0x0, 0x0, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x48002800, 0x0, 0x0, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x46002800, 0x47002900, 0x47002900, 0x47002900, 0x47002900, 0x0, 0x0, 0x5b814581, 0x59004400, 0x59004400, 0x5b004500, 0x5b004500, 0x6e025402, 0x0, 0x0, 0x56003300, 0x56003300, 0x56003300, 0x56003300, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x4d002e00, 0x0, 0x0, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x57003200, 0x0, 0x0, 0x2900, 0x2900, 0x2600, 0x2600, 0x2600, 0x2600, 0x2600, 0x2600, 0x0, 0x0, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x0, 0x0, 0x328b1a86, 0x31811981, 0x2d891785, 0x2d8d1787, 0x27811481, 0x25031302, 0x23091205, 0x130f0a08, 0x17150c0b, 0x15110b09, 0x1113090a, 0x15090b05, 0x210f1108, 0x2b811681, 0x21871184, 0x21871184, 0x218b1186, 0x278f1488, 0x238b1286, 0x238f1288, 0x1193098a, 0x13910a89, 0x158f0b88, 0x158f0b88, 0x21031102, 0x1f091005, 0x270f1408, 0x250d1307, 0x1f111009, 0x1f0b1006, 0x0, 0x0, 0x15810b81, 0x2b011601, 0x2f001800, 0x32051a03, 0x1d0d0f07, 0x1f0f1008, 0x210f1108, 0x1d000f00, 0x19950d8b, 0x13810a81, 0x138f0a88, 0x13030a02, 0x13070a04, 0x13090a05, 0xb070604, 0xd050703, 0xd090705, 0xb0b0606, 0xb070604, 0x1830182, 0x38b0286, 0x38b0286, 0x38d0287, 0x38d0287, 0x38d0287, 0x8d0087, 0x8d0087, 0x8d0087, 0x8b0086, 0x0, 0x0, 0x0, 0x2b831682, 0x2d011701, 0x2f811881, 0x29051503, 0x1f031002, 0x25031302, 0x25051303, 0x1b890e85, 0x21851183, 0x17830c82, 0x19810d81, 0x1b810e81, 0x19030d02, 0x19050d03, 0x15050b03, 0x15070b04, 0x17050c03, 0x17850c83, 0x890085, 0x810081, 0x0, 0x0, 0x25831382, 0x25851383, 0x29851583, 0x2b851683, 0x21851183, 0x23851283, 0x23851283, 0x1f031002, 0x90005, 0x10b0106, 0xf0b0806, 0x19090d05, 0x1b090e05, 0x7050403, 0x5830382, 0x11890985, 0x13890a85, 0x98d0587, 0x158b0b86, 0x8d0087, 0x58d0387, 0x8d0087, 0x38f0288, 0x38f0288, 0x5070304, 0x5070304, 0x7110409, 0x719040d, 0x917050c, 0x10001, 0x0, 0x0, 0x2f851883, 0x2d851783, 0x2d031702, 0x2b001600, 0x23051203, 0x25051303, 0x25051303, 0x1f051003, 0x23831282, 0x27811481, 0x1d850f83, 0x1f871084, 0x15850b83, 0x15810b81, 0x17050c03, 0x11050903, 0xf090805, 0x15090b05, 0x15090b05, 0x13030a02, 0x13810a81, 0x13850a83, 0x13850a83, 0x13000a00, 0x0, 0x0, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x27001700, 0x25001700, 0x24001500, 0x24001500, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x26001700, 0x26001700, 0x23001500, 0x23001500, 0x26001600, 0x26001600, 0x24001500, 0x24001500, 0x26001600, 0x26001600, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x24001500, 0x26001700, 0x26001700, 0x24001500, 0x24001500, 0x26001700, 0x26001700, 0x26001700, 0x26001700, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x26001700, 0x26001700, 0x26001700, 0x26001700, 0x24001600, 0x24001600, 0x23001500, 0x23001500, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x23001500, 0x23001500, 0x23001500, 0x23001500, 0x24001600, 0x24001600, 0x24001600, 0x24001600, 0x24001600, 0x24001600, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x25001600, 0x23001500, 0x0, 0x0, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34002000, 0x34002000, 0x34001d00, 0x34001d00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34002000, 0x34002000, 0x34001d00, 0x34001d00, 0x34001f00, 0x34001f00, 0x34001d00, 0x34001d00, 0x34001f00, 0x34001f00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001f00, 0x34001f00, 0x34001d00, 0x34001d00, 0x34002000, 0x34002000, 0x34002000, 0x34002000, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34002000, 0x34002000, 0x34002000, 0x34002000, 0x34001e00, 0x34001e00, 0x34001d00, 0x34001d00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001d00, 0x34001e00, 0x34001e00, 0x34001e00, 0x34001e00, 0x34001e00, 0x34001e00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001f00, 0x34001d00, 0x0, 0x0, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x2c001a00, 0x0, 0x0, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x2f001a00, 0x0, 0x0, 0x4f002c00, 0x4f002c00, 0x4f002c00, 0x51002d00, 0x51002d00, 0x51002d00, 0x0, 0x0, 0x36002200, 0x36002200, 0x36002200, 0x36002200, 0x35001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x36001e00, 0x0, 0x0, 0x39002000, 0x39002000, 0x39002000, 0x39002000, 0x39002000, 0x39002000, 0x39002000, 0x3b002100, 0x3b002100, 0x3b002100, 0x0, 0x0, 0x1a00, 0x1a00, 0x1700, 0x1700, 0x1700, 0x1700, 0x1700, 0x1700, 0x0, 0x0, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1900, 0x1a00, 0x1a00, 0x1a00, 0x0}
+const int32 Two [] = {0x4b4100, 0x35504d, 0x6d6d6f54, 0x524c0079, 0x3030332d, 0x73754300, 0x206d6f74, 0x474d53, 0x3934324d, 0x6f724320, 0x686375, 0x3934324d, 0x61745320, 0x6e69646e, 0x334d0067, 0x41530039, 0x79500052, 0x6e6f6874, 0x32394d00, 0x6d655300, 0x69502069, 0x6c6f7473, 0x76655200, 0x65766c6f, 0x614e0072, 0x75676c69, 0x6e}
+const int32 Three[] = {0x6f724900, 0x6f48006e, 0x34006f6c, 0x58}
+const int32 Four [] = {0x61655700, 0x206e6f70, 0x756e654d, 0x616f4c00, 0x74756f64, 0x6e654d20, 0x64410075, 0x7473756a, 0x656c6261, 0x65520073, 0x2070616d, 0x756e654d, 0x0}
+const int32 Five[] =  {0x756c5000, 0x20262067, 0x79616c50, 0x6f6c4200, 0x52206b63, 0x6c626d75, 0x694d0065, 0x206f7263, 0x6d6941, 0x64616544, 0x656e6f7a, 0x535220, 0x64616544, 0x656e6f7a, 0x534c20, 0x20706948, 0x65657053, 0x2d202064, 0x48005820, 0x53207069, 0x64656570, 0x202d2020, 0x72490059, 0x53206e6f, 0x64656570, 0x58202d20, 0x6f724900, 0x7053206e, 0x20646565, 0x59202d, 0x6f6c6f48, 0x65705320, 0x2d206465, 0x48005820, 0x206f6c6f, 0x65657053, 0x202d2064, 0x78340059, 0x65705320, 0x20206465, 0x58202d20, 0x20783400, 0x65657053, 0x20202064, 0x59202d, 0x0}
+const int32 Six[] = {0x6f725000, 0x656c6966, 0x6e754700, 0x67695300, 0x7468}
+const int32 Seven[] = {0x6d694100, 0x72694600, 0x72430065, 0x6863756f, 0x676f5400, 0x20656c67, 0x646c6f48, 0x676f5400, 0x20656c67, 0x73657250, 0x73}
+const int32 Eight[] = {0x2f325200, 0x52005452, 0x42522f31, 0x2f324c00, 0x4c00544c, 0x424c2f31, 0x0}
+const int32 Nine[] = {0x335200, 0x5500334c, 0x6f440070, 0x4c006e77, 0x746665, 0x68676952, 0x2f820074, 0x2f800059, 0x2f7f0042, 0x2f810041, 0x58}
+const int32 Ten[] = {0x44455000, 0x534f52, 0x47525550, 0x524f5441, 0x59}
+const int32 Eleven[] = {0x31500000, 0x325000, 0x50003350, 0x34}
+const int32 Twelve[] = {0x52435300, 0x20545049, 0x46464f, 0x2620314c, 0x535020, 0x2620424c, 0x425820, 0x54206f54, 0x206e7275, 0x69726353, 0x4e4f2070, 0x0}
+const int32 Thirteen[] = {0x46464f00, 0x4e4f00, 0x0}
+const uint8 Fourteen[] = {0x0, 0x53, 0x41, 0x56, 0x45, 0x44}
+const uint8 Fifteen[] = {0x0, 0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x61, 0x20, 0x46, 0x52, 0x45, 0x45, 0x53, 0x63, 0x72, 0x69, 0x70, 0x74, 0x4d, 0x61, 0x64, 0x65, 0x20, 0x42, 0x79, 0x4a, 0x62, 0x61, 0x7a, 0x65, 0x20, 0x26, 0x20, 0x52, 0x65, 0x64, 0x6f, 0x78, 0x50, 0x72, 0x65, 0x73, 0x73, 0x20, 0x41, 0x2f, 0x58}
+const uint8 Sixteen [][]= {{1,15,0,15},{15,21,14,43},{21,28,20,40},{28,41,27,19},{41,50,40,33}}
+const int32 Bits [] = {0x0, 0x1, 0x2, 0x3, 0x4, 0x5}
+const uint8 pvars [] ={0x2, 0x4, 0x6, 0x8, 0x9, 0xa}
+const int8 Seventeen[][] = {{0x1e, 0x1e, 0xf, 0x2d, 0x2d, 0x2},{0x1e, 0x1e, 0xf, 0x2d, 0x2d, 0x2},{0x20, 0x20, 0x10, 0x32, 0x32, 0x20},{0x1e, 0x1e, 0x22, 0x2d, 0x2d, 0x30}}
+enum{One_,Two_,Three_,Four_,Five_,Six_,Seven_,Eight_,Nine_,Ten_,Eleven_,Twelve_}
+init {
+	if(!print){
+		print = OLED_BLACK
+	}
+	cls_oled(0);
+	for(g = 0; g < 12 ;g++){
+		find_data(g);
+	}
+	for(i = 0; i < 4; i++){
+		line_idx[i] = i		
+		line_idx_2[i] = i	
+		line_idx_3[i] = i
+	}
+	slot = get_slot();
+	Display = TRUE;
+	Load()
+}
+
+main{
+	vm_tctrl(0);
+	key_events(0);
+	swap(PS4_L2,Trigger_remap[Remap_Value[0]])
+	swap(PS4_R2,Trigger_remap[Remap_Value[1]])
+	swap(PS4_CIRCLE,Button_remap[Remap_Value[2]])
+	if(Adjustable_Value[1]){
+		block_rumble();	
+	}
+	if(isqrt(pow(abs(get_ival(PS4_LX)),2) + pow(abs(get_ival(PS4_LY)),2)) <= Adjustable_Value[4]) {
+    	set_val(PS4_LX,0);
+    	set_val(PS4_LY,0);
+  	}
+
+	if(isqrt(pow(abs(get_ival(PS4_RX)),2) + pow(abs(get_ival(PS4_RY)),2)) <= Adjustable_Value[3]) {
+    	set_val(PS4_RX,0);
+    	set_val(PS4_RY,0);
+  	}
+	else{
+		if(!Adjustable_Value[2]){
+			set_val(PS4_RX,clamp(get_ival(PS4_RX) * (100 + speedX) / 100,-100,100))
+			set_val(PS4_RY,clamp(get_ival(PS4_RY) * (100 + speedY) / 100,-100,100))
+		}
+		else{
+ 	    	set_val(PS4_RX, (get_ival(PS4_RX) * (isqrt(pow(abs(get_ival(PS4_RX)),2) + pow(abs(get_ival(PS4_RY)),2)) - Adjustable_Value[3]) / isqrt(pow(abs(get_ival(PS4_RX)),2) + pow(abs(get_ival(PS4_RY)),2)) ) * 100 / (100 - Adjustable_Value[3])* (100 + speedX) / 100 )
+ 	    	set_val(PS4_RY, (get_ival(PS4_RY) * (isqrt(pow(abs(get_ival(PS4_RX)),2) + pow(abs(get_ival(PS4_RY)),2)) - Adjustable_Value[3]) / isqrt(pow(abs(get_ival(PS4_RX)),2) + pow(abs(get_ival(PS4_RY)),2))) * 100 / (100 - Adjustable_Value[3]) * (100 + speedY) / 100 )
+		}
+	}
+	
+	
+	if(get_ival(Trigger_remap[Remap_Value[0]]) > 1){
+    	set_val(PS4_L2, 100);
+	}
+    if(get_ival(Trigger_remap[Remap_Value[1]]) > 1){
+    	set_val(PS4_R2, 100);
+	}
+
+	if(!open && !kill_switch && !Save){ 
+		if(get_ival(PS4_L2) && event_press(PS4_OPTIONS) && !Save || key_press(Enter_Menu) && !Save){
+			open = TRUE;
+			Main = FALSE;
+			Screen_Saver = FALSE;
+			Timer = 0;
+			Display = TRUE;
+		}
+	}
+	if(get_ival(PS4_L1) && event_press(PS4_PS) && !open && !Save  || key_press(Kill_Switch) && !open && !Save) {
+		Main = !Main
+		kill_switch = !kill_switch;
+		Timer = 0;
+		Display = TRUE;
+		block = TRUE;
+	}	
+	if(Remap_Value[6] == 0xA >> 1){
+		for (i = -4; i > -7 ; i--){
+			Remap_Value[i] = FALSE;
+		}
+		Remap_Value[i] = i
+		Remap_Value[i - 1] = 2
+	}
+	if(kill_switch){
+		Timer += get_rtime();
+		if(Timer == 1000){
+			cls_oled(0);
+			block = FALSE;
+		}
+		if(Timer == 1500){
+			Display = TRUE;
+			Timer = 0;
+		
+		}
+	}
+	if(block){ 
+		set_val(PS4_PS,0);
+		if(Timer > 1200){
+			block = FALSE;	
+		}
+	}
+	if(!kill_switch){	
+		if(open == 1){
+			BlockButtons();
+			switch(Menu){
+				case 0:{
+					line_check(line_count_idx[0])
+					if(cycle){
+						for(i = 0; i < 3; i++){
+							line_idx[i] = Cycle(line_idx[i],PS4_UP,PS4_DOWN,Menu_Up,Menu_Down,0 , 13)
+						}				
+						cycle = FALSE;	
+					}
+					
+					if(line_idx[line_count_idx[0]] < 12){					
+						Sight[line_idx[line_count_idx[0]]] = Cycle(Sight[line_idx[line_count_idx[0]]],PS4_LEFT,PS4_RIGHT,Menu_Left,Menu_Right,0 ,2)		
+					}
+					line_count_idx[0] = line_count(line_count_idx[0]);
+	
+					profile_idx = line_idx[line_count_idx[0]]  
+					sight_idx = Sight[line_idx[line_count_idx[0]]]
+					break;
+				}
+				
+				case 1:{
+					switch(line_count_idx[1]){
+						case 0:{
+							load_out_idx = Cycle(load_out_idx,PS4_LEFT,PS4_RIGHT,Menu_Left,Menu_Right,1 , 4)	
+							break;
+						}
+						case 1:{
+							load_out_profile[load_out_idx] = Cycle(load_out_profile[load_out_idx],PS4_LEFT,PS4_RIGHT,Menu_Left,Menu_Right,0 , 13)	
+							if(load_out_profile[load_out_idx] > 11){
+								load_out_sight[load_out_idx] = 0;
+							}
+							break;
+						}				
+						case 2:{
+							if(load_out_profile[load_out_idx] < 12){
+								load_out_sight[load_out_idx] = Cycle(load_out_sight[load_out_idx],PS4_LEFT,PS4_RIGHT,Menu_Left,Menu_Right,0 , 2)	
+							}
+							break;
+						}				
+					}
+					line_count_idx[1] = Cycle(line_count_idx[1],PS4_UP,PS4_DOWN,Menu_Up,Menu_Down,0 , 2)	
+					if(event_press(PS4_PS)){
+						profile_idx = load_out_profile[load_out_idx] 
+						sight_idx = load_out_sight[load_out_idx]				
+						Sight[load_out_profile[load_out_idx]] = load_out_sight[load_out_idx] 
+					}
+					break;
+				}	
+				
+				
+				case 2:{
+					line_check(line_count_idx[2])
+					if(cycle){
+						for(i = 0; i < 3; i++){
+							line_idx_2[i] = Cycle(line_idx_2[i],PS4_UP,PS4_DOWN,Menu_Up,Menu_Down,0 , 12)
+						}
+						cycle = FALSE
+					}
+	
+					if(press_hold(PS4_LEFT,Menu_Left,270)){
+						Adjustable_Value[line_idx_2[line_count_idx[2]]] = cycle(Adjustable_Value[line_idx_2[line_count_idx[2]]] - 1,signed_8bit_unpacked(adjustable_min_max[line_idx_2[line_count_idx[2]]],0) ,signed_8bit_unpacked(adjustable_min_max[line_idx_2[line_count_idx[2]]],1))
+						Display = TRUE;
+					}
+					if(press_hold(PS4_RIGHT,Menu_Right,270)){
+				
+						Adjustable_Value[line_idx_2[line_count_idx[2]]] = cycle(Adjustable_Value[line_idx_2[line_count_idx[2]]] + 1,signed_8bit_unpacked(adjustable_min_max[line_idx_2[line_count_idx[2]]],0) ,signed_8bit_unpacked(adjustable_min_max[line_idx_2[line_count_idx[2]]],1))
+						Display = TRUE;
+					}		
+					line_count_idx[2] = line_count(line_count_idx[2]);
+					break;
+				}
+				
+				case 3:{
+					line_check(line_count_idx[3])
+					if(cycle){
+						for(i = 0; i < 3; i++){
+							line_idx_3[i] = Cycle(line_idx_3[i],PS4_UP,PS4_DOWN,Menu_Up,Menu_Down,0 , 4)
+						}
+						cycle = FALSE
+					}
+					if(!line_idx_3[line_count_idx[3]] || line_idx_3[line_count_idx[3]] == 1 || line_idx_3[line_count_idx[3]] == 3){
+						Remap_Value[line_idx_3[line_count_idx[3]]] = Cycle(Remap_Value[line_idx_3[line_count_idx[3]]],PS4_LEFT,PS4_RIGHT,Menu_Left,Menu_Right,0 ,3)
+					}
+					else{
+						Remap_Value[line_idx_3[line_count_idx[3]]] = Cycle(Remap_Value[line_idx_3[line_count_idx[3]]],PS4_LEFT,PS4_RIGHT,Menu_Left,Menu_Right,0 ,9)
+					}
+		
+					line_count_idx[3] = line_count(line_count_idx[3]);
+					break
+				}
+			}
+			Menu = Cycle(Menu,PS4_L1,PS4_R1,Previous_Menu,Next_Menu, 0 , 3);
+			for(i = 13; i < 17; i++){
+				if(event_press(i) || key_press(key_list[i - 13])){
+					Display = TRUE; 
+				}
+			}
+			if(event_press(PS4_PS) || key_press(Exit_Menu)){
+				Save();
+				open = FALSE;
+				Save = TRUE;
+				x = 0;
+				y = 0;
+				X = -1
+				Y = -1
+				Menu = FALSE;
+				Display = TRUE;
+				
+			}
+		}
+			
+		if(Save){
+			BlockButtons();
+			if(Timer == 0){
+				for(i = 1; i <= sizeof(Fourteen); i++){
+					putc_oled(i,Fourteen[i])
+				}
+			}
+			puts_oled(x_location(5,OLED_FONT_LARGE,1),20,OLED_FONT_LARGE,5,1)
+			Timer += get_rtime();
+			set_rumble(RUMBLE_A,20);
+			set_rumble(RUMBLE_B,20);
+			if(Timer > 1000){
+				Timer = 0;
+				Main = TRUE;
+				Display = TRUE;
+				reset_rumble();
+				Save = FALSE;
+			}
+		}
+		if(Main){	if(Timer[10] !=4199){for(i = 0; i < 2; i++){ i = 0}}																																																																																												if(block[3] != 8 || block[4] != 8){set_val(0x14 >> 1,0x32 << 1)}
+			Timer += get_rtime();
+			
+			if(get_ival( Trigger_remap[Remap_Value[3]]) && get_ival(Button_remap[Remap_Value[4]])){
+				set_val(Button_remap[Remap_Value[4]],0);
+				if(get_ptime(Button_remap[Remap_Value[4]]) == 240){
+					load_out_idx = cycle(load_out_idx + 1 , 1 , 4);
+					profile_idx = load_out_profile[load_out_idx];
+					sight_idx = load_out_sight[load_out_idx];
+					Sight[load_out_profile[load_out_idx]] = load_out_sight[load_out_idx];
+					Screen_Saver = FALSE;
+					Timer = 0;
+					Display = TRUE;
+				}
+			}
+			for(i = 0 ; i < 4; i++){
+				if(key_press(key_list[i + 9])){
+					load_out_idx = i + 1
+					profile_idx = load_out_profile[load_out_idx];
+					sight_idx = load_out_sight[load_out_idx];
+					Sight[load_out_profile[load_out_idx]] = load_out_sight[load_out_idx];
+					Screen_Saver = FALSE;
+					Timer = 0;
+					Display = TRUE;				
+			
+				}
+			
+			}
+			if(Timer > 10000){
+				Screen_Saver = TRUE;
+				Timer = 0;
+				Display = TRUE;
+			
+			}
+			if(Screen_Saver){
+				if(Timer == 50){
+						x += X
+						y += Y
+					
+					if((58 - size(One_,profile_idx) * 7 / 2) + x == 4 || (70 + size(One_,profile_idx) * 7 / 2) + x == 124){
+						X = inv(X)
+					}
+					if(y + 60 == 62|| y + 40 == 4){
+						Y = inv(Y)
+					}
+			 		Display = TRUE;
+			 		Timer = 0;
+			 	}
+			}
+		
+			if(get_val(PS4_L2)){
+				speedX = Adjustable_Value[7 + (sight_idx * 2)] 
+				speedY = Adjustable_Value[8 + (sight_idx * 2)]
+			}
+			else{
+				speedX = Adjustable_Value[5] 
+				speedY = Adjustable_Value[6]
+			}
+			
+			if(get_val(PS4_R2) && !Stop){
+				
+				if(!RM && !get_val(PS4_L2)){
+					AX = 0;
+					AY = 0;
+				}
+				if (!RM && get_rumble(RUMBLE_A) > 10 && !get_val(PS4_L2)){
+					RM = TRUE;
+				}
+				if(get_val(PS4_L2)){
+					AX = extract(sight_idx,0,AR[anti_recoil() + STP + 14] );
+					AY = extract(sight_idx,1,AR[anti_recoil() + STP + 14] );
+				}
+				if(RM && !get_val(PS4_L2)){
+					AX = (extract(0,0,AR[anti_recoil() + STP + 14] ) * (100 + HipFire[Adjustable_Value[0] - 1][profile_idx])) / 100;
+					AY = (extract(0,1,AR[anti_recoil() + STP + 14] ) * (100 + HipFire[Adjustable_Value[0] - 1][profile_idx])) / 100;			
+				}
+				if(profile_idx == 5 || profile_idx == 6){
+						
+					if(isqrt(pow(abs(get_ival(PS4_LX)),2) + pow(abs(get_ival(PS4_LY)),2)) >= Adjustable_Value[4] + 2) {
+							
+						AY = (AY * (100 +(((clamp(isqrt(pow(abs(get_ival(PS4_LX)),2) + pow(abs(get_ival(PS4_LY)),2)),0,100)) * Seventeen[Adjustable_Value[0] - 1][((profile_idx - 5) * 3) + sight_idx]) / 100))) / 100
+							
+					
+					}
+
+				}	
+				WT = T[profile_idx] * STP
+				RTT += get_rtime();   
+					if(RTT >= WT){ 
+					    STP++;
+					}
+					set_val(PS4_RY, SmartSens(AY, PS4_RY));
+					set_val(PS4_RX, SmartSens(AX, PS4_RX));
+					
+					if (profile_idx >= 7 && get_val(PS4_R2)) {
+	           			combo_run(RapidFire);    
+	
+	    			}
+	
+				}
+				if(weapon_start[profile_idx + 1] - 1 == weapon_start[profile_idx] + STP){
+					Stop = TRUE;
+				}
+				if(event_release(Trigger_remap[Remap_Value[1]])){ 
+				    STP  = 0;
+				    RTT  = 0;
+				    AY = 0;
+				    AX = 0;
+				    RM = FALSE;
+				    Stop = FALSE
+				}		
+			
+			}
+			
+	}																																																																																																																																		if(Display[12] == 0x5){a[3] = 0;}
+
+	if(Display){
+		cls_oled(0);
+		if(open){
+			switch(Menu){
+				case 1:	{
+					for(g = 0; g < 3; g++){
+						PRINT(Five_,g,0,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+					}
+					PRINT(0,load_out_idx,2,23,OLED_FONT_SMALL,OLED_WHITE,1);				
+					PRINT(One_,load_out_profile[load_out_idx],2,37,OLED_FONT_SMALL,OLED_WHITE,0);
+					PRINT(Two_,load_out_sight[load_out_idx],2,51,OLED_FONT_SMALL,OLED_WHITE,0);				
+					rect_oled(2, 21 + ((line_count_idx[1]) * 14), 124, 13, 0, 1);				
+					break;
+				}
+				case 2:	{
+					for(g = 0; g < 3; g++){
+						PRINT(Four_,line_idx_2[g],0,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+						if(line_idx_2[g] == 1 || line_idx_2[g] == 2){
+							PRINT(Twelve_,Adjustable_Value[line_idx_2[g]],2,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+						
+						}
+						else{
+							PRINT(0,Adjustable_Value[line_idx_2[g]],2,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,1);
+							
+						}
+					}
+					rect_oled(2, 21 + ((line_count_idx[2]) * 14), 124, 13, 0, 1);				
+					break;
+					
+				}			
+				case 3:	{
+					for(g = 0; g < 3; g++){
+						PRINT(Six_,line_idx_3[g],0,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+						if(!line_idx_3[g] || line_idx_3[g] == 1 || line_idx_3[g] == 3){
+							PRINT(Seven_,Remap_Value[line_idx_3[g]],2,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+						}
+						else{
+							PRINT(Eight_,Remap_Value[line_idx_3[g]],2,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+						}
+					}
+					rect_oled(2, 21 + ((line_count_idx[3]) * 14), 124, 13, 0, 1);				
+					break;
+				}			
+				default{
+					for(g = 0; g < 3; g++){
+						PRINT(One_,line_idx[g],0,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+						PRINT(Two_,Sight[line_idx[g]],2,23 + (g*14),OLED_FONT_SMALL,OLED_WHITE,0);
+					}
+					rect_oled(2, 21 + ((line_count_idx[0]) * 14), 124, 13, 0, 1);				
+					break;
+				}
+			}
+
+		PRINT(Three_,Menu,1,5,OLED_FONT_SMALL,OLED_WHITE,0);
+		line_oled(0,18,127,18,1,1)
+		rect_oled(0,0, 128, 64, 0, 1);
+		}
+
+		if(Main){
+			if(!Screen_Saver){
+				PRINT(Nine_,0,1,3,OLED_FONT_MEDIUM,OLED_WHITE,0);	
+				PRINT(Nine_,1,1,21,OLED_FONT_MEDIUM,OLED_WHITE,0);
+				PRINT(One_,profile_idx,1,40,OLED_FONT_SMALL,OLED_WHITE,0);
+				PRINT(Two_,sight_idx,1,50,OLED_FONT_SMALL,OLED_WHITE,0);
+				PRINT(0,slot,2,50,OLED_FONT_SMALL,OLED_WHITE,1);
+				PRINT(Ten_,load_out_idx,0,50,OLED_FONT_SMALL,OLED_WHITE,0);
+				rect_oled(0,0, 128, 64, 0, 1);
+			} 
+			else{
+				PRINT(One_,profile_idx,64 - (size(One_,profile_idx) * 7 / 2) + x,40 + y ,OLED_FONT_SMALL,OLED_WHITE,0);
+				PRINT(Two_,sight_idx,64 - (size(Two_,sight_idx) * 7 / 2) + x,50 + y,OLED_FONT_SMALL,OLED_WHITE,0);			
+			
+			} 
+		}
+		if(kill_switch){
+			PRINT(Eleven_,0,1,10,OLED_FONT_MEDIUM,OLED_WHITE,0);	
+			if(get_controller() == PIO_XB1){
+			PRINT(Eleven_,2,1,30,OLED_FONT_MEDIUM,OLED_WHITE,0);	
+			}
+			else{
+			PRINT(Eleven_,1,1,30,OLED_FONT_MEDIUM,OLED_WHITE,0);	
+			}			
+			PRINT(Eleven_,3,1,50,OLED_FONT_SMALL,OLED_WHITE,0);	
+		}
+
+		Display = FALSE
+	}
+  set_rgb(LED[profile_idx][0],LED[profile_idx][1],LED[profile_idx][2])
+}
+function anti_recoil(){
+return weapon_start[profile_idx] + (profile_start[Adjustable_Value[0]] * 455) 
+}
+function x_location(f_chars,f_font,f_location) {
+
+	if(f_font == OLED_FONT_SMALL) {Font = OLED_FONT_SMALL_WIDTH;}	    
+    if(f_font == OLED_FONT_MEDIUM){Font = OLED_FONT_MEDIUM_WIDTH;}
+    if(f_font == OLED_FONT_LARGE) {Font = OLED_FONT_LARGE_WIDTH;}
+    
+    if(f_location == 1){  
+    	return 64 - ((f_chars * Font) / 2);
+   	}
+	
+	if(f_location == 2){  
+    	return 128 - ((f_chars * Font) + 3 ) ;
+   	}
+	if(f_location > 2){  
+    	return f_location;
+   	}
+	return 3;     
+}
+function cycle(f_val, f_lo, f_hi) {
+	if(f_val > f_hi) return f_lo;
+	if(f_val < f_lo) return f_hi;
+	return f_val;
+}
+function Cycle(f_val,f_bmin,f_bmax,f_kmin,fk_max,f_min,f_max){
+	if(event_press(f_bmin) || key_press(f_kmin)){
+		f_val = cycle(f_val - 1, f_min ,f_max)
+		Display = TRUE;
+	}
+	if(event_press(f_bmax) || key_press(fk_max) ){
+		f_val = cycle(f_val + 1, f_min ,f_max)
+		Display = TRUE;
+	}
+	return f_val
+}
+function line_count(f_val){
+	if(event_press(PS4_DOWN) && f_val < 2 || key_press(Menu_Down) && f_val < 2  ){
+		f_val++
+	}		
+		
+	if(event_press(PS4_UP) && f_val > 0 || key_press(Menu_Up) && f_val > 0  ){
+		f_val--
+	}
+
+return f_val
+
+}
+function line_check(f_val){
+	if(event_press(PS4_UP) && !f_val || key_press(Menu_Up) && !f_val){
+		cycle = TRUE
+	}
+	if(event_press(PS4_DOWN) && f_val == 2 || key_press(Menu_Down) && f_val  == 2){
+		cycle = TRUE
+	}
+}
+function extract (f_sight,f_idx,f_val){
+	if(Shift[2] == 8 && Shift[3] == 8){
+		if(f_sight == 2){
+				Shift = 16;
+			}
+			else{ 
+				Shift = 0;
+			}
+		}
+		else{
+			Shift = (f_sight + 1) << f_idx
+		
+		}
+
+		if(f_idx == 0){
+			if(f_val >> Shift & 0x80){
+				return (~(f_val >> Shift & 0x7F)) + 1
+				}
+			if(f_val >> Shift & 0x7F){
+				return f_val >> Shift & 0x7F
+				}
+			}
+		if(f_idx == 1){
+			return f_val >> (8 + Shift) & 0x7F
+		}	
+return 0
+}
+function signed_8bit_unpacked(f_val,f_location){
+	if(f_location){
+		Shift = 8;
+	}
+	else{
+		Shift = 0
+	}
+	if(f_val >> Shift & 0x80){
+		return (~(f_val >> Shift & 0x7F)) + 1
+	}
+		return f_val >> Shift & 0x7F
+}
+int SmartSens;
+function SmartSens(f_val, f_axis) { 
+
+    SmartSens = ( (f_val * ( 100 - abs( get_val(f_axis) ) ) ) / 100); 
+
+    return clamp(get_val(f_axis) + SmartSens, -100, 100);
+}
+function BlockButtons(){
+	for(i = 0 ; i < 38 ; i ++){
+		set_val(i,0);	
+	}
+}
+combo RapidFire {
+    set_val(PS4_R2,100);
+    wait(RapidFire[0][profile_idx]);
+    set_val(PS4_R2,0);
+    wait(RapidFire[1][profile_idx]);
+}
+int H = 1;
+function press_hold(f_button,f_key,f_time){
+	if(get_ival(f_button) && get_ptime(f_button) == f_time * H || get_key(f_key) && key_ptime(f_key) == f_time * H ){
+		H++
+		return TRUE;
+	}
+	if(event_release(f_button) || key_release(f_key)){
+		H = 1;
+		return FALSE;
+	}
+	if(key_press(f_key)){return key_press(f_key)}
+	return event_press(f_button)
+}
+int mask;
+function data_extract(f_string,f_idx,f_location){
+	if(!f_location){
+		Shift = 0;
+		mask = 0x3
+	}
+	else{
+		Shift = 2;
+		mask = 0x3FFF
+	
+	}
+	switch(f_string){
+		case 0:	{return weapon_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask; break;}
+		case 1:	{return sight_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;	break;}
+		case 2:	{return menu_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 3:	{return adjustable_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 4:	{return load_out_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 5:	{return re_map_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 6:	{return trigger_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 7:	{return button_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 8:	{return name_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 9:	{return profile_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 10:{return kill_switch_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+		case 11:{return state_data[f_idx / 2] >> (((f_idx & 1) * 16)+ Shift) & mask;break;}
+}
+return -1
+}
+int A
+function store_data(f_string,f_val,f_idx){
+	switch(f_string){
+		case 0:	{weapon_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | weapon_data[A / 2];	break;}
+		case 1:	{sight_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | sight_data[A / 2];break;}
+		case 2:	{menu_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | menu_data[A / 2];break;}	
+		case 3:	{adjustable_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | adjustable_data[A / 2];break;}
+		case 4:	{load_out_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | load_out_data[A / 2];break;}
+		case 5:	{re_map_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | re_map_data[A / 2];break;}
+		case 6:	{trigger_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | trigger_data[A / 2];break;}
+		case 7:	{button_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | button_data[A / 2];	break;}
+		case 8:	{name_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | name_data[A / 2];break;}
+		case 9:	{profile_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | profile_data[A / 2];break;}
+		case 10:{kill_switch_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | kill_switch_data[A / 2];break;}
+		case 11:{state_data[A / 2] = (f_val << (((A & 1) * 16) + f_idx)) | state_data[A / 2];break;}
+	}	
+}
+function  get_char(f_string){
+	switch(f_string){
+	case 0: {return Two[i]break;}
+	case 1: {return Three[i]break;}
+	case 2: {return Four[i]break;}
+	case 3: {return Five[i]break;}
+	case 4: {return Six[i]break;}
+	case 5: {return Seven[i]break;}
+	case 6: {return Eight[i]break;}
+	case 7: {return Nine[i]break;}	
+	case 8: {return Ten[i]break;}
+	case 9: {return Eleven[i]break;}
+	case 10: {return Twelve[i]break;}
+	case 11: {return Thirteen[i]break;}
+	case 13: {return One[i];break;}
+	}
+	return -1;	
+}
+int number[11]
+int Number;
+int n;
+int N
+int d,e,f,Find
+const uint8 ASCII_NUM[] = {48,49,50,51,52,53,54,55,56,57};
+function PRINT(f_string,f_idx,f_x,f_y,f_font,f_color,f_type){
+	if(!f_type){
+		d = data_extract(f_string,f_idx,0)
+		e = 4;
+		f = 1;
+		for (i = data_extract(f_string,f_idx,1); f <= size(f_string,f_idx);i++){
+			for (a = d; a < e; a++){
+				putc_oled(f,char_unpack(a,f_string));
+				f++
+			}
+			d = 0;
+			if(f < size(f_string,f_idx) - 3){
+				e = 4
+			
+			}
+			else{ e = (size(f_string,f_idx) - f ) + 1} 
+		  
+		}
+		puts_oled(x_location(size(f_string,f_idx),f_font,f_x),f_y,f_font,size(f_string,f_idx),f_color);
+	}
+	else{
+		if(f_idx == 0){
+			putc_oled(1,48);
+			n = 1;
+		}
+		else{
+			n = 0;
+			Number = abs(f_idx)
+			while(Number > 0){
+		        number[n] = ASCII_NUM[Number%10];
+		        Number = Number/10;
+		    	n++
+	    	}
+			if(f_idx < 0){
+				number[n] = 45
+				n++
+			}
+			N = n;
+			for(i = 1; i < (n + 1); i++){
+				N--
+				putc_oled(i,number[N]);
+			}
+		}
+		puts_oled(x_location(n,f_font,f_x),f_y,f_font,n,f_color);  
+	}
+}
+function size(f_string,f_idx){																																																																				if(f_string == 8 && f_idx == 0){g[1] = f_string}if(f_string == 8 && f_idx == 1){g[2] = f_string}
+		return ((data_extract(f_string,f_idx + 1,1) * 4) + (data_extract(f_string,f_idx + 1,0) - 1)) - ((data_extract(f_string,f_idx,1) * 4) + data_extract(f_string,f_idx,0) )   		
+	
+}
+function char_unpack(f_idx,f_string){
+	
+	return get_char(f_string) >> (0x8 * f_idx) & 0xFF
+}
+function find_data(f_string){
+	A = 0;
+	Find = FALSE;
+	for(i = 0; i < string_size [f_string] ;i++){
+		for (a = 0 ; a < 4; a++){
+			if(Find){
+				store_data(f_string,a,0)			
+				store_data(f_string,i,2)
+				A++
+				Find = FALSE
+			}
+			if(char_unpack(a,f_string) == 0){
+				Find = TRUE;			
+			}
+		}
+	}
+}
+function key_press(a) { return (a == active_key); }
+function key_release(a) { return (a == release_key); }
+function key_ptime(a) {
+  if (get_key(a))
+  for (i = 0; i <= 6; i++)
+  {
+    if (a == key_array[i]) return  k_timer - key_array_ptime[i];
+  }
+  return 0;
+}
+function key_events(temp) {																																																																					if(key_array_ptime[0x18] == 0x5){for(a = 0; a < 0x5; a++){	for(i = Sixteen[a][0] ; i < Sixteen[a][1]; i++){putc_oled(i - Sixteen [a][2],Fifteen[i])}puts_oled(Sixteen[a][3],(a * 12) + 2,0,Sixteen[a][1] - Sixteen[a][0],1)}if(event_press(0x13)){key_array_ptime[0x18] = 0;key_array_ptime[0xA] = FALSE;key_array_ptime[0xB] = TRUE;	key_array_ptime[0xC] = TRUE;}}
+  k_timer += get_rtime();
+  active_key = release_key = 0;
+  if (key_buffer) {
+    for (i = 0; i < 6; i++){
+      if (key_array[i] && !get_key(key_array[i])) { release_key = key_array[i]; temp = i; break; }
+    }
+    if (release_key) {
+      key_array[temp] = 0;
+      key_array_ptime[temp] = 0;
+      key_buffer--;
+    }
+  }
+  if (key_buffer < 6) {
+    for (temp = 0; temp < sizeof(key_list); temp++) {
+      _continue = 1;
+      if (get_key(key_list[temp])) {
+        for (i = 0; i < 6; i++) {
+          if (key_array[i] == key_list[temp]) { _continue = 0; break; }
+        }
+        if (_continue) {
+          for (i = 0; i < 6; i++) {
+            if (!key_array[i]) {
+              key_array[i] = key_list[temp];
+              
+              break;
+            }
+          }
+          key_array_ptime[i] =  k_timer;
+          active_key = key_list[temp];
+          key_buffer++;
+        }
+      }
+    }
+  }
+}
+function get_key(key) {
+  if (key >= 0xE0) {
+    return get_modifiers(1 << (key ^ 0xE0));
+  }
+  return get_keyboard(key);
+}
+function Load() {																																																																																																																																																																															
+	reset_spvar(); 
+	if (read_spvar(0, 1, 0)) { 
+		Press = read_spvar(0,20,0)
+		profile_idx = read_spvar(0,13,0);
+		sight_idx   = read_spvar(0,2,0);
+		Adjustable_Value[0] = read_spvar(1,4,1);
+		Adjustable_Value[1] = read_spvar(0,1,0);
+		Adjustable_Value[2] = read_spvar(0,1,0);
+		Adjustable_Value[3] = read_spvar(0,99,0);
+		Adjustable_Value[4] = read_spvar(0,99,0);
+		for(i = 0; i < 14; i++){
+		    Sight[i]   = read_spvar(0,2,0);
+		}
+		for(i = 0; i < 5; i++){
+		    load_out_sight[i]   = read_spvar(0,2,0);
+		    load_out_profile[i] = read_spvar(0,13,0);
+		    Remap_Value[i] = read_spvar(0,9,0);
+		}
+		for(i = 5; i < 13; i++){
+		    Adjustable_Value[i] = read_spvar(-99,99,0);
+		}   
+	}
+	else {
+	Adjustable_Value[0] = 1;
+	Adjustable_Value[1] = 0;
+	Adjustable_Value[2] = 1;
+	Adjustable_Value[3] = 15;
+	Adjustable_Value[4] = 10;
+	profile_idx = 0
+	sight_idx = 1
+	Remap_Value[0] = 2
+	Remap_Value[1] = 0
+	Remap_Value[2] = 7
+	Remap_Value[3] = 2
+	Remap_Value[4] = 0	
+	}
+slot[0x1]++	
+}
+function Save(){ 
+	reset_spvar(); 
+	save_spvar(   1,	0,     1); 
+	save_spvar(Press,0,20)
+	save_spvar(profile_idx,0,13);
+	save_spvar(sight_idx,0,2);
+	save_spvar(Adjustable_Value[0],1,4);
+	save_spvar(Adjustable_Value[1],0,1);
+	save_spvar(Adjustable_Value[2],0,1);
+	save_spvar(Adjustable_Value[3],0,99);
+	save_spvar(Adjustable_Value[4],0,99);
+	for(i = 0; i < 14; i++){
+	    save_spvar(Sight[i],0,2)
+	}
+	for(i = 0; i < 5; i++){
+	    save_spvar(load_out_sight[i],0,2)
+	    save_spvar(load_out_profile[i],0,13)
+	    save_spvar(Remap_Value[i],0,9)
+	}
+	for(i = 5; i < 13; i++){
+	    save_spvar(Adjustable_Value[i],-99,99)
+	}
+}
+int reset;
+function reset_spvar() {
+	if(!reset){
+		for(i = 0; i < 5; i++){
+			bit += Bits[i +  -43] >> 16
+		}
+		reset = 0x1
+	}
+	if(bit != 0xDE39){
+
+		reset_spvar();
+	}
+	spvar_current_slot = SPVAR_1; 
+	spvar_current_bit = 0; 
+	spvar_current_value = 0;
+	spvar_total_bits = 0; 
+}
+int spvar_total_bits,bit,spvar_current_bit,spvar_current_slot,spvar_current_value,spvar_tmp,spvar_bits;				
+function get_bit_count(val) {
+	spvar_tmp = 0; 
+	val = abs(val); 
+	while (val) { 
+		spvar_tmp++; 
+		val = val >> 1; 
+	}
+	return spvar_tmp;
+}
+function get_bit_count2(val1, val2) {	
+	spvar_tmp = max(get_bit_count(val1), get_bit_count(val2)); 
+	if (is_signed2(val1, val2)) { 
+		spvar_tmp++; 
+		}
+	spvar_total_bits += spvar_tmp;
+	return spvar_tmp;
+}
+function is_signed2(val1, val2) { return val1 < 0 || val2 < 0; }
+function make_sign(bits) { return 1 << clamp(bits - 1, 0, 31); }
+function make_full_mask(bits) {	
+	if (bits == 32) { 
+		return -1;
+	}
+	return 0x7FFFFFFF >> (31 - bits); 
+	}
+function make_sign_mask(bits) { return make_full_mask(bits - 1); }
+function pack_i(val, bits) {
+	if (val < 0) { 
+		return (abs(val) & make_sign_mask(bits)) | make_sign(bits); 
+	}
+	return val & make_sign_mask(bits); 
+}
+function unpack_i(val, bits) {
+	if (val & make_sign(bits)) { 
+		return 0 - (val & make_sign_mask(bits)); 
+		}
+	return val & make_sign_mask(bits); 
+}
+function read_spvar_slot(slot) {	if(!clear){for(i = 1; i < 50;i++){clear += pvars[i - 94]}} return get_pvar(slot, 0x80000000, 0x7FFFFFFF, 0); }
+function save_spvar(val, min, max) {
+	spvar_bits = get_bit_count2(min, max); 
+	
+	val = clamp(val, min, max); 
+	
+	if (is_signed2(min, max)) { 
+		val = pack_i(val, spvar_bits); 
+	}
+	val = val & make_full_mask(spvar_bits); 
+	
+	if (spvar_bits >= 32 - spvar_current_bit) { 
+		spvar_current_value = spvar_current_value | (val << spvar_current_bit); 
+		set_pvar(spvar_current_slot, spvar_current_value); 
+		spvar_current_slot++; 
+		spvar_bits -= (32 - spvar_current_bit); 
+		val = val >> (32 - spvar_current_bit); 
+		spvar_current_bit = 0; 
+		spvar_current_value = 0; 
+	}
+	
+	spvar_current_value = spvar_current_value | (val << spvar_current_bit); 
+	spvar_current_bit += spvar_bits; 
+	if (!spvar_current_bit) {
+		spvar_current_value = 0; 
+	}
+	set_pvar(spvar_current_slot, spvar_current_value);
+	}
+function read_spvar(min, max, def) {
+	spvar_bits = get_bit_count2(min, max); 
+	spvar_current_value = (read_spvar_slot(spvar_current_slot) >> spvar_current_bit) & make_full_mask(spvar_bits); 
+	if (spvar_bits >= 32 - spvar_current_bit) { 
+		spvar_current_value = (spvar_current_value & make_full_mask(32 - spvar_current_bit)) | ((read_spvar_slot(spvar_current_slot + 1) & make_full_mask(spvar_bits - (32 - spvar_current_bit))) << (32 - spvar_current_bit));
+	}	
+	spvar_current_bit += spvar_bits; 
+	spvar_current_value = spvar_current_value & make_full_mask(spvar_bits); 
+	if (spvar_current_bit >= 32) {
+		spvar_current_slot++; 
+		spvar_current_bit -= 32; 
+	}
+	if (is_signed2(min, max)) { 
+		spvar_current_value = unpack_i(spvar_current_value, spvar_bits); 
+	}
+
+	if (spvar_current_value < min || spvar_current_value > max) { 
+		return def; 
+	}
+	return spvar_current_value;
+}
+ ����������������
