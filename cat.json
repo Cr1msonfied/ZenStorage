@@ -424,6 +424,11 @@
       "name": "Highwaters Script v6",
       "filename": "highwaters-apex-script-v6.gpc",
       "category": "Apex Legends"
+    },
+    {
+      "name": "Rust code raid V2.0",
+      "filename": "Rust-Code-Raid-V2.0.gpc",
+      "category": "Rust"
     }
   ]
 }
