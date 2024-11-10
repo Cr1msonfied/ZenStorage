@@ -414,6 +414,11 @@
       "name": "Mawk Script",
       "filename": "Mawk_script_2_2.gpc",
       "category": "UFC"
+    },
+    {
+      "name": "ps4 ufc combo shortcut",
+      "filename": "ps4ufc_combo_short_cut_2.gpc",
+      "category": "UFC"
     }
   ]
 }
