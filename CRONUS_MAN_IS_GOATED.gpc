@@ -1,0 +1,491 @@
+//--PickupMacro--
+int PickupMacro = FALSE;
+//--BUILDTRACKER--
+int BuildTracker = TRUE;
+//--INSTARESET--
+int InstaReset = FALSE;
+//--AINTORECOIL--
+int antirecoil = FALSE;
+//--AIM ASSIST V1--
+int AimAssist_Strength = 12;
+int antirecoil_strength = 25;
+//--AUTOAIM--
+int AutoAim = TRUE;
+//--SMARTSHOT--
+int SmartShotWait = 67;
+int SmartShot = FALSE;
+//--AUTO AIM TOGGLE--
+define autoaimtoggle = XB1_VIEW;
+//--RECOIL REDUCER--
+int RecoilReducer      = TRUE;
+int RecoilReducerPower = 13;
+//--ZEN SPEED--
+int Speed 				
+= -1;
+//--AIM ASSIST V2--
+define aimAssist = FALSE;
+define strenght= 100;
+define delayMs = 1;
+//--DEAZONE--
+define DeadZone = 8;
+//--LINEAR--
+int LinearAA = Off;
+int LinearHipFire = Off;
+int AAT;
+int Axis;
+int PolarPower = 1.49;
+int PolarTime = 100;
+define LinearPower = 2;
+//--AIM LOCK--
+int aimLock=TRUE;
+int PolarX  = TRUE;
+int Power 				= 8;
+//==================
+define Ads = PS4_L2;
+define Fire = PS4_R2;
+//==================
+
+main {
+	if (SmartShot && get_ival(Fire) && abs(get_ival(LX)) <= 35 && abs(get_ival(LY)) <= 35)
+        {
+            combo_run(SmartShot);
+            
+        }
+        else
+        {
+            combo_stop(SmartShot);
+            
+					}
+			}
+
+
+
+
+
+
+const image picture = {96, 64, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xBF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x7F, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xDF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE, 0x7F, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xCF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xC7, 0xFF, 0xFF, 0xFF, 0xFF, 0xF8, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xE3, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xE0, 0xFF, 0xFF, 0xFF, 0xFF, 0xE1, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xF0, 0x7F, 0xFF, 0xFF, 0xFF, 0x83, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xF8, 0x1F, 0xFF, 0xFF, 0xFF, 0x07, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xF6, 0x0F, 0xFF, 0xFF, 0xFC, 0x0B, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xF9, 0x03, 0xFF, 0xFF, 0xF0, 0x33, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xF8, 0x40, 0xFC, 0x1F, 0xE0, 0xC7, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFC, 0x30, 0x7C, 0x0F, 0x83, 0x0F, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFE, 0x0C, 0x1E, 0x0E, 0x04, 0x0F, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFE, 0x02, 0x0F, 0x0C, 0x10, 0x1F, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x07, 0x0C, 0x00, 0x3F, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF8, 0x06, 0x08, 0x03, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x80, 0x06, 0x00, 0x20, 0x7F, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xE0, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF0, 0x40, 0x00, 0xC1, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x80, 0x0A, 0x3F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x12, 0x09, 0x1F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFE, 0x02, 0x09, 0x1F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFE, 0x22, 0x11, 0x1F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x23, 0x11, 0x1F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x23, 0x11, 0x3F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xA1, 0x31, 0x7F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xF1, 0x33, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xF1, 0xA1, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xE0, 0xE5, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xCA, 0xD8, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x82, 0xDA, 0x3F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x16, 0xD9, 0x1F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xE6, 0xDC, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFE, 0xCE, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFC, 0xC7, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xF8, 0xD3, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xF2, 0xC1, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xC5, 0x28, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFD, 0x27, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFB, 0x33, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x82, 0x0C, 0x27, 0x6D, 0x0F, 0x18, 0xC7, 0x33, 0x00, 0x00, 0x00, 0x00, 0x82, 0x0C, 0x23, 0x6D, 0x0F, 0x18, 0xC7, 0x33, 0x00, 0x00, 0x00, 0x00, 0xBE, 0x4D, 0xA1, 0x6D, 0x7F, 0x00, 0xD7, 0x13, 0x00, 0x00, 0x00, 0x00, 0xBE, 0x0D, 0xA4, 0x6D, 0x0F, 0x24, 0x83, 0x43, 0x00, 0x00, 0x00, 0x00, 0x82, 0xEC, 0x26, 0x61, 0xEF, 0x24, 0xBB, 0x73, 0x00, 0x00, 0x00, 0x00, 0x82, 0xE4, 0x26, 0x61, 0x0F, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF0, 0x41, 0x82, 0x0F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF3, 0xCC, 0x9E, 0x7F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF0, 0xC0, 0x86, 0x1F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF3, 0xCC, 0x9E, 0x7F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xF3, 0xCC, 0x82, 0x0F, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
+init {cls_oled(0);combo_run(oled)set_rgb(255, 150, 0);}combo oled {image_oled(0, 0, TRUE, TRUE, picture[0])}combo vibrate1{set_rumble(RUMBLE_A, 50);	wait(300);	set_rumble(RUMBLE_A, 100)wait(600);	reset_rumble();	greetings = FALSE;}                                                                                
+
+
+main {
+	
+//StickDrift Removal
+applyDeadzone();
+
+//Constant
+stick_input = (isqrt(pow(get_ival(PS4_RX), 2) + pow(get_ival(PS4_RY), 2)));
+Radius 	= Const_Radius;  
+Speed	= Const_Speed;
+if(stick_input <= Radius){
+rnd = random(mn, mx);
+RS_Gradient = (RS_Gradient + Speed) % 360;
+set_polar(POLAR_RS, RS_Gradient, (Radius * rnd));
+}
+		if (LinearAA) {
+			if (get_ival(ADS) || LinearHipFire && get_ival(Fire)) {
+				AimAssist();
+							}
+			if (!get_ival(ADS) && !get_ival(Fire)) {
+				AAT = 0;
+				Axis = 0;
+							}
+if (PolarX) { if (get_val(PS4_L2)> 95){ combo_run(PolarX);} if (abs(get_val(9)) > 19 || abs(get_val(10)) > 19) combo_stop(PolarX); }
+}
+
+       
+    
+if(PickupMacro){
+ 		if(get_val(Interact))combo_run(pickupmacro);}
+ 	if(event_release(Interact)){combo_stop(pickupmacro);} 
+  	if(get_val(PS4_L2)){combo_stop(pickupmacro);}
+
+
+//L2
+if(get_val(Ads)){
+Radius 	= L2_Radius;  
+Speed	= L2_Speed;
+if(stick_input <= Radius){
+rnd = random(mn, mx);
+RS_Gradient = (RS_Gradient + Speed) % 360;
+set_polar(POLAR_RS, RS_Gradient, (Radius * rnd));
+}
+}
+if (RecoilReducer) { if (get_val (ADS) && get_val (Fire)) { combo_run (RecoilReducer); } }
+//R2
+if(get_val(Fire)){
+Radius 	= R2_Radius;  
+Speed	= R2_Speed;
+if(stick_input <= Radius){
+rnd = random(mn, mx);
+RS_Gradient = (RS_Gradient + Speed) % 360;
+set_polar(POLAR_RS, RS_Gradient, (Radius * rnd));
+}
+}
+
+//L2 and R2
+if(get_val(Ads) && get_val(Fire)){
+Radius 	= L2R2_Radius;  
+Speed	= L2R2_Speed;
+if(stick_input <= Radius){
+rnd = random(mn, mx);
+RS_Gradient = (RS_Gradient + Speed) % 360;
+set_polar(POLAR_RS, RS_Gradient, (Radius * rnd));
+}
+}
+
+
+}
+function set_Val(Input,Output) {
+	set_val(Input,clamp(Output * (100 - abs(get_ival(Input))) / 100 + get_ival(Input),-100,100));
+	return;
+	}
+function AimAssist() {
+	AAT += get_rtime();
+	if (!Axis) set_Val(RY,AAT * PolarPower / 10);
+	if (Axis == 1) set_Val(RX,AAT * PolarPower / 10);
+	if (Axis == 2) set_Val(RY,inv(AAT * PolarPower / 10));
+	if (Axis == 3) {
+		set_Val(RX,inv(AAT * PolarPower / 10));
+		if (AAT > 50) {
+			AAT = 0;
+			Axis = 0;
+					}
+			}
+	else if (AAT > 50) {
+		AAT = 0;
+		Axis += 1;
+			}
+	}
+combo RecoilReducer {
+set_val (RY, get_ival (RY) + (RecoilReducerPower));
+wait(5);
+}
+combo StrafeShot{
+	set_val(Strafe,-100);
+	wait(1);
+	set_val(Strafe,100);}
+function applyDeadzone() {
+correctStickInput(PS4_LX);	correctStickInput(PS4_LY);
+}
+
+function correctStickInput(Stick) {
+stickThresholdLow  	= inv(DeadZone);	// Get low threshold
+stickThresholdHigh 	= DeadZone;			// Get high threshold
+stickValue			= get_val(Stick);	// Get Stick value
+if((stickValue >= stickThresholdLow) && (stickValue <= stickThresholdHigh))
+{
+set_val(Stick, 0);
+}
+else if(stickValue < stickThresholdLow)
+{
+set_val(Stick, clamp((stickValue - stickThresholdLow) - ((stickValue) * stickThresholdLow) / 98, inv(98), 98));
+}
+else if(stickValue > stickThresholdHigh)
+{
+set_val(Stick, clamp((stickValue - stickThresholdHigh) + ((stickValue) * stickThresholdHigh) / 98, inv(98), 98));
+}
+else
+{
+set_val(Stick, 13);
+}
+}
+
+function Set_Val(Stick, Value) {
+if(Value)
+{
+set_val(Stick, clamp(Value * (98 - abs(get_val(Stick))) / 98 + get_val(Stick), -98, 98));
+}
+else
+{
+set_val(Stick, clamp(Value * (-98 + abs(get_val(Stick))) / -98 + get_val(Stick), -98, 98));
+}
+}
+
+
+
+combo PolarX { set_val(10, (Power)); wait(6)set_val(9, (Power)); wait(6)set_val(10, Power * -1); wait(6)set_val(9, Power * -1); wait(6) } 
+
+combo SmartShot
+{
+
+    set_val(LX,-85 + get_ival(LX));
+    wait(SmartShotWait);
+    set_val(LX,85 + get_ival(LX));
+    wait(SmartShotWait);
+}  
+define FireBtn    = XB1_RT;
+define AdsBtn     = XB1_LT;     
+define Edit = FALSE; //
+define Reset = PS4_R3; //
+define Interact = XB1_X; //         
+define Pickaxe    = PS4_TRIANGLE; //
+define Switch   = PS4_CIRCLE; //
+define Wall     = PS4_R2;
+define Floor    = PS4_R1; 
+define Ramp     = PS4_L2; 
+define Trap     = FALSE; 
+define Roof     = PS4_L1;
+define Build = FALSE; //
+define instareset = PS4_LEFT; //
+int Const_Radius = 13;
+int Const_Speed	 = 30;//NO CHANGE
+int L2_Radius	 = 13;
+int L2_Speed	 = 30;//NO CHANGE
+int R2_Radius	 = 13;
+int R2_Speed	 = 30;//NO CHANGE
+int L2R2_Radius	 = 13;
+int L2R2_Speed	 = 30;//NO CHANGE
+int stickThresholdLow; 
+int stickThresholdHigh; 
+int stick_input;
+int stickValue;
+int RS_Gradient;
+int Radius; 
+
+int rnd;
+int mn = 326; 
+int mx = 328;
+ define RT    =  8;
+ define LT    =  8;
+int ads
+
+
+main{
+
+   if (aimAssist) {
+      
+       if (get_ival(ads)) {
+       
+          combo_run(aimAssist);
+          
+        } else {
+        
+            combo_stop(aimAssist);
+        }
+    }
+}
+ 
+combo aimAssist {
+
+    set_val(aimY,get_ival(aimY) + inv(strenght));
+    wait(delayMs):
+    set_val(aimX,get_ival(aimX) + strenght);
+    wait(delayMs):
+    set_val(aimY,get_ival(aimY) + strenght);
+    wait(delayMs):
+    set_val(aimX,get_ival(aimX) + inv(strenght));
+    wait(delayMs):
+}
+
+
+
+
+main {
+    
+    if (get_val(Ads) > 90 || get_val(Fire) > 90) {
+        combo_run(Max_Aim_Assist);  
+        combo_run(Headshot_Boost);  
+    }
+
+    
+    if (get_val(Fire) > 90) {
+        combo_run(Anti_Bloom);  
+    }
+}
+
+
+combo Max_Aim_Assist {
+    set_val(RX, get_val(RX) + 12);  
+    wait(5);
+    set_val(RX, get_val(RX) - 12);  
+    wait(5);
+
+    set_val(RY, get_val(RY) + 8);   
+    wait(5);
+    set_val(RY, get_val(RY) - 8);   
+    wait(5);
+}
+
+
+combo Headshot_Boost {
+    set_val(RY, get_val(RY) - 16);  
+    wait(10);
+}
+
+
+combo Anti_Bloom {
+    set_val(RX, get_val(RX) + 6);   
+    wait(8);
+    set_val(RX, get_val(RX) - 6);   
+    wait(8);
+}
+
+
+int aiInputMax
+int aiAimLock
+int aiAim 
+int profileIdx 
+int rightStick
+int sinAngle
+int cosAngle
+
+main { 
+	
+					if(aiAim[profileIdx] == 1){ 
+						if(rightStick >= aiInputMax && rightStick < (15 * 32767/100)){ 
+							aiAimLock = FALSE;
+						}
+						if(rightStick <= aiInputMax || rightStick >= (15 * 32767/100)){ 
+							aiAimLock = TRUE;
+							combo_stop(aimLock);
+						} 
+						if(aiAimLock){ 
+							combo_run(aimLock);
+							
+    }
+     }
+   } 
+  
+ 
+   
+
+		        	
+combo aimLock { 
+	set_val(PS4_RX,0);
+	set_val(PS4_RY,0);
+	wait(85);
+	offset(POLAR_RX,(cosAngle >> 1));
+	offset(POLAR_RY,(sinAngle >> 1));
+	wait(200);
+} 	 
+
+combo AimAbuse {
+    set_val(L2,100);
+    wait(HOLD);
+    set_val(L2,0);
+    wait(RELEASE);}
+function offset(Stick, Value) {
+  if (Stick >= POLAR_RX) {
+    set_val(Stick, clamp(Value * (32767 - abs(get_val(Stick))) / 32767 + get_val(Stick), -32767, 32767));
+    return;
+  }
+  set_val(Stick, clamp(Value * (100 - abs(get_val(Stick))) / 100 + get_val(Stick), -100, 100));
+}
+
+function cos(angle){
+	if(aimType[profileIdx] == 0)
+    	return lerp_16(pollarArr[((correctAngle(angle - 1) + 90) % 360)],  pollarArr[((correctAngle(angle + 1) + 90) % 360)], 0x8000);
+    else
+    	return lerp_16(linearArr[((correctAngle(angle - 1) + 90) % 360)],  linearArr[((correctAngle(angle + 1) + 90) % 360)], 0x8000);
+    return 0;
+}
+
+
+
+
+main {
+    
+    if (get_val(Ads) > 90 || get_val(Fire) > 90) {
+        combo_run(Max_Aim_Assist);  
+        combo_run(Headshot_Boost);  
+    }
+
+    
+    if (get_val(Fire) > 90) {
+        combo_run(Anti_Bloom);  
+    }
+}
+
+combo pickupmacro {
+    set_val(Interact, 100);
+	wait(80);
+    set_val(Interact, 0);}
+combo MMax_Aim_Assist {
+    set_val(RX, get_val(RX) + 12);  
+    wait(3);
+    set_val(RX, get_val(RX) - 12);  
+    wait(3);
+
+    set_val(RY, get_val(RY) + 8);   
+    wait(3);
+    set_val(RY, get_val(RY) - 8);   
+    wait(3);
+}
+
+
+combo HHeadshot_Boost {
+    set_val(RY, get_val(RY) - 16);  
+    wait(10);
+}
+
+combo AAnti_Bloom {
+    set_val(RX, get_val(RX) + 6);   
+    wait(8);
+    set_val(RX, get_val(RX) - 6);   
+    wait(8);
+}
+    
+function NODELAY() {
+  for (i = 0; i < buttons_count; i++) {
+    if(get_val(buttons[i])) {
+      set_val(buttons[i], 100);
+    } else {
+      if(event_release(buttons[i])) {
+        set_val(buttons[i], 0);
+      }
+    }
+  }
+}
+
+ // sticky
+int LEGACYZAA = 8;
+main {
+combo_run(LEGACYZ1)AA()
+
+combo_run(LEGACYZ2)AA2()
+
+combo_run(LEGACYZ3)AA3()
+
+combo_run(LEGACYZ4)AA4()
+
+combo_run(LEGACYZ5)AA5()}
+
+combo LEGACYZ1 {
+set_val(PS4_RX,LEGACYZAA)wait(1)set_val(PS4_RY,LEGACYZAA)wait(1)set_val(PS4_RX,-LEGACYZAA)wait(1)set_val(PS4_RY,-LEGACYZAA)wait(1)}
+combo LEGACYZ2 {
+set_val(PS4_RX,LEGACYZAA)set_val(PS4_RY,LEGACYZAA)set_val(PS4_RX,-LEGACYZAA)wait(1)set_val(PS4_RY,-LEGACYZAA)}
+combo LEGACYZ3 {
+set_val(PS4_RX,LEGACYZAA)wait(1)set_val(PS4_RY,LEGACYZAA)set_val(PS4_RX,-LEGACYZAA)wait(1)set_val(PS4_RY,-LEGACYZAA)wait(1)}
+combo LEGACYZ4 {
+set_val(PS4_RX,LEGACYZAA)set_val(PS4_RY,LEGACYZAA)set_val(PS4_RX,-LEGACYZAA)wait(1)set_val(PS4_RY,-LEGACYZAA)wait(1)}
+combo LEGACYZ5 {
+set_val(PS4_RX,LEGACYZAA) set_val(PS4_RY,LEGACYZAA)wait(1)set_val(PS4_RX,-LEGACYZAA)wait(1)set_val(PS4_RY,-LEGACYZAA)wait(1)}
+function AA(){
+if(abs(get_val(PS4_RX)) > 15 || abs(get_val(PS4_RY)) > 15 ) combo_stop(LEGACYZ1)}
+function AA2(){
+if(abs(get_val(PS4_RX)) > 16 || abs(get_val(PS4_RY)) > 16 ) combo_stop(LEGACYZ2)}
+function AA3(){
+if(abs(get_val(PS4_RX)) > 17 || abs(get_val(PS4_RY)) > 17 ) combo_stop(LEGACYZ3)}
+function AA4(){
+if(abs(get_val(PS4_RX)) > 18 || abs(get_val(PS4_RY)) > 18 ) combo_stop(LEGACYZ4)}
+function AA5(){
+if(abs(get_val(PS4_RX)) > 19 || abs(get_val(PS4_RY)) > 19 ) combo_stop(LEGACYZ5)} 
+
+		main {
+    combo_run(RapidLED);
+}
+
+combo RapidLED {
+    set_rgb(91, 50, 86);  // Set purple
+    wait(200);  // Wait 200ms
+    set_rgb(216, 203, 50);  // Set green
+    wait(200);  // Wait 200ms
+    set_rgb(255, 165, 0);  // Set orange
+    wait(200);  // Wait 200ms
+}
+int ADS
+
+					
+ 	define Up     = PS4_UP;   define Left    = PS4_LEFT;   define RX       = PS4_RX;define Down   = PS4_DOWN; define Right   = PS4_RIGHT;  define RY       = PS4_RY;define aimY   = PS4_RY;   define LX      = PS4_LX;     define On       = TRUE;define aimX   = PS4_RX;   define LY      = PS4_LY;     define Off      = FALSE;int Anti_Recoil =  TRUE;int aabooster = FALSE;int StrafeWait =1;int BuildTrack,BuildCount;int BuildSyncTime;define LegacyRumble = Off;define LegacyInvert = Off;define LegacyARHip  = Off;int StrafeShot = TRUE; define Strafe   = PS4_LX;define Walk     = PS4_LY;int greetings = TRUE;int AR_Ver;int AR_Horiz;int AntirecoilVertical,AntirecoilHorizontal;init {  Anti_Recoil         = get_pvar(SPVAR_3,  1,    1,   1); AR_Ver              = get_pvar(SPVAR_11, 1,   99,  antirecoil_strength);AR_Horiz            = get_pvar(SPVAR_12,-99,  99,   0);}init{if(AutoAim){                  }else{if(!AutoAim){           }} }main {if (BuildTracker) {            if (event_press(Build)) {                    BuildTrack = !BuildTrack;    }            if (BuildTrack)         {                        BuildCount += get_rtime();                        if (event_press(Pickaxe) || BuildCount == BuildSyncTime)             {                                BuildTrack = FALSE;                BuildCount = 0;            }                        if (get_ival(Roof) || get_ival(Floor) || get_ival(Ramp) || get_ival(Wall) || get_ival(Trap))                                 BuildCount = 0;        }    }   if(greetings){combo_run(vibrate1);}   if (!BuildTrack) {       if(aabooster){         combo_run(FeatureAimbot)         if(abs(get_val(PS4_RX)) >= 15 || abs(get_val(PS4_RX)) >= 15 || abs(get_val(PS4_LY)) <= 15 || abs(get_val(PS4_LX)) <= 15)combo_stop(FeatureAimbot)                   combo_run(FeatureExpo2)if(abs(get_val(PS4_RX)) > 16 || abs(get_val(PS4_RY)) > 16 || abs(get_val(PS4_LX)) > 16 || abs(get_val(PS4_LY)) > 16)         combo_stop(FeatureExpo2)               combo_run(FeatureExpo3)if(abs(get_val(PS4_RX)) > 17 || abs(get_val(PS4_RY)) > 17 || abs(get_val(PS4_LX)) > 16 || abs(get_val(PS4_LY)) > 16)         combo_stop(FeatureExpo3)}                            	  	  		if(InstaReset){ 	if(get_val(instareset)) 		combo_run(insta);} 		if(antirecoil) {    if (get_ival(AdsBtn) && get_ival(FireBtn))     {            combo_run(AntiRecoil);	}}if(AutoAim){if(StrafeShot){	if(event_press(autoaimtoggle)){		StrafeShot = FALSE;		autoaim(FALSE)}}else{	if(event_press(autoaimtoggle)){		StrafeShot = TRUE;		autoaim(TRUE)}}}if(AutoAim){		if(StrafeShot){	combo_run(StrafeShot)}if (StrafeShot){	if (StrafeShot && abs(get_ival(Strafe)) <= 55 && abs(get_ival(Walk)) <= 55){		combo_run(StrafeShot);}	else{		combo_stop(StrafeShot);}}}}}     combo FeatureAimbot {set_val(PS4_RX,AimAssist_Strength)set_val(PS4_RY,AimAssist_Strength)wait(1)set_val(PS4_RX,-AimAssist_Strength)set_val(PS4_RY,-AimAssist_Strength)wait(1)}int Feature1 = 8;combo FeatureExpo2 {set_val(PS4_RX,Feature1)wait(1)set_val(PS4_RY,Feature1)wait(1) }combo FeatureExpo3 {set_val(PS4_RX,Feature1)wait(1)set_val(PS4_RY,Feature1)wait(1)}       combo insta {	set_val(Edit, 100); wait(40);	set_val(Reset, 100); wait(80)} combo AntiRecoil {    AntirecoilVertical = get_val(PS4_RY) + AR_Ver;      if(AntirecoilVertical > 100) AntirecoilVertical = 100;    if(abs(get_val(PS4_RY)) < abs(AR_Ver) +  5)    set_val(PS4_RY, (AntirecoilVertical));    AntirecoilHorizontal = get_val(PS4_RX) + AR_Horiz;    if(AntirecoilHorizontal > 100) AntirecoilHorizontal = 100;    if(abs(get_val(PS4_RX)) < abs(AR_Horiz)  + 5)    set_val(PS4_RX, AntirecoilHorizontal);}combo vIibrate1{set_rumble(RUMBLE_A, 50);	wait(300);	set_rumble(RUMBLE_A, 100)wait(600);	reset_rumble();	greetings = TRUE;}int AR_Value;function autoaim(state){ {            combo_run(vibon);}                	combo_run(viboff);}combo vibon{set_rumble(RUMBLE_A, 50);wait(100);set_rumble(RUMBLE_A, 0)}combo viboff{set_rumble(RUMBLE_B, 50);wait(100);set_rumble(RUMBLE_B, 0) }         
+ ú¾¹ˆ¾ˆ°€¶…´ƒµ„Å
