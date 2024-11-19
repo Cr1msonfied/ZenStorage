@@ -474,6 +474,11 @@
       "name": "DayZ Personal Script",
       "filename": "DAYZ_SCRIPT_xXSkyWalkerXx1s_personal_script.gpc",
       "category": "Day Z"
+    },
+    {
+      "name": "Overwatch 2 Adara V1.6",
+      "filename": "Overwatch_2_Adara_v1.6.gpc",
+      "category": "Overwatch Series"
     }
   ]
 }
