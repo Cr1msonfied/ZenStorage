@@ -1,0 +1,562 @@
+// GPC Online Library
+// Gran_Turismo_Sport__AFK_Credit__XP_Autogrind_1_0.gpc
+
+// Gran Turismo Sport - AFK Credit & XP Autogrind
+// By LeoneFamily
+//
+// Before using:
+// 1- Make sure your in-game controller mapping is on default.
+// 2- Disable controller vibration.
+// 3- Get the McLaren F1 '94.
+// 4- Use default tuning sheet except for the following parameters:
+//		- Power Ratio: 133%
+//		- Weight Reduction Ratio: 87%
+//		- Traction Control: 0
+//		- Front and rear tires: Racing Super Soft
+//
+// How to use:
+// 1- Go to Campaign > GT League > Professional League > Premium Sports Lounge > Race 1 (Blue Moon Bay).
+// 2- Make sure the cursor is on the Start icon.
+// 3- You may now press the L3 stick to start the rubberband. The CronusZen LED will turn red to indicate that the auto-repeat
+//    is on. This will automatically start a new race after the previous one is finished. If you press L3 once again, the LED
+//    will turn blue, indicating that the auto-repeat is off, meaning that the game will finish the current race but won't
+//    start another one after.
+//
+// Optional:
+// Press the R3 stick to be patriotic and scare off the anglos.
+//
+// Stats:
+// This is the second fastest way to earn XP, and the fastest 100% AFK method. This script will grind 672,000 CR and 14,784 XP
+// per hour.
+// The fastest method (requires an human player) is to do the same race but to actually play properly. Only 6 specific cars in
+// the game can pull it off and they must be tuned to a very specific tuning sheet for every car. Using this method, if you
+// don't crash and manage to get the clean race bonus, you will grind 1,800,000 CR and 39,600 XP per hour. I will likely make a
+// YouTube video about that if people are interested, because every single tutorial on YouTube doesn't show the correct method
+// and my method is more efficient than theirs (there's a good reason why my method only works with 6 cars and no one else
+// figured it out).
+//
+// Credits:
+// Made in Quezon City, Philippines.
+// By LeoneFamily, an expat from the unrecognised nation of Qu√©bec.
+// 2022-11-07
+//
+// Vive le Qu√©bec libre!
+//##############################################################################################################################
+
+int rubber_activated = FALSE;
+int shits_runnin_son = FALSE;
+int initial = TRUE;
+int quebecstage = 0;
+int timehortonlol = 32000;
+int cumspam = 0;
+int stage = 1;
+int offsetx;
+int offsety;
+int compteurqc = 1;
+int drawscreen = FALSE;
+
+main {
+if (initial)
+	{initial = FALSE;
+	combo_run(initialisation);}
+
+switch (quebecstage)
+	{
+	case 1:
+		{if (!combo_running(quebecstage1))
+			{
+			cls_oled(0);
+			combo_run(quebecstage1);
+			}
+		break;}
+	case 2:
+		{if (!combo_running(quebecstage2))
+		{combo_run(quebecstage2);}
+		break;}
+	case 3:
+		{if (!combo_running(quebecstage3))
+		{combo_run(quebecstage3);}
+		break;}
+}
+if(event_press(PS4_R3) && !combo_running(waityoulilshit) && (quebecstage == 0) && !combo_running(initialisation))
+	{quebecstage = 1;}
+
+if(event_press(PS4_L3) && !combo_running(waityoulilshit))
+	{
+	rubber_activated = !rubber_activated;
+	combo_stop(initialisation);
+	combo_stop(quebecstage1);
+	combo_stop(quebecstage2);
+	combo_stop(quebecstage3);
+	quebecstage = 0;
+	compteurqc = 1;	
+	cls_oled(0);
+	putc_oled(1, ASCII_UPPER_R);
+	putc_oled(2, ASCII_LOWER_A);
+	putc_oled(3, ASCII_LOWER_C);
+	putc_oled(4, ASCII_LOWER_E);
+	putc_oled(5, ASCII_SPACE);
+	putc_oled(6, ASCII_UPPER_R);
+	putc_oled(7, ASCII_LOWER_E);
+	putc_oled(8, ASCII_LOWER_P);
+	putc_oled(9, ASCII_LOWER_E);
+	putc_oled(10, ASCII_LOWER_A);
+	putc_oled(11, ASCII_LOWER_T);
+	puts_oled(2, 8, 1, 11, 1);
+	if(rubber_activated)
+		{
+		putc_oled(1, ASCII_UPPER_O);
+		putc_oled(2, ASCII_UPPER_N);
+		puts_oled(52, 38, 1, 2, 0);
+		set_rgb(255,0,0);
+		}
+		else
+		{
+		putc_oled(1, ASCII_UPPER_O);
+		putc_oled(2, ASCII_UPPER_F);
+		putc_oled(3, ASCII_UPPER_F);
+		puts_oled(46, 38, 1, 3, 0);
+		set_rgb(0,0,255);
+		}
+	combo_run(waityoulilshit);
+	}
+if (drawscreen)
+	{drawscreen = FALSE;
+	combo_run(screenstatus);
+	}
+if(!shits_runnin_son && rubber_activated)
+	{shits_runnin_son = TRUE;}
+if(shits_runnin_son)
+	{
+	switch (stage)
+	{
+		case 1:
+			{if (!combo_running(spamcross))
+				{
+				if (cumspam < 10)
+					{combo_run(spamcross);}
+					else if (!combo_running(spamcircle))
+					{cumspam = 0;
+					stage = 2;
+					drawscreen = TRUE}
+				}
+    		break;}
+	
+		case 2:
+			{if (!combo_running(wallgrind))
+				{
+				if (cumspam < 23)
+					{combo_run(wallgrind);}
+					else
+					{
+					timehortonlol = 16000;
+					cumspam = 0;
+					stage = 3;}
+				}
+    		break;}
+    	
+    	case 3:
+			{if (!combo_running(wallgrind))
+				{
+				if (cumspam < 1)
+					{combo_run(wallgrind);}
+					else
+					{cumspam = 0;
+					stage = 4;
+					drawscreen = TRUE;
+					timehortonlol = 32000;}
+				}
+    		break;}
+    	
+    	case 4:
+			{if (!combo_running(spamcross))
+				{
+				if (cumspam < 60)
+					{combo_run(spamcross);}
+					else
+					{combo_run(spamcircle)
+					stage = 5;
+					drawscreen = TRUE;}
+				}
+    		break;}
+		}
+	}
+}
+
+combo spamcross {
+set_val(PS4_CROSS, 0);
+wait(50);
+set_val(PS4_CROSS, 100);
+wait(50);
+cumspam++;
+}
+
+combo wallgrind {
+set_val(PS4_R2, 100);
+set_val(PS4_LX, 30);
+wait(timehortonlol);
+cumspam++;
+}
+
+combo spamcircle {
+set_val(PS4_CIRCLE, 0);
+wait(50);
+set_val(PS4_CIRCLE, 100);
+wait(100);
+set_val(PS4_LX, 0);
+wait(1000);
+cumspam = 0;
+stage = 1;
+shits_runnin_son = FALSE;
+drawscreen = TRUE;
+}
+
+combo initialisation {
+cls_oled(0);
+putc_oled(1, ASCII_UPPER_G);
+putc_oled(2, ASCII_UPPER_T);
+putc_oled(3, ASCII_SPACE);
+putc_oled(4, ASCII_UPPER_S);
+putc_oled(5, ASCII_LOWER_P);
+putc_oled(6, ASCII_LOWER_O);
+putc_oled(7, ASCII_LOWER_R);
+putc_oled(8, ASCII_LOWER_T);
+puts_oled(35, 1, 0, 8, 1);
+putc_oled(1, ASCII_UPPER_A);
+putc_oled(2, ASCII_UPPER_F);
+putc_oled(3, ASCII_UPPER_K);
+putc_oled(4, ASCII_SPACE);
+putc_oled(5, ASCII_UPPER_C);
+putc_oled(6, ASCII_LOWER_R);
+putc_oled(7, ASCII_LOWER_E);
+putc_oled(8, ASCII_LOWER_D);
+putc_oled(9, ASCII_LOWER_I);
+putc_oled(10, ASCII_LOWER_T);
+putc_oled(11, ASCII_SPACE);
+putc_oled(12, ASCII_AND);
+putc_oled(13, ASCII_SPACE);
+putc_oled(14, ASCII_UPPER_X);
+putc_oled(15, ASCII_UPPER_P);
+puts_oled(10, 21, 0, 15, 1);
+putc_oled(1, ASCII_UPPER_A);
+putc_oled(2, ASCII_LOWER_U);
+putc_oled(3, ASCII_LOWER_T);
+putc_oled(4, ASCII_LOWER_O);
+putc_oled(5, ASCII_LOWER_G);
+putc_oled(6, ASCII_LOWER_R);
+putc_oled(7, ASCII_LOWER_I);
+putc_oled(8, ASCII_LOWER_N);
+putc_oled(9, ASCII_LOWER_D);
+puts_oled(31, 31, 0, 9, 1);
+putc_oled(1, ASCII_UPPER_B);
+putc_oled(2, ASCII_LOWER_Y);
+putc_oled(3, ASCII_COLON);
+putc_oled(4, ASCII_SPACE);
+putc_oled(5, ASCII_UPPER_L);
+putc_oled(6, ASCII_LOWER_E);
+putc_oled(7, ASCII_LOWER_O);
+putc_oled(8, ASCII_LOWER_N);
+putc_oled(9, ASCII_LOWER_E);
+putc_oled(10, ASCII_UPPER_F);
+putc_oled(11, ASCII_LOWER_A);
+putc_oled(12, ASCII_LOWER_M);
+putc_oled(13, ASCII_LOWER_I);
+putc_oled(14, ASCII_LOWER_L);
+putc_oled(15, ASCII_LOWER_Y);
+puts_oled(10, 51, 0, 15, 1);
+wait(2000);
+quebecstage = 2;
+}
+
+combo quebecstage1 {
+putc_oled(1, ASCII_UPPER_V);
+putc_oled(2, ASCII_LOWER_I);
+putc_oled(3, ASCII_LOWER_V);
+putc_oled(4, ASCII_LOWER_E);
+puts_oled(26, 4, 1, 4, 1);
+set_rgb(255,255,255);
+wait(500);
+set_rgb(0,0,255);
+wait(500);
+putc_oled(1, ASCII_LOWER_L);
+putc_oled(2, ASCII_LOWER_E);
+puts_oled(77, 4, 1, 2, 1);
+set_rgb(255,255,255);
+wait(500);
+set_rgb(0,0,255);
+wait(500);
+putc_oled(1, ASCII_UPPER_Q);
+putc_oled(2, ASCII_LOWER_U);
+putc_oled(3, ASCII_LOWER_E);
+putc_oled(4, ASCII_LOWER_B);
+putc_oled(5, ASCII_LOWER_E);
+putc_oled(6, ASCII_LOWER_C);
+puts_oled(30, 22, 1, 6, 1);
+line_oled(56, 25, 58, 24, 2, 1);
+set_rgb(255,255,255);
+wait(500);
+set_rgb(0,0,255);
+wait(500);
+putc_oled(1, ASCII_LOWER_L);
+putc_oled(2, ASCII_LOWER_I);
+putc_oled(3, ASCII_LOWER_B);
+putc_oled(4, ASCII_LOWER_R);
+putc_oled(5, ASCII_LOWER_E);
+putc_oled(6, ASCII_EXCLAMATION);
+puts_oled(30, 40, 1, 6, 1);
+set_rgb(255,255,255);
+wait(500);
+set_rgb(0,0,255);
+wait(500);
+compteurqc = 1;
+quebecstage = 2;
+}
+
+combo quebecstage2 {
+switch (compteurqc)
+	{
+	case 1:
+		{cls_oled(0);
+		offsetx = 0;
+    	offsety = 0;
+    	break;}
+	
+	case 2:
+		{offsetx = 35;
+    	offsety = 0;
+    	break;}
+    	
+    case 3:
+		{offsetx = 0;
+    	offsety = 24;
+    	break;}
+    	
+    case 4:
+		{offsetx = 35;
+    	offsety = 24;
+    	break;}
+	}
+rect_oled(offsetx + 34, offsety + 12, 24, 15, 1, 1);
+line_oled(offsetx + 46, offsety + 14, offsetx + 46, offsety + 25, 1, 0);
+line_oled(offsetx + 45, offsety + 16, offsetx + 45, offsety + 18, 1, 0);
+line_oled(offsetx + 47, offsety + 16, offsetx + 47, offsety + 18, 1, 0);
+line_oled(offsetx + 45, offsety + 21, offsetx + 47, offsety + 21, 1, 0);
+line_oled(offsetx + 44, offsety + 22, offsetx + 48, offsety + 22, 1, 0);
+line_oled(offsetx + 45, offsety + 24, offsetx + 47, offsety + 24, 1, 0);
+line_oled(offsetx + 42, offsety + 19, offsetx + 43, offsety + 19, 1, 0);
+line_oled(offsetx + 42, offsety + 20, offsetx + 44, offsety + 20, 1, 0);
+pixel_oled(offsetx + 42, offsety + 21, 0);
+line_oled(offsetx + 49, offsety + 19, offsetx + 50, offsety + 19, 1, 0);
+line_oled(offsetx + 48, offsety + 20, offsetx + 50, offsety + 20, 1, 0);
+pixel_oled(offsetx + 50, offsety + 21, 0);
+compteurqc++;
+if (compteurqc == 5)
+	{compteurqc = 0;
+	quebecstage = 3;}
+}
+
+combo quebecstage3 {
+wait(1000);
+drawscreen = TRUE;
+quebecstage = 0;
+}
+
+combo screenstatus {
+cls_oled(0);
+switch (stage)
+	{case 1:
+		{
+    	putc_oled(1, ASCII_UPPER_I);
+		putc_oled(2, ASCII_LOWER_N);
+		putc_oled(3, ASCII_SPACE);
+		putc_oled(4, ASCII_LOWER_M);
+		putc_oled(5, ASCII_LOWER_E);
+		putc_oled(6, ASCII_LOWER_N);
+		putc_oled(7, ASCII_LOWER_U);
+		puts_oled(24, 4, 1, 7, 1);
+		break;
+    	}
+	
+	case 2:
+		{
+		putc_oled(1, ASCII_UPPER_I);
+		putc_oled(2, ASCII_LOWER_N);
+		putc_oled(3, ASCII_SPACE);
+		putc_oled(4, ASCII_LOWER_R);
+		putc_oled(5, ASCII_LOWER_A);
+		putc_oled(6, ASCII_LOWER_C);
+		putc_oled(7, ASCII_LOWER_E);
+		puts_oled(24, 4, 1, 7, 1);
+		break;
+		}
+		
+	case 3:
+		{
+		putc_oled(1, ASCII_UPPER_I);
+		putc_oled(2, ASCII_LOWER_N);
+		putc_oled(3, ASCII_SPACE);
+		putc_oled(4, ASCII_LOWER_R);
+		putc_oled(5, ASCII_LOWER_A);
+		putc_oled(6, ASCII_LOWER_C);
+		putc_oled(7, ASCII_LOWER_E);
+		puts_oled(24, 4, 1, 7, 1);
+		break;
+		}
+    	
+    case 4:
+		{
+		putc_oled(1, ASCII_UPPER_A);
+		putc_oled(2, ASCII_LOWER_F);
+		putc_oled(3, ASCII_LOWER_T);
+		putc_oled(4, ASCII_LOWER_E);
+		putc_oled(5, ASCII_LOWER_R);
+		putc_oled(6, ASCII_SPACE);
+		putc_oled(7, ASCII_LOWER_R);
+		putc_oled(8, ASCII_LOWER_A);
+		putc_oled(9, ASCII_LOWER_C);
+		putc_oled(10, ASCII_LOWER_E);
+		puts_oled(8, 4, 1, 10, 1);
+		break;
+		}
+	
+	case 5:
+		{
+		putc_oled(1, ASCII_UPPER_A);
+		putc_oled(2, ASCII_LOWER_F);
+		putc_oled(3, ASCII_LOWER_T);
+		putc_oled(4, ASCII_LOWER_E);
+		putc_oled(5, ASCII_LOWER_R);
+		putc_oled(6, ASCII_SPACE);
+		putc_oled(7, ASCII_LOWER_R);
+		putc_oled(8, ASCII_LOWER_A);
+		putc_oled(9, ASCII_LOWER_C);
+		putc_oled(10, ASCII_LOWER_E);
+		puts_oled(8, 4, 1, 10, 1);
+		break;
+		}
+	}
+
+if (shits_runnin_son)
+	{
+	switch (stage)
+	{case 1:
+		{
+    	putc_oled(1, ASCII_UPPER_S);
+		putc_oled(2, ASCII_UPPER_P);
+		putc_oled(3, ASCII_UPPER_A);
+		putc_oled(4, ASCII_UPPER_M);
+		putc_oled(5, ASCII_UPPER_M);
+		putc_oled(6, ASCII_UPPER_I);
+		putc_oled(7, ASCII_UPPER_N);
+		putc_oled(8, ASCII_UPPER_G);
+		putc_oled(9, ASCII_SPACE);
+		putc_oled(10, ASCII_UPPER_X);
+		puts_oled(8, 22, 1, 10, 1);
+		break;
+    	}
+	
+	case 2:
+		{
+		putc_oled(1, ASCII_UPPER_R);
+		putc_oled(2, ASCII_UPPER_A);
+		putc_oled(3, ASCII_UPPER_C);
+		putc_oled(4, ASCII_UPPER_I);
+		putc_oled(5, ASCII_UPPER_N);
+		putc_oled(6, ASCII_UPPER_G);
+		puts_oled(30, 22, 1, 6, 1);
+		break;
+		}
+		
+	case 3:
+		{
+		putc_oled(1, ASCII_UPPER_R);
+		putc_oled(2, ASCII_UPPER_A);
+		putc_oled(3, ASCII_UPPER_C);
+		putc_oled(4, ASCII_UPPER_I);
+		putc_oled(5, ASCII_UPPER_N);
+		putc_oled(6, ASCII_UPPER_G);
+		puts_oled(30, 22, 1, 6, 1);
+		break;
+		}
+    	
+    case 4:
+		{
+		putc_oled(1, ASCII_UPPER_S);
+		putc_oled(2, ASCII_UPPER_P);
+		putc_oled(3, ASCII_UPPER_A);
+		putc_oled(4, ASCII_UPPER_M);
+		putc_oled(5, ASCII_UPPER_M);
+		putc_oled(6, ASCII_UPPER_I);
+		putc_oled(7, ASCII_UPPER_N);
+		putc_oled(8, ASCII_UPPER_G);
+		putc_oled(9, ASCII_SPACE);
+		putc_oled(10, ASCII_UPPER_X);
+		puts_oled(8, 22, 1, 10, 1);
+		break;
+		}
+    case 5:
+		{
+		putc_oled(1, ASCII_UPPER_S);
+		putc_oled(2, ASCII_UPPER_P);
+		putc_oled(3, ASCII_UPPER_A);
+		putc_oled(4, ASCII_UPPER_M);
+		putc_oled(5, ASCII_UPPER_M);
+		putc_oled(6, ASCII_UPPER_I);
+		putc_oled(7, ASCII_UPPER_N);
+		putc_oled(8, ASCII_UPPER_G);
+		putc_oled(9, ASCII_SPACE);
+		putc_oled(10, ASCII_UPPER_O);
+		puts_oled(8, 22, 1, 10, 1);
+		break;}
+	}
+}
+	else
+	{
+	putc_oled(1, ASCII_UPPER_N);
+	putc_oled(2, ASCII_UPPER_O);
+	putc_oled(3, ASCII_SPACE);
+	putc_oled(4, ASCII_UPPER_A);
+	putc_oled(5, ASCII_UPPER_C);
+	putc_oled(6, ASCII_UPPER_T);
+	putc_oled(7, ASCII_UPPER_I);
+	putc_oled(8, ASCII_UPPER_O);
+	putc_oled(9, ASCII_UPPER_N);
+	puts_oled(13, 22, 1, 9, 1);
+	}
+if(rubber_activated)
+		{
+		set_rgb(255,0,0);
+		putc_oled(1, ASCII_UPPER_R);
+		putc_oled(2, ASCII_LOWER_E);
+		putc_oled(3, ASCII_LOWER_P);
+		putc_oled(4, ASCII_LOWER_E);
+		putc_oled(5, ASCII_LOWER_A);
+		putc_oled(6, ASCII_LOWER_T);
+		putc_oled(7, ASCII_SPACE);
+		putc_oled(8, ASCII_UPPER_O);
+		putc_oled(9, ASCII_UPPER_N);
+		puts_oled(13, 40, 1, 9, 1);
+		}
+		else
+		{
+		set_rgb(0,0,255);
+		putc_oled(1, ASCII_UPPER_R);
+		putc_oled(2, ASCII_LOWER_E);
+		putc_oled(3, ASCII_LOWER_P);
+		putc_oled(4, ASCII_LOWER_E);
+		putc_oled(5, ASCII_LOWER_A);
+		putc_oled(6, ASCII_LOWER_T);
+		putc_oled(7, ASCII_SPACE);
+		putc_oled(8, ASCII_UPPER_O);
+		putc_oled(9, ASCII_UPPER_F);
+		putc_oled(10, ASCII_UPPER_F);
+		puts_oled(8, 40, 1, 10, 1);
+		}
+}
+
+combo waityoulilshit {
+drawscreen = FALSE;
+wait(1000);
+drawscreen = TRUE;
+quebecstage = 0;
+} ‰ßó•ï£î≠õ≠ûﬂÈ›Î€
