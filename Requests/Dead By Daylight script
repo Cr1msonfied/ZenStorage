@@ -1,0 +1,420 @@
+// GPC Online Library
+// DBD_1.gpc
+
+// GPC Online Library
+// DBD.gpc
+///////////////////////////////////////////////////////
+/*******************************************************
+
+	Game   : Dead by Daylight
+
+	Authors: FILIPE_-_OLI
+
+*******************************************************/
+///////////////////////////////////////////////////////
+// Buttons Controller ID
+//------------------------------------------------------------------------------------------------------/
+// Index/		PS4		/		PS3		/ 		XB1		/ 	XB360		/ WII/NUNCHUCK	/ CLASSIC CTRL	/
+//------/---------------/---------------/---------------/ --------------/---------------/---------------/
+// 0	/ PS4_PS		/ PS3_PS		/ XB1_XBOX		/ XB360_XBOX	/ WII_HOME		/ WII_HOME		/
+// 1	/ PS4_SHARE		/ PS3_SELECT	/ XB1_VIEW		/ XB360_BACK	/ WII_MINUS		/ WII_MINUS		/
+// 2	/ PS4_OPTIONS	/ PS3_START		/ XB1_MENU		/ XB360_START	/ WII_PLUS		/ WII_PLUS		/
+// 3	/ PS4_R1		/ PS3_R1		/ XB1_RB		/ XB360_RB		/ 				/ WII_RT		/
+// 4	/ PS4_R2		/ PS3_R2		/ XB1_RT		/ XB360_RT		/ 				/ WII_ZR		/
+// 5	/ PS4_R3		/ PS3_R3		/ XB1_RS		/ XB360_RS		/ WII_ONE		/ 				/
+// 6	/ PS4_L1		/ PS3_L1		/ XB1_LB		/ XB360_LB		/ WII_C			/ WII_LT		/
+// 7	/ PS4_L2		/ PS3_L2		/ XB1_LT		/ XB360_LT		/ WII_Z			/ WII_ZL		/
+// 8	/ PS4_L3		/ PS3_L3		/ XB1_LS		/ XB360_LS		/ WII_TWO		/ 				/
+// 9	/ PS4_RX		/ PS3_RX		/ XB1_RX		/ XB360_RX		/ 				/ WII_RX		/
+// 10	/ PS4_RY		/ PS3_RY		/ XB1_RY		/ XB360_RY		/ 				/ WII_RY		/
+// 11	/ PS4_LX		/ PS3_LX		/ XB1_LX		/ XB360_LX		/ WII_NX		/ WII_LX		/
+// 12	/ PS4_LY		/ PS3_LY		/ XB1_LY		/ XB360_LY		/ WII_NY		/ WII_LY		/
+// 13	/ PS4_UP		/ PS3_UP		/ XB1_UP		/ XB360_UP		/ WII_UP		/ WII_UP		/
+// 14	/ PS4_DOWN		/ PS3_DOWN		/ XB1_DOWN		/ XB360_DOWN	/ WII_DOWN		/ WII_DOWN		/
+// 15	/ PS4_LEFT		/ PS3_LEFT		/ XB1_LEFT		/ XB360_LEFT	/ WII_LEFT		/ WII_LEFT		/
+// 16	/ PS4_RIGHT		/ PS3_RIGHT		/ XB1_RIGHT		/ XB360_RIGHT	/ WII_RIGHT		/ WII_RIGHT		/
+// 17	/ PS4_TRIANGLE	/ PS3_TRIANGLE	/ XB1_Y			/ XB360_Y		/ 				/ WII_X			/	
+// 18	/ PS4_CIRCLE	/ PS3_CIRCLE	/ XB1_B			/ XB360_B		/ WII_B			/ WII_B			/
+// 19	/ PS4_CROSS		/ PS3_CROSS		/ XB1_A			/ XB360_A		/ WII_A			/ WII_A			/
+// 20	/ PS4_SQUARE	/ PS3_SQUARE	/ XB1_X			/ XB360_X		/ 				/ WII_Y			/
+// 21	/ PS4_ACCX		/ PS3_ACCX		/ 				/ 				/ WII_ACCX		/ 				/
+// 22	/ PS4_ACCY		/ PS3_ACCY		/ 				/ 				/ WII_ACCY		/ 				/
+// 23	/ PS4_ACCZ		/ PS3_ACCZ		/ 				/ 				/ WII_ACCZ		/ 				/
+// 24	/ PS4_GYROX		/ PS3_GYRO		/ XB1_PR1		/ 				/ 				/ 				/
+// 25	/ PS4_GYROY		/ 				/ XB1_PR2		/ 				/ WII_ACCNX		/ 				/
+// 26	/ PS4_GYROZ		/ 				/ XB1_PL1		/ 				/ WII_ACCNY		/ 				/
+// 27	/ PS4_TOUCH		/ 				/ XB1_PL2		/ 				/ WII_ACCNZ		/ 				/
+// 28	/ PS4_TOUCHX	/ 				/ 				/ 				/ WII_IRX		/ 				/
+// 29	/ PS4_TOUCHY	/ 				/ 				/ 				/ WII_IRY		/ 				/
+//------------------------------------------------------------------------------------------------------/
+///////////////////////////////////////////////////////
+// Buttons to Start Configs
+define Spin_Left = 8;
+define Spin_Right = 5;
+define Auto_T_Bag = 16;
+define Auto_Clicker_Flashlight = 15;
+define Auto_Wiggle = 17;
+// End Buttons of Configs
+///////////////////////////////////////////////////////
+// Buttons Controller
+define RX = 9;
+define LX = 11;
+define LY = 12;
+define Crouch_Button = 7;
+define Use_Item_Button = 20;
+define Interactions_Button = 4;
+define Actions_Button = 3;
+define Hook_Struggle_Button = 19;
+int Tool_Box = Interactions_Button;
+// End Buttons Controller
+///////////////////////////////////////////////////////
+// Unmaped Buttons
+unmap 8;
+unmap 5;
+// End Unmaped Buttons
+///////////////////////////////////////////////////////
+// Speeds
+define Spin_Speed = 12; // Change this value for the speed of movement( decrease = faster/ increase = slower)
+define RX_Speed = 100; // Camera Speed
+define T_Bag_Speed = 90;
+define Click_Rate_Flashlight = 50;
+define Struggle_Speed = 50; // If 20 ms is too fast for the game to dectect you can increase the speed to allow more time between button pres.
+define Wiggle_Speed = 50; // The time between stick movement.
+define Repairing_Time = 1000; // Value for generator animation hold (decrease = faster, increase = slower) (If you change value to a faster value you could sound stealth a gen. but this is for max efficiency)
+define Waiting_Time_Repairing  = 290; // Value for the combo reset( decrease = faster, increase = slower)
+// End Speeds
+///////////////////////////////////////////////////////
+////////////  MAIN BLOCK START  ///////////////////////
+///////////////////////////////////////////////////////
+main {
+///////////////////////////////////////////////////////
+// Spin Left
+if (get_val(Spin_Left)) {
+	combo_run(Clock_Wise);
+	set_val(RX,-RX_Speed);}
+else if(combo_running(Clock_Wise)) {
+	combo_stop(Clock_Wise);}
+// End Spin Left
+///////////////////////////////////////////////////////
+// Spin Right
+if (get_val(Spin_Right)) {
+	combo_run(Counter_Clock_Wise);
+	set_val(RX,RX_Speed);}
+else if(combo_running(Counter_Clock_Wise)) {
+	combo_stop(Counter_Clock_Wise);}
+// End Spin Right
+///////////////////////////////////////////////////////
+// Auto T-Bag
+if (get_val(Auto_T_Bag)) {
+	combo_run(T_Bag);}
+else if(combo_running(T_Bag)) {
+	combo_stop(T_Bag);}
+// End Auto T-Bag
+///////////////////////////////////////////////////////
+// Auto Clicker Flashlight
+if (get_val(Auto_Clicker_Flashlight)) {
+	combo_run(Clicker_Flashlight);}
+else if(combo_running(Clicker_Flashlight)) {
+	combo_stop(Clicker_Flashlight);}
+// End Auto Clicker Flashlight
+///////////////////////////////////////////////////////
+// Auto Struggle
+if (get_val(Hook_Struggle_Button)) {
+	combo_run(Struggle);}
+else if(combo_running(Struggle)) {
+	combo_stop(Struggle);}
+// End Auto Struggle
+///////////////////////////////////////////////////////
+// Auto Wiggle
+if (get_val(Auto_Wiggle)) {
+	combo_run(Wiggle);}
+else if(combo_running(Wiggle)) {
+	combo_stop(Wiggle);}
+// End Auto Wiggle
+///////////////////////////////////////////////////////
+// Anti Skill Check
+if ((get_val(Interactions_Button)) && (get_val(Actions_Button))) {
+	combo_run(Skill_Check);}
+else if (combo_running(Skill_Check)) {
+	combo_stop(Skill_Check);}
+///////////////////////////////////////////////////////
+// End Anti Skill Check
+///////////////////////////////////////////////////////
+// Anti Skill Check With Tool Box
+if (get_val(Use_Item_Button)) {
+	Tool_Box = Use_Item_Button;}
+else {Tool_Box = Interactions_Button;}
+///////////////////////////////////////////////////////
+// End Anti Skill Check With Tool Box
+}
+// End of Main Blocks
+///////////////////////////////////////////////////////
+///////////////////  COMBO BLOCKS   ///////////////////
+///////////////////////////////////////////////////////
+// Spin Left
+combo Clock_Wise {
+	set_val(LX,25);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,50);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,75);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+// 1/8
+	set_val(LX,100);
+	set_val(LY,-75);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,-50);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,-25);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,0);
+	wait(Spin_Speed);
+// 1/4
+	set_val(LX,100);
+	set_val(LY,25);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,50);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,75);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,100);
+	wait(Spin_Speed);
+// 3/8
+	set_val(LX,75);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,50);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,25);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,0);
+	set_val(LY,100);
+	wait(Spin_Speed);
+// 1/2
+	set_val(LX,-25);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,-50);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,-75);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,100);
+	wait(Spin_Speed);
+// 5/8
+	set_val(LX,-100);
+	set_val(LY,75);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,50);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,25);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,0);
+	wait(Spin_Speed);
+// 3/4
+	set_val(LX,-100);
+	set_val(LY,-25);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,-50);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,-75);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+// 7/8
+	set_val(LX,-75);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,-50);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,-25);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,0);
+	set_val(LY,-100);
+	wait(Spin_Speed);}
+// 4/4
+// End Spin Left
+///////////////////////////////////////////////////////
+// Spin Right
+combo Counter_Clock_Wise {
+	set_val(LX,-25);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,-50);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,-75);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+// 1/8
+	set_val(LX,-100);
+	set_val(LY,-75);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,-50);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,-25);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,0);
+	wait(Spin_Speed);
+// 1/4
+	set_val(LX,-100);
+	set_val(LY,25);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,50);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,75);
+	wait(Spin_Speed);
+	set_val(LX,-100);
+	set_val(LY,100);
+	wait(Spin_Speed);
+// 3/8
+	set_val(LX,-75);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,-50);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,-25);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,0);
+	set_val(LY,100);
+	wait(Spin_Speed);
+// 1/2
+	set_val(LX,25);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,50);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,75);
+	set_val(LY,100);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,100);
+	wait(Spin_Speed);
+// 5/8
+	set_val(LX,100);
+	set_val(LY,75);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,50);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,25);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,0);
+	wait(Spin_Speed);
+// 3/4
+	set_val(LX,100);
+	set_val(LY,-25);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,-50);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,-75);
+	wait(Spin_Speed);
+	set_val(LX,100);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+// 7/8
+	set_val(LX,75);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,50);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,25);
+	set_val(LY,-100);
+	wait(Spin_Speed);
+	set_val(LX,0);
+	set_val(LY,-100);
+	wait(Spin_Speed);}
+// 4/4
+// End Spin Right
+///////////////////////////////////////////////////
+// Auto T Bag
+combo T_Bag {
+	set_val(Crouch_Button, 100);
+	wait(T_Bag_Speed);
+	set_val(Crouch_Button, 0);
+	wait(T_Bag_Speed);
+	set_val(Crouch_Button, 0);}
+// End Auto T Bag
+///////////////////////////////////////////////////
+// Auto Clicker Flashlight
+combo Clicker_Flashlight {
+	set_val(Use_Item_Button, 100);
+	wait(Click_Rate_Flashlight);
+	set_val(Use_Item_Button, 0);
+	wait(Click_Rate_Flashlight);
+	set_val(Use_Item_Button, 0);}
+// End Auto Clicker Flashlight
+///////////////////////////////////////////////////////
+// Auto Struggle
+combo Struggle {
+	set_val(Hook_Struggle_Button, 100);
+	wait(Struggle_Speed);
+	set_val(Hook_Struggle_Button, 0);
+	wait(Struggle_Speed);
+	set_val(Hook_Struggle_Button, 0);}
+// End Auto Struggle
+///////////////////////////////////////////////////////
+// Auto Wiggle
+combo Wiggle {
+	set_val(LX,100);
+	wait(Wiggle_Speed);
+	set_val(LX,-100);
+	wait(Wiggle_Speed);}
+// End Auto Wiggle
+///////////////////////////////////////////////////////
+// Anti Skill Check
+combo Skill_Check {
+	set_val(Interactions_Button,0);
+	set_val(Actions_Button,0);
+	set_val(Tool_Box,100);
+	wait(Repairing_Time);
+	set_val(Interactions_Button,0);
+	set_val(Actions_Button,0);
+	set_val(Tool_Box,0);
+	wait(Waiting_Time_Repairing);
+	set_val(Interactions_Button,0);
+	set_val(Actions_Button,0);
+	set_val(Tool_Box,0);}
+// End Anti Skill Check
+///////////////////////////////////////////////////////
+// End of Combo Blocks
