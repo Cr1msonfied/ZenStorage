@@ -499,6 +499,11 @@
       "name": "Dead By Daylight script",
       "filename": "Dead By Daylight script",
       "category": "Dead By Daylight"
+    },
+    {
+      "name": "Dead By Daylight script",
+      "filename": "Requests/Dead By Daylight script",
+      "category": "Dead By Daylight"
     }
   ]
 }
